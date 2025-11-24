@@ -3,7 +3,10 @@ use quick_xml::{
     events::{BytesStart, BytesText, Event, attributes::Attribute},
 };
 
-use crate::{Platform, Platforms, PlatformsElem, Registry, RegistryElem, Tag, Tags, TagsElem};
+use crate::{
+    Platform, Platforms, PlatformsElem, Registry, RegistryElem, Tag, Tags, TagsElem, Type,
+    TypeContent, Types, TypesElem,
+};
 
 struct Parser<'a> {
     reader: Reader<&'a [u8]>,
@@ -96,8 +99,8 @@ impl<'a> Parser<'a> {
                 Event::Start(start) => match start.name().as_ref() {
                     b"registry" => {
                         let is_empty = false;
-                        let elem = Elem { is_empty, start };
-                        self.parse_registry(elem, &mut registry);
+                        assert_eq!(registry, None);
+                        registry = Some(self.parse_registry(Elem { is_empty, start }));
                     }
                     _ => {
                         panic!("unexpected elem: {start:?}");
@@ -111,9 +114,7 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_registry(&mut self, elem: Elem, registry: &mut Option<Registry>) {
-        assert_eq!(*registry, None);
-
+    fn parse_registry(&mut self, elem: Elem) -> Registry {
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
@@ -138,13 +139,17 @@ impl<'a> Parser<'a> {
                     let tags = this.parse_tags(elem);
                     elems.push(RegistryElem::Tags(tags));
                 }
+                b"types" => {
+                    let types = this.parse_types(elem);
+                    elems.push(RegistryElem::Types(types));
+                }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
         );
 
-        *registry = Some(Registry { elems });
+        Registry { elems }
     }
 
     fn parse_text_elem(&mut self, elem: Elem) -> String {
@@ -269,6 +274,123 @@ impl<'a> Parser<'a> {
             author: author.unwrap(),
             contact: contact.unwrap(),
             name: name.unwrap(),
+        }
+    }
+
+    fn parse_types(&mut self, elem: Elem) -> Types {
+        let mut comment = None;
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut elems = Vec::new();
+        self.parse_content(
+            elem,
+            |this, text| this.assert_is_ws(text),
+            |this, elem| match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    elems.push(TypesElem::Comment(comment));
+                }
+                b"type" => {
+                    let ty = this.parse_type(elem);
+                    elems.push(TypesElem::Type(ty));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        );
+
+        Types {
+            comment: comment.unwrap(),
+            elems,
+        }
+    }
+
+    fn parse_type(&mut self, elem: Elem) -> Type {
+        let mut alias = None;
+        let mut api = None;
+        let mut bitvalues = None;
+        let mut category = None;
+        let mut comment = None;
+        let mut name = None;
+        let mut objtypeenum = None;
+        let mut parent = None;
+        let mut requires = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"api" => self.save_attr(attr, &mut api),
+                b"bitvalues" => self.save_attr(attr, &mut bitvalues),
+                b"category" => self.save_attr(attr, &mut category),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"name" => self.save_attr(attr, &mut name),
+                b"objtypeenum" => self.save_attr(attr, &mut objtypeenum),
+                b"parent" => self.save_attr(attr, &mut parent),
+                b"requires" => self.save_attr(attr, &mut requires),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        if !elem.is_empty {
+            let mut buf = Vec::new();
+            loop {
+                match self.next_event(&mut buf) {
+                    Event::Text(text) => {
+                        let text = text.decode().unwrap().to_string();
+                        contents.push(TypeContent::Text(text));
+                    }
+                    Event::GeneralRef(text) => {
+                        let text = text.decode().unwrap().to_string();
+                        contents.push(TypeContent::Text(text));
+                    }
+                    Event::Start(start) => match start.name().as_ref() {
+                        b"name" => {
+                            assert_eq!(name, None);
+                            let is_empty = false;
+                            let name = self.parse_text_elem(Elem { is_empty, start });
+                            contents.push(TypeContent::Name(name));
+                        }
+                        b"type" => {
+                            let is_empty = false;
+                            let ty = self.parse_text_elem(Elem { is_empty, start });
+                            contents.push(TypeContent::Type(ty));
+                        }
+                        _ => {
+                            panic!("unexpected element: {start:?}");
+                        }
+                    },
+                    Event::End(end) => {
+                        assert_eq!(end.name(), elem.start.name());
+                        break;
+                    }
+                    event => {
+                        panic!("unexpected event: {event:?}");
+                    }
+                }
+                buf.clear();
+            }
+        }
+
+        Type {
+            alias,
+            api,
+            bitvalues,
+            category,
+            comment,
+            name,
+            objtypeenum,
+            parent,
+            requires,
+            contents,
         }
     }
 }
