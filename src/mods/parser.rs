@@ -14,6 +14,11 @@ struct Parser<'a> {
     reader: Reader<&'a [u8]>,
 }
 
+enum Content<'a> {
+    Text(&'a str),
+    Elem(Elem<'a>),
+}
+
 #[derive(Debug)]
 struct Elem<'a> {
     is_empty: bool,
@@ -51,10 +56,9 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_contents<TextF, ElemF>(&mut self, elem: Elem, mut text_f: TextF, mut elem_f: ElemF)
+    fn parse_contents<F>(&mut self, elem: Elem, mut f: F)
     where
-        TextF: FnMut(&mut Parser, &str),
-        ElemF: FnMut(&mut Parser, Elem),
+        F: FnMut(&mut Parser, Content),
     {
         if elem.is_empty {
             return;
@@ -64,18 +68,18 @@ impl<'a> Parser<'a> {
         loop {
             match self.next_event(&mut buf) {
                 Event::Text(text) => {
-                    text_f(self, text.decode().unwrap().as_ref());
+                    f(self, Content::Text(text.decode().unwrap().as_ref()));
                 }
                 Event::GeneralRef(text) => {
-                    text_f(self, text.decode().unwrap().as_ref());
+                    f(self, Content::Text(text.decode().unwrap().as_ref()));
                 }
                 Event::Empty(start) => {
                     let is_empty = true;
-                    elem_f(self, Elem { is_empty, start });
+                    f(self, Content::Elem(Elem { is_empty, start }));
                 }
                 Event::Start(start) => {
                     let is_empty = false;
-                    elem_f(self, Elem { is_empty, start });
+                    f(self, Content::Elem(Elem { is_empty, start }));
                 }
                 Event::End(end) => {
                     assert_eq!(end.name(), elem.start.name());
@@ -128,10 +132,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"comment" => {
                     let text = this.parse_text_elem(elem);
                     contents.push(RegistryContent::Comment(text));
@@ -160,7 +163,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Registry { contents }
     }
@@ -174,11 +177,10 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = String::new();
-        self.parse_contents(
-            elem,
-            |_this, text| contents += text,
-            |_this, elem| panic!("unexpected elem: {elem:?}"),
-        );
+        self.parse_contents(elem, |_this, content| match content {
+            Content::Text(text) => contents += text,
+            Content::Elem(elem) => panic!("unexpected elem: {elem:?}"),
+        });
 
         contents
     }
@@ -195,10 +197,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"platform" => {
                     let platform = this.parse_platform(elem);
                     contents.push(PlatformsContent::Platform(platform));
@@ -207,7 +208,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Platforms {
             comment: comment.unwrap(),
@@ -250,10 +251,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"tag" => {
                     let tag = this.parse_tag(elem);
                     contents.push(TagsContent::Tag(tag));
@@ -262,7 +262,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Tags {
             comment: comment.unwrap(),
@@ -305,10 +305,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"comment" => {
                     let comment = this.parse_text_elem(elem);
                     contents.push(TypesContent::Comment(comment));
@@ -321,7 +320,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Types {
             comment: comment.unwrap(),
@@ -365,55 +364,33 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        if !elem.is_empty {
-            let mut buf = Vec::new();
-            loop {
-                match self.next_event(&mut buf) {
-                    Event::Text(text) => {
-                        let text = text.decode().unwrap().to_string();
-                        contents.push(TypeContent::Text(text));
-                    }
-                    Event::GeneralRef(text) => {
-                        let text = text.decode().unwrap().to_string();
-                        contents.push(TypeContent::Text(text));
-                    }
-                    Event::Start(start) => {
-                        let is_empty = false;
-                        let elem = Elem { is_empty, start };
-                        match elem.start.name().as_ref() {
-                            b"comment" => {
-                                let comment = self.parse_text_elem(elem);
-                                contents.push(TypeContent::Comment(comment));
-                            }
-                            b"type" => {
-                                let type_name = self.parse_text_elem(elem);
-                                contents.push(TypeContent::Type(type_name));
-                            }
-                            b"name" => {
-                                assert_eq!(name, None);
-                                let name = self.parse_text_elem(elem);
-                                contents.push(TypeContent::Name(name));
-                            }
-                            b"member" => {
-                                let member = self.parse_member(elem);
-                                contents.push(TypeContent::Member(member));
-                            }
-                            _ => {
-                                panic!("unexpected element: {elem:?}");
-                            }
-                        }
-                    }
-                    Event::End(end) => {
-                        assert_eq!(end.name(), elem.start.name());
-                        break;
-                    }
-                    event => {
-                        panic!("unexpected event: {event:?}");
-                    }
-                }
-                buf.clear();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => {
+                contents.push(TypeContent::Text(text.to_string()));
             }
-        }
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    contents.push(TypeContent::Comment(comment));
+                }
+                b"type" => {
+                    let type_name = this.parse_text_elem(elem);
+                    contents.push(TypeContent::Type(type_name));
+                }
+                b"name" => {
+                    assert_eq!(name, None);
+                    let name = this.parse_text_elem(elem);
+                    contents.push(TypeContent::Name(name));
+                }
+                b"member" => {
+                    let member = this.parse_member(elem);
+                    contents.push(TypeContent::Member(member));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
 
         Type {
             alias,
@@ -469,50 +446,32 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        if !elem.is_empty {
-            let mut buf = Vec::new();
-            loop {
-                match self.next_event(&mut buf) {
-                    Event::Text(text) => {
-                        let text = text.decode().unwrap().to_string();
-                        contents.push(MemberContent::Text(text));
-                    }
-                    Event::Start(start) => {
-                        let is_empty = false;
-                        let elem = Elem { is_empty, start };
-                        match elem.start.name().as_ref() {
-                            b"comment" => {
-                                let comment = self.parse_text_elem(elem);
-                                contents.push(MemberContent::Comment(comment));
-                            }
-                            b"type" => {
-                                let type_name = self.parse_text_elem(elem);
-                                contents.push(MemberContent::Type(type_name));
-                            }
-                            b"name" => {
-                                let name = self.parse_text_elem(elem);
-                                contents.push(MemberContent::Name(name));
-                            }
-                            b"enum" => {
-                                let enum_name = self.parse_text_elem(elem);
-                                contents.push(MemberContent::Enum(enum_name));
-                            }
-                            _ => {
-                                panic!("unexpected element: {elem:?}");
-                            }
-                        }
-                    }
-                    Event::End(end) => {
-                        assert_eq!(end.name(), elem.start.name());
-                        break;
-                    }
-                    event => {
-                        panic!("unexpected event: {event:?}");
-                    }
-                }
-                buf.clear();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => {
+                contents.push(MemberContent::Text(text.to_string()));
             }
-        }
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Comment(comment));
+                }
+                b"type" => {
+                    let type_name = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Type(type_name));
+                }
+                b"name" => {
+                    let name = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Name(name));
+                }
+                b"enum" => {
+                    let enum_name = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Enum(enum_name));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
 
         Member {
             altlen,
@@ -550,10 +509,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"comment" => {
                     let comment = this.parse_text_elem(elem);
                     contents.push(EnumsContent::Comment(comment));
@@ -570,7 +528,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Enums {
             bitwidth,
@@ -651,10 +609,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"command" => {
                     let command = this.parse_command(elem);
                     contents.push(CommandsContent::Command(command));
@@ -663,7 +620,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Commands {
             comment: comment.unwrap(),
@@ -709,10 +666,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"proto" => {
                     let proto = this.parse_proto(elem);
                     contents.push(CommandContent::Proto(proto));
@@ -729,7 +685,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         Command {
             alias,
@@ -759,42 +715,24 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        if !elem.is_empty {
-            let mut buf = Vec::new();
-            loop {
-                match self.next_event(&mut buf) {
-                    Event::Text(text) => {
-                        let text = text.decode().unwrap().to_string();
-                        contents.push(ProtoContent::Text(text));
-                    }
-                    Event::Start(start) => {
-                        let is_empty = false;
-                        let elem = Elem { is_empty, start };
-                        match elem.start.name().as_ref() {
-                            b"type" => {
-                                let type_name = self.parse_text_elem(elem);
-                                contents.push(ProtoContent::Type(type_name));
-                            }
-                            b"name" => {
-                                let name = self.parse_text_elem(elem);
-                                contents.push(ProtoContent::Name(name));
-                            }
-                            _ => {
-                                panic!("unexpected element: {elem:?}");
-                            }
-                        }
-                    }
-                    Event::End(end) => {
-                        assert_eq!(end.name(), elem.start.name());
-                        break;
-                    }
-                    event => {
-                        panic!("unexpected event: {event:?}");
-                    }
-                }
-                buf.clear();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => {
+                contents.push(ProtoContent::Text(text.to_string()));
             }
-        }
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"type" => {
+                    let type_name = this.parse_text_elem(elem);
+                    contents.push(ProtoContent::Type(type_name));
+                }
+                b"name" => {
+                    let name = this.parse_text_elem(elem);
+                    contents.push(ProtoContent::Name(name));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
 
         Proto { contents }
     }
@@ -827,42 +765,24 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        if !elem.is_empty {
-            let mut buf = Vec::new();
-            loop {
-                match self.next_event(&mut buf) {
-                    Event::Text(text) => {
-                        let text = text.decode().unwrap().to_string();
-                        contents.push(ParamContent::Text(text));
-                    }
-                    Event::Start(start) => {
-                        let is_empty = false;
-                        let elem = Elem { is_empty, start };
-                        match elem.start.name().as_ref() {
-                            b"type" => {
-                                let type_name = self.parse_text_elem(elem);
-                                contents.push(ParamContent::Type(type_name));
-                            }
-                            b"name" => {
-                                let name = self.parse_text_elem(elem);
-                                contents.push(ParamContent::Name(name));
-                            }
-                            _ => {
-                                panic!("unexpected element: {elem:?}");
-                            }
-                        }
-                    }
-                    Event::End(end) => {
-                        assert_eq!(end.name(), elem.start.name());
-                        break;
-                    }
-                    event => {
-                        panic!("unexpected event: {event:?}");
-                    }
-                }
-                buf.clear();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => {
+                contents.push(ParamContent::Text(text.to_string()));
             }
-        }
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"type" => {
+                    let type_name = this.parse_text_elem(elem);
+                    contents.push(ParamContent::Type(type_name));
+                }
+                b"name" => {
+                    let name = this.parse_text_elem(elem);
+                    contents.push(ParamContent::Name(name));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
 
         Param {
             altlen,
@@ -887,10 +807,9 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_contents(
-            elem,
-            |this, text| this.assert_is_ws(text.as_bytes()),
-            |this, elem| match elem.start.name().as_ref() {
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"param" => {
                     let param = this.parse_text_elem(elem);
                     contents.push(ImplicitExternSyncParamsContent::Param(param));
@@ -899,7 +818,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        );
+        });
 
         ImplicitExternSyncParams { contents }
     }
