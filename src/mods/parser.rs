@@ -4,8 +4,8 @@ use quick_xml::{
 };
 
 use crate::{
-    Platform, Platforms, PlatformsElem, Registry, RegistryElem, Tag, Tags, TagsElem, Type,
-    TypeContent, Types, TypesElem,
+    Platform, Platforms, PlatformsContent, Registry, RegistryContent, Tag, Tags, TagsContent, Type,
+    TypeContent, Types, TypesContent,
 };
 
 struct Parser<'a> {
@@ -122,26 +122,26 @@ impl<'a> Parser<'a> {
             }
         }
 
-        let mut elems = Vec::new();
+        let mut contents = Vec::new();
         self.parse_content(
             elem,
             |this, text| this.assert_is_ws(text),
             |this, elem| match elem.start.name().as_ref() {
                 b"comment" => {
                     let text = this.parse_text_elem(elem);
-                    elems.push(RegistryElem::Comment(text));
+                    contents.push(RegistryContent::Comment(text));
                 }
                 b"platforms" => {
                     let platforms = this.parse_platforms(elem);
-                    elems.push(RegistryElem::Platforms(platforms));
+                    contents.push(RegistryContent::Platforms(platforms));
                 }
                 b"tags" => {
                     let tags = this.parse_tags(elem);
-                    elems.push(RegistryElem::Tags(tags));
+                    contents.push(RegistryContent::Tags(tags));
                 }
                 b"types" => {
                     let types = this.parse_types(elem);
-                    elems.push(RegistryElem::Types(types));
+                    contents.push(RegistryContent::Types(types));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -149,7 +149,7 @@ impl<'a> Parser<'a> {
             },
         );
 
-        Registry { elems }
+        Registry { contents }
     }
 
     fn parse_text_elem(&mut self, elem: Elem) -> String {
@@ -179,14 +179,14 @@ impl<'a> Parser<'a> {
             }
         }
 
-        let mut elems = Vec::new();
+        let mut contents = Vec::new();
         self.parse_content(
             elem,
             |this, text| this.assert_is_ws(text),
             |this, elem| match elem.start.name().as_ref() {
                 b"platform" => {
                     let platform = this.parse_platform(elem);
-                    elems.push(PlatformsElem::Platform(platform));
+                    contents.push(PlatformsContent::Platform(platform));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -196,7 +196,7 @@ impl<'a> Parser<'a> {
 
         Platforms {
             comment: comment.unwrap(),
-            elems,
+            contents,
         }
     }
 
@@ -233,14 +233,14 @@ impl<'a> Parser<'a> {
             }
         }
 
-        let mut elems = Vec::new();
+        let mut contents = Vec::new();
         self.parse_content(
             elem,
             |this, text| this.assert_is_ws(text),
             |this, elem| match elem.start.name().as_ref() {
                 b"tag" => {
                     let tag = this.parse_tag(elem);
-                    elems.push(TagsElem::Tag(tag));
+                    contents.push(TagsContent::Tag(tag));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -250,7 +250,7 @@ impl<'a> Parser<'a> {
 
         Tags {
             comment: comment.unwrap(),
-            elems,
+            contents,
         }
     }
 
@@ -287,18 +287,18 @@ impl<'a> Parser<'a> {
             }
         }
 
-        let mut elems = Vec::new();
+        let mut contents = Vec::new();
         self.parse_content(
             elem,
             |this, text| this.assert_is_ws(text),
             |this, elem| match elem.start.name().as_ref() {
                 b"comment" => {
                     let comment = this.parse_text_elem(elem);
-                    elems.push(TypesElem::Comment(comment));
+                    contents.push(TypesContent::Comment(comment));
                 }
                 b"type" => {
                     let ty = this.parse_type(elem);
-                    elems.push(TypesElem::Type(ty));
+                    contents.push(TypesContent::Type(ty));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -308,7 +308,7 @@ impl<'a> Parser<'a> {
 
         Types {
             comment: comment.unwrap(),
-            elems,
+            contents,
         }
     }
 

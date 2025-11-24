@@ -1,10 +1,10 @@
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Registry {
-    pub elems: Vec<RegistryElem>,
+    pub contents: Vec<RegistryContent>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub enum RegistryElem {
+pub enum RegistryContent {
     Comment(String),
     Platforms(Platforms),
     Tags(Tags),
@@ -14,11 +14,11 @@ pub enum RegistryElem {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Platforms {
     pub comment: String,
-    pub elems: Vec<PlatformsElem>,
+    pub contents: Vec<PlatformsContent>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub enum PlatformsElem {
+pub enum PlatformsContent {
     Platform(Platform),
 }
 
@@ -32,11 +32,11 @@ pub struct Platform {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Tags {
     pub comment: String,
-    pub elems: Vec<TagsElem>,
+    pub contents: Vec<TagsContent>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub enum TagsElem {
+pub enum TagsContent {
     Tag(Tag),
 }
 
@@ -50,11 +50,11 @@ pub struct Tag {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Types {
     pub comment: String,
-    pub elems: Vec<TypesElem>,
+    pub contents: Vec<TypesContent>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub enum TypesElem {
+pub enum TypesContent {
     Comment(String),
     Type(Type),
 }
