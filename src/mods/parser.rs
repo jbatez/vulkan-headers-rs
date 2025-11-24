@@ -4,9 +4,10 @@ use quick_xml::{
 };
 
 use crate::{
-    Enum, Enums, EnumsContent, Member, MemberContent, Platform, Platforms, PlatformsContent,
-    Registry, RegistryContent, Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent,
-    Unused,
+    Command, CommandContent, Commands, CommandsContent, Enum, Enums, EnumsContent,
+    ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent, Param,
+    ParamContent, Platform, Platforms, PlatformsContent, Proto, ProtoContent, Registry,
+    RegistryContent, Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
 };
 
 struct Parser<'a> {
@@ -150,6 +151,10 @@ impl<'a> Parser<'a> {
                 b"enums" => {
                     let enums = this.parse_enums(elem);
                     contents.push(RegistryContent::Enums(enums));
+                }
+                b"commands" => {
+                    let commands = this.parse_commands(elem);
+                    contents.push(RegistryContent::Commands(commands));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -632,5 +637,270 @@ impl<'a> Parser<'a> {
             comment: comment.unwrap(),
             start: start.unwrap(),
         }
+    }
+
+    fn parse_commands(&mut self, elem: Elem) -> Commands {
+        let mut comment = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(
+            elem,
+            |this, text| this.assert_is_ws(text.as_bytes()),
+            |this, elem| match elem.start.name().as_ref() {
+                b"command" => {
+                    let command = this.parse_command(elem);
+                    contents.push(CommandsContent::Command(command));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        );
+
+        Commands {
+            comment: comment.unwrap(),
+            contents,
+        }
+    }
+
+    fn parse_command(&mut self, elem: Elem) -> Command {
+        let mut alias = None;
+        let mut allownoqueues = None;
+        let mut api = None;
+        let mut cmdbufferlevel = None;
+        let mut comment = None;
+        let mut conditionalrendering = None;
+        let mut errorcodes = None;
+        let mut export = None;
+        let mut name = None;
+        let mut queues = None;
+        let mut renderpass = None;
+        let mut successcodes = None;
+        let mut tasks = None;
+        let mut videocoding = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"allownoqueues" => self.save_attr(attr, &mut allownoqueues),
+                b"api" => self.save_attr(attr, &mut api),
+                b"cmdbufferlevel" => self.save_attr(attr, &mut cmdbufferlevel),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"conditionalrendering" => self.save_attr(attr, &mut conditionalrendering),
+                b"errorcodes" => self.save_attr(attr, &mut errorcodes),
+                b"export" => self.save_attr(attr, &mut export),
+                b"name" => self.save_attr(attr, &mut name),
+                b"queues" => self.save_attr(attr, &mut queues),
+                b"renderpass" => self.save_attr(attr, &mut renderpass),
+                b"successcodes" => self.save_attr(attr, &mut successcodes),
+                b"tasks" => self.save_attr(attr, &mut tasks),
+                b"videocoding" => self.save_attr(attr, &mut videocoding),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(
+            elem,
+            |this, text| this.assert_is_ws(text.as_bytes()),
+            |this, elem| match elem.start.name().as_ref() {
+                b"proto" => {
+                    let proto = this.parse_proto(elem);
+                    contents.push(CommandContent::Proto(proto));
+                }
+                b"param" => {
+                    let param = this.parse_param(elem);
+                    contents.push(CommandContent::Param(param));
+                }
+                b"implicitexternsyncparams" => {
+                    let params = this.parse_implicitexternsyncparams(elem);
+                    contents.push(CommandContent::ImplicitExternSyncParams(params));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        );
+
+        Command {
+            alias,
+            allownoqueues,
+            api,
+            cmdbufferlevel,
+            comment,
+            conditionalrendering,
+            errorcodes,
+            export,
+            name,
+            queues,
+            renderpass,
+            successcodes,
+            tasks,
+            videocoding,
+            contents,
+        }
+    }
+
+    fn parse_proto(&mut self, elem: Elem) -> Proto {
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        if !elem.is_empty {
+            let mut buf = Vec::new();
+            loop {
+                match self.next_event(&mut buf) {
+                    Event::Text(text) => {
+                        let text = text.decode().unwrap().to_string();
+                        contents.push(ProtoContent::Text(text));
+                    }
+                    Event::Start(start) => {
+                        let is_empty = false;
+                        let elem = Elem { is_empty, start };
+                        match elem.start.name().as_ref() {
+                            b"type" => {
+                                let type_name = self.parse_text_elem(elem);
+                                contents.push(ProtoContent::Type(type_name));
+                            }
+                            b"name" => {
+                                let name = self.parse_text_elem(elem);
+                                contents.push(ProtoContent::Name(name));
+                            }
+                            _ => {
+                                panic!("unexpected element: {elem:?}");
+                            }
+                        }
+                    }
+                    Event::End(end) => {
+                        assert_eq!(end.name(), elem.start.name());
+                        break;
+                    }
+                    event => {
+                        panic!("unexpected event: {event:?}");
+                    }
+                }
+                buf.clear();
+            }
+        }
+
+        Proto { contents }
+    }
+
+    fn parse_param(&mut self, elem: Elem) -> Param {
+        let mut altlen = None;
+        let mut api = None;
+        let mut externsync = None;
+        let mut len = None;
+        let mut noautovalidity = None;
+        let mut objecttype = None;
+        let mut optional = None;
+        let mut stride = None;
+        let mut validstructs = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"altlen" => self.save_attr(attr, &mut altlen),
+                b"api" => self.save_attr(attr, &mut api),
+                b"externsync" => self.save_attr(attr, &mut externsync),
+                b"len" => self.save_attr(attr, &mut len),
+                b"noautovalidity" => self.save_attr(attr, &mut noautovalidity),
+                b"objecttype" => self.save_attr(attr, &mut objecttype),
+                b"optional" => self.save_attr(attr, &mut optional),
+                b"stride" => self.save_attr(attr, &mut stride),
+                b"validstructs" => self.save_attr(attr, &mut validstructs),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        if !elem.is_empty {
+            let mut buf = Vec::new();
+            loop {
+                match self.next_event(&mut buf) {
+                    Event::Text(text) => {
+                        let text = text.decode().unwrap().to_string();
+                        contents.push(ParamContent::Text(text));
+                    }
+                    Event::Start(start) => {
+                        let is_empty = false;
+                        let elem = Elem { is_empty, start };
+                        match elem.start.name().as_ref() {
+                            b"type" => {
+                                let type_name = self.parse_text_elem(elem);
+                                contents.push(ParamContent::Type(type_name));
+                            }
+                            b"name" => {
+                                let name = self.parse_text_elem(elem);
+                                contents.push(ParamContent::Name(name));
+                            }
+                            _ => {
+                                panic!("unexpected element: {elem:?}");
+                            }
+                        }
+                    }
+                    Event::End(end) => {
+                        assert_eq!(end.name(), elem.start.name());
+                        break;
+                    }
+                    event => {
+                        panic!("unexpected event: {event:?}");
+                    }
+                }
+                buf.clear();
+            }
+        }
+
+        Param {
+            altlen,
+            api,
+            externsync,
+            len,
+            noautovalidity,
+            objecttype,
+            optional,
+            stride,
+            validstructs,
+            contents,
+        }
+    }
+
+    fn parse_implicitexternsyncparams(&mut self, elem: Elem) -> ImplicitExternSyncParams {
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(
+            elem,
+            |this, text| this.assert_is_ws(text.as_bytes()),
+            |this, elem| match elem.start.name().as_ref() {
+                b"param" => {
+                    let param = this.parse_text_elem(elem);
+                    contents.push(ImplicitExternSyncParamsContent::Param(param));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        );
+
+        ImplicitExternSyncParams { contents }
     }
 }

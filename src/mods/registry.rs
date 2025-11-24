@@ -10,6 +10,7 @@ pub enum RegistryContent {
     Tags(Tags),
     Types(Types),
     Enums(Enums),
+    Commands(Commands),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -146,4 +147,84 @@ pub struct Enum {
 pub struct Unused {
     pub comment: String,
     pub start: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Commands {
+    pub comment: String,
+    pub contents: Vec<CommandsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum CommandsContent {
+    Command(Command),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Command {
+    pub alias: Option<String>,
+    pub allownoqueues: Option<String>,
+    pub api: Option<String>,
+    pub cmdbufferlevel: Option<String>,
+    pub comment: Option<String>,
+    pub conditionalrendering: Option<String>,
+    pub errorcodes: Option<String>,
+    pub export: Option<String>,
+    pub name: Option<String>,
+    pub queues: Option<String>,
+    pub renderpass: Option<String>,
+    pub successcodes: Option<String>,
+    pub tasks: Option<String>,
+    pub videocoding: Option<String>,
+    pub contents: Vec<CommandContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum CommandContent {
+    Proto(Proto),
+    Param(Param),
+    ImplicitExternSyncParams(ImplicitExternSyncParams),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Proto {
+    pub contents: Vec<ProtoContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ProtoContent {
+    Text(String),
+    Type(String),
+    Name(String),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Param {
+    pub altlen: Option<String>,
+    pub api: Option<String>,
+    pub externsync: Option<String>,
+    pub len: Option<String>,
+    pub noautovalidity: Option<String>,
+    pub objecttype: Option<String>,
+    pub optional: Option<String>,
+    pub stride: Option<String>,
+    pub validstructs: Option<String>,
+    pub contents: Vec<ParamContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ParamContent {
+    Text(String),
+    Type(String),
+    Name(String),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ImplicitExternSyncParams {
+    pub contents: Vec<ImplicitExternSyncParamsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ImplicitExternSyncParamsContent {
+    Param(String),
 }
