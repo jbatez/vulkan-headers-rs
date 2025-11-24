@@ -4,8 +4,8 @@ use quick_xml::{
 };
 
 use crate::{
-    Platform, Platforms, PlatformsContent, Registry, RegistryContent, Tag, Tags, TagsContent, Type,
-    TypeContent, Types, TypesContent,
+    Member, MemberContent, Platform, Platforms, PlatformsContent, Registry, RegistryContent, Tag,
+    Tags, TagsContent, Type, TypeContent, Types, TypesContent,
 };
 
 struct Parser<'a> {
@@ -297,8 +297,8 @@ impl<'a> Parser<'a> {
                     contents.push(TypesContent::Comment(comment));
                 }
                 b"type" => {
-                    let ty = this.parse_type(elem);
-                    contents.push(TypesContent::Type(ty));
+                    let type_name = this.parse_type(elem);
+                    contents.push(TypesContent::Type(type_name));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -314,6 +314,7 @@ impl<'a> Parser<'a> {
 
     fn parse_type(&mut self, elem: Elem) -> Type {
         let mut alias = None;
+        let mut allowduplicate = None;
         let mut api = None;
         let mut bitvalues = None;
         let mut category = None;
@@ -321,12 +322,16 @@ impl<'a> Parser<'a> {
         let mut name = None;
         let mut objtypeenum = None;
         let mut parent = None;
+        let mut requiredlimittype = None;
         let mut requires = None;
+        let mut returnedonly = None;
+        let mut structextends = None;
 
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
                 b"alias" => self.save_attr(attr, &mut alias),
+                b"allowduplicate" => self.save_attr(attr, &mut allowduplicate),
                 b"api" => self.save_attr(attr, &mut api),
                 b"bitvalues" => self.save_attr(attr, &mut bitvalues),
                 b"category" => self.save_attr(attr, &mut category),
@@ -334,7 +339,10 @@ impl<'a> Parser<'a> {
                 b"name" => self.save_attr(attr, &mut name),
                 b"objtypeenum" => self.save_attr(attr, &mut objtypeenum),
                 b"parent" => self.save_attr(attr, &mut parent),
+                b"requiredlimittype" => self.save_attr(attr, &mut requiredlimittype),
                 b"requires" => self.save_attr(attr, &mut requires),
+                b"returnedonly" => self.save_attr(attr, &mut returnedonly),
+                b"structextends" => self.save_attr(attr, &mut structextends),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
         }
@@ -352,22 +360,32 @@ impl<'a> Parser<'a> {
                         let text = text.decode().unwrap().to_string();
                         contents.push(TypeContent::Text(text));
                     }
-                    Event::Start(start) => match start.name().as_ref() {
-                        b"name" => {
-                            assert_eq!(name, None);
-                            let is_empty = false;
-                            let name = self.parse_text_elem(Elem { is_empty, start });
-                            contents.push(TypeContent::Name(name));
+                    Event::Start(start) => {
+                        let is_empty = false;
+                        let elem = Elem { is_empty, start };
+                        match elem.start.name().as_ref() {
+                            b"type" => {
+                                let type_name = self.parse_text_elem(elem);
+                                contents.push(TypeContent::Type(type_name));
+                            }
+                            b"name" => {
+                                assert_eq!(name, None);
+                                let name = self.parse_text_elem(elem);
+                                contents.push(TypeContent::Name(name));
+                            }
+                            b"member" => {
+                                let member = self.parse_member(elem);
+                                contents.push(TypeContent::Member(member));
+                            }
+                            b"comment" => {
+                                let comment = self.parse_text_elem(elem);
+                                contents.push(TypeContent::Comment(comment));
+                            }
+                            _ => {
+                                panic!("unexpected element: {elem:?}");
+                            }
                         }
-                        b"type" => {
-                            let is_empty = false;
-                            let ty = self.parse_text_elem(Elem { is_empty, start });
-                            contents.push(TypeContent::Type(ty));
-                        }
-                        _ => {
-                            panic!("unexpected element: {start:?}");
-                        }
-                    },
+                    }
                     Event::End(end) => {
                         assert_eq!(end.name(), elem.start.name());
                         break;
@@ -382,6 +400,7 @@ impl<'a> Parser<'a> {
 
         Type {
             alias,
+            allowduplicate,
             api,
             bitvalues,
             category,
@@ -389,7 +408,109 @@ impl<'a> Parser<'a> {
             name,
             objtypeenum,
             parent,
+            requiredlimittype,
             requires,
+            returnedonly,
+            structextends,
+            contents,
+        }
+    }
+
+    fn parse_member(&mut self, elem: Elem) -> Member {
+        let mut altlen = None;
+        let mut api = None;
+        let mut deprecated = None;
+        let mut externsync = None;
+        let mut featurelink = None;
+        let mut len = None;
+        let mut limittype = None;
+        let mut noautovalidity = None;
+        let mut objecttype = None;
+        let mut optional = None;
+        let mut selection = None;
+        let mut selector = None;
+        let mut values = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"altlen" => self.save_attr(attr, &mut altlen),
+                b"api" => self.save_attr(attr, &mut api),
+                b"deprecated" => self.save_attr(attr, &mut deprecated),
+                b"externsync" => self.save_attr(attr, &mut externsync),
+                b"featurelink" => self.save_attr(attr, &mut featurelink),
+                b"len" => self.save_attr(attr, &mut len),
+                b"limittype" => self.save_attr(attr, &mut limittype),
+                b"noautovalidity" => self.save_attr(attr, &mut noautovalidity),
+                b"objecttype" => self.save_attr(attr, &mut objecttype),
+                b"optional" => self.save_attr(attr, &mut optional),
+                b"selection" => self.save_attr(attr, &mut selection),
+                b"selector" => self.save_attr(attr, &mut selector),
+                b"values" => self.save_attr(attr, &mut values),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        if !elem.is_empty {
+            let mut buf = Vec::new();
+            loop {
+                match self.next_event(&mut buf) {
+                    Event::Text(text) => {
+                        let text = text.decode().unwrap().to_string();
+                        contents.push(MemberContent::Text(text));
+                    }
+                    Event::Start(start) => {
+                        let is_empty = false;
+                        let elem = Elem { is_empty, start };
+                        match elem.start.name().as_ref() {
+                            b"type" => {
+                                let type_name = self.parse_text_elem(elem);
+                                contents.push(MemberContent::Type(type_name));
+                            }
+                            b"name" => {
+                                let name = self.parse_text_elem(elem);
+                                contents.push(MemberContent::Name(name));
+                            }
+                            b"enum" => {
+                                let enum_name = self.parse_text_elem(elem);
+                                contents.push(MemberContent::Enum(enum_name));
+                            }
+                            b"comment" => {
+                                let comment = self.parse_text_elem(elem);
+                                contents.push(MemberContent::Comment(comment));
+                            }
+                            _ => {
+                                panic!("unexpected element: {elem:?}");
+                            }
+                        }
+                    }
+                    Event::End(end) => {
+                        assert_eq!(end.name(), elem.start.name());
+                        break;
+                    }
+                    event => {
+                        panic!("unexpected event: {event:?}");
+                    }
+                }
+                buf.clear();
+            }
+        }
+
+        Member {
+            altlen,
+            api,
+            deprecated,
+            externsync,
+            featurelink,
+            len,
+            limittype,
+            noautovalidity,
+            objecttype,
+            optional,
+            selection,
+            selector,
+            values,
             contents,
         }
     }

@@ -62,6 +62,7 @@ pub enum TypesContent {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Type {
     pub alias: Option<String>,
+    pub allowduplicate: Option<String>,
     pub api: Option<String>,
     pub bitvalues: Option<String>,
     pub category: Option<String>,
@@ -69,13 +70,45 @@ pub struct Type {
     pub name: Option<String>,
     pub objtypeenum: Option<String>,
     pub parent: Option<String>,
+    pub requiredlimittype: Option<String>,
     pub requires: Option<String>,
+    pub returnedonly: Option<String>,
+    pub structextends: Option<String>,
     pub contents: Vec<TypeContent>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum TypeContent {
     Text(String),
-    Name(String),
     Type(String),
+    Name(String),
+    Member(Member),
+    Comment(String),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Member {
+    pub altlen: Option<String>,
+    pub api: Option<String>,
+    pub deprecated: Option<String>,
+    pub externsync: Option<String>,
+    pub featurelink: Option<String>,
+    pub len: Option<String>,
+    pub limittype: Option<String>,
+    pub noautovalidity: Option<String>,
+    pub objecttype: Option<String>,
+    pub optional: Option<String>,
+    pub selection: Option<String>,
+    pub selector: Option<String>,
+    pub values: Option<String>,
+    pub contents: Vec<MemberContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum MemberContent {
+    Text(String),
+    Type(String),
+    Name(String),
+    Enum(String),
+    Comment(String),
 }
