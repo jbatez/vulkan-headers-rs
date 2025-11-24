@@ -12,6 +12,7 @@ pub enum RegistryContent {
     Enums(Enums),
     Commands(Commands),
     Feature(Feature),
+    Extensions(Extensions),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -249,7 +250,48 @@ pub enum FeatureContent {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Extensions {
+    pub comment: Option<String>,
+    pub contents: Vec<ExtensionsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ExtensionsContent {
+    Extension(Extension),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Extension {
+    pub author: Option<String>,
+    pub comment: Option<String>,
+    pub contact: Option<String>,
+    pub depends: Option<String>,
+    pub deprecatedby: Option<String>,
+    pub name: Option<String>,
+    pub nofeatures: Option<String>,
+    pub number: Option<String>,
+    pub obsoletedby: Option<String>,
+    pub platform: Option<String>,
+    pub promotedto: Option<String>,
+    pub provisional: Option<String>,
+    pub ratified: Option<String>,
+    pub sortorder: Option<String>,
+    pub specialuse: Option<String>,
+    pub supported: Option<String>,
+    pub ty: Option<String>,
+    pub contents: Vec<ExtensionContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ExtensionContent {
+    Require(Require),
+    Deprecate(Deprecate),
+    Remove(Remove),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Require {
+    pub api: Option<String>,
     pub comment: Option<String>,
     pub depends: Option<String>,
     pub contents: Vec<RequireContent>,
@@ -276,6 +318,7 @@ pub struct RequireEnum {
     pub extnumber: Option<String>,
     pub name: Option<String>,
     pub offset: Option<String>,
+    pub protect: Option<String>,
     pub value: Option<String>,
 }
 

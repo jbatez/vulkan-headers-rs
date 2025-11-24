@@ -5,7 +5,8 @@ use quick_xml::{
 
 use crate::{
     Command, CommandContent, Commands, CommandsContent, Deprecate, DeprecateContent, Enum, Enums,
-    EnumsContent, Feature, FeatureContent, FeatureRef, GeneralRef, ImplicitExternSyncParams,
+    EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent, Feature,
+    FeatureContent, FeatureRef, GeneralRef, ImplicitExternSyncParams,
     ImplicitExternSyncParamsContent, Member, MemberContent, Param, ParamContent, Platform,
     Platforms, PlatformsContent, Proto, ProtoContent, Registry, RegistryContent, Remove,
     RemoveContent, Require, RequireContent, RequireEnum, Tag, Tags, TagsContent, Type, TypeContent,
@@ -167,6 +168,10 @@ impl<'a> Parser<'a> {
                 b"feature" => {
                     let feature = this.parse_feature(elem);
                     contents.push(RegistryContent::Feature(feature));
+                }
+                b"extensions" => {
+                    let extensions = this.parse_extensions(elem);
+                    contents.push(RegistryContent::Extensions(extensions));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -871,13 +876,130 @@ impl<'a> Parser<'a> {
         }
     }
 
+    fn parse_extensions(&mut self, elem: Elem) -> Extensions {
+        let mut comment = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"extension" => {
+                    let extension = this.parse_extension(elem);
+                    contents.push(ExtensionsContent::Extension(extension));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        Extensions { comment, contents }
+    }
+
+    fn parse_extension(&mut self, elem: Elem) -> Extension {
+        let mut author = None;
+        let mut comment = None;
+        let mut contact = None;
+        let mut depends = None;
+        let mut deprecatedby = None;
+        let mut name = None;
+        let mut nofeatures = None;
+        let mut number = None;
+        let mut obsoletedby = None;
+        let mut platform = None;
+        let mut promotedto = None;
+        let mut provisional = None;
+        let mut ratified = None;
+        let mut sortorder = None;
+        let mut specialuse = None;
+        let mut supported = None;
+        let mut ty = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"author" => self.save_attr(attr, &mut author),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"contact" => self.save_attr(attr, &mut contact),
+                b"depends" => self.save_attr(attr, &mut depends),
+                b"deprecatedby" => self.save_attr(attr, &mut deprecatedby),
+                b"name" => self.save_attr(attr, &mut name),
+                b"nofeatures" => self.save_attr(attr, &mut nofeatures),
+                b"number" => self.save_attr(attr, &mut number),
+                b"obsoletedby" => self.save_attr(attr, &mut obsoletedby),
+                b"platform" => self.save_attr(attr, &mut platform),
+                b"promotedto" => self.save_attr(attr, &mut promotedto),
+                b"provisional" => self.save_attr(attr, &mut provisional),
+                b"ratified" => self.save_attr(attr, &mut ratified),
+                b"sortorder" => self.save_attr(attr, &mut sortorder),
+                b"specialuse" => self.save_attr(attr, &mut specialuse),
+                b"supported" => self.save_attr(attr, &mut supported),
+                b"type" => self.save_attr(attr, &mut ty),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"require" => {
+                    let require = this.parse_require(elem);
+                    contents.push(ExtensionContent::Require(require));
+                }
+                b"deprecate" => {
+                    let deprecate = this.parse_deprecate(elem);
+                    contents.push(ExtensionContent::Deprecate(deprecate));
+                }
+                b"remove" => {
+                    let remove = this.parse_remove(elem);
+                    contents.push(ExtensionContent::Remove(remove));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Extension {
+            author,
+            comment,
+            contact,
+            depends,
+            deprecatedby,
+            name,
+            nofeatures,
+            number,
+            obsoletedby,
+            platform,
+            promotedto,
+            provisional,
+            ratified,
+            sortorder,
+            specialuse,
+            supported,
+            ty,
+            contents,
+        }
+    }
+
     fn parse_require(&mut self, elem: Elem) -> Require {
+        let mut api = None;
         let mut comment = None;
         let mut depends = None;
 
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
+                b"api" => self.save_attr(attr, &mut api),
                 b"comment" => self.save_attr(attr, &mut comment),
                 b"depends" => self.save_attr(attr, &mut depends),
                 _ => panic!("unexpected attr: {attr:?}"),
@@ -915,6 +1037,7 @@ impl<'a> Parser<'a> {
         });
 
         Require {
+            api,
             comment,
             depends,
             contents,
@@ -932,6 +1055,7 @@ impl<'a> Parser<'a> {
         let mut extnumber = None;
         let mut name = None;
         let mut offset = None;
+        let mut protect = None;
         let mut value = None;
 
         for attr in elem.start.attributes() {
@@ -947,6 +1071,7 @@ impl<'a> Parser<'a> {
                 b"extnumber" => self.save_attr(attr, &mut extnumber),
                 b"name" => self.save_attr(attr, &mut name),
                 b"offset" => self.save_attr(attr, &mut offset),
+                b"protect" => self.save_attr(attr, &mut protect),
                 b"value" => self.save_attr(attr, &mut value),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
@@ -964,6 +1089,7 @@ impl<'a> Parser<'a> {
             extnumber,
             name,
             offset,
+            protect,
             value,
         }
     }
