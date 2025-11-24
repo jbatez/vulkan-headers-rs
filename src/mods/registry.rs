@@ -15,7 +15,7 @@ pub enum RegistryContent {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Platforms {
-    pub comment: String,
+    pub comment: Option<String>,
     pub contents: Vec<PlatformsContent>,
 }
 
@@ -26,14 +26,14 @@ pub enum PlatformsContent {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Platform {
-    pub comment: String,
-    pub name: String,
-    pub protect: String,
+    pub comment: Option<String>,
+    pub name: Option<String>,
+    pub protect: Option<String>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Tags {
-    pub comment: String,
+    pub comment: Option<String>,
     pub contents: Vec<TagsContent>,
 }
 
@@ -44,14 +44,14 @@ pub enum TagsContent {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Tag {
-    pub author: String,
-    pub contact: String,
-    pub name: String,
+    pub author: Option<String>,
+    pub contact: Option<String>,
+    pub name: Option<String>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Types {
-    pub comment: String,
+    pub comment: Option<String>,
     pub contents: Vec<TypesContent>,
 }
 
@@ -119,8 +119,8 @@ pub enum MemberContent {
 pub struct Enums {
     pub bitwidth: Option<String>,
     pub comment: Option<String>,
-    pub name: String,
-    pub ty: String,
+    pub name: Option<String>,
+    pub ty: Option<String>,
     pub contents: Vec<EnumsContent>,
 }
 
@@ -138,20 +138,20 @@ pub struct Enum {
     pub bitpos: Option<String>,
     pub comment: Option<String>,
     pub deprecated: Option<String>,
-    pub name: String,
+    pub name: Option<String>,
     pub ty: Option<String>,
     pub value: Option<String>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Unused {
-    pub comment: String,
-    pub start: String,
+    pub comment: Option<String>,
+    pub start: Option<String>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Commands {
-    pub comment: String,
+    pub comment: Option<String>,
     pub contents: Vec<CommandsContent>,
 }
 

@@ -210,10 +210,7 @@ impl<'a> Parser<'a> {
             },
         });
 
-        Platforms {
-            comment: comment.unwrap(),
-            contents,
-        }
+        Platforms { comment, contents }
     }
 
     fn parse_platform(&mut self, elem: Elem) -> Platform {
@@ -233,9 +230,9 @@ impl<'a> Parser<'a> {
 
         assert_eq!(elem.is_empty, true);
         Platform {
-            comment: comment.unwrap(),
-            name: name.unwrap(),
-            protect: protect.unwrap(),
+            comment,
+            name,
+            protect,
         }
     }
 
@@ -264,10 +261,7 @@ impl<'a> Parser<'a> {
             },
         });
 
-        Tags {
-            comment: comment.unwrap(),
-            contents,
-        }
+        Tags { comment, contents }
     }
 
     fn parse_tag(&mut self, elem: Elem) -> Tag {
@@ -287,9 +281,9 @@ impl<'a> Parser<'a> {
 
         assert_eq!(elem.is_empty, true);
         Tag {
-            author: author.unwrap(),
-            contact: contact.unwrap(),
-            name: name.unwrap(),
+            author,
+            contact,
+            name,
         }
     }
 
@@ -322,10 +316,7 @@ impl<'a> Parser<'a> {
             },
         });
 
-        Types {
-            comment: comment.unwrap(),
-            contents,
-        }
+        Types { comment, contents }
     }
 
     fn parse_type(&mut self, elem: Elem) -> Type {
@@ -533,8 +524,8 @@ impl<'a> Parser<'a> {
         Enums {
             bitwidth,
             comment,
-            name: name.unwrap(),
-            ty: ty.unwrap(),
+            name,
+            ty,
             contents,
         }
     }
@@ -571,7 +562,7 @@ impl<'a> Parser<'a> {
             bitpos,
             comment,
             deprecated,
-            name: name.unwrap(),
+            name,
             ty,
             value,
         }
@@ -591,10 +582,7 @@ impl<'a> Parser<'a> {
         }
 
         assert_eq!(elem.is_empty, true);
-        Unused {
-            comment: comment.unwrap(),
-            start: start.unwrap(),
-        }
+        Unused { comment, start }
     }
 
     fn parse_commands(&mut self, elem: Elem) -> Commands {
@@ -622,10 +610,7 @@ impl<'a> Parser<'a> {
             },
         });
 
-        Commands {
-            comment: comment.unwrap(),
-            contents,
-        }
+        Commands { comment, contents }
     }
 
     fn parse_command(&mut self, elem: Elem) -> Command {
