@@ -321,8 +321,8 @@ impl<'a> Parser<'a> {
                     contents.push(TypesContent::Comment(comment));
                 }
                 b"type" => {
-                    let type_name = this.parse_type(elem);
-                    contents.push(TypesContent::Type(type_name));
+                    let typ = this.parse_type(elem);
+                    contents.push(TypesContent::Type(typ));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -379,11 +379,10 @@ impl<'a> Parser<'a> {
                     contents.push(TypeContent::Comment(comment));
                 }
                 b"type" => {
-                    let type_name = this.parse_text_elem(elem);
-                    contents.push(TypeContent::Type(type_name));
+                    let typ = this.parse_text_elem(elem);
+                    contents.push(TypeContent::Type(typ));
                 }
                 b"name" => {
-                    assert_eq!(name, None);
                     let name = this.parse_text_elem(elem);
                     contents.push(TypeContent::Name(name));
                 }
@@ -461,16 +460,16 @@ impl<'a> Parser<'a> {
                     contents.push(MemberContent::Comment(comment));
                 }
                 b"type" => {
-                    let type_name = this.parse_text_elem(elem);
-                    contents.push(MemberContent::Type(type_name));
+                    let typ = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Type(typ));
                 }
                 b"name" => {
                     let name = this.parse_text_elem(elem);
                     contents.push(MemberContent::Name(name));
                 }
                 b"enum" => {
-                    let enum_name = this.parse_text_elem(elem);
-                    contents.push(MemberContent::Enum(enum_name));
+                    let enu = this.parse_text_elem(elem);
+                    contents.push(MemberContent::Enum(enu));
                 }
                 _ => {
                     panic!("unexpected element: {elem:?}");
@@ -500,7 +499,7 @@ impl<'a> Parser<'a> {
         let mut bitwidth = None;
         let mut comment = None;
         let mut name = None;
-        let mut ty = None;
+        let mut typ = None;
 
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
@@ -508,7 +507,7 @@ impl<'a> Parser<'a> {
                 b"bitwidth" => self.save_attr(attr, &mut bitwidth),
                 b"comment" => self.save_attr(attr, &mut comment),
                 b"name" => self.save_attr(attr, &mut name),
-                b"type" => self.save_attr(attr, &mut ty),
+                b"type" => self.save_attr(attr, &mut typ),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
         }
@@ -522,8 +521,8 @@ impl<'a> Parser<'a> {
                     contents.push(EnumsContent::Comment(comment));
                 }
                 b"enum" => {
-                    let new_enum = this.parse_enum(elem);
-                    contents.push(EnumsContent::Enum(new_enum));
+                    let enu = this.parse_enum(elem);
+                    contents.push(EnumsContent::Enum(enu));
                 }
                 b"unused" => {
                     let unused = this.parse_unused(elem);
@@ -539,7 +538,7 @@ impl<'a> Parser<'a> {
             bitwidth,
             comment,
             name,
-            ty,
+            typ,
             contents,
         }
     }
@@ -551,7 +550,7 @@ impl<'a> Parser<'a> {
         let mut comment = None;
         let mut deprecated = None;
         let mut name = None;
-        let mut ty = None;
+        let mut typ = None;
         let mut value = None;
 
         for attr in elem.start.attributes() {
@@ -563,7 +562,7 @@ impl<'a> Parser<'a> {
                 b"comment" => self.save_attr(attr, &mut comment),
                 b"deprecated" => self.save_attr(attr, &mut deprecated),
                 b"name" => self.save_attr(attr, &mut name),
-                b"type" => self.save_attr(attr, &mut ty),
+                b"type" => self.save_attr(attr, &mut typ),
                 b"value" => self.save_attr(attr, &mut value),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
@@ -577,7 +576,7 @@ impl<'a> Parser<'a> {
             comment,
             deprecated,
             name,
-            ty,
+            typ,
             value,
         }
     }
@@ -677,7 +676,7 @@ impl<'a> Parser<'a> {
                     contents.push(CommandContent::Param(param));
                 }
                 b"implicitexternsyncparams" => {
-                    let params = this.parse_implicitexternsyncparams(elem);
+                    let params = this.parse_implicit_extern_sync_params(elem);
                     contents.push(CommandContent::ImplicitExternSyncParams(params));
                 }
                 _ => {
@@ -720,8 +719,8 @@ impl<'a> Parser<'a> {
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {
-                    let type_name = this.parse_text_elem(elem);
-                    contents.push(ProtoContent::Type(type_name));
+                    let typ = this.parse_text_elem(elem);
+                    contents.push(ProtoContent::Type(typ));
                 }
                 b"name" => {
                     let name = this.parse_text_elem(elem);
@@ -770,8 +769,8 @@ impl<'a> Parser<'a> {
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {
-                    let type_name = this.parse_text_elem(elem);
-                    contents.push(ParamContent::Type(type_name));
+                    let typ = this.parse_text_elem(elem);
+                    contents.push(ParamContent::Type(typ));
                 }
                 b"name" => {
                     let name = this.parse_text_elem(elem);
@@ -797,7 +796,7 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_implicitexternsyncparams(&mut self, elem: Elem) -> ImplicitExternSyncParams {
+    fn parse_implicit_extern_sync_params(&mut self, elem: Elem) -> ImplicitExternSyncParams {
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
@@ -921,7 +920,7 @@ impl<'a> Parser<'a> {
         let mut sortorder = None;
         let mut specialuse = None;
         let mut supported = None;
-        let mut ty = None;
+        let mut typ = None;
 
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
@@ -942,7 +941,7 @@ impl<'a> Parser<'a> {
                 b"sortorder" => self.save_attr(attr, &mut sortorder),
                 b"specialuse" => self.save_attr(attr, &mut specialuse),
                 b"supported" => self.save_attr(attr, &mut supported),
-                b"type" => self.save_attr(attr, &mut ty),
+                b"type" => self.save_attr(attr, &mut typ),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
         }
@@ -986,7 +985,7 @@ impl<'a> Parser<'a> {
             sortorder,
             specialuse,
             supported,
-            ty,
+            typ,
             contents,
         }
     }
@@ -1015,20 +1014,20 @@ impl<'a> Parser<'a> {
                     contents.push(RequireContent::Comment(comment));
                 }
                 b"type" => {
-                    let type_ref = this.parse_general_ref(elem);
-                    contents.push(RequireContent::Type(type_ref));
+                    let typ = this.parse_general_ref(elem);
+                    contents.push(RequireContent::Type(typ));
                 }
                 b"enum" => {
-                    let enum_ref = this.parse_require_enum(elem);
-                    contents.push(RequireContent::Enum(enum_ref));
+                    let enu = this.parse_require_enum(elem);
+                    contents.push(RequireContent::Enum(enu));
                 }
                 b"command" => {
-                    let command_ref = this.parse_general_ref(elem);
-                    contents.push(RequireContent::Command(command_ref));
+                    let command = this.parse_general_ref(elem);
+                    contents.push(RequireContent::Command(command));
                 }
                 b"feature" => {
-                    let feature_ref = this.parse_feature_ref(elem);
-                    contents.push(RequireContent::Feature(feature_ref));
+                    let feature = this.parse_feature_ref(elem);
+                    contents.push(RequireContent::Feature(feature));
                 }
                 _ => {
                     panic!("unexpected element: {elem:?}");
@@ -1110,12 +1109,12 @@ impl<'a> Parser<'a> {
             Content::Text(text) => this.assert_is_ws(text.as_bytes()),
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {
-                    let type_ref = this.parse_general_ref(elem);
-                    contents.push(DeprecateContent::Type(type_ref));
+                    let typ = this.parse_general_ref(elem);
+                    contents.push(DeprecateContent::Type(typ));
                 }
                 b"command" => {
-                    let command_ref = this.parse_general_ref(elem);
-                    contents.push(DeprecateContent::Command(command_ref));
+                    let command = this.parse_general_ref(elem);
+                    contents.push(DeprecateContent::Command(command));
                 }
                 _ => {
                     panic!("unexpected element: {elem:?}");
@@ -1147,20 +1146,20 @@ impl<'a> Parser<'a> {
             Content::Text(text) => this.assert_is_ws(text.as_bytes()),
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {
-                    let type_ref = this.parse_general_ref(elem);
-                    contents.push(RemoveContent::Type(type_ref));
+                    let typ = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Type(typ));
                 }
                 b"enum" => {
-                    let enum_ref = this.parse_general_ref(elem);
-                    contents.push(RemoveContent::Enum(enum_ref));
+                    let enu = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Enum(enu));
                 }
                 b"command" => {
-                    let command_ref = this.parse_general_ref(elem);
-                    contents.push(RemoveContent::Command(command_ref));
+                    let command = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Command(command));
                 }
                 b"feature" => {
-                    let feature_ref = this.parse_feature_ref(elem);
-                    contents.push(RemoveContent::Feature(feature_ref));
+                    let feature = this.parse_feature_ref(elem);
+                    contents.push(RemoveContent::Feature(feature));
                 }
                 _ => {
                     panic!("unexpected element: {elem:?}");
@@ -1194,21 +1193,18 @@ impl<'a> Parser<'a> {
 
     fn parse_feature_ref(&mut self, elem: Elem) -> FeatureRef {
         let mut name = None;
-        let mut feature_struct = None;
+        let mut struc = None;
 
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
                 b"name" => self.save_attr(attr, &mut name),
-                b"struct" => self.save_attr(attr, &mut feature_struct),
+                b"struct" => self.save_attr(attr, &mut struc),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
         }
 
         assert_eq!(elem.is_empty, true);
-        FeatureRef {
-            name,
-            feature_struct,
-        }
+        FeatureRef { name, struc }
     }
 }

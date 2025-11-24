@@ -122,7 +122,7 @@ pub struct Enums {
     pub bitwidth: Option<String>,
     pub comment: Option<String>,
     pub name: Option<String>,
-    pub ty: Option<String>,
+    pub typ: Option<String>,
     pub contents: Vec<EnumsContent>,
 }
 
@@ -141,7 +141,7 @@ pub struct Enum {
     pub comment: Option<String>,
     pub deprecated: Option<String>,
     pub name: Option<String>,
-    pub ty: Option<String>,
+    pub typ: Option<String>,
     pub value: Option<String>,
 }
 
@@ -278,7 +278,7 @@ pub struct Extension {
     pub sortorder: Option<String>,
     pub specialuse: Option<String>,
     pub supported: Option<String>,
-    pub ty: Option<String>,
+    pub typ: Option<String>,
     pub contents: Vec<ExtensionContent>,
 }
 
@@ -358,5 +358,5 @@ pub struct GeneralRef {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct FeatureRef {
     pub name: Option<String>,
-    pub feature_struct: Option<String>,
+    pub struc: Option<String>,
 }
