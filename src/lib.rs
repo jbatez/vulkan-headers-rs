@@ -2,8 +2,8 @@ pub use mods::*;
 mod mods {
     mod parser;
 
-    pub use types::*;
-    mod types;
+    pub use registry::*;
+    mod registry;
 }
 
 #[cfg(test)]
