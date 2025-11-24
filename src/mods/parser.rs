@@ -9,11 +9,6 @@ struct Parser<'a> {
     reader: Reader<&'a [u8]>,
 }
 
-enum Content<'a> {
-    Text(BytesText<'a>),
-    Elem(Elem<'a>),
-}
-
 #[derive(Debug)]
 struct Elem<'a> {
     is_empty: bool,
@@ -51,9 +46,10 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_content<F>(&mut self, elem: Elem, mut f: F)
+    fn parse_content<TextF, ElemF>(&mut self, elem: Elem, mut text_f: TextF, mut elem_f: ElemF)
     where
-        F: FnMut(&mut Parser, Content),
+        TextF: FnMut(&mut Parser, BytesText),
+        ElemF: FnMut(&mut Parser, Elem),
     {
         if elem.is_empty {
             return;
@@ -63,25 +59,15 @@ impl<'a> Parser<'a> {
         loop {
             match self.next_event(&mut buf) {
                 Event::Text(text) => {
-                    f(self, Content::Text(text));
+                    text_f(self, text);
                 }
                 Event::Empty(start) => {
-                    f(
-                        self,
-                        Content::Elem(Elem {
-                            is_empty: true,
-                            start,
-                        }),
-                    );
+                    let is_empty = true;
+                    elem_f(self, Elem { is_empty, start });
                 }
                 Event::Start(start) => {
-                    f(
-                        self,
-                        Content::Elem(Elem {
-                            is_empty: false,
-                            start,
-                        }),
-                    );
+                    let is_empty = false;
+                    elem_f(self, Elem { is_empty, start });
                 }
                 Event::End(end) => {
                     assert_eq!(end.name(), elem.start.name());
@@ -136,11 +122,10 @@ impl<'a> Parser<'a> {
         }
 
         let mut elems = Vec::new();
-        self.parse_content(elem, |this, content| match content {
-            Content::Text(text) => {
-                this.assert_is_ws(text);
-            }
-            Content::Elem(elem) => match elem.start.name().as_ref() {
+        self.parse_content(
+            elem,
+            |this, text| this.assert_is_ws(text),
+            |this, elem| match elem.start.name().as_ref() {
                 b"comment" => {
                     let text = this.parse_text_elem(elem);
                     elems.push(RegistryElem::Comment(text));
@@ -157,7 +142,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        });
+        );
 
         *registry = Some(Registry { elems });
     }
@@ -171,14 +156,11 @@ impl<'a> Parser<'a> {
         }
 
         let mut ret = String::new();
-        self.parse_content(elem, |_this, content| match content {
-            Content::Text(text) => {
-                ret += text.decode().unwrap().as_ref();
-            }
-            Content::Elem(elem) => {
-                panic!("unexpected elem: {elem:?}");
-            }
-        });
+        self.parse_content(
+            elem,
+            |_this, text| ret += text.decode().unwrap().as_ref(),
+            |_this, elem| panic!("unexpected elem: {elem:?}"),
+        );
         ret
     }
 
@@ -193,11 +175,10 @@ impl<'a> Parser<'a> {
         }
 
         let mut elems = Vec::new();
-        self.parse_content(elem, |this, content| match content {
-            Content::Text(text) => {
-                this.assert_is_ws(text);
-            }
-            Content::Elem(elem) => match elem.start.name().as_ref() {
+        self.parse_content(
+            elem,
+            |this, text| this.assert_is_ws(text),
+            |this, elem| match elem.start.name().as_ref() {
                 b"platform" => {
                     let platform = this.parse_platform(elem);
                     elems.push(PlatformsElem::Platform(platform));
@@ -206,7 +187,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        });
+        );
 
         Platforms {
             comment: comment.unwrap(),
@@ -248,11 +229,10 @@ impl<'a> Parser<'a> {
         }
 
         let mut elems = Vec::new();
-        self.parse_content(elem, |this, content| match content {
-            Content::Text(text) => {
-                this.assert_is_ws(text);
-            }
-            Content::Elem(elem) => match elem.start.name().as_ref() {
+        self.parse_content(
+            elem,
+            |this, text| this.assert_is_ws(text),
+            |this, elem| match elem.start.name().as_ref() {
                 b"tag" => {
                     let tag = this.parse_tag(elem);
                     elems.push(TagsElem::Tag(tag));
@@ -261,7 +241,7 @@ impl<'a> Parser<'a> {
                     panic!("unexpected elem: {elem:?}");
                 }
             },
-        });
+        );
 
         Tags {
             comment: comment.unwrap(),
