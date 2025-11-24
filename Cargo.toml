@@ -1,3 +1,6 @@
 [package]
 name = "vulkan_registry"
 edition = "2024"
+
+[dependencies]
+quick-xml = "0.38.4"
