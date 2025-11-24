@@ -1,11 +1,12 @@
 use quick_xml::{
     Reader,
-    events::{BytesStart, BytesText, Event, attributes::Attribute},
+    events::{BytesStart, Event, attributes::Attribute},
 };
 
 use crate::{
-    Member, MemberContent, Platform, Platforms, PlatformsContent, Registry, RegistryContent, Tag,
-    Tags, TagsContent, Type, TypeContent, Types, TypesContent,
+    Enum, Enums, EnumsContent, Member, MemberContent, Platform, Platforms, PlatformsContent,
+    Registry, RegistryContent, Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent,
+    Unused,
 };
 
 struct Parser<'a> {
@@ -43,15 +44,15 @@ impl<'a> Parser<'a> {
         *out = Some(value.to_string());
     }
 
-    fn assert_is_ws(&mut self, text: BytesText) {
-        for &b in text.as_ref() {
+    fn assert_is_ws(&mut self, text: &[u8]) {
+        for &b in text {
             assert!(matches!(b, b'\n' | b'\r' | b' '));
         }
     }
 
     fn parse_content<TextF, ElemF>(&mut self, elem: Elem, mut text_f: TextF, mut elem_f: ElemF)
     where
-        TextF: FnMut(&mut Parser, BytesText),
+        TextF: FnMut(&mut Parser, &str),
         ElemF: FnMut(&mut Parser, Elem),
     {
         if elem.is_empty {
@@ -62,7 +63,10 @@ impl<'a> Parser<'a> {
         loop {
             match self.next_event(&mut buf) {
                 Event::Text(text) => {
-                    text_f(self, text);
+                    text_f(self, text.decode().unwrap().as_ref());
+                }
+                Event::GeneralRef(text) => {
+                    text_f(self, text.decode().unwrap().as_ref());
                 }
                 Event::Empty(start) => {
                     let is_empty = true;
@@ -94,7 +98,7 @@ impl<'a> Parser<'a> {
                     ();
                 }
                 Event::Text(text) => {
-                    self.assert_is_ws(text);
+                    self.assert_is_ws(text.as_ref());
                 }
                 Event::Start(start) => match start.name().as_ref() {
                     b"registry" => {
@@ -125,7 +129,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_content(
             elem,
-            |this, text| this.assert_is_ws(text),
+            |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
                 b"comment" => {
                     let text = this.parse_text_elem(elem);
@@ -142,6 +146,10 @@ impl<'a> Parser<'a> {
                 b"types" => {
                     let types = this.parse_types(elem);
                     contents.push(RegistryContent::Types(types));
+                }
+                b"enums" => {
+                    let enums = this.parse_enums(elem);
+                    contents.push(RegistryContent::Enums(enums));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -163,7 +171,7 @@ impl<'a> Parser<'a> {
         let mut ret = String::new();
         self.parse_content(
             elem,
-            |_this, text| ret += text.decode().unwrap().as_ref(),
+            |_this, text| ret += text,
             |_this, elem| panic!("unexpected elem: {elem:?}"),
         );
         ret
@@ -182,7 +190,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_content(
             elem,
-            |this, text| this.assert_is_ws(text),
+            |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
                 b"platform" => {
                     let platform = this.parse_platform(elem);
@@ -236,7 +244,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_content(
             elem,
-            |this, text| this.assert_is_ws(text),
+            |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
                 b"tag" => {
                     let tag = this.parse_tag(elem);
@@ -290,7 +298,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_content(
             elem,
-            |this, text| this.assert_is_ws(text),
+            |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
                 b"comment" => {
                     let comment = this.parse_text_elem(elem);
@@ -364,6 +372,10 @@ impl<'a> Parser<'a> {
                         let is_empty = false;
                         let elem = Elem { is_empty, start };
                         match elem.start.name().as_ref() {
+                            b"comment" => {
+                                let comment = self.parse_text_elem(elem);
+                                contents.push(TypeContent::Comment(comment));
+                            }
                             b"type" => {
                                 let type_name = self.parse_text_elem(elem);
                                 contents.push(TypeContent::Type(type_name));
@@ -376,10 +388,6 @@ impl<'a> Parser<'a> {
                             b"member" => {
                                 let member = self.parse_member(elem);
                                 contents.push(TypeContent::Member(member));
-                            }
-                            b"comment" => {
-                                let comment = self.parse_text_elem(elem);
-                                contents.push(TypeContent::Comment(comment));
                             }
                             _ => {
                                 panic!("unexpected element: {elem:?}");
@@ -464,6 +472,10 @@ impl<'a> Parser<'a> {
                         let is_empty = false;
                         let elem = Elem { is_empty, start };
                         match elem.start.name().as_ref() {
+                            b"comment" => {
+                                let comment = self.parse_text_elem(elem);
+                                contents.push(MemberContent::Comment(comment));
+                            }
                             b"type" => {
                                 let type_name = self.parse_text_elem(elem);
                                 contents.push(MemberContent::Type(type_name));
@@ -475,10 +487,6 @@ impl<'a> Parser<'a> {
                             b"enum" => {
                                 let enum_name = self.parse_text_elem(elem);
                                 contents.push(MemberContent::Enum(enum_name));
-                            }
-                            b"comment" => {
-                                let comment = self.parse_text_elem(elem);
-                                contents.push(MemberContent::Comment(comment));
                             }
                             _ => {
                                 panic!("unexpected element: {elem:?}");
@@ -512,6 +520,113 @@ impl<'a> Parser<'a> {
             selector,
             values,
             contents,
+        }
+    }
+
+    fn parse_enums(&mut self, elem: Elem) -> Enums {
+        let mut bitwidth = None;
+        let mut comment = None;
+        let mut name = None;
+        let mut ty = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"bitwidth" => self.save_attr(attr, &mut bitwidth),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"name" => self.save_attr(attr, &mut name),
+                b"type" => self.save_attr(attr, &mut ty),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_content(
+            elem,
+            |this, text| this.assert_is_ws(text.as_bytes()),
+            |this, elem| match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    contents.push(EnumsContent::Comment(comment));
+                }
+                b"enum" => {
+                    let new_enum = this.parse_enum(elem);
+                    contents.push(EnumsContent::Enum(new_enum));
+                }
+                b"unused" => {
+                    let unused = this.parse_unused(elem);
+                    contents.push(EnumsContent::Unused(unused));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        );
+
+        Enums {
+            bitwidth,
+            comment,
+            name: name.unwrap(),
+            ty: ty.unwrap(),
+            contents,
+        }
+    }
+
+    fn parse_enum(&mut self, elem: Elem) -> Enum {
+        let mut alias = None;
+        let mut api = None;
+        let mut bitpos = None;
+        let mut comment = None;
+        let mut deprecated = None;
+        let mut name = None;
+        let mut ty = None;
+        let mut value = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"api" => self.save_attr(attr, &mut api),
+                b"bitpos" => self.save_attr(attr, &mut bitpos),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"deprecated" => self.save_attr(attr, &mut deprecated),
+                b"name" => self.save_attr(attr, &mut name),
+                b"type" => self.save_attr(attr, &mut ty),
+                b"value" => self.save_attr(attr, &mut value),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        Enum {
+            alias,
+            api,
+            bitpos,
+            comment,
+            deprecated,
+            name: name.unwrap(),
+            ty,
+            value,
+        }
+    }
+
+    fn parse_unused(&mut self, elem: Elem) -> Unused {
+        let mut comment = None;
+        let mut start = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"start" => self.save_attr(attr, &mut start),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        Unused {
+            comment: comment.unwrap(),
+            start: start.unwrap(),
         }
     }
 }

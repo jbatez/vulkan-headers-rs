@@ -9,6 +9,7 @@ pub enum RegistryContent {
     Platforms(Platforms),
     Tags(Tags),
     Types(Types),
+    Enums(Enums),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -79,11 +80,11 @@ pub struct Type {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum TypeContent {
+    Comment(String),
     Text(String),
     Type(String),
     Name(String),
     Member(Member),
-    Comment(String),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -106,9 +107,43 @@ pub struct Member {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum MemberContent {
+    Comment(String),
     Text(String),
     Type(String),
     Name(String),
     Enum(String),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Enums {
+    pub bitwidth: Option<String>,
+    pub comment: Option<String>,
+    pub name: String,
+    pub ty: String,
+    pub contents: Vec<EnumsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum EnumsContent {
     Comment(String),
+    Enum(Enum),
+    Unused(Unused),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Enum {
+    pub alias: Option<String>,
+    pub api: Option<String>,
+    pub bitpos: Option<String>,
+    pub comment: Option<String>,
+    pub deprecated: Option<String>,
+    pub name: String,
+    pub ty: Option<String>,
+    pub value: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Unused {
+    pub comment: String,
+    pub start: String,
 }
