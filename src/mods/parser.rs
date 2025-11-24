@@ -168,17 +168,19 @@ impl<'a> Parser<'a> {
             }
         }
 
-        let mut ret = String::new();
+        let mut contents = String::new();
         self.parse_contents(
             elem,
-            |_this, text| ret += text,
+            |_this, text| contents += text,
             |_this, elem| panic!("unexpected elem: {elem:?}"),
         );
-        ret
+
+        contents
     }
 
     fn parse_platforms(&mut self, elem: Elem) -> Platforms {
         let mut comment = None;
+
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
@@ -233,6 +235,7 @@ impl<'a> Parser<'a> {
 
     fn parse_tags(&mut self, elem: Elem) -> Tags {
         let mut comment = None;
+
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
@@ -287,6 +290,7 @@ impl<'a> Parser<'a> {
 
     fn parse_types(&mut self, elem: Elem) -> Types {
         let mut comment = None;
+
         for attr in elem.start.attributes() {
             let attr = attr.unwrap();
             match attr.key.as_ref() {
