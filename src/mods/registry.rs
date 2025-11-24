@@ -11,6 +11,7 @@ pub enum RegistryContent {
     Types(Types),
     Enums(Enums),
     Commands(Commands),
+    Feature(Feature),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -227,4 +228,92 @@ pub struct ImplicitExternSyncParams {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum ImplicitExternSyncParamsContent {
     Param(String),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Feature {
+    pub api: Option<String>,
+    pub apitype: Option<String>,
+    pub comment: Option<String>,
+    pub depends: Option<String>,
+    pub name: Option<String>,
+    pub number: Option<String>,
+    pub contents: Vec<FeatureContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum FeatureContent {
+    Require(Require),
+    Deprecate(Deprecate),
+    Remove(Remove),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Require {
+    pub comment: Option<String>,
+    pub depends: Option<String>,
+    pub contents: Vec<RequireContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum RequireContent {
+    Comment(String),
+    Type(GeneralRef),
+    Enum(RequireEnum),
+    Command(GeneralRef),
+    Feature(FeatureRef),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct RequireEnum {
+    pub alias: Option<String>,
+    pub api: Option<String>,
+    pub bitpos: Option<String>,
+    pub comment: Option<String>,
+    pub deprecated: Option<String>,
+    pub dir: Option<String>,
+    pub extends: Option<String>,
+    pub extnumber: Option<String>,
+    pub name: Option<String>,
+    pub offset: Option<String>,
+    pub value: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Deprecate {
+    pub explanationlink: Option<String>,
+    pub contents: Vec<DeprecateContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum DeprecateContent {
+    Type(GeneralRef),
+    Command(GeneralRef),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Remove {
+    pub comment: Option<String>,
+    pub reasonlink: Option<String>,
+    pub contents: Vec<RemoveContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum RemoveContent {
+    Type(GeneralRef),
+    Enum(GeneralRef),
+    Command(GeneralRef),
+    Feature(FeatureRef),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct GeneralRef {
+    pub comment: Option<String>,
+    pub name: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct FeatureRef {
+    pub name: Option<String>,
+    pub feature_struct: Option<String>,
 }

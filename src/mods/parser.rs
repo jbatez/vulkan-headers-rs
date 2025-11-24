@@ -4,10 +4,12 @@ use quick_xml::{
 };
 
 use crate::{
-    Command, CommandContent, Commands, CommandsContent, Enum, Enums, EnumsContent,
-    ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent, Param,
-    ParamContent, Platform, Platforms, PlatformsContent, Proto, ProtoContent, Registry,
-    RegistryContent, Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
+    Command, CommandContent, Commands, CommandsContent, Deprecate, DeprecateContent, Enum, Enums,
+    EnumsContent, Feature, FeatureContent, FeatureRef, GeneralRef, ImplicitExternSyncParams,
+    ImplicitExternSyncParamsContent, Member, MemberContent, Param, ParamContent, Platform,
+    Platforms, PlatformsContent, Proto, ProtoContent, Registry, RegistryContent, Remove,
+    RemoveContent, Require, RequireContent, RequireEnum, Tag, Tags, TagsContent, Type, TypeContent,
+    Types, TypesContent, Unused,
 };
 
 struct Parser<'a> {
@@ -67,6 +69,9 @@ impl<'a> Parser<'a> {
         let mut buf = Vec::new();
         loop {
             match self.next_event(&mut buf) {
+                Event::Comment(_) => {
+                    ();
+                }
                 Event::Text(text) => {
                     f(self, Content::Text(text.decode().unwrap().as_ref()));
                 }
@@ -158,6 +163,10 @@ impl<'a> Parser<'a> {
                 b"commands" => {
                     let commands = this.parse_commands(elem);
                     contents.push(RegistryContent::Commands(commands));
+                }
+                b"feature" => {
+                    let feature = this.parse_feature(elem);
+                    contents.push(RegistryContent::Feature(feature));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -806,5 +815,274 @@ impl<'a> Parser<'a> {
         });
 
         ImplicitExternSyncParams { contents }
+    }
+
+    fn parse_feature(&mut self, elem: Elem) -> Feature {
+        let mut api = None;
+        let mut apitype = None;
+        let mut comment = None;
+        let mut depends = None;
+        let mut name = None;
+        let mut number = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"api" => self.save_attr(attr, &mut api),
+                b"apitype" => self.save_attr(attr, &mut apitype),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"depends" => self.save_attr(attr, &mut depends),
+                b"name" => self.save_attr(attr, &mut name),
+                b"number" => self.save_attr(attr, &mut number),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"require" => {
+                    let require = this.parse_require(elem);
+                    contents.push(FeatureContent::Require(require));
+                }
+                b"deprecate" => {
+                    let deprecate = this.parse_deprecate(elem);
+                    contents.push(FeatureContent::Deprecate(deprecate));
+                }
+                b"remove" => {
+                    let remove = this.parse_remove(elem);
+                    contents.push(FeatureContent::Remove(remove));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Feature {
+            api,
+            apitype,
+            comment,
+            depends,
+            name,
+            number,
+            contents,
+        }
+    }
+
+    fn parse_require(&mut self, elem: Elem) -> Require {
+        let mut comment = None;
+        let mut depends = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"depends" => self.save_attr(attr, &mut depends),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    contents.push(RequireContent::Comment(comment));
+                }
+                b"type" => {
+                    let type_ref = this.parse_general_ref(elem);
+                    contents.push(RequireContent::Type(type_ref));
+                }
+                b"enum" => {
+                    let enum_ref = this.parse_require_enum(elem);
+                    contents.push(RequireContent::Enum(enum_ref));
+                }
+                b"command" => {
+                    let command_ref = this.parse_general_ref(elem);
+                    contents.push(RequireContent::Command(command_ref));
+                }
+                b"feature" => {
+                    let feature_ref = this.parse_feature_ref(elem);
+                    contents.push(RequireContent::Feature(feature_ref));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Require {
+            comment,
+            depends,
+            contents,
+        }
+    }
+
+    fn parse_require_enum(&mut self, elem: Elem) -> RequireEnum {
+        let mut alias = None;
+        let mut api = None;
+        let mut bitpos = None;
+        let mut comment = None;
+        let mut deprecated = None;
+        let mut dir = None;
+        let mut extends = None;
+        let mut extnumber = None;
+        let mut name = None;
+        let mut offset = None;
+        let mut value = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"api" => self.save_attr(attr, &mut api),
+                b"bitpos" => self.save_attr(attr, &mut bitpos),
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"deprecated" => self.save_attr(attr, &mut deprecated),
+                b"dir" => self.save_attr(attr, &mut dir),
+                b"extends" => self.save_attr(attr, &mut extends),
+                b"extnumber" => self.save_attr(attr, &mut extnumber),
+                b"name" => self.save_attr(attr, &mut name),
+                b"offset" => self.save_attr(attr, &mut offset),
+                b"value" => self.save_attr(attr, &mut value),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        RequireEnum {
+            alias,
+            api,
+            bitpos,
+            comment,
+            deprecated,
+            dir,
+            extends,
+            extnumber,
+            name,
+            offset,
+            value,
+        }
+    }
+
+    fn parse_deprecate(&mut self, elem: Elem) -> Deprecate {
+        let mut explanationlink = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"explanationlink" => self.save_attr(attr, &mut explanationlink),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"type" => {
+                    let type_ref = this.parse_general_ref(elem);
+                    contents.push(DeprecateContent::Type(type_ref));
+                }
+                b"command" => {
+                    let command_ref = this.parse_general_ref(elem);
+                    contents.push(DeprecateContent::Command(command_ref));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Deprecate {
+            explanationlink,
+            contents,
+        }
+    }
+
+    fn parse_remove(&mut self, elem: Elem) -> Remove {
+        let mut comment = None;
+        let mut reasonlink = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"reasonlink" => self.save_attr(attr, &mut reasonlink),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"type" => {
+                    let type_ref = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Type(type_ref));
+                }
+                b"enum" => {
+                    let enum_ref = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Enum(enum_ref));
+                }
+                b"command" => {
+                    let command_ref = this.parse_general_ref(elem);
+                    contents.push(RemoveContent::Command(command_ref));
+                }
+                b"feature" => {
+                    let feature_ref = this.parse_feature_ref(elem);
+                    contents.push(RemoveContent::Feature(feature_ref));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Remove {
+            comment,
+            reasonlink,
+            contents,
+        }
+    }
+
+    fn parse_general_ref(&mut self, elem: Elem) -> GeneralRef {
+        let mut comment = None;
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        GeneralRef { comment, name }
+    }
+
+    fn parse_feature_ref(&mut self, elem: Elem) -> FeatureRef {
+        let mut name = None;
+        let mut feature_struct = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"name" => self.save_attr(attr, &mut name),
+                b"struct" => self.save_attr(attr, &mut feature_struct),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        FeatureRef {
+            name,
+            feature_struct,
+        }
     }
 }
