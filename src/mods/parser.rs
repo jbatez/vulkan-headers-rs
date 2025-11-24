@@ -50,7 +50,7 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_content<TextF, ElemF>(&mut self, elem: Elem, mut text_f: TextF, mut elem_f: ElemF)
+    fn parse_contents<TextF, ElemF>(&mut self, elem: Elem, mut text_f: TextF, mut elem_f: ElemF)
     where
         TextF: FnMut(&mut Parser, &str),
         ElemF: FnMut(&mut Parser, Elem),
@@ -127,7 +127,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
@@ -169,7 +169,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut ret = String::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |_this, text| ret += text,
             |_this, elem| panic!("unexpected elem: {elem:?}"),
@@ -188,7 +188,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
@@ -242,7 +242,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
@@ -296,7 +296,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
@@ -541,7 +541,7 @@ impl<'a> Parser<'a> {
         }
 
         let mut contents = Vec::new();
-        self.parse_content(
+        self.parse_contents(
             elem,
             |this, text| this.assert_is_ws(text.as_bytes()),
             |this, elem| match elem.start.name().as_ref() {
