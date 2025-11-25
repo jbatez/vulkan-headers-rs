@@ -15,6 +15,7 @@ pub enum RegistryContent {
     Extensions(Extensions),
     Formats(Formats),
     SpirvExtensions(SpirvExtensions),
+    SpirvCapabilities(SpirvCapabilities),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -433,11 +434,46 @@ pub struct SpirvExtension {
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum SpirvExtensionContent {
-    Enable(Enable),
+    Enable(SpirvExtensionEnable),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub struct Enable {
+pub struct SpirvExtensionEnable {
     pub extension: Option<String>,
+    pub version: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvCapabilities {
+    pub comment: Option<String>,
+    pub contents: Vec<SpirvCapabilitiesContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SpirvCapabilitiesContent {
+    SpirvCapability(SpirvCapability),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvCapability {
+    pub name: Option<String>,
+    pub contents: Vec<SpirvCapabilityContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SpirvCapabilityContent {
+    Enable(SpirvCapabilityEnable),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvCapabilityEnable {
+    pub alias: Option<String>,
+    pub extension: Option<String>,
+    pub feature: Option<String>,
+    pub member: Option<String>,
+    pub property: Option<String>,
+    pub requires: Option<String>,
+    pub struc: Option<String>,
+    pub value: Option<String>,
     pub version: Option<String>,
 }
