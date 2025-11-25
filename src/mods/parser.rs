@@ -1,5 +1,6 @@
 use quick_xml::{
     Reader,
+    escape::resolve_xml_entity,
     events::{BytesStart, Event, attributes::Attribute},
 };
 
@@ -74,10 +75,13 @@ impl<'a> Parser<'a> {
                     ();
                 }
                 Event::Text(text) => {
-                    f(self, Content::Text(text.decode().unwrap().as_ref()));
+                    let text = text.xml_content().unwrap();
+                    f(self, Content::Text(&text));
                 }
                 Event::GeneralRef(text) => {
-                    f(self, Content::Text(text.decode().unwrap().as_ref()));
+                    let text = text.xml_content().unwrap();
+                    let text = resolve_xml_entity(&text).unwrap();
+                    f(self, Content::Text(text));
                 }
                 Event::Empty(start) => {
                     let is_empty = true;
@@ -109,7 +113,7 @@ impl<'a> Parser<'a> {
                     ();
                 }
                 Event::Text(text) => {
-                    self.assert_is_ws(text.as_ref());
+                    self.assert_is_ws(&text);
                 }
                 Event::Start(start) => match start.name().as_ref() {
                     b"registry" => {
