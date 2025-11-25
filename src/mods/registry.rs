@@ -13,6 +13,7 @@ pub enum RegistryContent {
     Commands(Commands),
     Feature(Feature),
     Extensions(Extensions),
+    Formats(Formats),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -359,4 +360,55 @@ pub struct GeneralRef {
 pub struct FeatureRef {
     pub name: Option<String>,
     pub struc: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Formats {
+    pub contents: Vec<FormatsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum FormatsContent {
+    Format(Format),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Format {
+    pub block_extent: Option<String>,
+    pub block_size: Option<String>,
+    pub chroma: Option<String>,
+    pub class: Option<String>,
+    pub compressed: Option<String>,
+    pub name: Option<String>,
+    pub packed: Option<String>,
+    pub texels_per_block: Option<String>,
+    pub contents: Vec<FormatContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum FormatContent {
+    Component(Component),
+    Plane(Plane),
+    SpirvImageFormat(SpirvImageFormat),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Component {
+    pub bits: Option<String>,
+    pub name: Option<String>,
+    pub numeric_format: Option<String>,
+    pub plane_index: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Plane {
+    pub compatible: Option<String>,
+    pub height_divisor: Option<String>,
+    pub index: Option<String>,
+    pub width_divisor: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvImageFormat {
+    pub name: Option<String>,
 }

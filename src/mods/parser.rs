@@ -5,13 +5,13 @@ use quick_xml::{
 };
 
 use crate::{
-    Command, CommandContent, Commands, CommandsContent, Deprecate, DeprecateContent, Enum, Enums,
-    EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent, Feature,
-    FeatureContent, FeatureRef, GeneralRef, ImplicitExternSyncParams,
-    ImplicitExternSyncParamsContent, Member, MemberContent, Param, ParamContent, Platform,
-    Platforms, PlatformsContent, Proto, ProtoContent, Registry, RegistryContent, Remove,
-    RemoveContent, Require, RequireContent, RequireEnum, Tag, Tags, TagsContent, Type, TypeContent,
-    Types, TypesContent, Unused,
+    Command, CommandContent, Commands, CommandsContent, Component, Deprecate, DeprecateContent,
+    Enum, Enums, EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent, Feature,
+    FeatureContent, FeatureRef, Format, FormatContent, Formats, FormatsContent, GeneralRef,
+    ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent, Param,
+    ParamContent, Plane, Platform, Platforms, PlatformsContent, Proto, ProtoContent, Registry,
+    RegistryContent, Remove, RemoveContent, Require, RequireContent, RequireEnum, SpirvImageFormat,
+    Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
 };
 
 struct Parser<'a> {
@@ -176,6 +176,10 @@ impl<'a> Parser<'a> {
                 b"extensions" => {
                     let extensions = this.parse_extensions(elem);
                     contents.push(RegistryContent::Extensions(extensions));
+                }
+                b"formats" => {
+                    let formats = this.parse_formats(elem);
+                    contents.push(RegistryContent::Formats(formats));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -1210,5 +1214,157 @@ impl<'a> Parser<'a> {
 
         assert_eq!(elem.is_empty, true);
         FeatureRef { name, struc }
+    }
+
+    fn parse_formats(&mut self, elem: Elem) -> Formats {
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"format" => {
+                    let format = this.parse_format(elem);
+                    contents.push(FormatsContent::Format(format));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        Formats { contents }
+    }
+
+    fn parse_format(&mut self, elem: Elem) -> Format {
+        let mut block_extent = None;
+        let mut block_size = None;
+        let mut chroma = None;
+        let mut class = None;
+        let mut compressed = None;
+        let mut name = None;
+        let mut packed = None;
+        let mut texels_per_block = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"blockExtent" => self.save_attr(attr, &mut block_extent),
+                b"blockSize" => self.save_attr(attr, &mut block_size),
+                b"chroma" => self.save_attr(attr, &mut chroma),
+                b"class" => self.save_attr(attr, &mut class),
+                b"compressed" => self.save_attr(attr, &mut compressed),
+                b"name" => self.save_attr(attr, &mut name),
+                b"packed" => self.save_attr(attr, &mut packed),
+                b"texelsPerBlock" => self.save_attr(attr, &mut texels_per_block),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"component" => {
+                    let component = this.parse_component(elem);
+                    contents.push(FormatContent::Component(component));
+                }
+                b"plane" => {
+                    let plane = this.parse_plane(elem);
+                    contents.push(FormatContent::Plane(plane));
+                }
+                b"spirvimageformat" => {
+                    let format = this.parse_spirv_image_format(elem);
+                    contents.push(FormatContent::SpirvImageFormat(format));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        Format {
+            block_extent,
+            block_size,
+            chroma,
+            class,
+            compressed,
+            name,
+            packed,
+            texels_per_block,
+            contents,
+        }
+    }
+
+    fn parse_component(&mut self, elem: Elem) -> Component {
+        let mut bits = None;
+        let mut name = None;
+        let mut numeric_format = None;
+        let mut plane_index = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"bits" => self.save_attr(attr, &mut bits),
+                b"name" => self.save_attr(attr, &mut name),
+                b"numericFormat" => self.save_attr(attr, &mut numeric_format),
+                b"planeIndex" => self.save_attr(attr, &mut plane_index),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        Component {
+            bits,
+            name,
+            numeric_format,
+            plane_index,
+        }
+    }
+
+    fn parse_plane(&mut self, elem: Elem) -> Plane {
+        let mut compatible = None;
+        let mut height_divisor = None;
+        let mut index = None;
+        let mut width_divisor = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"compatible" => self.save_attr(attr, &mut compatible),
+                b"heightDivisor" => self.save_attr(attr, &mut height_divisor),
+                b"index" => self.save_attr(attr, &mut index),
+                b"widthDivisor" => self.save_attr(attr, &mut width_divisor),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        Plane {
+            compatible,
+            height_divisor,
+            index,
+            width_divisor,
+        }
+    }
+
+    fn parse_spirv_image_format(&mut self, elem: Elem) -> SpirvImageFormat {
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        SpirvImageFormat { name }
     }
 }
