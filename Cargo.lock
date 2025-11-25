@@ -18,6 +18,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "vulkan_headers_generator"
+version = "0.0.0"
+dependencies = [
+ "vulkan_registry",
+]
+
+[[package]]
 name = "vulkan_registry"
 version = "0.0.0"
 dependencies = [

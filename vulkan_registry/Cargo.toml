@@ -1,6 +1,6 @@
 [package]
 name = "vulkan_registry"
-edition = "2024"
+edition.workspace = true
 
 [dependencies]
-quick-xml = "0.38.4"
+quick-xml.workspace = true
