@@ -6,12 +6,13 @@ use quick_xml::{
 
 use crate::{
     Command, CommandContent, Commands, CommandsContent, Component, Deprecate, DeprecateContent,
-    Enum, Enums, EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent, Feature,
-    FeatureContent, FeatureRef, Format, FormatContent, Formats, FormatsContent, GeneralRef,
-    ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent, Param,
-    ParamContent, Plane, Platform, Platforms, PlatformsContent, Proto, ProtoContent, Registry,
-    RegistryContent, Remove, RemoveContent, Require, RequireContent, RequireEnum, SpirvImageFormat,
-    Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
+    Enable, Enum, Enums, EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent,
+    Feature, FeatureContent, FeatureRef, Format, FormatContent, Formats, FormatsContent,
+    GeneralRef, ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent,
+    Param, ParamContent, Plane, Platform, Platforms, PlatformsContent, Proto, ProtoContent,
+    Registry, RegistryContent, Remove, RemoveContent, Require, RequireContent, RequireEnum,
+    SpirvExtension, SpirvExtensionContent, SpirvExtensions, SpirvExtensionsContent,
+    SpirvImageFormat, Tag, Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
 };
 
 struct Parser<'a> {
@@ -180,6 +181,10 @@ impl<'a> Parser<'a> {
                 b"formats" => {
                     let formats = this.parse_formats(elem);
                     contents.push(RegistryContent::Formats(formats));
+                }
+                b"spirvextensions" => {
+                    let extensions = this.parse_spirv_extensions(elem);
+                    contents.push(RegistryContent::SpirvExtensions(extensions));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -1366,5 +1371,78 @@ impl<'a> Parser<'a> {
 
         assert_eq!(elem.is_empty, true);
         SpirvImageFormat { name }
+    }
+
+    fn parse_spirv_extensions(&mut self, elem: Elem) -> SpirvExtensions {
+        let mut comment = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"spirvextension" => {
+                    let extension = this.parse_spirv_extension(elem);
+                    contents.push(SpirvExtensionsContent::SpirvExtension(extension));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        SpirvExtensions { comment, contents }
+    }
+
+    fn parse_spirv_extension(&mut self, elem: Elem) -> SpirvExtension {
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"enable" => {
+                    let enable = this.parse_enable(elem);
+                    contents.push(SpirvExtensionContent::Enable(enable));
+                }
+                _ => {
+                    panic!("unexpected element: {elem:?}");
+                }
+            },
+        });
+
+        SpirvExtension { name, contents }
+    }
+
+    fn parse_enable(&mut self, elem: Elem) -> Enable {
+        let mut extension = None;
+        let mut version = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"extension" => self.save_attr(attr, &mut extension),
+                b"version" => self.save_attr(attr, &mut version),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        Enable { extension, version }
     }
 }

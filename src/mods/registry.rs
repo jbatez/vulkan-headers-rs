@@ -14,6 +14,7 @@ pub enum RegistryContent {
     Feature(Feature),
     Extensions(Extensions),
     Formats(Formats),
+    SpirvExtensions(SpirvExtensions),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -411,4 +412,32 @@ pub struct Plane {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SpirvImageFormat {
     pub name: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvExtensions {
+    pub comment: Option<String>,
+    pub contents: Vec<SpirvExtensionsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SpirvExtensionsContent {
+    SpirvExtension(SpirvExtension),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SpirvExtension {
+    pub name: Option<String>,
+    pub contents: Vec<SpirvExtensionContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SpirvExtensionContent {
+    Enable(Enable),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Enable {
+    pub extension: Option<String>,
+    pub version: Option<String>,
 }
