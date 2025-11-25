@@ -16,6 +16,7 @@ pub enum RegistryContent {
     Formats(Formats),
     SpirvExtensions(SpirvExtensions),
     SpirvCapabilities(SpirvCapabilities),
+    Syncs(Syncs),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -476,4 +477,83 @@ pub struct SpirvCapabilityEnable {
     pub struc: Option<String>,
     pub value: Option<String>,
     pub version: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Syncs {
+    pub comment: Option<String>,
+    pub contents: Vec<SyncsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SyncsContent {
+    SyncStage(SyncStage),
+    SyncAccess(SyncAccess),
+    SyncPipeline(SyncPipeline),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncStage {
+    pub alias: Option<String>,
+    pub name: Option<String>,
+    pub contents: Vec<SyncStageContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SyncStageContent {
+    SyncSupport(SyncStageSupport),
+    SyncEquivalent(SyncStageEquivalent),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncStageSupport {
+    pub queues: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncStageEquivalent {
+    pub stage: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncAccess {
+    pub alias: Option<String>,
+    pub name: Option<String>,
+    pub contents: Vec<SyncAccessContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SyncAccessContent {
+    Comment(String),
+    SyncSupport(SyncAccessSupport),
+    SyncEquivalent(SyncAccessEquivalent),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncAccessSupport {
+    pub stage: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncAccessEquivalent {
+    pub access: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncPipeline {
+    pub depends: Option<String>,
+    pub name: Option<String>,
+    pub contents: Vec<SyncPipelineContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum SyncPipelineContent {
+    SyncPipelineStage(SyncPipelineStage),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SyncPipelineStage {
+    pub before: Option<String>,
+    pub order: Option<String>,
+    pub contents: String,
 }

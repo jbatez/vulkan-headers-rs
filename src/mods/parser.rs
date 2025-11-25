@@ -13,8 +13,10 @@ use crate::{
     RegistryContent, Remove, RemoveContent, Require, RequireContent, RequireEnum,
     SpirvCapabilities, SpirvCapabilitiesContent, SpirvCapability, SpirvCapabilityContent,
     SpirvCapabilityEnable, SpirvExtension, SpirvExtensionContent, SpirvExtensionEnable,
-    SpirvExtensions, SpirvExtensionsContent, SpirvImageFormat, Tag, Tags, TagsContent, Type,
-    TypeContent, Types, TypesContent, Unused,
+    SpirvExtensions, SpirvExtensionsContent, SpirvImageFormat, SyncAccess, SyncAccessContent,
+    SyncAccessEquivalent, SyncAccessSupport, SyncPipeline, SyncPipelineContent, SyncPipelineStage,
+    SyncStage, SyncStageContent, SyncStageEquivalent, SyncStageSupport, Syncs, SyncsContent, Tag,
+    Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
 };
 
 struct Parser<'a> {
@@ -191,6 +193,10 @@ impl<'a> Parser<'a> {
                 b"spirvcapabilities" => {
                     let capabilities = this.parse_spirv_capabilities(elem);
                     contents.push(RegistryContent::SpirvCapabilities(capabilities));
+                }
+                b"sync" => {
+                    let syncs = this.parse_syncs(elem);
+                    contents.push(RegistryContent::Syncs(syncs));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -410,7 +416,7 @@ impl<'a> Parser<'a> {
                     contents.push(TypeContent::Member(member));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -491,7 +497,7 @@ impl<'a> Parser<'a> {
                     contents.push(MemberContent::Enum(enu));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -746,7 +752,7 @@ impl<'a> Parser<'a> {
                     contents.push(ProtoContent::Name(name));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -796,7 +802,7 @@ impl<'a> Parser<'a> {
                     contents.push(ParamContent::Name(name));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -878,7 +884,7 @@ impl<'a> Parser<'a> {
                     contents.push(FeatureContent::Remove(remove));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -982,7 +988,7 @@ impl<'a> Parser<'a> {
                     contents.push(ExtensionContent::Remove(remove));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1049,7 +1055,7 @@ impl<'a> Parser<'a> {
                     contents.push(RequireContent::Feature(feature));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1136,7 +1142,7 @@ impl<'a> Parser<'a> {
                     contents.push(DeprecateContent::Command(command));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1181,7 +1187,7 @@ impl<'a> Parser<'a> {
                     contents.push(RemoveContent::Feature(feature));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1294,7 +1300,7 @@ impl<'a> Parser<'a> {
                     contents.push(FormatContent::SpirvImageFormat(format));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1399,7 +1405,7 @@ impl<'a> Parser<'a> {
                     contents.push(SpirvExtensionsContent::SpirvExtension(extension));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1427,7 +1433,7 @@ impl<'a> Parser<'a> {
                     contents.push(SpirvExtensionContent::Enable(enable));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1472,7 +1478,7 @@ impl<'a> Parser<'a> {
                     contents.push(SpirvCapabilitiesContent::SpirvCapability(capability));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1500,7 +1506,7 @@ impl<'a> Parser<'a> {
                     contents.push(SpirvCapabilityContent::Enable(enable));
                 }
                 _ => {
-                    panic!("unexpected element: {elem:?}");
+                    panic!("unexpected elem: {elem:?}");
                 }
             },
         });
@@ -1546,6 +1552,242 @@ impl<'a> Parser<'a> {
             struc,
             value,
             version,
+        }
+    }
+
+    fn parse_syncs(&mut self, elem: Elem) -> Syncs {
+        let mut comment = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"comment" => self.save_attr(attr, &mut comment),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"syncstage" => {
+                    let stage = this.parse_sync_stage(elem);
+                    contents.push(SyncsContent::SyncStage(stage));
+                }
+                b"syncaccess" => {
+                    let access = this.parse_sync_access(elem);
+                    contents.push(SyncsContent::SyncAccess(access));
+                }
+                b"syncpipeline" => {
+                    let pipeline = this.parse_sync_pipeline(elem);
+                    contents.push(SyncsContent::SyncPipeline(pipeline));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        Syncs { comment, contents }
+    }
+
+    fn parse_sync_stage(&mut self, elem: Elem) -> SyncStage {
+        let mut alias = None;
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"syncsupport" => {
+                    let support = this.parse_sync_stage_support(elem);
+                    contents.push(SyncStageContent::SyncSupport(support));
+                }
+                b"syncequivalent" => {
+                    let equivalent = this.parse_sync_stage_equivalent(elem);
+                    contents.push(SyncStageContent::SyncEquivalent(equivalent));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        SyncStage {
+            alias,
+            name,
+            contents,
+        }
+    }
+
+    fn parse_sync_stage_support(&mut self, elem: Elem) -> SyncStageSupport {
+        let mut queues = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"queues" => self.save_attr(attr, &mut queues),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        SyncStageSupport { queues }
+    }
+
+    fn parse_sync_stage_equivalent(&mut self, elem: Elem) -> SyncStageEquivalent {
+        let mut stage = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"stage" => self.save_attr(attr, &mut stage),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        SyncStageEquivalent { stage }
+    }
+
+    fn parse_sync_access(&mut self, elem: Elem) -> SyncAccess {
+        let mut alias = None;
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"alias" => self.save_attr(attr, &mut alias),
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"comment" => {
+                    let comment = this.parse_text_elem(elem);
+                    contents.push(SyncAccessContent::Comment(comment));
+                }
+                b"syncsupport" => {
+                    let support = this.parse_sync_access_support(elem);
+                    contents.push(SyncAccessContent::SyncSupport(support));
+                }
+                b"syncequivalent" => {
+                    let equivalent = this.parse_sync_access_equivalent(elem);
+                    contents.push(SyncAccessContent::SyncEquivalent(equivalent));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        SyncAccess {
+            alias,
+            name,
+            contents,
+        }
+    }
+
+    fn parse_sync_access_support(&mut self, elem: Elem) -> SyncAccessSupport {
+        let mut stage = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"stage" => self.save_attr(attr, &mut stage),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        SyncAccessSupport { stage }
+    }
+
+    fn parse_sync_access_equivalent(&mut self, elem: Elem) -> SyncAccessEquivalent {
+        let mut access = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"access" => self.save_attr(attr, &mut access),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        SyncAccessEquivalent { access }
+    }
+
+    fn parse_sync_pipeline(&mut self, elem: Elem) -> SyncPipeline {
+        let mut depends = None;
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"depends" => self.save_attr(attr, &mut depends),
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"syncpipelinestage" => {
+                    let stage = this.parse_sync_pipeline_stage(elem);
+                    contents.push(SyncPipelineContent::SyncPipelineStage(stage));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        SyncPipeline {
+            depends,
+            name,
+            contents,
+        }
+    }
+
+    fn parse_sync_pipeline_stage(&mut self, elem: Elem) -> SyncPipelineStage {
+        let mut before = None;
+        let mut order = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"before" => self.save_attr(attr, &mut before),
+                b"order" => self.save_attr(attr, &mut order),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = String::new();
+        self.parse_contents(elem, |_this, content| match content {
+            Content::Text(text) => contents += text,
+            Content::Elem(elem) => panic!("unexpected elem: {elem:?}"),
+        });
+
+        SyncPipelineStage {
+            before,
+            order,
+            contents,
         }
     }
 }
