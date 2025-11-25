@@ -16,7 +16,10 @@ use crate::{
     SpirvExtensions, SpirvExtensionsContent, SpirvImageFormat, SyncAccess, SyncAccessContent,
     SyncAccessEquivalent, SyncAccessSupport, SyncPipeline, SyncPipelineContent, SyncPipelineStage,
     SyncStage, SyncStageContent, SyncStageEquivalent, SyncStageSupport, Syncs, SyncsContent, Tag,
-    Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused,
+    Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused, VideoCapabilities,
+    VideoCodec, VideoCodecContent, VideoCodecs, VideoCodecsContent, VideoFormat,
+    VideoFormatContent, VideoFormatProperties, VideoProfile, VideoProfileMember,
+    VideoProfileMemberContent, VideoProfiles, VideoProfilesContent, VideoRequireCapabilities,
 };
 
 struct Parser<'a> {
@@ -130,12 +133,17 @@ impl<'a> Parser<'a> {
                         panic!("unexpected elem: {start:?}");
                     }
                 },
+                Event::Eof => {
+                    break;
+                }
                 event => {
                     panic!("unexpected event: {event:?}");
                 }
             }
             buf.clear();
         }
+
+        registry.unwrap()
     }
 
     fn parse_registry(&mut self, elem: Elem) -> Registry {
@@ -197,6 +205,10 @@ impl<'a> Parser<'a> {
                 b"sync" => {
                     let syncs = this.parse_syncs(elem);
                     contents.push(RegistryContent::Syncs(syncs));
+                }
+                b"videocodecs" => {
+                    let codecs = this.parse_video_codecs(elem);
+                    contents.push(RegistryContent::VideoCodecs(codecs));
                 }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
@@ -1789,5 +1801,242 @@ impl<'a> Parser<'a> {
             order,
             contents,
         }
+    }
+
+    fn parse_video_codecs(&mut self, elem: Elem) -> VideoCodecs {
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"videocodec" => {
+                    let codec = this.parse_video_codec(elem);
+                    contents.push(VideoCodecsContent::VideoCodec(codec));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        VideoCodecs { contents }
+    }
+
+    fn parse_video_codec(&mut self, elem: Elem) -> VideoCodec {
+        let mut extend = None;
+        let mut name = None;
+        let mut value = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"extend" => self.save_attr(attr, &mut extend),
+                b"name" => self.save_attr(attr, &mut name),
+                b"value" => self.save_attr(attr, &mut value),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"videocapabilities" => {
+                    let capabilities = this.parse_video_capabilities(elem);
+                    contents.push(VideoCodecContent::VideoCapabilities(capabilities));
+                }
+                b"videoformat" => {
+                    let format = this.parse_video_format(elem);
+                    contents.push(VideoCodecContent::VideoFormat(format));
+                }
+                b"videoprofiles" => {
+                    let profiles = this.parse_video_profiles(elem);
+                    contents.push(VideoCodecContent::VideoProfiles(profiles));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        VideoCodec {
+            extend,
+            name,
+            value,
+            contents,
+        }
+    }
+
+    fn parse_video_capabilities(&mut self, elem: Elem) -> VideoCapabilities {
+        let mut struc = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"struct" => self.save_attr(attr, &mut struc),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        VideoCapabilities { struc }
+    }
+
+    fn parse_video_format(&mut self, elem: Elem) -> VideoFormat {
+        let mut extend = None;
+        let mut name = None;
+        let mut usage = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"extend" => self.save_attr(attr, &mut extend),
+                b"name" => self.save_attr(attr, &mut name),
+                b"usage" => self.save_attr(attr, &mut usage),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"videorequirecapabilities" => {
+                    let capabilities = this.parse_video_require_capabilities(elem);
+                    contents.push(VideoFormatContent::VideoRequireCapabilities(capabilities));
+                }
+                b"videoformatproperties" => {
+                    let properties = this.parse_video_format_properties(elem);
+                    contents.push(VideoFormatContent::VideoFormatProperties(properties));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        VideoFormat {
+            extend,
+            name,
+            usage,
+            contents,
+        }
+    }
+
+    fn parse_video_require_capabilities(&mut self, elem: Elem) -> VideoRequireCapabilities {
+        let mut member = None;
+        let mut struc = None;
+        let mut value = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"member" => self.save_attr(attr, &mut member),
+                b"struct" => self.save_attr(attr, &mut struc),
+                b"value" => self.save_attr(attr, &mut value),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        VideoRequireCapabilities {
+            member,
+            struc,
+            value,
+        }
+    }
+
+    fn parse_video_format_properties(&mut self, elem: Elem) -> VideoFormatProperties {
+        let mut struc = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"struct" => self.save_attr(attr, &mut struc),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        VideoFormatProperties { struc }
+    }
+
+    fn parse_video_profiles(&mut self, elem: Elem) -> VideoProfiles {
+        let mut struc = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"struct" => self.save_attr(attr, &mut struc),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"videoprofilemember" => {
+                    let member = this.parse_video_profile_member(elem);
+                    contents.push(VideoProfilesContent::VideoProfileMember(member));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        VideoProfiles { struc, contents }
+    }
+
+    fn parse_video_profile_member(&mut self, elem: Elem) -> VideoProfileMember {
+        let mut name = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"name" => self.save_attr(attr, &mut name),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        let mut contents = Vec::new();
+        self.parse_contents(elem, |this, content| match content {
+            Content::Text(text) => this.assert_is_ws(text.as_bytes()),
+            Content::Elem(elem) => match elem.start.name().as_ref() {
+                b"videoprofile" => {
+                    let profile = this.parse_video_profile(elem);
+                    contents.push(VideoProfileMemberContent::VideoProfile(profile));
+                }
+                _ => {
+                    panic!("unexpected elem: {elem:?}");
+                }
+            },
+        });
+
+        VideoProfileMember { name, contents }
+    }
+
+    fn parse_video_profile(&mut self, elem: Elem) -> VideoProfile {
+        let mut name = None;
+        let mut value = None;
+
+        for attr in elem.start.attributes() {
+            let attr = attr.unwrap();
+            match attr.key.as_ref() {
+                b"name" => self.save_attr(attr, &mut name),
+                b"value" => self.save_attr(attr, &mut value),
+                _ => panic!("unexpected attr: {attr:?}"),
+            }
+        }
+
+        assert_eq!(elem.is_empty, true);
+        VideoProfile { name, value }
     }
 }

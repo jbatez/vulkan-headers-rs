@@ -17,6 +17,7 @@ pub enum RegistryContent {
     SpirvExtensions(SpirvExtensions),
     SpirvCapabilities(SpirvCapabilities),
     Syncs(Syncs),
+    VideoCodecs(VideoCodecs),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -556,4 +557,88 @@ pub struct SyncPipelineStage {
     pub before: Option<String>,
     pub order: Option<String>,
     pub contents: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoCodecs {
+    pub contents: Vec<VideoCodecsContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum VideoCodecsContent {
+    VideoCodec(VideoCodec),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoCodec {
+    pub extend: Option<String>,
+    pub name: Option<String>,
+    pub value: Option<String>,
+    pub contents: Vec<VideoCodecContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum VideoCodecContent {
+    VideoCapabilities(VideoCapabilities),
+    VideoFormat(VideoFormat),
+    VideoProfiles(VideoProfiles),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoCapabilities {
+    pub struc: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoFormat {
+    pub extend: Option<String>,
+    pub name: Option<String>,
+    pub usage: Option<String>,
+    pub contents: Vec<VideoFormatContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum VideoFormatContent {
+    VideoRequireCapabilities(VideoRequireCapabilities),
+    VideoFormatProperties(VideoFormatProperties),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoRequireCapabilities {
+    pub member: Option<String>,
+    pub struc: Option<String>,
+    pub value: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoFormatProperties {
+    pub struc: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoProfiles {
+    pub struc: Option<String>,
+    pub contents: Vec<VideoProfilesContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum VideoProfilesContent {
+    VideoProfileMember(VideoProfileMember),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoProfileMember {
+    pub name: Option<String>,
+    pub contents: Vec<VideoProfileMemberContent>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum VideoProfileMemberContent {
+    VideoProfile(VideoProfile),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct VideoProfile {
+    pub name: Option<String>,
+    pub value: Option<String>,
 }
