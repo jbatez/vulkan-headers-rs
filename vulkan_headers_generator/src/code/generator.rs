@@ -15,6 +15,7 @@ impl<'a> Generator<'a> {
     pub(crate) fn generate() {
         let registry = Registry::vk();
         let index = RegistryIndex::new(&registry);
+
         let mut generator = Generator {
             index: &index,
             require_names: HashSet::new(),
@@ -69,34 +70,33 @@ impl<'a> Generator<'a> {
         let name = typ.name.as_ref().unwrap().as_str();
         if self.require_names.insert(name) {
             for &typ in &self.index.types[name] {
-                self.add_type(typ);
+                self.add_type(name, typ);
             }
         }
     }
 
-    fn add_type(&mut self, typ: &'a Type) {
+    fn add_type(&mut self, name: &'a str, typ: &'a Type) {
         if !Self::api_matches_vulkan(&typ.api) {
             return;
         }
 
         if let Some(alias) = typ.alias.as_ref() {
-            let name = typ.name.clone().unwrap();
-            self.add_type_alias(name, alias);
+            self.add_type_alias(name.to_string(), alias);
             return;
         }
 
         match typ.category.as_ref().map(String::as_str) {
-            Some("basetype") => self.add_other_type(typ),
-            Some("bitmask") => self.add_other_type(typ),
+            Some("basetype") => self.add_other_type(name, typ),
+            Some("bitmask") => self.add_other_type(name, typ),
             Some("define") => (),
-            Some("enum") => self.add_enum_type(typ),
-            Some("funcpointer") => self.add_funcpointer_type(typ),
-            Some("handle") => self.add_handle_type(typ),
+            Some("enum") => self.add_enum_type(name),
+            Some("funcpointer") => self.add_funcpointer_type(name, typ),
+            Some("handle") => self.add_handle_type(name),
             Some("include") => (),
-            Some("struct") => self.add_struct_or_union_type(typ),
-            Some("union") => self.add_struct_or_union_type(typ),
+            Some("struct") => self.add_struct_or_union_type(name, typ),
+            Some("union") => self.add_struct_or_union_type(name, typ),
             Some(category) => panic!("unexpected type category: {category:?}"),
-            None => self.add_other_type(typ),
+            None => self.add_other_type(name, typ),
         }
     }
 
@@ -109,7 +109,7 @@ impl<'a> Generator<'a> {
         let text = format!(
             "\
 #[cfg_attr(not(doc), repr(u8))]
-pub enum {name}_T {{
+pub enum {name} {{
     #[doc(hidden)]
     __variant1,
     #[doc(hidden)]
@@ -119,32 +119,36 @@ pub enum {name}_T {{
         self.enums.push((name, text));
     }
 
-    fn add_enum_type(&mut self, typ: &'a Type) {
-        let name = typ.name.clone().unwrap();
-        self.add_type_alias(name, "i32");
+    fn add_enum_type(&mut self, name: &'a str) {
+        for &enums in &self.index.enums[name] {
+            let alias = match enums.typ.as_ref().unwrap().as_str() {
+                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
+                    None => "u32",
+                    Some("64") => "u64",
+                    Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
+                },
+                "enum" => "i32",
+                typ => panic!("unexpected enums type: {typ:?}"),
+            };
+            self.add_type_alias(name.to_string(), alias);
+        }
     }
 
-    fn add_funcpointer_type(&mut self, _: &'a Type) {
+    fn add_funcpointer_type(&mut self, _name: &'a str, _: &'a Type) {
         // TODO
     }
 
-    fn add_handle_type(&mut self, typ: &'a Type) {
-        let name = typ.name.clone().unwrap();
+    fn add_handle_type(&mut self, name: &'a str) {
         self.add_opaque_type(format!("{name}_T"));
-
-        let non_null_name = format!("NonNull{name}");
-        let non_null_alias = format!("NonNull<{name}_T>");
-        self.add_type_alias(non_null_name, &non_null_alias);
-
-        let alias = format!("*mut {name}_T");
-        self.add_type_alias(name, &alias);
+        self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
+        self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
     }
 
-    fn add_struct_or_union_type(&mut self, _: &'a Type) {
+    fn add_struct_or_union_type(&mut self, _name: &'a str, _: &'a Type) {
         // TODO
     }
 
-    fn add_other_type(&mut self, _: &'a Type) {
+    fn add_other_type(&mut self, _name: &'a str, _: &'a Type) {
         // TODO
     }
 
