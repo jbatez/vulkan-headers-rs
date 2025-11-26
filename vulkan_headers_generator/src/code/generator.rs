@@ -105,20 +105,6 @@ impl<'a> Generator<'a> {
         self.type_aliases.push((name, text));
     }
 
-    fn add_opaque_type(&mut self, name: String) {
-        let text = format!(
-            "\
-#[cfg_attr(not(doc), repr(u8))]
-pub enum {name} {{
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}}"
-        );
-        self.enums.push((name, text));
-    }
-
     fn add_enum_type(&mut self, name: &'a str) {
         for &enums in &self.index.enums[name] {
             let alias = match enums.typ.as_ref().unwrap().as_str() {
@@ -134,12 +120,26 @@ pub enum {name} {{
         }
     }
 
+    fn add_extern_type(&mut self, name: String) {
+        let text = format!(
+            "\
+#[cfg_attr(not(doc), repr(u8))]
+pub enum {name} {{
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}}"
+        );
+        self.enums.push((name, text));
+    }
+
     fn add_funcpointer_type(&mut self, _name: &'a str, _: &'a Type) {
         // TODO
     }
 
     fn add_handle_type(&mut self, name: &'a str) {
-        self.add_opaque_type(format!("{name}_T"));
+        self.add_extern_type(format!("{name}_T"));
         self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
         self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
     }
