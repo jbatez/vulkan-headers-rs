@@ -7,6 +7,8 @@ use crate::code::*;
 pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
     require_names: HashSet<&'a str>,
+    enums: Vec<(String, String)>,
+    type_aliases: Vec<(String, String)>,
 }
 
 impl<'a> Generator<'a> {
@@ -16,6 +18,8 @@ impl<'a> Generator<'a> {
         let mut generator = Generator {
             index: &index,
             require_names: HashSet::new(),
+            enums: Vec::new(),
+            type_aliases: Vec::new(),
         };
 
         for features in index.features.values() {
@@ -75,8 +79,9 @@ impl<'a> Generator<'a> {
             return;
         }
 
-        if typ.alias.is_some() {
-            self.add_type_alias(typ);
+        if let Some(alias) = typ.alias.as_ref() {
+            let name = typ.name.clone().unwrap();
+            self.add_type_alias(name, alias);
             return;
         }
 
@@ -95,20 +100,44 @@ impl<'a> Generator<'a> {
         }
     }
 
-    fn add_type_alias(&mut self, _: &'a Type) {
-        // TODO
+    fn add_type_alias(&mut self, name: String, alias: &str) {
+        let text = format!("pub type {name} = {alias};");
+        self.type_aliases.push((name, text));
     }
 
-    fn add_enum_type(&mut self, _: &'a Type) {
-        // TODO
+    fn add_opaque_type(&mut self, name: String) {
+        let text = format!(
+            "\
+#[cfg_attr(not(doc), repr(u8))]
+pub enum {name}_T {{
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}}"
+        );
+        self.enums.push((name, text));
+    }
+
+    fn add_enum_type(&mut self, typ: &'a Type) {
+        let name = typ.name.clone().unwrap();
+        self.add_type_alias(name, "i32");
     }
 
     fn add_funcpointer_type(&mut self, _: &'a Type) {
         // TODO
     }
 
-    fn add_handle_type(&mut self, _: &'a Type) {
-        // TODO
+    fn add_handle_type(&mut self, typ: &'a Type) {
+        let name = typ.name.clone().unwrap();
+        self.add_opaque_type(format!("{name}_T"));
+
+        let non_null_name = format!("NonNull{name}");
+        let non_null_alias = format!("NonNull<{name}_T>");
+        self.add_type_alias(non_null_name, &non_null_alias);
+
+        let alias = format!("*mut {name}_T");
+        self.add_type_alias(name, &alias);
     }
 
     fn add_struct_or_union_type(&mut self, _: &'a Type) {
