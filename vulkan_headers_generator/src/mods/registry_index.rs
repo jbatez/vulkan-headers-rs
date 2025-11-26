@@ -2,15 +2,15 @@ use std::collections::HashMap;
 
 use vulkan_registry::*;
 
-pub struct RegistryIndex<'a> {
-    pub types: HashMap<&'a str, Vec<&'a Type>>,
-    pub enums: HashMap<&'a str, Vec<&'a Enums>>,
-    pub commands: HashMap<&'a str, Vec<&'a Command>>,
-    pub features: HashMap<&'a str, Vec<&'a Feature>>,
+pub(crate) struct RegistryIndex<'a> {
+    pub(crate) types: HashMap<&'a str, Vec<&'a Type>>,
+    pub(crate) enums: HashMap<&'a str, Vec<&'a Enums>>,
+    pub(crate) commands: HashMap<&'a str, Vec<&'a Command>>,
+    pub(crate) features: HashMap<&'a str, Vec<&'a Feature>>,
 }
 
 impl<'a> RegistryIndex<'a> {
-    pub fn new(registry: &'a Registry) -> Self {
+    pub(crate) fn new(registry: &'a Registry) -> Self {
         let mut index = Self {
             types: HashMap::new(),
             enums: HashMap::new(),
