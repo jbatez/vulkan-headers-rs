@@ -1,130 +1,15 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 
-use vulkan_registry::{
-    Command, CommandContent, CommandsContent, Enums, Feature, FeatureContent, GeneralRef,
-    ProtoContent, Registry, RegistryContent, RequireContent, RequireEnum, Type, TypeContent,
-    TypesContent,
-};
+use vulkan_registry::*;
+
+use mods::*;
+mod mods {
+    pub use registry_index::*;
+    mod registry_index;
+}
 
 fn main() {
     Generator::generate();
-}
-
-struct RegistryIndex<'a> {
-    types: HashMap<&'a str, Vec<&'a Type>>,
-    enums: HashMap<&'a str, Vec<&'a Enums>>,
-    commands: HashMap<&'a str, Vec<&'a Command>>,
-    features: HashMap<&'a str, Vec<&'a Feature>>,
-}
-
-impl<'a> RegistryIndex<'a> {
-    fn new(registry: &'a Registry) -> Self {
-        let mut index = Self {
-            types: HashMap::new(),
-            enums: HashMap::new(),
-            commands: HashMap::new(),
-            features: HashMap::new(),
-        };
-
-        for registry_content in &registry.contents {
-            match registry_content {
-                RegistryContent::Types(types) => {
-                    for types_content in &types.contents {
-                        if let TypesContent::Type(typ) = types_content {
-                            index.add_type(typ);
-                        }
-                    }
-                }
-                RegistryContent::Enums(enums) => {
-                    index.add_enums(enums);
-                }
-                RegistryContent::Commands(commands) => {
-                    for commands_content in &commands.contents {
-                        let CommandsContent::Command(command) = commands_content;
-                        index.add_command(command);
-                    }
-                }
-                RegistryContent::Feature(feature) => {
-                    index.add_feature(feature);
-                }
-                _ => (),
-            }
-        }
-
-        index
-    }
-
-    fn add_type(&mut self, typ: &'a Type) {
-        let name = 'name: {
-            if let Some(name) = typ.name.as_ref() {
-                break 'name name.as_str();
-            }
-            for type_content in &typ.contents {
-                if let TypeContent::Name(name) = type_content {
-                    break 'name name.as_str();
-                }
-            }
-            panic!("unnamed type");
-        };
-
-        if let Some(vec) = self.types.get_mut(name) {
-            vec.push(typ);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(typ);
-            self.types.insert(name, vec);
-        }
-    }
-
-    fn add_enums(&mut self, enums: &'a Enums) {
-        let name = enums.name.as_ref().unwrap().as_str();
-
-        if let Some(vec) = self.enums.get_mut(name) {
-            vec.push(enums);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(enums);
-            self.enums.insert(name, vec);
-        }
-    }
-
-    fn add_command(&mut self, command: &'a Command) {
-        let name = 'name: {
-            if let Some(name) = command.name.as_ref() {
-                break 'name name.as_str();
-            }
-            for command_content in &command.contents {
-                if let CommandContent::Proto(proto) = command_content {
-                    for proto_content in &proto.contents {
-                        if let ProtoContent::Name(name) = proto_content {
-                            break 'name name.as_str();
-                        }
-                    }
-                }
-            }
-            panic!("unnamed command");
-        };
-
-        if let Some(vec) = self.commands.get_mut(name) {
-            vec.push(command);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(command);
-            self.commands.insert(name, vec);
-        }
-    }
-
-    fn add_feature(&mut self, feature: &'a Feature) {
-        let name = feature.name.as_ref().unwrap().as_str();
-
-        if let Some(vec) = self.features.get_mut(name) {
-            vec.push(feature);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(feature);
-            self.features.insert(name, vec);
-        }
-    }
 }
 
 struct Generator<'a> {

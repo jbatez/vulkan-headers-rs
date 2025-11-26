@@ -4,23 +4,7 @@ use quick_xml::{
     events::{BytesStart, Event, attributes::Attribute},
 };
 
-use crate::{
-    Command, CommandContent, Commands, CommandsContent, Component, Deprecate, DeprecateContent,
-    Enum, Enums, EnumsContent, Extension, ExtensionContent, Extensions, ExtensionsContent, Feature,
-    FeatureContent, FeatureRef, Format, FormatContent, Formats, FormatsContent, GeneralRef,
-    ImplicitExternSyncParams, ImplicitExternSyncParamsContent, Member, MemberContent, Param,
-    ParamContent, Plane, Platform, Platforms, PlatformsContent, Proto, ProtoContent, Registry,
-    RegistryContent, Remove, RemoveContent, Require, RequireContent, RequireEnum,
-    SpirvCapabilities, SpirvCapabilitiesContent, SpirvCapability, SpirvCapabilityContent,
-    SpirvCapabilityEnable, SpirvExtension, SpirvExtensionContent, SpirvExtensionEnable,
-    SpirvExtensions, SpirvExtensionsContent, SpirvImageFormat, SyncAccess, SyncAccessContent,
-    SyncAccessEquivalent, SyncAccessSupport, SyncPipeline, SyncPipelineContent, SyncPipelineStage,
-    SyncStage, SyncStageContent, SyncStageEquivalent, SyncStageSupport, Syncs, SyncsContent, Tag,
-    Tags, TagsContent, Type, TypeContent, Types, TypesContent, Unused, VideoCapabilities,
-    VideoCodec, VideoCodecContent, VideoCodecs, VideoCodecsContent, VideoFormat,
-    VideoFormatContent, VideoFormatProperties, VideoProfile, VideoProfileMember,
-    VideoProfileMemberContent, VideoProfiles, VideoProfilesContent, VideoRequireCapabilities,
-};
+use crate::*;
 
 struct Parser<'a> {
     reader: Reader<&'a [u8]>,
