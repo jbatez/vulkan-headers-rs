@@ -90,7 +90,7 @@ impl<'a> Generator<'a> {
             Some("bitmask") => self.add_other_type(name, typ),
             Some("define") => (),
             Some("enum") => self.add_enum_type(name),
-            Some("funcpointer") => self.add_funcpointer_type(name, typ),
+            Some("funcpointer") => self.add_other_type(name, typ),
             Some("handle") => self.add_handle_type(name),
             Some("include") => (),
             Some("struct") => self.add_struct_or_union_type(name, typ),
@@ -132,10 +132,6 @@ pub enum {name} {{
 }}"
         );
         self.enums.push((name, text));
-    }
-
-    fn add_funcpointer_type(&mut self, _name: &'a str, _: &'a Type) {
-        // TODO
     }
 
     fn add_handle_type(&mut self, name: &'a str) {
