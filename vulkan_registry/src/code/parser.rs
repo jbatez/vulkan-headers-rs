@@ -4,7 +4,7 @@ use quick_xml::{
     events::{BytesStart, Event, attributes::Attribute},
 };
 
-use crate::mods::*;
+use crate::code::*;
 
 struct Parser<'a> {
     reader: Reader<&'a [u8]>,

@@ -1,5 +1,5 @@
-pub use mods::*;
-mod mods {
+pub use code::*;
+mod code {
     mod parser;
 
     pub use registry::*;

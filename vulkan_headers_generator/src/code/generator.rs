@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use vulkan_registry::*;
 
-use crate::mods::*;
+use crate::code::*;
 
 pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
