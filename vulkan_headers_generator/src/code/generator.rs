@@ -123,8 +123,8 @@ pub enum {name} {{
         for &enums in &self.index.enums[name] {
             let alias = match enums.typ.as_ref().unwrap().as_str() {
                 "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
-                    None => "u32",
-                    Some("64") => "u64",
+                    None => "VkFlags",
+                    Some("64") => "VkFlags64",
                     Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
                 },
                 "enum" => "i32",
