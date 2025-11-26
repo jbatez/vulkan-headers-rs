@@ -2,13 +2,11 @@ use std::collections::HashSet;
 
 use vulkan_registry::*;
 
-use crate::*;
+use crate::mods::*;
 
 pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
-    type_names: HashSet<&'a str>,
-    enum_names: HashSet<&'a str>,
-    command_names: HashSet<&'a str>,
+    require_names: HashSet<&'a str>,
 }
 
 impl<'a> Generator<'a> {
@@ -17,86 +15,103 @@ impl<'a> Generator<'a> {
         let index = RegistryIndex::new(&registry);
         let mut generator = Generator {
             index: &index,
-            type_names: HashSet::new(),
-            enum_names: HashSet::new(),
-            command_names: HashSet::new(),
+            require_names: HashSet::new(),
         };
 
         for features in index.features.values() {
             for &feature in features {
-                generator.include_feature(feature);
+                generator.add_feature(feature);
             }
         }
     }
 
-    fn api_includes_vulkan(api: &'a Option<String>) -> bool {
+    fn api_matches_vulkan(api: &'a Option<String>) -> bool {
         if let Some(api) = api.as_ref() {
-            api.split(',').find(|&s| s == "vulkan").is_some()
+            api.split(',').find(|&api| api == "vulkan").is_some()
         } else {
             true
         }
     }
 
-    fn include_feature(&mut self, feature: &'a Feature) {
-        if !Self::api_includes_vulkan(&feature.api) {
+    fn add_feature(&mut self, feature: &'a Feature) {
+        if !Self::api_matches_vulkan(&feature.api) {
             return;
         }
 
         for feature_content in &feature.contents {
             if let FeatureContent::Require(require) = feature_content {
-                for require_content in &require.contents {
-                    match require_content {
-                        RequireContent::Comment(_) => {
-                            ();
-                        }
-                        RequireContent::Type(type_ref) => {
-                            self.include_type(type_ref);
-                        }
-                        RequireContent::Enum(require_enum) => {
-                            self.include_enum(require_enum);
-                        }
-                        RequireContent::Command(command_ref) => {
-                            self.include_command(command_ref);
-                        }
-                        RequireContent::Feature(_) => {
-                            ();
-                        }
-                    }
+                self.add_require(require);
+            }
+        }
+    }
+
+    fn add_require(&mut self, require: &'a Require) {
+        if !Self::api_matches_vulkan(&require.api) {
+            return;
+        }
+
+        for require_content in &require.contents {
+            match require_content {
+                RequireContent::Comment(_) => {
+                    ();
+                }
+                RequireContent::Type(typ) => {
+                    self.require_type(typ);
+                }
+                RequireContent::Enum(enu) => {
+                    self.require_enum(enu);
+                }
+                RequireContent::Command(command) => {
+                    self.require_command(command);
+                }
+                RequireContent::Feature(_) => {
+                    ();
                 }
             }
         }
     }
 
-    fn include_type(&mut self, type_ref: &'a GeneralRef) {
-        let name = type_ref.name.as_ref().unwrap().as_str();
-        if !self.type_names.insert(name) {
-            return;
-        }
-
-        let typ = 'typ: {
+    fn require_type(&mut self, typ: &'a GeneralRef) {
+        let name = typ.name.as_ref().unwrap().as_str();
+        if self.require_names.insert(name) {
             for &typ in &self.index.types[name] {
-                if Self::api_includes_vulkan(&typ.api) {
-                    break 'typ typ;
-                }
+                self.add_type(typ);
             }
-            panic!("unknown type");
-        };
-
-        // TODO
+        }
     }
 
-    fn include_enum(&mut self, require_enum: &'a RequireEnum) {
-        let name = require_enum.name.as_ref().unwrap().as_str();
-        if !self.enum_names.insert(name) {
+    fn add_type(&mut self, typ: &'a Type) {
+        if !Self::api_matches_vulkan(&typ.api) {
             return;
         }
 
         // TODO
     }
 
-    fn include_command(&mut self, command_ref: &'a GeneralRef) {
-        let name = command_ref.name.as_ref().unwrap().as_str();
-        if !self.command_names.insert(name) {
+    fn require_enum(&mut self, enu: &'a RequireEnum) {
+        if !Self::api_matches_vulkan(&enu.api) {
+            return;
+        }
+
+        let name = enu.name.as_ref().unwrap().as_str();
+        if !self.require_names.insert(name) {
+            return;
+        }
+
+        // TODO
+    }
+
+    fn require_command(&mut self, command: &'a GeneralRef) {
+        let name = command.name.as_ref().unwrap().as_str();
+        if self.require_names.insert(name) {
+            for &command in &self.index.commands[name] {
+                self.add_command(command);
+            }
+        }
+    }
+
+    fn add_command(&mut self, command: &'a Command) {
+        if !Self::api_matches_vulkan(&command.api) {
             return;
         }
 
