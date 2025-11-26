@@ -52,21 +52,11 @@ impl<'a> Generator<'a> {
 
         for require_content in &require.contents {
             match require_content {
-                RequireContent::Comment(_) => {
-                    ();
-                }
-                RequireContent::Type(typ) => {
-                    self.require_type(typ);
-                }
-                RequireContent::Enum(enu) => {
-                    self.require_enum(enu);
-                }
-                RequireContent::Command(command) => {
-                    self.require_command(command);
-                }
-                RequireContent::Feature(_) => {
-                    ();
-                }
+                RequireContent::Comment(_) => (),
+                RequireContent::Type(typ) => self.require_type(typ),
+                RequireContent::Enum(enu) => self.require_enum(enu),
+                RequireContent::Command(command) => self.require_command(command),
+                RequireContent::Feature(_) => (),
             }
         }
     }
@@ -85,6 +75,47 @@ impl<'a> Generator<'a> {
             return;
         }
 
+        if typ.alias.is_some() {
+            self.add_type_alias(typ);
+            return;
+        }
+
+        match typ.category.as_ref().map(String::as_str) {
+            Some("basetype") => self.add_other_type(typ),
+            Some("bitmask") => self.add_other_type(typ),
+            Some("define") => (),
+            Some("enum") => self.add_enum_type(typ),
+            Some("funcpointer") => self.add_funcpointer_type(typ),
+            Some("handle") => self.add_handle_type(typ),
+            Some("include") => (),
+            Some("struct") => self.add_struct_or_union_type(typ),
+            Some("union") => self.add_struct_or_union_type(typ),
+            Some(category) => panic!("unexpected type category: {category:?}"),
+            None => self.add_other_type(typ),
+        }
+    }
+
+    fn add_type_alias(&mut self, _: &'a Type) {
+        // TODO
+    }
+
+    fn add_enum_type(&mut self, _: &'a Type) {
+        // TODO
+    }
+
+    fn add_funcpointer_type(&mut self, _: &'a Type) {
+        // TODO
+    }
+
+    fn add_handle_type(&mut self, _: &'a Type) {
+        // TODO
+    }
+
+    fn add_struct_or_union_type(&mut self, _: &'a Type) {
+        // TODO
+    }
+
+    fn add_other_type(&mut self, _: &'a Type) {
         // TODO
     }
 

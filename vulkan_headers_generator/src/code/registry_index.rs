@@ -24,18 +24,10 @@ impl<'a> RegistryIndex<'a> {
     fn add_registry(&mut self, registry: &'a Registry) {
         for registry_content in &registry.contents {
             match registry_content {
-                RegistryContent::Types(types) => {
-                    self.add_types(types);
-                }
-                RegistryContent::Enums(enums) => {
-                    self.add_enums(enums);
-                }
-                RegistryContent::Commands(commands) => {
-                    self.add_commands(commands);
-                }
-                RegistryContent::Feature(feature) => {
-                    self.add_feature(feature);
-                }
+                RegistryContent::Types(types) => self.add_types(types),
+                RegistryContent::Enums(enums) => self.add_enums(enums),
+                RegistryContent::Commands(commands) => self.add_commands(commands),
+                RegistryContent::Feature(feature) => self.add_feature(feature),
                 _ => (),
             }
         }
