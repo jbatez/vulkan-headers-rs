@@ -6,6 +6,19 @@ use quick_xml::{
 
 use crate::code::*;
 
+impl Registry {
+    pub fn vk() -> Self {
+        Self::parse(include_str!("../data/vk.xml"))
+    }
+
+    pub fn parse(xml: &str) -> Self {
+        let mut parser = Parser {
+            reader: Reader::from_str(xml),
+        };
+        parser.parse_file()
+    }
+}
+
 struct Parser<'a> {
     reader: Reader<&'a [u8]>,
 }
@@ -19,19 +32,6 @@ enum Content<'a> {
 struct Elem<'a> {
     is_empty: bool,
     start: BytesStart<'a>,
-}
-
-impl Registry {
-    pub fn vk() -> Self {
-        Self::parse(include_str!("../data/vk.xml"))
-    }
-
-    pub fn parse(xml: &str) -> Self {
-        let mut parser = Parser {
-            reader: Reader::from_str(xml),
-        };
-        parser.parse_file()
-    }
 }
 
 impl<'a> Parser<'a> {
