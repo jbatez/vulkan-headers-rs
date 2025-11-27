@@ -146,6 +146,13 @@ impl<'a> CDeclParser<'a> {
                 }
             }
 
+            if params.len() == 1 {
+                let param = &params[0];
+                if matches!(param.typ, CType::Name("void")) && param.name.is_none() {
+                    params.clear();
+                }
+            }
+
             return CDecl {
                 typ: CType::FuncPtr {
                     return_type: Box::new(typ),

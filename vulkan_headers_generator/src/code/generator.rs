@@ -38,6 +38,67 @@ impl<'a> Generator<'a> {
         }
     }
 
+    fn rust_type_from_c_func_ptr(return_type: &CType, params: &[CDecl]) -> String {
+        let mut s = "unsafe extern \"system\" fn(".to_string();
+        for (i, param) in params.iter().enumerate() {
+            if i > 0 {
+                s += ", ";
+            }
+            match param.name {
+                Some(name) => s += name,
+                None => s += "_",
+            }
+            s += ": ";
+            s += &Self::rust_type_from_c_type(&param.typ);
+        }
+        s += ")";
+
+        if !matches!(return_type, CType::Name("void")) {
+            s += " -> ";
+            s += &Self::rust_type_from_c_type(&return_type);
+        }
+
+        s
+    }
+
+    fn rust_type_from_c_type(c_type: &CType) -> String {
+        match c_type {
+            &CType::Name(name) => match name {
+                "void" => "c_void".to_string(),
+                "char" => "c_char".to_string(),
+                "int" => "c_int".to_string(),
+                "float" => "c_float".to_string(),
+                "double" => "c_double".to_string(),
+                "int8_t" => "i8".to_string(),
+                "int16_t" => "i16".to_string(),
+                "int32_t" => "i32".to_string(),
+                "int64_t" => "i64".to_string(),
+                "uint8_t" => "u8".to_string(),
+                "uint16_t" => "u16".to_string(),
+                "uint32_t" => "u32".to_string(),
+                "uint64_t" => "u64".to_string(),
+                "size_t" => "usize".to_string(),
+                name => name.to_string(),
+            },
+            CType::Const(non_const_type) => {
+                return Self::rust_type_from_c_type(non_const_type);
+            }
+            CType::Ptr(pointee_type) => {
+                let (prefix, pointee_type) = match pointee_type.as_ref() {
+                    CType::Const(non_const_type) => ("*const ", non_const_type),
+                    _ => ("*mut ", pointee_type),
+                };
+                format!("{}{}", prefix, Self::rust_type_from_c_type(pointee_type))
+            }
+            CType::FuncPtr { .. } => {
+                panic!("unexpected c function pointer type");
+            }
+            CType::Array { elem_type, len } => {
+                format!("[{}; {}]", Self::rust_type_from_c_type(elem_type), len)
+            }
+        }
+    }
+
     fn add_feature(&mut self, feature: &'a Feature) {
         if !Self::api_matches_vulkan(&feature.api) {
             return;
@@ -144,7 +205,7 @@ pub enum {name} {{
         // TODO
     }
 
-    fn add_other_type(&mut self, _name: &'a str, typ: &'a Type) {
+    fn add_other_type(&mut self, name: &'a str, typ: &'a Type) {
         let mut contents = String::new();
         for content in &typ.contents {
             match content {
@@ -158,8 +219,20 @@ pub enum {name} {{
 
         if contents.starts_with("typedef ") {
             let c_decl = CDecl::parse(&contents["typedef ".len()..]);
-
-            // TODO
+            match &c_decl.typ {
+                CType::FuncPtr {
+                    return_type,
+                    params,
+                } => {
+                    let rust_type = Self::rust_type_from_c_func_ptr(return_type, params);
+                    self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
+                    self.add_type_alias(format!("NonNull{name}"), &rust_type);
+                }
+                c_type => {
+                    let rust_type = Self::rust_type_from_c_type(c_type);
+                    self.add_type_alias(name.to_string(), &rust_type);
+                }
+            }
         }
 
         // TODO
