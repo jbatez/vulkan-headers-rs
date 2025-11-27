@@ -144,7 +144,24 @@ pub enum {name} {{
         // TODO
     }
 
-    fn add_other_type(&mut self, _name: &'a str, _: &'a Type) {
+    fn add_other_type(&mut self, _name: &'a str, typ: &'a Type) {
+        let mut contents = String::new();
+        for content in &typ.contents {
+            match content {
+                TypeContent::Comment(_) => (),
+                TypeContent::Text(text) => contents += text,
+                TypeContent::Type(text) => contents += text,
+                TypeContent::Name(text) => contents += text,
+                TypeContent::Member(_) => panic!("unexpected type member"),
+            }
+        }
+
+        if contents.starts_with("typedef ") {
+            let c_decl = CDecl::parse(&contents["typedef ".len()..]);
+
+            // TODO
+        }
+
         // TODO
     }
 

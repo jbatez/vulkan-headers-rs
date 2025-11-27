@@ -1,8 +1,10 @@
+#[derive(Debug)]
 pub(crate) struct CDecl<'a> {
     pub(crate) typ: CType<'a>,
-    pub(crate) name: &'a str,
+    pub(crate) name: Option<&'a str>,
 }
 
+#[derive(Debug)]
 pub(crate) enum CType<'a> {
     Name(&'a str),
     Const(Box<CType<'a>>),
@@ -19,17 +21,22 @@ pub(crate) enum CType<'a> {
 
 impl<'a> CDecl<'a> {
     pub(crate) fn parse(s: &'a str) -> Self {
-        let mut parser = CDeclParser {
-            bytes: s.as_bytes(),
-        };
+        let mut parser = CDeclParser { s };
         let decl = parser.parse_decl();
-        assert_eq!(parser.peek_next_token(), None);
+
+        let mut token = parser.peek_next_token();
+        if token == Some(";") {
+            parser.consume(token.unwrap());
+            token = parser.peek_next_token();
+        }
+        assert_eq!(token, None);
+
         decl
     }
 }
 
 struct CDeclParser<'a> {
-    bytes: &'a [u8],
+    s: &'a str,
 }
 
 impl<'a> CDeclParser<'a> {
@@ -37,77 +44,107 @@ impl<'a> CDeclParser<'a> {
         matches!(b, b'0'..=b'9' | b'A'..=b'Z' | b'_' | b'a'..=b'z')
     }
 
-    fn peek_next_token(&mut self) -> Option<&'a [u8]> {
-        while !self.bytes.is_empty() {
-            match self.bytes[0] {
-                b'\n' | b'\r' | b' ' => self.bytes = &self.bytes[1..],
+    fn is_ident(token: &'a str) -> bool {
+        Self::is_ident_char(token.as_bytes()[0])
+    }
+
+    fn peek_next_token(&mut self) -> Option<&'a str> {
+        while !self.s.is_empty() {
+            match self.s.as_bytes()[0] {
+                b'\n' | b'\r' | b' ' => self.s = &self.s[1..],
                 _ => break,
             }
         }
 
-        if self.bytes.is_empty() {
+        if self.s.is_empty() {
             return None;
         }
 
         let mut len = 1;
-        if Self::is_ident_char(self.bytes[0]) {
-            while self.bytes.len() > len && Self::is_ident_char(self.bytes[len]) {
-                len += 1;
+        if Self::is_ident_char(self.s.as_bytes()[0]) {
+            while self.s.len() > len {
+                if Self::is_ident_char(self.s.as_bytes()[len]) {
+                    len += 1;
+                } else {
+                    break;
+                }
             }
         }
 
-        Some(&self.bytes[..len])
+        Some(&self.s[..len])
     }
 
-    fn next_token(&mut self) -> Option<&'a [u8]> {
-        let token = self.peek_next_token();
-        if let Some(token) = token {
-            self.bytes = &self.bytes[token.len()..];
-        }
-        token
+    fn assert_next_token(&mut self, expected: &str) {
+        let token = self.peek_next_token().unwrap();
+        assert_eq!(token, expected);
+        self.consume(token);
+    }
+
+    fn consume(&mut self, token: &'a str) {
+        self.s = &self.s[token.len()..];
     }
 
     fn parse_type_name(&mut self) -> CType<'a> {
-        let token = self.next_token().unwrap();
-        if token == b"const" {
+        let token = self.peek_next_token().unwrap();
+        if token == "const" {
+            self.consume(token);
             return CType::Const(Box::new(self.parse_type_name()));
+        } else if Self::is_ident(token) {
+            self.consume(token);
+            CType::Name(token)
+        } else {
+            panic!("unexpected token: {token:?}");
         }
-
-        assert!(Self::is_ident_char(token[0]));
-        CType::Name(str::from_utf8(token).unwrap())
     }
 
     fn parse_decl(&mut self) -> CDecl<'a> {
         let mut typ = self.parse_type_name();
+        let mut token = self.peek_next_token();
 
-        let mut token = self.next_token().unwrap();
         loop {
             match token {
-                b"const" => typ = CType::Const(Box::new(typ)),
-                b"*" => typ = CType::Ptr(Box::new(typ)),
+                Some("const") => {
+                    self.consume(token.unwrap());
+                    typ = CType::Const(Box::new(typ));
+                }
+                Some("*") => {
+                    self.consume(token.unwrap());
+                    typ = CType::Ptr(Box::new(typ));
+                }
                 _ => break,
             }
-            token = self.next_token().unwrap();
+            token = self.peek_next_token();
         }
 
-        if token == b"(" {
-            assert_eq!(self.next_token().unwrap(), b"VKAPI_PTR");
-            assert_eq!(self.next_token().unwrap(), b"*");
+        if token == Some("(") {
+            self.consume(token.unwrap());
+            self.assert_next_token("VKAPI_PTR");
+            self.assert_next_token("*");
 
-            token = self.next_token().unwrap();
-            assert!(Self::is_ident_char(token[0]));
-            let name = str::from_utf8(token).unwrap();
+            let name = match self.peek_next_token() {
+                Some(name) if Self::is_ident(name) => {
+                    self.consume(name);
+                    Some(name)
+                }
+                _ => None,
+            };
 
-            assert_eq!(self.next_token().unwrap(), b")");
-            assert_eq!(self.next_token().unwrap(), b"(");
+            self.assert_next_token(")");
+            self.assert_next_token("(");
 
             let mut params = Vec::new();
-            while self.peek_next_token().unwrap() != b")" {
+            loop {
                 params.push(self.parse_decl());
+                let token = self.peek_next_token().unwrap();
+                if token == "," {
+                    self.consume(token);
+                } else if token == ")" {
+                    self.consume(token);
+                    break;
+                } else {
+                    panic!("unexpected token: {token:?}")
+                }
             }
-
-            assert_eq!(self.next_token().unwrap(), b")");
-            assert_eq!(self.next_token().unwrap(), b";");
 
             return CDecl {
                 typ: CType::FuncPtr {
@@ -118,18 +155,29 @@ impl<'a> CDeclParser<'a> {
             };
         }
 
-        assert!(Self::is_ident_char(token[0]));
-        let name = str::from_utf8(token).unwrap();
+        let name = match token {
+            Some(name) if Self::is_ident(name) => {
+                self.consume(name);
+                token = self.peek_next_token();
+                Some(name)
+            }
+            _ => None,
+        };
 
         let mut lens = Vec::new();
-        let mut token = self.next_token();
-        while token == Some(b"[") {
-            let len = self.next_token().unwrap();
-            assert!(Self::is_ident_char(len[0]));
-            lens.push(str::from_utf8(len).unwrap());
+        while token == Some("[") {
+            self.consume(token.unwrap());
 
-            assert_eq!(self.next_token().unwrap(), b"]");
-            token = self.next_token();
+            let len = self.peek_next_token().unwrap();
+            if Self::is_ident(len) {
+                self.consume(len);
+            } else {
+                panic!("unexpected token: {len:?}");
+            }
+            lens.push(len);
+
+            self.assert_next_token("]");
+            token = self.peek_next_token();
         }
 
         while let Some(len) = lens.pop() {
@@ -139,7 +187,6 @@ impl<'a> CDeclParser<'a> {
             };
         }
 
-        assert!(matches!(token, None | Some(b"," | b";")));
         CDecl { typ, name }
     }
 }
