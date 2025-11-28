@@ -180,6 +180,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
 
         let name = enu.name.clone().unwrap();
         let typ = group.name.as_ref().unwrap();
+
         let value = if let Some(alias) = enu.alias.as_ref() {
             alias.to_string()
         } else if let Some(bitpos) = enu.bitpos.as_ref() {
@@ -190,7 +191,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
             panic!("{enu:?}");
         };
 
-        let text = format!("pub const {}: {} = {};", name, typ, value);
+        let text = format!("pub const {name}: {typ} = {value};");
         self.constants.push((name, text));
     }
 
@@ -225,42 +226,41 @@ pub enum {name} {{
     }
 
     fn rust_struct_or_union_from_registry_type(name: &'a str, typ: &'a Type) -> String {
+        let category = typ.category.as_ref().unwrap();
+
         let mut s = String::new();
         s += "#[derive(Clone, Copy)]\n";
         s += "#[repr(C)]\n";
-        s += &format!("pub {} {} {{\n", typ.category.as_ref().unwrap(), name);
+        s += &format!("pub {category} {name} {{\n");
 
         for type_content in &typ.contents {
-            match type_content {
-                TypeContent::Comment(_) => (),
-                TypeContent::Text(text) => assert!(text.trim().is_empty()),
-                TypeContent::Type(_) => panic!(),
-                TypeContent::Name(_) => panic!(),
-                TypeContent::Member(member) => {
-                    if !Self::api_matches_vulkan(&member.api) {
-                        continue;
-                    }
+            let TypeContent::Member(member) = type_content else {
+                continue;
+            };
 
-                    let mut contents = String::new();
-                    for member_content in &member.contents {
-                        match member_content {
-                            MemberContent::Comment(_) => (),
-                            MemberContent::Text(text) => contents += text,
-                            MemberContent::Type(text) => contents += text,
-                            MemberContent::Name(text) => contents += text,
-                            MemberContent::Enum(text) => contents += text,
-                        }
-                    }
+            if !Self::api_matches_vulkan(&member.api) {
+                continue;
+            }
 
-                    let c_decl = CDecl::parse(&contents);
-                    let name = match c_decl.name.unwrap() {
-                        "type" => "typ",
-                        name => name,
-                    };
-                    let rust_type = Self::rust_type_from_c_type(&c_decl.typ);
-                    s += &format!("    pub {}: {},\n", name, rust_type);
+            let mut c_decl = String::new();
+            for member_content in &member.contents {
+                match member_content {
+                    MemberContent::Comment(_) => (),
+                    MemberContent::Text(text) => c_decl += text,
+                    MemberContent::Type(text) => c_decl += text,
+                    MemberContent::Name(text) => c_decl += text,
+                    MemberContent::Enum(text) => c_decl += text,
                 }
             }
+
+            let c_decl = CDecl::parse(&c_decl);
+            let name = match c_decl.name.unwrap() {
+                "type" => "typ",
+                name => name,
+            };
+
+            let typ = Self::rust_type_from_c_type(&c_decl.typ);
+            s += &format!("    pub {name}: {typ},\n");
         }
 
         s += "}";
@@ -268,25 +268,25 @@ pub enum {name} {{
     }
 
     fn add_other_type(&mut self, name: &'a str, typ: &'a Type) {
-        let mut contents = String::new();
+        let mut c_decl = String::new();
         for type_content in &typ.contents {
             match type_content {
                 TypeContent::Comment(_) => (),
-                TypeContent::Text(text) => contents += text,
-                TypeContent::Type(text) => contents += text,
-                TypeContent::Name(text) => contents += text,
+                TypeContent::Text(text) => c_decl += text,
+                TypeContent::Type(text) => c_decl += text,
+                TypeContent::Name(text) => c_decl += text,
                 TypeContent::Member(_) => panic!("unexpected type member"),
             }
         }
 
-        assert!(contents.starts_with("typedef "));
-        let c_decl = CDecl::parse(&contents["typedef ".len()..]);
+        assert!(c_decl.starts_with("typedef "));
+        let c_decl = CDecl::parse(&c_decl["typedef ".len()..]);
         match &c_decl.typ {
             CType::FnPtr {
                 return_type,
                 params,
             } => {
-                let rust_type = Self::rust_type_from_c_func_ptr(return_type, params);
+                let rust_type = Self::rust_type_from_c_fn_ptr(return_type, params);
                 self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
                 self.add_type_alias(format!("NonNull{name}"), &rust_type);
             }
@@ -297,16 +297,14 @@ pub enum {name} {{
         }
     }
 
-    fn rust_type_from_c_func_ptr(return_type: &CType, params: &[CDecl]) -> String {
+    fn rust_type_from_c_fn_ptr(return_type: &CType, params: &[CDecl]) -> String {
         let mut s = "unsafe extern \"system\" fn(".to_string();
         for (i, param) in params.iter().enumerate() {
             if i > 0 {
                 s += ", ";
             }
-            match param.name {
-                Some(name) => s += name,
-                None => s += "_",
-            }
+
+            s += param.name.unwrap_or("_");
             s += ": ";
             s += &Self::rust_type_from_c_type(&param.typ);
         }
@@ -353,17 +351,15 @@ pub enum {name} {{
                     CType::Const(non_const_type) => ("*const", non_const_type),
                     _ => ("*mut", pointee_type),
                 };
-                format!("{} {}", prefix, Self::rust_type_from_c_type(pointee_type))
+                let pointee_type = Self::rust_type_from_c_type(pointee_type);
+                format!("{prefix} {pointee_type}")
             }
             CType::FnPtr { .. } => {
                 panic!("unexpected c function pointer type");
             }
             CType::Array { elem_type, len } => {
-                format!(
-                    "[{}; {} as usize]",
-                    Self::rust_type_from_c_type(elem_type),
-                    len
-                )
+                let elem_type = Self::rust_type_from_c_type(elem_type);
+                format!("[{elem_type}; {len} as usize]")
             }
         }
     }
@@ -392,6 +388,7 @@ pub enum {name} {{
     fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
         let name = enu.name.clone().unwrap();
         let typ = group.name.as_ref().unwrap();
+
         let value = if let Some(alias) = enu.alias.as_ref() {
             alias.to_string()
         } else if let Some(bitpos) = enu.bitpos.as_ref() {
@@ -411,7 +408,7 @@ pub enum {name} {{
             panic!("{enu:?}");
         };
 
-        let text = format!("pub const {}: {} = {};", name, typ, value);
+        let text = format!("pub const {name}: {typ} = {value};");
         self.constants.push((name, text));
     }
 
@@ -449,7 +446,7 @@ pub enum {name} {{
             value.to_string()
         };
 
-        let text = format!("pub const {}: {} = {};", name, typ, value);
+        let text = format!("pub const {name}: {typ} = {value};");
         self.constants.push((name, text));
     }
 
