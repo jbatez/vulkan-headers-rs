@@ -3,24 +3,32 @@ use std::collections::HashMap;
 use vulkan_registry::*;
 
 pub(crate) struct RegistryIndex<'a> {
-    pub(crate) types: HashMap<&'a str, Vec<&'a Type>>,
-    pub(crate) constants: HashMap<&'a str, Vec<&'a Enum>>,
-    pub(crate) enums: HashMap<&'a str, Vec<&'a Enums>>,
-    pub(crate) commands: HashMap<&'a str, Vec<&'a Command>>,
-    pub(crate) features: HashMap<&'a str, Vec<&'a Feature>>,
+    pub(crate) types: HashMap<&'a str, &'a Type>,
+    pub(crate) enums: HashMap<&'a str, &'a Enums>,
+    pub(crate) constants: HashMap<&'a str, &'a Enum>,
+    pub(crate) commands: HashMap<&'a str, &'a Command>,
+    pub(crate) features: HashMap<&'a str, &'a Feature>,
 }
 
 impl<'a> RegistryIndex<'a> {
     pub(crate) fn new(registry: &'a Registry) -> Self {
         let mut index = Self {
             types: HashMap::new(),
-            constants: HashMap::new(),
             enums: HashMap::new(),
+            constants: HashMap::new(),
             commands: HashMap::new(),
             features: HashMap::new(),
         };
         index.add_registry(registry);
         index
+    }
+
+    fn api_matches_vulkan(api: &Option<String>) -> bool {
+        if let Some(api) = api.as_ref() {
+            api.split(',').find(|&s| s == "vulkan").is_some()
+        } else {
+            true
+        }
     }
 
     fn add_registry(&mut self, registry: &'a Registry) {
@@ -58,33 +66,13 @@ impl<'a> RegistryIndex<'a> {
     }
 
     fn add_type(&mut self, typ: &'a Type) {
+        if !Self::api_matches_vulkan(&typ.api) {
+            return;
+        }
+
         let name = Self::get_type_name(typ);
-        if let Some(vec) = self.types.get_mut(name) {
-            vec.push(typ);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(typ);
-            self.types.insert(name, vec);
-        }
-    }
-
-    fn add_constants(&mut self, enums: &'a Enums) {
-        for enums_content in &enums.contents {
-            if let EnumsContent::Enum(enu) = enums_content {
-                self.add_constant(enu);
-            }
-        }
-    }
-
-    fn add_constant(&mut self, enu: &'a Enum) {
-        let name = enu.name.as_ref().unwrap().as_str();
-        if let Some(vec) = self.constants.get_mut(name) {
-            vec.push(enu);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(enu);
-            self.constants.insert(name, vec);
-        }
+        let old = self.types.insert(name, typ);
+        assert_eq!(old, None);
     }
 
     fn add_enums(&mut self, enums: &'a Enums) {
@@ -94,13 +82,26 @@ impl<'a> RegistryIndex<'a> {
         }
 
         let name = enums.name.as_ref().unwrap().as_str();
-        if let Some(vec) = self.enums.get_mut(name) {
-            vec.push(enums);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(enums);
-            self.enums.insert(name, vec);
+        let old = self.enums.insert(name, enums);
+        assert_eq!(old, None);
+    }
+
+    fn add_constants(&mut self, enums: &'a Enums) {
+        for enums_content in &enums.contents {
+            if let EnumsContent::Enum(constant) = enums_content {
+                self.add_constant(constant);
+            }
         }
+    }
+
+    fn add_constant(&mut self, constant: &'a Enum) {
+        if !Self::api_matches_vulkan(&constant.api) {
+            return;
+        }
+
+        let name = constant.name.as_ref().unwrap().as_str();
+        let old = self.constants.insert(name, constant);
+        assert_eq!(old, None);
     }
 
     fn add_commands(&mut self, commands: &'a Commands) {
@@ -129,24 +130,22 @@ impl<'a> RegistryIndex<'a> {
     }
 
     fn add_command(&mut self, command: &'a Command) {
-        let name = Self::get_command_name(command);
-        if let Some(vec) = self.commands.get_mut(name) {
-            vec.push(command);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(command);
-            self.commands.insert(name, vec);
+        if !Self::api_matches_vulkan(&command.api) {
+            return;
         }
+
+        let name = Self::get_command_name(command);
+        let old = self.commands.insert(name, command);
+        assert_eq!(old, None);
     }
 
     fn add_feature(&mut self, feature: &'a Feature) {
-        let name = feature.name.as_ref().unwrap().as_str();
-        if let Some(vec) = self.features.get_mut(name) {
-            vec.push(feature);
-        } else {
-            let mut vec = Vec::new();
-            vec.push(feature);
-            self.features.insert(name, vec);
+        if !Self::api_matches_vulkan(&feature.api) {
+            return;
         }
+
+        let name = feature.name.as_ref().unwrap().as_str();
+        let old = self.features.insert(name, feature);
+        assert_eq!(old, None);
     }
 }

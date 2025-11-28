@@ -31,10 +31,8 @@ impl<'a> Generator<'a> {
             unions: Vec::new(),
         };
 
-        for features in index.features.values() {
-            for &feature in features {
-                generator.add_feature(feature);
-            }
+        for feature in index.features.values() {
+            generator.add_feature(feature);
         }
 
         let mut out = File::create("vulkan_headers/src/lib.rs").unwrap();
@@ -126,9 +124,8 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
     fn require_type(&mut self, typ: &'a GeneralRef) {
         let name = typ.name.as_ref().unwrap().as_str();
         if self.require_names.insert(name) {
-            for &typ in &self.index.types[name] {
-                self.add_type(name, typ);
-            }
+            let typ = &self.index.types[name];
+            self.add_type(name, typ);
         }
     }
 
@@ -163,33 +160,33 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
     }
 
     fn add_enum_type(&mut self, name: &str) {
-        for &enums in &self.index.enums[name] {
-            let alias = match enums.typ.as_ref().unwrap().as_str() {
-                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
-                    None => "VkFlags",
-                    Some("64") => "VkFlags64",
-                    Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
-                },
-                "enum" => "i32",
-                typ => panic!("unexpected enums type: {typ:?}"),
-            };
-            self.add_type_alias(name.to_string(), alias);
+        let enums = &self.index.enums[name];
 
-            for enums_content in &enums.contents {
-                if let EnumsContent::Enum(enu) = enums_content {
-                    self.add_enum(enums, enu);
-                }
+        let alias = match enums.typ.as_ref().unwrap().as_str() {
+            "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
+                None => "VkFlags",
+                Some("64") => "VkFlags64",
+                Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
+            },
+            "enum" => "i32",
+            typ => panic!("unexpected enums type: {typ:?}"),
+        };
+        self.add_type_alias(name.to_string(), alias);
+
+        for enums_content in &enums.contents {
+            if let EnumsContent::Enum(enu) = enums_content {
+                self.add_enum(enums, enu);
             }
         }
     }
 
-    fn add_enum(&mut self, group: &Enums, enu: &Enum) {
+    fn add_enum(&mut self, enums: &Enums, enu: &Enum) {
         if !Self::api_matches_vulkan(&enu.api) {
             return;
         }
 
         let name = enu.name.clone().unwrap();
-        let typ = group.name.as_ref().unwrap();
+        let typ = enums.name.as_ref().unwrap();
 
         let value = if let Some(alias) = enu.alias.as_ref() {
             alias.to_string()
@@ -369,19 +366,17 @@ pub enum {name} {{
         }
 
         if let Some(extends) = enu.extends.as_ref() {
-            for group in &self.index.enums[extends.as_str()] {
-                self.add_enum_extension(group, enu);
-            }
+            let enums = &self.index.enums[extends.as_str()];
+            self.add_enum_extension(enums, enu);
         } else {
-            for &enu in &self.index.constants[name] {
-                self.add_constant(enu);
-            }
+            let constant = &self.index.constants[name];
+            self.add_constant(constant);
         }
     }
 
-    fn add_enum_extension(&mut self, group: &Enums, enu: &RequireEnum) {
+    fn add_enum_extension(&mut self, enums: &Enums, enu: &RequireEnum) {
         let name = enu.name.clone().unwrap();
-        let typ = group.name.as_ref().unwrap();
+        let typ = enums.name.as_ref().unwrap();
 
         let value = if let Some(alias) = enu.alias.as_ref() {
             alias.to_string()
@@ -406,17 +401,17 @@ pub enum {name} {{
         self.constants.push((name, text));
     }
 
-    fn add_constant(&mut self, enu: &Enum) {
-        if !Self::api_matches_vulkan(&enu.api) {
+    fn add_constant(&mut self, constant: &Enum) {
+        if !Self::api_matches_vulkan(&constant.api) {
             return;
         }
 
-        let name = enu.name.clone().unwrap();
+        let name = constant.name.clone().unwrap();
 
-        let typ = enu.typ.as_ref().unwrap();
+        let typ = constant.typ.as_ref().unwrap();
         let typ = Self::rust_type_from_c_type_name(typ);
 
-        let mut value = enu.value.as_ref().unwrap().as_str();
+        let mut value = constant.value.as_ref().unwrap().as_str();
         if value.starts_with("(") {
             assert!(value.ends_with(")"));
             value = &value[1..value.len() - 1];
@@ -447,9 +442,8 @@ pub enum {name} {{
     fn require_command(&mut self, command: &'a GeneralRef) {
         let name = command.name.as_ref().unwrap().as_str();
         if self.require_names.insert(name) {
-            for &command in &self.index.commands[name] {
-                self.add_command(command);
-            }
+            let command = &self.index.commands[name];
+            self.add_command(command);
         }
     }
 
