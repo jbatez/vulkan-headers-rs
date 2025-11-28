@@ -88,7 +88,8 @@ impl<'a> RegistryIndex<'a> {
     }
 
     fn add_enums(&mut self, enums: &'a Enums) {
-        if enums.typ.as_ref().map(String::as_str) == Some("constants") {
+        let typ = enums.typ.as_ref().map(String::as_str);
+        if typ == Some("constants") {
             return self.add_constants(enums);
         }
 
