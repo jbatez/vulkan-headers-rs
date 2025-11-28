@@ -7,11 +7,11 @@ use crate::code::*;
 pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
     require_names: HashSet<&'a str>,
-    consts: Vec<(String, String)>,
-    enums: Vec<(String, String)>,
     structs: Vec<(String, String)>,
-    unions: Vec<(String, String)>,
+    enums: Vec<(String, String)>,
+    constants: Vec<(String, String)>,
     type_aliases: Vec<(String, String)>,
+    unions: Vec<(String, String)>,
 }
 
 impl<'a> Generator<'a> {
@@ -22,11 +22,11 @@ impl<'a> Generator<'a> {
         let mut generator = Generator {
             index: &index,
             require_names: HashSet::new(),
-            consts: Vec::new(),
-            enums: Vec::new(),
             structs: Vec::new(),
-            unions: Vec::new(),
+            enums: Vec::new(),
+            constants: Vec::new(),
             type_aliases: Vec::new(),
+            unions: Vec::new(),
         };
 
         for features in index.features.values() {
@@ -36,9 +36,19 @@ impl<'a> Generator<'a> {
         }
 
         let mut out = File::create("vulkan_headers/src/lib.rs").unwrap();
+        out.write_all(
+            b"\
+#![allow(nonstandard_style)]
+#![no_std]
 
-        generator.consts.sort_by(|a, b| a.0.cmp(&b.0));
-        for (_, text) in &generator.consts {
+use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
+        ",
+        )
+        .unwrap();
+
+        generator.structs.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.structs {
+            writeln!(out).unwrap();
             writeln!(out, "{text}").unwrap();
         }
 
@@ -48,21 +58,21 @@ impl<'a> Generator<'a> {
             writeln!(out, "{text}").unwrap();
         }
 
-        generator.structs.sort_by(|a, b| a.0.cmp(&b.0));
-        for (_, text) in &generator.structs {
-            writeln!(out).unwrap();
-            writeln!(out, "{text}").unwrap();
-        }
-
-        generator.unions.sort_by(|a, b| a.0.cmp(&b.0));
-        for (_, text) in &generator.unions {
-            writeln!(out).unwrap();
+        writeln!(out).unwrap();
+        generator.constants.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.constants {
             writeln!(out, "{text}").unwrap();
         }
 
         writeln!(out).unwrap();
         generator.type_aliases.sort_by(|a, b| a.0.cmp(&b.0));
         for (_, text) in &generator.type_aliases {
+            writeln!(out, "{text}").unwrap();
+        }
+
+        generator.unions.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.unions {
+            writeln!(out).unwrap();
             writeln!(out, "{text}").unwrap();
         }
     }
@@ -195,7 +205,7 @@ pub enum {name} {{
 
     fn rust_struct_or_union_from_registry_type(name: &'a str, typ: &'a Type) -> String {
         let mut s = String::new();
-        s += "#[derive(Clone, Copy, Debug, Default]\n";
+        s += "#[derive(Clone, Copy)]\n";
         s += "#[repr(C)]\n";
         s += &format!("pub {} {} {{\n", typ.category.as_ref().unwrap(), name);
 
@@ -222,7 +232,10 @@ pub enum {name} {{
                     }
 
                     let c_decl = CDecl::parse(&contents);
-                    let name = c_decl.name.unwrap();
+                    let name = match c_decl.name.unwrap() {
+                        "type" => "typ",
+                        name => name,
+                    };
                     let rust_type = Self::rust_type_from_c_type(&c_decl.typ);
                     s += &format!("    pub {}: {},\n", name, rust_type);
                 }
@@ -316,16 +329,20 @@ pub enum {name} {{
             }
             CType::Ptr(pointee_type) => {
                 let (prefix, pointee_type) = match pointee_type.as_ref() {
-                    CType::Const(non_const_type) => ("*const ", non_const_type),
-                    _ => ("*mut ", pointee_type),
+                    CType::Const(non_const_type) => ("*const", non_const_type),
+                    _ => ("*mut", pointee_type),
                 };
-                format!("{}{}", prefix, Self::rust_type_from_c_type(pointee_type))
+                format!("{} {}", prefix, Self::rust_type_from_c_type(pointee_type))
             }
             CType::FuncPtr { .. } => {
                 panic!("unexpected c function pointer type");
             }
             CType::Array { elem_type, len } => {
-                format!("[{}; {}]", Self::rust_type_from_c_type(elem_type), len)
+                format!(
+                    "[{}; {} as usize]",
+                    Self::rust_type_from_c_type(elem_type),
+                    len
+                )
             }
         }
     }
@@ -388,7 +405,7 @@ pub enum {name} {{
         };
 
         let text = format!("pub const {}: {} = {};", name, typ, value);
-        self.consts.push((name, text));
+        self.constants.push((name, text));
     }
 
     fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
@@ -415,7 +432,7 @@ pub enum {name} {{
         };
 
         let text = format!("pub const {}: {} = {};", name, typ, value);
-        self.consts.push((name, text));
+        self.constants.push((name, text));
     }
 
     fn require_command(&mut self, command: &'a GeneralRef) {
