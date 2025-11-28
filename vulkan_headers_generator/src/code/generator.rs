@@ -340,13 +340,14 @@ pub enum {name} {{
             return;
         }
 
-        if let Some(_extends) = enu.extends.as_ref() {
-            // TODO
-            return;
-        }
-
-        for &(group, enu) in &self.index.enums[name] {
-            self.add_enum(group, enu);
+        if let Some(extends) = enu.extends.as_ref() {
+            for group in &self.index.enum_groups[extends.as_str()] {
+                self.add_enum_extension(group, enu);
+            }
+        } else {
+            for &(group, enu) in &self.index.enums[name] {
+                self.add_enum(group, enu);
+            }
         }
     }
 
@@ -380,6 +381,33 @@ pub enum {name} {{
             }
         } else if let Some(bitpos) = enu.bitpos.as_ref() {
             format!("1 << {bitpos}")
+        } else if let Some(alias) = enu.alias.as_ref() {
+            alias.to_string()
+        } else {
+            panic!("{enu:?}");
+        };
+
+        let text = format!("pub const {}: {} = {};", name, typ, value);
+        self.consts.push((name, text));
+    }
+
+    fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
+        let name = enu.name.clone().unwrap();
+        let typ = group.name.as_ref().unwrap();
+
+        let value = if let Some(offset) = enu.offset.as_ref() {
+            let offset: u32 = offset.parse().unwrap();
+            let extnumber: u32 = enu.extnumber.as_ref().unwrap().parse().unwrap();
+            let value = 1_000_000_000 + 1_000 * (extnumber - 1) + offset;
+            match enu.dir.as_ref().map(String::as_str) {
+                None => format!("{value}"),
+                Some("-") => format!("-{value}"),
+                Some(dir) => panic!("unexpected enum dir: {dir:?}"),
+            }
+        } else if let Some(bitpos) = enu.bitpos.as_ref() {
+            format!("1 << {bitpos}")
+        } else if let Some(value) = enu.value.as_ref() {
+            value.to_string()
         } else if let Some(alias) = enu.alias.as_ref() {
             alias.to_string()
         } else {
