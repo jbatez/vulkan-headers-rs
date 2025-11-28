@@ -496,7 +496,12 @@ pub enum {name} {{
             if i > 0 {
                 s += ", ";
             }
-            s += param.name.as_ref().unwrap();
+
+            s += match param.name.as_ref().unwrap().as_str() {
+                "type" => "typ",
+                name => name,
+            };
+
             s += ": ";
             s += &Self::rust_type_from_c_type(&param.typ);
         }
