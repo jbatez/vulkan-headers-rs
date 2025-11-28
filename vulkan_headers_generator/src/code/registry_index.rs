@@ -4,7 +4,8 @@ use vulkan_registry::*;
 
 pub(crate) struct RegistryIndex<'a> {
     pub(crate) types: HashMap<&'a str, Vec<&'a Type>>,
-    pub(crate) enums: HashMap<&'a str, Vec<&'a Enums>>,
+    pub(crate) enum_groups: HashMap<&'a str, Vec<&'a Enums>>,
+    pub(crate) enums: HashMap<&'a str, Vec<&'a Enum>>,
     pub(crate) commands: HashMap<&'a str, Vec<&'a Command>>,
     pub(crate) features: HashMap<&'a str, Vec<&'a Feature>>,
 }
@@ -13,6 +14,7 @@ impl<'a> RegistryIndex<'a> {
     pub(crate) fn new(registry: &'a Registry) -> Self {
         let mut index = Self {
             types: HashMap::new(),
+            enum_groups: HashMap::new(),
             enums: HashMap::new(),
             commands: HashMap::new(),
             features: HashMap::new(),
@@ -68,11 +70,28 @@ impl<'a> RegistryIndex<'a> {
 
     fn add_enums(&mut self, enums: &'a Enums) {
         let name = enums.name.as_ref().unwrap().as_str();
-        if let Some(vec) = self.enums.get_mut(name) {
+        if let Some(vec) = self.enum_groups.get_mut(name) {
             vec.push(enums);
         } else {
             let mut vec = Vec::new();
             vec.push(enums);
+            self.enum_groups.insert(name, vec);
+        }
+
+        for enums_content in &enums.contents {
+            if let EnumsContent::Enum(enu) = enums_content {
+                self.add_enum(enu);
+            }
+        }
+    }
+
+    fn add_enum(&mut self, enu: &'a Enum) {
+        let name = enu.name.as_ref().unwrap().as_str();
+        if let Some(vec) = self.enums.get_mut(name) {
+            vec.push(enu);
+        } else {
+            let mut vec = Vec::new();
+            vec.push(enu);
             self.enums.insert(name, vec);
         }
     }

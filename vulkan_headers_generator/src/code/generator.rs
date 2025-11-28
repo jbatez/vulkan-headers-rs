@@ -167,7 +167,7 @@ impl<'a> Generator<'a> {
     }
 
     fn add_enum_type(&mut self, name: &'a str) {
-        for &enums in &self.index.enums[name] {
+        for &enums in &self.index.enum_groups[name] {
             let alias = match enums.typ.as_ref().unwrap().as_str() {
                 "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
                     None => "VkFlags",
