@@ -1,7 +1,7 @@
 #[derive(Debug)]
 pub(crate) struct CDecl<'a> {
-    pub(crate) typ: CType<'a>,
     pub(crate) name: Option<&'a str>,
+    pub(crate) typ: CType<'a>,
 }
 
 #[derive(Debug)]
@@ -9,7 +9,7 @@ pub(crate) enum CType<'a> {
     Name(&'a str),
     Const(Box<CType<'a>>),
     Ptr(Box<CType<'a>>),
-    FuncPtr {
+    FnPtr {
         return_type: Box<CType<'a>>,
         params: Vec<CDecl<'a>>,
     },
@@ -49,15 +49,12 @@ impl<'a> CDeclParser<'a> {
     }
 
     fn peek_next_token(&mut self) -> Option<&'a str> {
-        while !self.s.is_empty() {
-            match self.s.as_bytes()[0] {
-                b'\n' | b'\r' | b' ' => self.s = &self.s[1..],
-                _ => break,
+        loop {
+            match self.s.as_bytes().first() {
+                Some(b'\n' | b'\r' | b' ') => self.s = &self.s[1..],
+                Some(_) => break,
+                None => return None,
             }
-        }
-
-        if self.s.is_empty() {
-            return None;
         }
 
         let mut len = 1;
@@ -80,8 +77,25 @@ impl<'a> CDeclParser<'a> {
         self.consume(token);
     }
 
+    fn assert_next_token_ident(&mut self) -> &'a str {
+        let token = self.peek_next_token().unwrap();
+        assert!(Self::is_ident(token));
+        self.consume(token);
+        token
+    }
+
     fn consume(&mut self, token: &'a str) {
         self.s = &self.s[token.len()..];
+    }
+
+    fn consume_opt_ident(&mut self) -> Option<&'a str> {
+        match self.peek_next_token() {
+            Some(token) if Self::is_ident(token) => {
+                self.consume(token);
+                Some(token)
+            }
+            _ => None,
+        }
     }
 
     fn parse_type_name(&mut self) -> CType<'a> {
@@ -104,11 +118,9 @@ impl<'a> CDeclParser<'a> {
         panic!("unexpected token: {token:?}");
     }
 
-    fn parse_decl(&mut self) -> CDecl<'a> {
-        let mut typ = self.parse_type_name();
-        let mut token = self.peek_next_token();
-
+    fn parse_ptrs(&mut self, mut typ: CType<'a>) -> CType<'a> {
         loop {
+            let token = self.peek_next_token();
             match token {
                 Some("const") => {
                     self.consume(token.unwrap());
@@ -118,89 +130,86 @@ impl<'a> CDeclParser<'a> {
                     self.consume(token.unwrap());
                     typ = CType::Ptr(Box::new(typ));
                 }
-                _ => break,
+                _ => break typ,
             }
-            token = self.peek_next_token();
+        }
+    }
+
+    fn parse_fn_ptr(&mut self, return_type: CType<'a>) -> CDecl<'a> {
+        self.assert_next_token("(");
+        self.assert_next_token("VKAPI_PTR");
+        self.assert_next_token("*");
+        let name = self.consume_opt_ident();
+        self.assert_next_token(")");
+        self.assert_next_token("(");
+        let params = self.parse_params();
+        self.assert_next_token(")");
+
+        CDecl {
+            name,
+            typ: CType::FnPtr {
+                return_type: Box::new(return_type),
+                params,
+            },
+        }
+    }
+
+    fn parse_params(&mut self) -> Vec<CDecl<'a>> {
+        let mut params = Vec::new();
+        loop {
+            params.push(self.parse_decl());
+
+            let token = self.peek_next_token().unwrap();
+            match token {
+                "," => self.consume(token),
+                ")" => break,
+                _ => panic!("unexpected token: {token:?}"),
+            }
         }
 
-        if token == Some("(") {
-            self.consume(token.unwrap());
-            self.assert_next_token("VKAPI_PTR");
-            self.assert_next_token("*");
-
-            let name = match self.peek_next_token() {
-                Some(name) if Self::is_ident(name) => {
-                    self.consume(name);
-                    Some(name)
-                }
-                _ => None,
-            };
-
-            self.assert_next_token(")");
-            self.assert_next_token("(");
-
-            let mut params = Vec::new();
-            loop {
-                params.push(self.parse_decl());
-                let token = self.peek_next_token().unwrap();
-                if token == "," {
-                    self.consume(token);
-                } else if token == ")" {
-                    self.consume(token);
-                    break;
-                } else {
-                    panic!("unexpected token: {token:?}")
-                }
+        if params.len() == 1 {
+            let param = &params[0];
+            if matches!(param.typ, CType::Name("void")) && param.name.is_none() {
+                params = Vec::new();
             }
-
-            if params.len() == 1 {
-                let param = &params[0];
-                if matches!(param.typ, CType::Name("void")) && param.name.is_none() {
-                    params.clear();
-                }
-            }
-
-            return CDecl {
-                typ: CType::FuncPtr {
-                    return_type: Box::new(typ),
-                    params,
-                },
-                name,
-            };
         }
 
-        let name = match token {
-            Some(name) if Self::is_ident(name) => {
-                self.consume(name);
-                token = self.peek_next_token();
-                Some(name)
-            }
-            _ => None,
-        };
+        params
+    }
 
-        let mut lens = Vec::new();
-        while token == Some("[") {
-            self.consume(token.unwrap());
+    fn parse_decl(&mut self) -> CDecl<'a> {
+        let typ = self.parse_type_name();
+        let typ = self.parse_ptrs(typ);
 
-            let len = self.peek_next_token().unwrap();
-            if Self::is_ident(len) {
-                self.consume(len);
+        if self.peek_next_token() == Some("(") {
+            self.parse_fn_ptr(typ)
+        } else {
+            let name = self.consume_opt_ident();
+            let typ = self.parse_array_extents(typ);
+            CDecl { typ, name }
+        }
+    }
+
+    fn parse_array_extents(&mut self, mut typ: CType<'a>) -> CType<'a> {
+        let mut extents = Vec::new();
+        loop {
+            let token = self.peek_next_token();
+            if token == Some("[") {
+                self.consume(token.unwrap());
+                extents.push(self.assert_next_token_ident());
+                self.assert_next_token("]");
             } else {
-                panic!("unexpected token: {len:?}");
+                break;
             }
-            lens.push(len);
-
-            self.assert_next_token("]");
-            token = self.peek_next_token();
         }
 
-        while let Some(len) = lens.pop() {
+        while let Some(len) = extents.pop() {
             typ = CType::Array {
                 elem_type: Box::new(typ),
                 len,
             };
         }
 
-        CDecl { typ, name }
+        typ
     }
 }

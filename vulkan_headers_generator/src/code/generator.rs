@@ -282,7 +282,7 @@ pub enum {name} {{
         assert!(contents.starts_with("typedef "));
         let c_decl = CDecl::parse(&contents["typedef ".len()..]);
         match &c_decl.typ {
-            CType::FuncPtr {
+            CType::FnPtr {
                 return_type,
                 params,
             } => {
@@ -355,7 +355,7 @@ pub enum {name} {{
                 };
                 format!("{} {}", prefix, Self::rust_type_from_c_type(pointee_type))
             }
-            CType::FuncPtr { .. } => {
+            CType::FnPtr { .. } => {
                 panic!("unexpected c function pointer type");
             }
             CType::Array { elem_type, len } => {
