@@ -7,6 +7,7 @@ use crate::code::*;
 pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
     require_names: HashSet<&'a str>,
+    consts: Vec<(String, String)>,
     enums: Vec<(String, String)>,
     structs: Vec<(String, String)>,
     unions: Vec<(String, String)>,
@@ -21,6 +22,7 @@ impl<'a> Generator<'a> {
         let mut generator = Generator {
             index: &index,
             require_names: HashSet::new(),
+            consts: Vec::new(),
             enums: Vec::new(),
             structs: Vec::new(),
             unions: Vec::new(),
@@ -34,6 +36,11 @@ impl<'a> Generator<'a> {
         }
 
         let mut out = File::create("vulkan_headers/src/lib.rs").unwrap();
+
+        generator.consts.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.consts {
+            writeln!(out, "{text}").unwrap();
+        }
 
         generator.enums.sort_by(|a, b| a.0.cmp(&b.0));
         for (_, text) in &generator.enums {
@@ -136,9 +143,9 @@ impl<'a> Generator<'a> {
     }
 
     fn add_enum_type(&mut self, name: &'a str) {
-        for &enums in &self.index.enum_groups[name] {
-            let alias = match enums.typ.as_ref().unwrap().as_str() {
-                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
+        for &group in &self.index.enum_groups[name] {
+            let alias = match group.typ.as_ref().unwrap().as_str() {
+                "bitmask" => match group.bitwidth.as_ref().map(String::as_str) {
                     None => "VkFlags",
                     Some("64") => "VkFlags64",
                     Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
@@ -147,6 +154,12 @@ impl<'a> Generator<'a> {
                 typ => panic!("unexpected enums type: {typ:?}"),
             };
             self.add_type_alias(name.to_string(), alias);
+
+            for group_content in &group.contents {
+                if let EnumsContent::Enum(enu) = group_content {
+                    self.add_enum(group, enu);
+                }
+            }
         }
     }
 
@@ -273,25 +286,31 @@ pub enum {name} {{
         s
     }
 
+    fn rust_type_from_c_type_name(name: &str) -> &str {
+        match name {
+            "void" => "c_void",
+            "char" => "c_char",
+            "int" => "c_int",
+            "float" => "c_float",
+            "double" => "c_double",
+            "int8_t" => "i8",
+            "int16_t" => "i16",
+            "int32_t" => "i32",
+            "int64_t" => "i64",
+            "uint8_t" => "u8",
+            "uint16_t" => "u16",
+            "uint32_t" => "u32",
+            "uint64_t" => "u64",
+            "size_t" => "usize",
+            name => name,
+        }
+    }
+
     fn rust_type_from_c_type(c_type: &CType) -> String {
         match c_type {
-            &CType::Name(name) => match name {
-                "void" => "c_void".to_string(),
-                "char" => "c_char".to_string(),
-                "int" => "c_int".to_string(),
-                "float" => "c_float".to_string(),
-                "double" => "c_double".to_string(),
-                "int8_t" => "i8".to_string(),
-                "int16_t" => "i16".to_string(),
-                "int32_t" => "i32".to_string(),
-                "int64_t" => "i64".to_string(),
-                "uint8_t" => "u8".to_string(),
-                "uint16_t" => "u16".to_string(),
-                "uint32_t" => "u32".to_string(),
-                "uint64_t" => "u64".to_string(),
-                "size_t" => "usize".to_string(),
-                name => name.to_string(),
-            },
+            &CType::Name(name) => {
+                return Self::rust_type_from_c_type_name(name).to_string();
+            }
             CType::Const(non_const_type) => {
                 return Self::rust_type_from_c_type(non_const_type);
             }
@@ -321,7 +340,54 @@ pub enum {name} {{
             return;
         }
 
-        // TODO
+        if let Some(_extends) = enu.extends.as_ref() {
+            // TODO
+            return;
+        }
+
+        for &(group, enu) in &self.index.enums[name] {
+            self.add_enum(group, enu);
+        }
+    }
+
+    fn add_enum(&mut self, group: &'a Enums, enu: &'a Enum) {
+        if !Self::api_matches_vulkan(&enu.api) {
+            return;
+        }
+
+        let name = enu.name.clone().unwrap();
+        let typ = if let Some(typ) = enu.typ.as_ref() {
+            Self::rust_type_from_c_type_name(typ)
+        } else {
+            group.name.as_ref().unwrap()
+        };
+
+        let value = if let Some(value) = enu.value.as_ref() {
+            let mut value = value.as_str();
+            loop {
+                match value.bytes().last().unwrap() {
+                    b')' | b'F' | b'L' | b'U' => value = &value[..value.len() - 1],
+                    _ => break,
+                }
+            }
+            if value.starts_with("(") {
+                value = &value[1..];
+            }
+            if value.starts_with("~") {
+                "!".to_string() + &value[1..]
+            } else {
+                value.to_string()
+            }
+        } else if let Some(bitpos) = enu.bitpos.as_ref() {
+            format!("1 << {bitpos}")
+        } else if let Some(alias) = enu.alias.as_ref() {
+            alias.to_string()
+        } else {
+            panic!("{enu:?}");
+        };
+
+        let text = format!("pub const {}: {} = {};", name, typ, value);
+        self.consts.push((name, text));
     }
 
     fn require_command(&mut self, command: &'a GeneralRef) {

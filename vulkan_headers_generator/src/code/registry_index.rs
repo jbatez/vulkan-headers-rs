@@ -5,7 +5,7 @@ use vulkan_registry::*;
 pub(crate) struct RegistryIndex<'a> {
     pub(crate) types: HashMap<&'a str, Vec<&'a Type>>,
     pub(crate) enum_groups: HashMap<&'a str, Vec<&'a Enums>>,
-    pub(crate) enums: HashMap<&'a str, Vec<&'a Enum>>,
+    pub(crate) enums: HashMap<&'a str, Vec<(&'a Enums, &'a Enum)>>,
     pub(crate) commands: HashMap<&'a str, Vec<&'a Command>>,
     pub(crate) features: HashMap<&'a str, Vec<&'a Feature>>,
 }
@@ -27,7 +27,7 @@ impl<'a> RegistryIndex<'a> {
         for registry_content in &registry.contents {
             match registry_content {
                 RegistryContent::Types(types) => self.add_types(types),
-                RegistryContent::Enums(enums) => self.add_enums(enums),
+                RegistryContent::Enums(group) => self.add_enum_group(group),
                 RegistryContent::Commands(commands) => self.add_commands(commands),
                 RegistryContent::Feature(feature) => self.add_feature(feature),
                 _ => (),
@@ -68,30 +68,30 @@ impl<'a> RegistryIndex<'a> {
         }
     }
 
-    fn add_enums(&mut self, enums: &'a Enums) {
-        let name = enums.name.as_ref().unwrap().as_str();
+    fn add_enum_group(&mut self, group: &'a Enums) {
+        let name = group.name.as_ref().unwrap().as_str();
         if let Some(vec) = self.enum_groups.get_mut(name) {
-            vec.push(enums);
+            vec.push(group);
         } else {
             let mut vec = Vec::new();
-            vec.push(enums);
+            vec.push(group);
             self.enum_groups.insert(name, vec);
         }
 
-        for enums_content in &enums.contents {
-            if let EnumsContent::Enum(enu) = enums_content {
-                self.add_enum(enu);
+        for group_content in &group.contents {
+            if let EnumsContent::Enum(enu) = group_content {
+                self.add_enum(group, enu);
             }
         }
     }
 
-    fn add_enum(&mut self, enu: &'a Enum) {
+    fn add_enum(&mut self, group: &'a Enums, enu: &'a Enum) {
         let name = enu.name.as_ref().unwrap().as_str();
         if let Some(vec) = self.enums.get_mut(name) {
-            vec.push(enu);
+            vec.push((group, enu));
         } else {
             let mut vec = Vec::new();
-            vec.push(enu);
+            vec.push((group, enu));
             self.enums.insert(name, vec);
         }
     }
