@@ -35,6 +35,10 @@ impl<'a> Generator<'a> {
             generator.add_feature(feature);
         }
 
+        // for extension in index.extensions.values() {
+        //     generator.add_extension(extension);
+        // }
+
         let mut out = File::create("vulkan_headers/src/lib.rs").unwrap();
         out.write_all(
             b"\
@@ -100,12 +104,24 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
 
         for feature_content in &feature.contents {
             if let FeatureContent::Require(require) = feature_content {
-                self.add_require(require);
+                self.add_require(None, require);
             }
         }
     }
 
-    fn add_require(&mut self, require: &'a Require) {
+    // fn add_extension(&mut self, extension: &'a Extension) {
+    //     if extension.platform.is_some() {
+    //         return;
+    //     }
+
+    //     for extension_content in &extension.contents {
+    //         if let ExtensionContent::Require(require) = extension_content {
+    //             self.add_require(Some(extension), require);
+    //         }
+    //     }
+    // }
+
+    fn add_require(&mut self, extension: Option<&Extension>, require: &'a Require) {
         if !Self::api_matches_vulkan(&require.api) {
             return;
         }
@@ -114,7 +130,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
             match require_content {
                 RequireContent::Comment(_) => (),
                 RequireContent::Type(typ) => self.require_type(typ),
-                RequireContent::Enum(enu) => self.require_enum(enu),
+                RequireContent::Enum(enu) => self.require_enum(extension, enu),
                 RequireContent::Command(command) => self.require_command(command),
                 RequireContent::Feature(_) => (),
             }
@@ -355,7 +371,7 @@ pub enum {name} {{
         }
     }
 
-    fn require_enum(&mut self, enu: &'a RequireEnum) {
+    fn require_enum(&mut self, extension: Option<&Extension>, enu: &'a RequireEnum) {
         if !Self::api_matches_vulkan(&enu.api) {
             return;
         }
@@ -367,14 +383,22 @@ pub enum {name} {{
 
         if let Some(extends) = enu.extends.as_ref() {
             let enums = &self.index.enums[extends.as_str()];
-            self.add_enum_extension(enums, enu);
-        } else {
-            let constant = &self.index.constants[name];
+            self.add_extension_enum(extension, enu, enums);
+        } else if let Some(_value) = enu.value.as_ref() {
+            self.add_extension_constant(enu);
+        } else if let Some(_alias) = enu.alias.as_ref() {
+            self.add_extension_constant_alias(enu);
+        } else if let Some(&constant) = self.index.constants.get(name) {
             self.add_constant(constant);
         }
     }
 
-    fn add_enum_extension(&mut self, enums: &Enums, enu: &RequireEnum) {
+    fn add_extension_enum(
+        &mut self,
+        extension: Option<&Extension>,
+        enu: &RequireEnum,
+        enums: &Enums,
+    ) {
         let name = enu.name.clone().unwrap();
         let typ = enums.name.as_ref().unwrap();
 
@@ -383,7 +407,11 @@ pub enum {name} {{
         } else if let Some(bitpos) = enu.bitpos.as_ref() {
             format!("1 << {bitpos}")
         } else if let Some(offset) = enu.offset.as_ref() {
-            let extnumber: u32 = enu.extnumber.as_ref().unwrap().parse().unwrap();
+            let extnumber = match enu.extnumber.as_ref() {
+                Some(extnumber) => extnumber,
+                None => extension.unwrap().number.as_ref().unwrap(),
+            };
+            let extnumber: u32 = extnumber.parse().unwrap();
             let offset: u32 = offset.parse().unwrap();
             let value = 1_000_000_000 + 1_000 * (extnumber - 1) + offset;
             match enu.dir.as_ref().map(String::as_str) {
@@ -399,6 +427,14 @@ pub enum {name} {{
 
         let text = format!("pub const {name}: {typ} = {value};");
         self.constants.push((name, text));
+    }
+
+    fn add_extension_constant(&mut self, _constant: &RequireEnum) {
+        // TODO
+    }
+
+    fn add_extension_constant_alias(&mut self, _constant: &RequireEnum) {
+        // TODO
     }
 
     fn add_constant(&mut self, constant: &Enum) {
@@ -452,9 +488,14 @@ pub enum {name} {{
             return;
         }
 
+        let actual_command = match command.alias.as_ref() {
+            Some(alias) => &self.index.commands[alias.as_str()],
+            None => command,
+        };
+
         let mut proto_decl = None;
         let mut params = Vec::new();
-        for command_content in &command.contents {
+        for command_content in &actual_command.contents {
             match command_content {
                 CommandContent::Proto(proto) => {
                     let mut c_decl = String::new();
@@ -487,7 +528,11 @@ pub enum {name} {{
         }
 
         let proto = proto_decl.unwrap();
-        let name = proto.name.as_ref().unwrap();
+        let name = match command.name.as_ref() {
+            Some(name) => name,
+            None => proto.name.as_ref().unwrap(),
+        };
+
         let signature = Self::rust_signature_from_c_fn(&proto.typ, &params);
         self.add_pfn_type(&format!("PFN_{name}"), &signature);
 

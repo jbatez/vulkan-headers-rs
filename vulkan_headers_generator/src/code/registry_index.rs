@@ -8,6 +8,7 @@ pub(crate) struct RegistryIndex<'a> {
     pub(crate) constants: HashMap<&'a str, &'a Enum>,
     pub(crate) commands: HashMap<&'a str, &'a Command>,
     pub(crate) features: HashMap<&'a str, &'a Feature>,
+    pub(crate) extensions: HashMap<&'a str, &'a Extension>,
 }
 
 impl<'a> RegistryIndex<'a> {
@@ -18,6 +19,7 @@ impl<'a> RegistryIndex<'a> {
             constants: HashMap::new(),
             commands: HashMap::new(),
             features: HashMap::new(),
+            extensions: HashMap::new(),
         };
         index.add_registry(registry);
         index
@@ -38,6 +40,7 @@ impl<'a> RegistryIndex<'a> {
                 RegistryContent::Enums(enums) => self.add_enums(enums),
                 RegistryContent::Commands(commands) => self.add_commands(commands),
                 RegistryContent::Feature(feature) => self.add_feature(feature),
+                RegistryContent::Extensions(extensions) => self.add_extensions(extensions),
                 _ => (),
             }
         }
@@ -146,6 +149,23 @@ impl<'a> RegistryIndex<'a> {
 
         let name = feature.name.as_ref().unwrap().as_str();
         let old = self.features.insert(name, feature);
+        assert_eq!(old, None);
+    }
+
+    fn add_extensions(&mut self, extensions: &'a Extensions) {
+        for extensions_content in &extensions.contents {
+            let ExtensionsContent::Extension(extension) = extensions_content;
+            self.add_extension(extension);
+        }
+    }
+
+    fn add_extension(&mut self, extension: &'a Extension) {
+        if !Self::api_matches_vulkan(&extension.supported) {
+            return;
+        }
+
+        let name = extension.name.as_ref().unwrap().as_str();
+        let old = self.extensions.insert(name, extension);
         assert_eq!(old, None);
     }
 }

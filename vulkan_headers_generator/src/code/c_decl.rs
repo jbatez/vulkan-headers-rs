@@ -25,6 +25,10 @@ impl CDecl {
         let decl = parser.parse_decl();
 
         let mut token = parser.peek_next_token();
+        if token == Some(":") {
+            // TODO
+            return decl;
+        }
         if token == Some(";") {
             parser.consume(token.unwrap());
             token = parser.peek_next_token();
