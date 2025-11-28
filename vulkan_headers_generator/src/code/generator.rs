@@ -8,6 +8,8 @@ pub(crate) struct Generator<'a> {
     index: &'a RegistryIndex<'a>,
     require_names: HashSet<&'a str>,
     enums: Vec<(String, String)>,
+    structs: Vec<(String, String)>,
+    unions: Vec<(String, String)>,
     type_aliases: Vec<(String, String)>,
 }
 
@@ -20,6 +22,8 @@ impl<'a> Generator<'a> {
             index: &index,
             require_names: HashSet::new(),
             enums: Vec::new(),
+            structs: Vec::new(),
+            unions: Vec::new(),
             type_aliases: Vec::new(),
         };
 
@@ -35,6 +39,185 @@ impl<'a> Generator<'a> {
             api.split(',').find(|&api| api == "vulkan").is_some()
         } else {
             true
+        }
+    }
+
+    fn add_feature(&mut self, feature: &'a Feature) {
+        if !Self::api_matches_vulkan(&feature.api) {
+            return;
+        }
+
+        for feature_content in &feature.contents {
+            if let FeatureContent::Require(require) = feature_content {
+                self.add_require(require);
+            }
+        }
+    }
+
+    fn add_require(&mut self, require: &'a Require) {
+        if !Self::api_matches_vulkan(&require.api) {
+            return;
+        }
+
+        for require_content in &require.contents {
+            match require_content {
+                RequireContent::Comment(_) => (),
+                RequireContent::Type(typ) => self.require_type(typ),
+                RequireContent::Enum(enu) => self.require_enum(enu),
+                RequireContent::Command(command) => self.require_command(command),
+                RequireContent::Feature(_) => (),
+            }
+        }
+    }
+
+    fn require_type(&mut self, typ: &'a GeneralRef) {
+        let name = typ.name.as_ref().unwrap().as_str();
+        if self.require_names.insert(name) {
+            for &typ in &self.index.types[name] {
+                self.add_type(name, typ);
+            }
+        }
+    }
+
+    fn add_type(&mut self, name: &'a str, typ: &'a Type) {
+        if !Self::api_matches_vulkan(&typ.api) {
+            return;
+        }
+
+        if let Some(alias) = typ.alias.as_ref() {
+            self.add_type_alias(name.to_string(), alias);
+            return;
+        }
+
+        match typ.category.as_ref().map(String::as_str) {
+            Some("basetype") => self.add_other_type(name, typ),
+            Some("bitmask") => self.add_other_type(name, typ),
+            Some("define") => (),
+            Some("enum") => self.add_enum_type(name),
+            Some("funcpointer") => self.add_other_type(name, typ),
+            Some("handle") => self.add_handle_type(name),
+            Some("include") => (),
+            Some("struct") => self.add_struct_type(name, typ),
+            Some("union") => self.add_union_type(name, typ),
+            Some(category) => panic!("unexpected type category: {category:?}"),
+            None => self.add_other_type(name, typ),
+        }
+    }
+
+    fn add_type_alias(&mut self, name: String, alias: &str) {
+        let text = format!("pub type {name} = {alias};");
+        self.type_aliases.push((name, text));
+    }
+
+    fn add_enum_type(&mut self, name: &'a str) {
+        for &enums in &self.index.enum_groups[name] {
+            let alias = match enums.typ.as_ref().unwrap().as_str() {
+                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
+                    None => "VkFlags",
+                    Some("64") => "VkFlags64",
+                    Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
+                },
+                "enum" => "i32",
+                typ => panic!("unexpected enums type: {typ:?}"),
+            };
+            self.add_type_alias(name.to_string(), alias);
+        }
+    }
+
+    fn add_extern_type(&mut self, name: String) {
+        let text = format!(
+            "\
+#[cfg_attr(not(doc), repr(u8))]
+pub enum {name} {{
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}}"
+        );
+        self.enums.push((name, text));
+    }
+
+    fn add_handle_type(&mut self, name: &'a str) {
+        self.add_extern_type(format!("{name}_T"));
+        self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
+        self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
+    }
+
+    fn add_struct_type(&mut self, name: &'a str, typ: &'a Type) {
+        let rust_type = Self::rust_struct_or_union_from_registry_type(name, typ);
+        self.structs.push((name.to_string(), rust_type));
+    }
+
+    fn add_union_type(&mut self, name: &'a str, typ: &'a Type) {
+        let rust_type = Self::rust_struct_or_union_from_registry_type(name, typ);
+        self.unions.push((name.to_string(), rust_type));
+    }
+
+    fn rust_struct_or_union_from_registry_type(name: &'a str, typ: &'a Type) -> String {
+        let mut s = format!("pub {} {} {{\n", typ.category.as_ref().unwrap(), name);
+
+        for type_content in &typ.contents {
+            match type_content {
+                TypeContent::Comment(_) => (),
+                TypeContent::Text(text) => assert!(text.trim().is_empty()),
+                TypeContent::Type(_) => panic!(),
+                TypeContent::Name(_) => panic!(),
+                TypeContent::Member(member) => {
+                    if !Self::api_matches_vulkan(&member.api) {
+                        continue;
+                    }
+
+                    let mut contents = String::new();
+                    for member_content in &member.contents {
+                        match member_content {
+                            MemberContent::Comment(_) => (),
+                            MemberContent::Text(text) => contents += text,
+                            MemberContent::Type(text) => contents += text,
+                            MemberContent::Name(text) => contents += text,
+                            MemberContent::Enum(text) => contents += text,
+                        }
+                    }
+
+                    let c_decl = CDecl::parse(&contents);
+                    let name = c_decl.name.unwrap();
+                    let rust_type = Self::rust_type_from_c_type(&c_decl.typ);
+                    s += &format!("    pub {}: {},\n", name, rust_type);
+                }
+            }
+        }
+
+        s += "}}";
+        s
+    }
+
+    fn add_other_type(&mut self, name: &'a str, typ: &'a Type) {
+        let mut contents = String::new();
+        for type_content in &typ.contents {
+            match type_content {
+                TypeContent::Comment(_) => (),
+                TypeContent::Text(text) => contents += text,
+                TypeContent::Type(text) => contents += text,
+                TypeContent::Name(text) => contents += text,
+                TypeContent::Member(_) => panic!("unexpected type member"),
+            }
+        }
+
+        assert!(contents.starts_with("typedef "));
+        let c_decl = CDecl::parse(&contents["typedef ".len()..]);
+        match &c_decl.typ {
+            CType::FuncPtr {
+                return_type,
+                params,
+            } => {
+                let rust_type = Self::rust_type_from_c_func_ptr(return_type, params);
+                self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
+                self.add_type_alias(format!("NonNull{name}"), &rust_type);
+            }
+            c_type => {
+                let rust_type = Self::rust_type_from_c_type(c_type);
+                self.add_type_alias(name.to_string(), &rust_type);
+            }
         }
     }
 
@@ -97,145 +280,6 @@ impl<'a> Generator<'a> {
                 format!("[{}; {}]", Self::rust_type_from_c_type(elem_type), len)
             }
         }
-    }
-
-    fn add_feature(&mut self, feature: &'a Feature) {
-        if !Self::api_matches_vulkan(&feature.api) {
-            return;
-        }
-
-        for feature_content in &feature.contents {
-            if let FeatureContent::Require(require) = feature_content {
-                self.add_require(require);
-            }
-        }
-    }
-
-    fn add_require(&mut self, require: &'a Require) {
-        if !Self::api_matches_vulkan(&require.api) {
-            return;
-        }
-
-        for require_content in &require.contents {
-            match require_content {
-                RequireContent::Comment(_) => (),
-                RequireContent::Type(typ) => self.require_type(typ),
-                RequireContent::Enum(enu) => self.require_enum(enu),
-                RequireContent::Command(command) => self.require_command(command),
-                RequireContent::Feature(_) => (),
-            }
-        }
-    }
-
-    fn require_type(&mut self, typ: &'a GeneralRef) {
-        let name = typ.name.as_ref().unwrap().as_str();
-        if self.require_names.insert(name) {
-            for &typ in &self.index.types[name] {
-                self.add_type(name, typ);
-            }
-        }
-    }
-
-    fn add_type(&mut self, name: &'a str, typ: &'a Type) {
-        if !Self::api_matches_vulkan(&typ.api) {
-            return;
-        }
-
-        if let Some(alias) = typ.alias.as_ref() {
-            self.add_type_alias(name.to_string(), alias);
-            return;
-        }
-
-        match typ.category.as_ref().map(String::as_str) {
-            Some("basetype") => self.add_other_type(name, typ),
-            Some("bitmask") => self.add_other_type(name, typ),
-            Some("define") => (),
-            Some("enum") => self.add_enum_type(name),
-            Some("funcpointer") => self.add_other_type(name, typ),
-            Some("handle") => self.add_handle_type(name),
-            Some("include") => (),
-            Some("struct") => self.add_struct_or_union_type(name, typ),
-            Some("union") => self.add_struct_or_union_type(name, typ),
-            Some(category) => panic!("unexpected type category: {category:?}"),
-            None => self.add_other_type(name, typ),
-        }
-    }
-
-    fn add_type_alias(&mut self, name: String, alias: &str) {
-        let text = format!("pub type {name} = {alias};");
-        self.type_aliases.push((name, text));
-    }
-
-    fn add_enum_type(&mut self, name: &'a str) {
-        for &enums in &self.index.enum_groups[name] {
-            let alias = match enums.typ.as_ref().unwrap().as_str() {
-                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
-                    None => "VkFlags",
-                    Some("64") => "VkFlags64",
-                    Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
-                },
-                "enum" => "i32",
-                typ => panic!("unexpected enums type: {typ:?}"),
-            };
-            self.add_type_alias(name.to_string(), alias);
-        }
-    }
-
-    fn add_extern_type(&mut self, name: String) {
-        let text = format!(
-            "\
-#[cfg_attr(not(doc), repr(u8))]
-pub enum {name} {{
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}}"
-        );
-        self.enums.push((name, text));
-    }
-
-    fn add_handle_type(&mut self, name: &'a str) {
-        self.add_extern_type(format!("{name}_T"));
-        self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
-        self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
-    }
-
-    fn add_struct_or_union_type(&mut self, _name: &'a str, _: &'a Type) {
-        // TODO
-    }
-
-    fn add_other_type(&mut self, name: &'a str, typ: &'a Type) {
-        let mut contents = String::new();
-        for content in &typ.contents {
-            match content {
-                TypeContent::Comment(_) => (),
-                TypeContent::Text(text) => contents += text,
-                TypeContent::Type(text) => contents += text,
-                TypeContent::Name(text) => contents += text,
-                TypeContent::Member(_) => panic!("unexpected type member"),
-            }
-        }
-
-        if contents.starts_with("typedef ") {
-            let c_decl = CDecl::parse(&contents["typedef ".len()..]);
-            match &c_decl.typ {
-                CType::FuncPtr {
-                    return_type,
-                    params,
-                } => {
-                    let rust_type = Self::rust_type_from_c_func_ptr(return_type, params);
-                    self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
-                    self.add_type_alias(format!("NonNull{name}"), &rust_type);
-                }
-                c_type => {
-                    let rust_type = Self::rust_type_from_c_type(c_type);
-                    self.add_type_alias(name.to_string(), &rust_type);
-                }
-            }
-        }
-
-        // TODO
     }
 
     fn require_enum(&mut self, enu: &'a RequireEnum) {

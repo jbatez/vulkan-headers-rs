@@ -85,16 +85,23 @@ impl<'a> CDeclParser<'a> {
     }
 
     fn parse_type_name(&mut self) -> CType<'a> {
-        let token = self.peek_next_token().unwrap();
+        let mut token = self.peek_next_token().unwrap();
         if token == "const" {
             self.consume(token);
             return CType::Const(Box::new(self.parse_type_name()));
-        } else if Self::is_ident(token) {
-            self.consume(token);
-            CType::Name(token)
-        } else {
-            panic!("unexpected token: {token:?}");
         }
+
+        if token == "struct" {
+            self.consume(token);
+            token = self.peek_next_token().unwrap();
+        }
+
+        if Self::is_ident(token) {
+            self.consume(token);
+            return CType::Name(token);
+        }
+
+        panic!("unexpected token: {token:?}");
     }
 
     fn parse_decl(&mut self) -> CDecl<'a> {
