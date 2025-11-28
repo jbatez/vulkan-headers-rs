@@ -5195,6 +5195,477 @@ pub const VK_VERTEX_INPUT_RATE_INSTANCE: VkVertexInputRate = 1;
 pub const VK_VERTEX_INPUT_RATE_VERTEX: VkVertexInputRate = 0;
 pub const VK_WHOLE_SIZE: u64 = !0;
 
+unsafe extern "system" {
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkAllocateCommandBuffers(device: VkDevice, pAllocateInfo: *const VkCommandBufferAllocateInfo, pCommandBuffers: *mut VkCommandBuffer) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkAllocateDescriptorSets(device: VkDevice, pAllocateInfo: *const VkDescriptorSetAllocateInfo, pDescriptorSets: *mut VkDescriptorSet) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkAllocateMemory(device: VkDevice, pAllocateInfo: *const VkMemoryAllocateInfo, pAllocator: *const VkAllocationCallbacks, pMemory: *mut VkDeviceMemory) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkBeginCommandBuffer(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkCommandBufferBeginInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkBindBufferMemory(device: VkDevice, buffer: VkBuffer, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkBindBufferMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkBindImageMemory(device: VkDevice, image: VkImage, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkBindImageMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBeginQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBeginRenderPass(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, contents: VkSubpassContents);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBeginRenderPass2(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBeginRendering(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindDescriptorSets(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet, dynamicOffsetCount: u32, pDynamicOffsets: *const u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindDescriptorSets2(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindIndexBuffer(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, indexType: VkIndexType);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindIndexBuffer2(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindPipeline(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindVertexBuffers(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBindVertexBuffers2(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBlitImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageBlit, filter: VkFilter);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdBlitImage2(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdClearAttachments(commandBuffer: VkCommandBuffer, attachmentCount: u32, pAttachments: *const VkClearAttachment, rectCount: u32, pRects: *const VkClearRect);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdClearColorImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pColor: *const VkClearColorValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdClearDepthStencilImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pDepthStencil: *const VkClearDepthStencilValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyBuffer(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferCopy);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyBuffer2(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyBufferToImage(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkBufferImageCopy);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyBufferToImage2(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageCopy);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyImage2(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyImageToBuffer(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferImageCopy);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyImageToBuffer2(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdCopyQueryPoolResults(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, stride: VkDeviceSize, flags: VkQueryResultFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDispatch(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDispatchBase(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDispatchIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDraw(commandBuffer: VkCommandBuffer, vertexCount: u32, instanceCount: u32, firstVertex: u32, firstInstance: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDrawIndexed(commandBuffer: VkCommandBuffer, indexCount: u32, instanceCount: u32, firstIndex: u32, vertexOffset: i32, firstInstance: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDrawIndexedIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDrawIndexedIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDrawIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdDrawIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdEndQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdEndRenderPass(commandBuffer: VkCommandBuffer);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdEndRenderPass2(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdEndRendering(commandBuffer: VkCommandBuffer);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdExecuteCommands(commandBuffer: VkCommandBuffer, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdFillBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, size: VkDeviceSize, data: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdNextSubpass(commandBuffer: VkCommandBuffer, contents: VkSubpassContents);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdNextSubpass2(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPipelineBarrier(commandBuffer: VkCommandBuffer, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, dependencyFlags: VkDependencyFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPipelineBarrier2(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushConstants(commandBuffer: VkCommandBuffer, layout: VkPipelineLayout, stageFlags: VkShaderStageFlags, offset: u32, size: u32, pValues: *const c_void);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushConstants2(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushDescriptorSet(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushDescriptorSet2(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushDescriptorSetWithTemplate(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdPushDescriptorSetWithTemplate2(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdResetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdResetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdResetQueryPool(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdResolveImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageResolve);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdResolveImage2(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetBlendConstants(commandBuffer: VkCommandBuffer, blendConstants: *const c_float);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetCullMode(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthBias(commandBuffer: VkCommandBuffer, depthBiasConstantFactor: c_float, depthBiasClamp: c_float, depthBiasSlopeFactor: c_float);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthBiasEnable(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthBounds(commandBuffer: VkCommandBuffer, minDepthBounds: c_float, maxDepthBounds: c_float);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthBoundsTestEnable(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthCompareOp(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthTestEnable(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDepthWriteEnable(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetDeviceMask(commandBuffer: VkCommandBuffer, deviceMask: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetFrontFace(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetLineStipple(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetLineWidth(commandBuffer: VkCommandBuffer, lineWidth: c_float);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetPrimitiveRestartEnable(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetPrimitiveTopology(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetRasterizerDiscardEnable(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetRenderingAttachmentLocations(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetRenderingInputAttachmentIndices(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetScissor(commandBuffer: VkCommandBuffer, firstScissor: u32, scissorCount: u32, pScissors: *const VkRect2D);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetScissorWithCount(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetStencilCompareMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, compareMask: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetStencilOp(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetStencilReference(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, reference: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetStencilTestEnable(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetStencilWriteMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, writeMask: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetViewport(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewports: *const VkViewport);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdSetViewportWithCount(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdUpdateBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, dataSize: VkDeviceSize, pData: *const c_void);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdWaitEvents(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdWaitEvents2(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdWriteTimestamp(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, queryPool: VkQueryPool, query: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCmdWriteTimestamp2(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCopyImageToImage(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCopyImageToMemory(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCopyMemoryToImage(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateBuffer(device: VkDevice, pCreateInfo: *const VkBufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pBuffer: *mut VkBuffer) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateBufferView(device: VkDevice, pCreateInfo: *const VkBufferViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkBufferView) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateCommandPool(device: VkDevice, pCreateInfo: *const VkCommandPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pCommandPool: *mut VkCommandPool) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateComputePipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkComputePipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateDescriptorPool(device: VkDevice, pCreateInfo: *const VkDescriptorPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorPool: *mut VkDescriptorPool) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateDescriptorSetLayout(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pSetLayout: *mut VkDescriptorSetLayout) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateDescriptorUpdateTemplate(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateDevice(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateEvent(device: VkDevice, pCreateInfo: *const VkEventCreateInfo, pAllocator: *const VkAllocationCallbacks, pEvent: *mut VkEvent) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateFence(device: VkDevice, pCreateInfo: *const VkFenceCreateInfo, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateFramebuffer(device: VkDevice, pCreateInfo: *const VkFramebufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pFramebuffer: *mut VkFramebuffer) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateGraphicsPipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkGraphicsPipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateImage(device: VkDevice, pCreateInfo: *const VkImageCreateInfo, pAllocator: *const VkAllocationCallbacks, pImage: *mut VkImage) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateImageView(device: VkDevice, pCreateInfo: *const VkImageViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkImageView) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateInstance(pCreateInfo: *const VkInstanceCreateInfo, pAllocator: *const VkAllocationCallbacks, pInstance: *mut VkInstance) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreatePipelineCache(device: VkDevice, pCreateInfo: *const VkPipelineCacheCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineCache: *mut VkPipelineCache) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreatePipelineLayout(device: VkDevice, pCreateInfo: *const VkPipelineLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineLayout: *mut VkPipelineLayout) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreatePrivateDataSlot(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateQueryPool(device: VkDevice, pCreateInfo: *const VkQueryPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pQueryPool: *mut VkQueryPool) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateRenderPass(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateRenderPass2(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateSampler(device: VkDevice, pCreateInfo: *const VkSamplerCreateInfo, pAllocator: *const VkAllocationCallbacks, pSampler: *mut VkSampler) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateSamplerYcbcrConversion(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateSemaphore(device: VkDevice, pCreateInfo: *const VkSemaphoreCreateInfo, pAllocator: *const VkAllocationCallbacks, pSemaphore: *mut VkSemaphore) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkCreateShaderModule(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pAllocator: *const VkAllocationCallbacks, pShaderModule: *mut VkShaderModule) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyBuffer(device: VkDevice, buffer: VkBuffer, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyBufferView(device: VkDevice, bufferView: VkBufferView, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyCommandPool(device: VkDevice, commandPool: VkCommandPool, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyDescriptorSetLayout(device: VkDevice, descriptorSetLayout: VkDescriptorSetLayout, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyDescriptorUpdateTemplate(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyDevice(device: VkDevice, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyEvent(device: VkDevice, event: VkEvent, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyFence(device: VkDevice, fence: VkFence, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyFramebuffer(device: VkDevice, framebuffer: VkFramebuffer, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyImage(device: VkDevice, image: VkImage, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyImageView(device: VkDevice, imageView: VkImageView, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyInstance(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyPipeline(device: VkDevice, pipeline: VkPipeline, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyPipelineCache(device: VkDevice, pipelineCache: VkPipelineCache, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyPipelineLayout(device: VkDevice, pipelineLayout: VkPipelineLayout, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyPrivateDataSlot(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyQueryPool(device: VkDevice, queryPool: VkQueryPool, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyRenderPass(device: VkDevice, renderPass: VkRenderPass, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroySampler(device: VkDevice, sampler: VkSampler, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroySamplerYcbcrConversion(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroySemaphore(device: VkDevice, semaphore: VkSemaphore, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDestroyShaderModule(device: VkDevice, shaderModule: VkShaderModule, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkDeviceWaitIdle(device: VkDevice) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEndCommandBuffer(commandBuffer: VkCommandBuffer) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumerateDeviceLayerProperties(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumerateInstanceExtensionProperties(pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumerateInstanceLayerProperties(pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumerateInstanceVersion(pApiVersion: *mut u32) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumeratePhysicalDeviceGroups(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkEnumeratePhysicalDevices(instance: VkInstance, pPhysicalDeviceCount: *mut u32, pPhysicalDevices: *mut VkPhysicalDevice) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkFlushMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkFreeCommandBuffers(device: VkDevice, commandPool: VkCommandPool, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkFreeDescriptorSets(device: VkDevice, descriptorPool: VkDescriptorPool, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkFreeMemory(device: VkDevice, memory: VkDeviceMemory, pAllocator: *const VkAllocationCallbacks);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetBufferDeviceAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetBufferMemoryRequirements(device: VkDevice, buffer: VkBuffer, pMemoryRequirements: *mut VkMemoryRequirements);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetBufferMemoryRequirements2(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetBufferOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDescriptorSetLayoutSupport(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceBufferMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceGroupPeerMemoryFeatures(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceImageMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceImageSparseMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceImageSubresourceLayout(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceMemoryCommitment(device: VkDevice, memory: VkDeviceMemory, pCommittedMemoryInBytes: *mut VkDeviceSize);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceMemoryOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceProcAddr(device: VkDevice, pName: *const c_char) -> PFN_vkVoidFunction;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceQueue(device: VkDevice, queueFamilyIndex: u32, queueIndex: u32, pQueue: *mut VkQueue);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetDeviceQueue2(device: VkDevice, pQueueInfo: *const VkDeviceQueueInfo2, pQueue: *mut VkQueue);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetEventStatus(device: VkDevice, event: VkEvent) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetFenceStatus(device: VkDevice, fence: VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageMemoryRequirements(device: VkDevice, image: VkImage, pMemoryRequirements: *mut VkMemoryRequirements);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageMemoryRequirements2(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageSparseMemoryRequirements(device: VkDevice, image: VkImage, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageSparseMemoryRequirements2(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageSubresourceLayout(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource, pLayout: *mut VkSubresourceLayout);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetImageSubresourceLayout2(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetInstanceProcAddr(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceExternalBufferProperties(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceExternalFenceProperties(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceFeatures(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceFeatures2(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceFormatProperties2(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceImageFormatProperties2(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceMemoryProperties(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceMemoryProperties2(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceProperties(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceProperties2(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceQueueFamilyProperties2(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceSparseImageFormatProperties2(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPhysicalDeviceToolProperties(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPipelineCacheData(device: VkDevice, pipelineCache: VkPipelineCache, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetQueryPoolResults(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dataSize: usize, pData: *mut c_void, stride: VkDeviceSize, flags: VkQueryResultFlags) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetRenderAreaGranularity(device: VkDevice, renderPass: VkRenderPass, pGranularity: *mut VkExtent2D);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetRenderingAreaGranularity(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkGetSemaphoreCounterValue(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkInvalidateMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkMapMemory(device: VkDevice, memory: VkDeviceMemory, offset: VkDeviceSize, size: VkDeviceSize, flags: VkMemoryMapFlags, ppData: *mut *mut c_void) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkMapMemory2(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkMergePipelineCaches(device: VkDevice, dstCache: VkPipelineCache, srcCacheCount: u32, pSrcCaches: *const VkPipelineCache) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkQueueBindSparse(queue: VkQueue, bindInfoCount: u32, pBindInfo: *const VkBindSparseInfo, fence: VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkQueueSubmit(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo, fence: VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkQueueSubmit2(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkQueueWaitIdle(queue: VkQueue) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetCommandBuffer(commandBuffer: VkCommandBuffer, flags: VkCommandBufferResetFlags) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolResetFlags) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, flags: VkDescriptorPoolResetFlags) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetEvent(device: VkDevice, event: VkEvent) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkResetQueryPool(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkSetEvent(device: VkDevice, event: VkEvent) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkSetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkSignalSemaphore(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkTransitionImageLayout(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkTrimCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkUnmapMemory(device: VkDevice, memory: VkDeviceMemory);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkUnmapMemory2(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkUpdateDescriptorSetWithTemplate(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkUpdateDescriptorSets(device: VkDevice, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet, descriptorCopyCount: u32, pDescriptorCopies: *const VkCopyDescriptorSet);
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkWaitForFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence, waitAll: VkBool32, timeout: u64) -> VkResult;
+    #[cfg(feature = "exported_prototypes")]
+    pub fn vkWaitSemaphores(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
+}
+
 pub type NonNullPFN_vkAllocateCommandBuffers = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkCommandBufferAllocateInfo, pCommandBuffers: *mut VkCommandBuffer) -> VkResult;
 pub type NonNullPFN_vkAllocateDescriptorSets = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkDescriptorSetAllocateInfo, pDescriptorSets: *mut VkDescriptorSet) -> VkResult;
 pub type NonNullPFN_vkAllocateMemory = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkMemoryAllocateInfo, pAllocator: *const VkAllocationCallbacks, pMemory: *mut VkDeviceMemory) -> VkResult;
@@ -5259,7 +5730,7 @@ pub type NonNullPFN_vkCmdResetEvent2 = unsafe extern "system" fn(commandBuffer: 
 pub type NonNullPFN_vkCmdResetQueryPool = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
 pub type NonNullPFN_vkCmdResolveImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageResolve);
 pub type NonNullPFN_vkCmdResolveImage2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
-pub type NonNullPFN_vkCmdSetBlendConstants = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, blendConstants: [c_float; 4 as usize]);
+pub type NonNullPFN_vkCmdSetBlendConstants = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, blendConstants: *const c_float);
 pub type NonNullPFN_vkCmdSetCullMode = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
 pub type NonNullPFN_vkCmdSetDepthBias = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBiasConstantFactor: c_float, depthBiasClamp: c_float, depthBiasSlopeFactor: c_float);
 pub type NonNullPFN_vkCmdSetDepthBiasEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);

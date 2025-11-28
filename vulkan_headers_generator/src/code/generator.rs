@@ -10,6 +10,7 @@ pub(crate) struct Generator<'a> {
     structs: Vec<(String, String)>,
     enums: Vec<(String, String)>,
     constants: Vec<(String, String)>,
+    functions: Vec<(String, String)>,
     type_aliases: Vec<(String, String)>,
     unions: Vec<(String, String)>,
 }
@@ -25,6 +26,7 @@ impl<'a> Generator<'a> {
             structs: Vec::new(),
             enums: Vec::new(),
             constants: Vec::new(),
+            functions: Vec::new(),
             type_aliases: Vec::new(),
             unions: Vec::new(),
         };
@@ -65,6 +67,14 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
         }
 
         writeln!(out).unwrap();
+        writeln!(out, "unsafe extern \"system\" {{").unwrap();
+        generator.functions.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.functions {
+            writeln!(out, "{text}").unwrap();
+        }
+        writeln!(out, "}}").unwrap();
+
+        writeln!(out).unwrap();
         generator.type_aliases.sort_by(|a, b| a.0.cmp(&b.0));
         for (_, text) in &generator.type_aliases {
             writeln!(out, "{text}").unwrap();
@@ -79,7 +89,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
 
     fn api_matches_vulkan(api: &Option<String>) -> bool {
         if let Some(api) = api.as_ref() {
-            api.split(',').find(|&api| api == "vulkan").is_some()
+            api.split(',').find(|&s| s == "vulkan").is_some()
         } else {
             true
         }
@@ -209,16 +219,16 @@ pub enum {name} {{
         self.enums.push((name, text));
     }
 
-    fn add_fn_type(&mut self, name: &str, signature: &str) {
-        let rust_type = format!("unsafe extern \"system\" fn{signature}");
-        self.add_type_alias(format!("NonNull{name}"), &rust_type);
-        self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
-    }
-
     fn add_handle_type(&mut self, name: &str) {
         self.add_extern_type(format!("{name}_T"));
         self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
         self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
+    }
+
+    fn add_pfn_type(&mut self, name: &str, signature: &str) {
+        let rust_type = format!("unsafe extern \"system\" fn{signature}");
+        self.add_type_alias(format!("NonNull{name}"), &rust_type);
+        self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
     }
 
     fn add_struct_type(&mut self, name: &str, typ: &Type) {
@@ -288,12 +298,12 @@ pub enum {name} {{
         assert!(c_decl.starts_with("typedef "));
         let c_decl = CDecl::parse(&c_decl["typedef ".len()..]);
         match &c_decl.typ {
-            CType::FnPtr {
+            CType::Pfn {
                 return_type,
                 params,
             } => {
                 let signature = Self::rust_signature_from_c_fn(return_type, params);
-                self.add_fn_type(name, &signature);
+                self.add_pfn_type(name, &signature);
             }
             c_type => {
                 let rust_type = Self::rust_type_from_c_type(c_type);
@@ -338,7 +348,7 @@ pub enum {name} {{
                 let pointee_type = Self::rust_type_from_c_type(pointee_type);
                 format!("{prefix} {pointee_type}")
             }
-            CType::FnPtr { .. } => {
+            CType::Pfn { .. } => {
                 panic!("unexpected c function pointer type");
             }
             CType::Array { elem_type, len } => {
@@ -485,9 +495,18 @@ pub enum {name} {{
         let proto = proto_decl.unwrap();
         let name = proto.name.as_ref().unwrap();
         let signature = Self::rust_signature_from_c_fn(&proto.typ, &params);
-        self.add_fn_type(&format!("PFN_{name}"), &signature);
+        self.add_pfn_type(&format!("PFN_{name}"), &signature);
 
-        // TODO
+        let feature = if let Some(export) = command.export.as_ref()
+            && export.split(',').find(|&s| s == "vulkan").is_some()
+        {
+            "exported_prototypes"
+        } else {
+            "prototypes"
+        };
+
+        let text = format!("    #[cfg(feature = \"{feature}\")]\n    pub fn {name}{signature};");
+        self.functions.push((name.to_string(), text));
     }
 
     fn rust_signature_from_c_fn(return_type: &CType, params: &[CDecl]) -> String {
@@ -503,7 +522,19 @@ pub enum {name} {{
             };
 
             s += ": ";
-            s += &Self::rust_type_from_c_type(&param.typ);
+            match &param.typ {
+                CType::Array { elem_type, .. } => {
+                    let (prefix, pointee_type) = match elem_type.as_ref() {
+                        CType::Const(non_const_type) => ("*const", non_const_type),
+                        _ => ("*mut", elem_type),
+                    };
+                    let pointee_type = Self::rust_type_from_c_type(pointee_type);
+                    s += &format!("{prefix} {pointee_type}");
+                }
+                param_typ => {
+                    s += &Self::rust_type_from_c_type(param_typ);
+                }
+            }
         }
         s += ")";
 

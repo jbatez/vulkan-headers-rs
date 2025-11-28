@@ -9,7 +9,7 @@ pub(crate) enum CType {
     Name(String),
     Const(Box<CType>),
     Ptr(Box<CType>),
-    FnPtr {
+    Pfn {
         return_type: Box<CType>,
         params: Vec<CDecl>,
     },
@@ -147,7 +147,7 @@ impl<'a> CDeclParser<'a> {
 
         CDecl {
             name: name.map(str::to_string),
-            typ: CType::FnPtr {
+            typ: CType::Pfn {
                 return_type: Box::new(return_type),
                 params,
             },
