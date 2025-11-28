@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, fs::File, io::Write};
 
 use vulkan_registry::*;
 
@@ -31,6 +31,32 @@ impl<'a> Generator<'a> {
             for &feature in features {
                 generator.add_feature(feature);
             }
+        }
+
+        let mut out = File::create("vulkan_headers/src/lib.rs").unwrap();
+
+        generator.enums.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.enums {
+            writeln!(out).unwrap();
+            writeln!(out, "{text}").unwrap();
+        }
+
+        generator.structs.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.structs {
+            writeln!(out).unwrap();
+            writeln!(out, "{text}").unwrap();
+        }
+
+        generator.unions.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.unions {
+            writeln!(out).unwrap();
+            writeln!(out, "{text}").unwrap();
+        }
+
+        writeln!(out).unwrap();
+        generator.type_aliases.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, text) in &generator.type_aliases {
+            writeln!(out, "{text}").unwrap();
         }
     }
 
@@ -145,17 +171,20 @@ pub enum {name} {{
     }
 
     fn add_struct_type(&mut self, name: &'a str, typ: &'a Type) {
-        let rust_type = Self::rust_struct_or_union_from_registry_type(name, typ);
-        self.structs.push((name.to_string(), rust_type));
+        let text = Self::rust_struct_or_union_from_registry_type(name, typ);
+        self.structs.push((name.to_string(), text));
     }
 
     fn add_union_type(&mut self, name: &'a str, typ: &'a Type) {
-        let rust_type = Self::rust_struct_or_union_from_registry_type(name, typ);
-        self.unions.push((name.to_string(), rust_type));
+        let text = Self::rust_struct_or_union_from_registry_type(name, typ);
+        self.unions.push((name.to_string(), text));
     }
 
     fn rust_struct_or_union_from_registry_type(name: &'a str, typ: &'a Type) -> String {
-        let mut s = format!("pub {} {} {{\n", typ.category.as_ref().unwrap(), name);
+        let mut s = String::new();
+        s += "#[derive(Clone, Copy, Debug, Default]\n";
+        s += "#[repr(C)]\n";
+        s += &format!("pub {} {} {{\n", typ.category.as_ref().unwrap(), name);
 
         for type_content in &typ.contents {
             match type_content {
@@ -187,7 +216,7 @@ pub enum {name} {{
             }
         }
 
-        s += "}}";
+        s += "}";
         s
     }
 
