@@ -153,9 +153,9 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
     }
 
     fn add_enum_type(&mut self, name: &'a str) {
-        for &group in &self.index.enum_groups[name] {
-            let alias = match group.typ.as_ref().unwrap().as_str() {
-                "bitmask" => match group.bitwidth.as_ref().map(String::as_str) {
+        for &enums in &self.index.enums[name] {
+            let alias = match enums.typ.as_ref().unwrap().as_str() {
+                "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
                     None => "VkFlags",
                     Some("64") => "VkFlags64",
                     Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
@@ -165,12 +165,33 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
             };
             self.add_type_alias(name.to_string(), alias);
 
-            for group_content in &group.contents {
-                if let EnumsContent::Enum(enu) = group_content {
-                    self.add_enum(group, enu);
+            for enums_content in &enums.contents {
+                if let EnumsContent::Enum(enu) = enums_content {
+                    self.add_enum(enums, enu);
                 }
             }
         }
+    }
+
+    fn add_enum(&mut self, group: &'a Enums, enu: &'a Enum) {
+        if !Self::api_matches_vulkan(&enu.api) {
+            return;
+        }
+
+        let name = enu.name.clone().unwrap();
+        let typ = group.name.as_ref().unwrap();
+        let value = if let Some(alias) = enu.alias.as_ref() {
+            alias.to_string()
+        } else if let Some(bitpos) = enu.bitpos.as_ref() {
+            format!("1 << {bitpos}")
+        } else if let Some(value) = enu.value.as_ref() {
+            value.to_string()
+        } else {
+            panic!("{enu:?}");
+        };
+
+        let text = format!("pub const {}: {} = {};", name, typ, value);
+        self.constants.push((name, text));
     }
 
     fn add_extern_type(&mut self, name: String) {
@@ -358,48 +379,34 @@ pub enum {name} {{
         }
 
         if let Some(extends) = enu.extends.as_ref() {
-            for group in &self.index.enum_groups[extends.as_str()] {
+            for group in &self.index.enums[extends.as_str()] {
                 self.add_enum_extension(group, enu);
             }
         } else {
-            for &(group, enu) in &self.index.enums[name] {
-                self.add_enum(group, enu);
+            for &enu in &self.index.constants[name] {
+                self.add_constant(enu);
             }
         }
     }
 
-    fn add_enum(&mut self, group: &'a Enums, enu: &'a Enum) {
-        if !Self::api_matches_vulkan(&enu.api) {
-            return;
-        }
-
+    fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
         let name = enu.name.clone().unwrap();
-        let typ = if let Some(typ) = enu.typ.as_ref() {
-            Self::rust_type_from_c_type_name(typ)
-        } else {
-            group.name.as_ref().unwrap()
-        };
-
-        let value = if let Some(value) = enu.value.as_ref() {
-            let mut value = value.as_str();
-            loop {
-                match value.bytes().last().unwrap() {
-                    b')' | b'F' | b'L' | b'U' => value = &value[..value.len() - 1],
-                    _ => break,
-                }
-            }
-            if value.starts_with("(") {
-                value = &value[1..];
-            }
-            if value.starts_with("~") {
-                "!".to_string() + &value[1..]
-            } else {
-                value.to_string()
-            }
+        let typ = group.name.as_ref().unwrap();
+        let value = if let Some(alias) = enu.alias.as_ref() {
+            alias.to_string()
         } else if let Some(bitpos) = enu.bitpos.as_ref() {
             format!("1 << {bitpos}")
-        } else if let Some(alias) = enu.alias.as_ref() {
-            alias.to_string()
+        } else if let Some(offset) = enu.offset.as_ref() {
+            let extnumber: u32 = enu.extnumber.as_ref().unwrap().parse().unwrap();
+            let offset: u32 = offset.parse().unwrap();
+            let value = 1_000_000_000 + 1_000 * (extnumber - 1) + offset;
+            match enu.dir.as_ref().map(String::as_str) {
+                None => format!("{value}"),
+                Some("-") => format!("-{value}"),
+                Some(dir) => panic!("unexpected enum dir: {dir:?}"),
+            }
+        } else if let Some(value) = enu.value.as_ref() {
+            value.to_string()
         } else {
             panic!("{enu:?}");
         };
@@ -408,27 +415,38 @@ pub enum {name} {{
         self.constants.push((name, text));
     }
 
-    fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
-        let name = enu.name.clone().unwrap();
-        let typ = group.name.as_ref().unwrap();
+    fn add_constant(&mut self, enu: &'a Enum) {
+        if !Self::api_matches_vulkan(&enu.api) {
+            return;
+        }
 
-        let value = if let Some(offset) = enu.offset.as_ref() {
-            let offset: u32 = offset.parse().unwrap();
-            let extnumber: u32 = enu.extnumber.as_ref().unwrap().parse().unwrap();
-            let value = 1_000_000_000 + 1_000 * (extnumber - 1) + offset;
-            match enu.dir.as_ref().map(String::as_str) {
-                None => format!("{value}"),
-                Some("-") => format!("-{value}"),
-                Some(dir) => panic!("unexpected enum dir: {dir:?}"),
+        let name = enu.name.clone().unwrap();
+
+        let typ = enu.typ.as_ref().unwrap();
+        let typ = Self::rust_type_from_c_type_name(typ);
+
+        let mut value = enu.value.as_ref().unwrap().as_str();
+        if value.starts_with("(") {
+            assert!(value.ends_with(")"));
+            value = &value[1..value.len() - 1];
+        }
+        if value.ends_with("L") {
+            value = &value[..value.len() - 1];
+            if value.ends_with("L") {
+                value = &value[..value.len() - 1];
             }
-        } else if let Some(bitpos) = enu.bitpos.as_ref() {
-            format!("1 << {bitpos}")
-        } else if let Some(value) = enu.value.as_ref() {
-            value.to_string()
-        } else if let Some(alias) = enu.alias.as_ref() {
-            alias.to_string()
+        }
+        if value.ends_with("U") {
+            value = &value[..value.len() - 1];
+        }
+        if value.ends_with("F") && !value.contains("0x") {
+            value = &value[..value.len() - 1];
+        }
+
+        let value = if value.starts_with("~") {
+            format!("!{}", &value[1..])
         } else {
-            panic!("{enu:?}");
+            value.to_string()
         };
 
         let text = format!("pub const {}: {} = {};", name, typ, value);
