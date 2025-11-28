@@ -77,7 +77,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
         }
     }
 
-    fn api_matches_vulkan(api: &'a Option<String>) -> bool {
+    fn api_matches_vulkan(api: &Option<String>) -> bool {
         if let Some(api) = api.as_ref() {
             api.split(',').find(|&api| api == "vulkan").is_some()
         } else {
@@ -122,7 +122,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
         }
     }
 
-    fn add_type(&mut self, name: &'a str, typ: &'a Type) {
+    fn add_type(&mut self, name: &str, typ: &Type) {
         if !Self::api_matches_vulkan(&typ.api) {
             return;
         }
@@ -152,7 +152,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
         self.type_aliases.push((name, text));
     }
 
-    fn add_enum_type(&mut self, name: &'a str) {
+    fn add_enum_type(&mut self, name: &str) {
         for &enums in &self.index.enums[name] {
             let alias = match enums.typ.as_ref().unwrap().as_str() {
                 "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
@@ -173,7 +173,7 @@ use core::{ffi::{c_char, c_float, c_void}, ptr::NonNull};
         }
     }
 
-    fn add_enum(&mut self, group: &'a Enums, enu: &'a Enum) {
+    fn add_enum(&mut self, group: &Enums, enu: &Enum) {
         if !Self::api_matches_vulkan(&enu.api) {
             return;
         }
@@ -209,23 +209,29 @@ pub enum {name} {{
         self.enums.push((name, text));
     }
 
-    fn add_handle_type(&mut self, name: &'a str) {
+    fn add_fn_type(&mut self, name: &str, signature: &str) {
+        let rust_type = format!("unsafe extern \"system\" fn{signature}");
+        self.add_type_alias(format!("NonNull{name}"), &rust_type);
+        self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
+    }
+
+    fn add_handle_type(&mut self, name: &str) {
         self.add_extern_type(format!("{name}_T"));
         self.add_type_alias(name.to_string(), &format!("*mut {name}_T"));
         self.add_type_alias(format!("NonNull{name}"), &format!("NonNull<{name}_T>"));
     }
 
-    fn add_struct_type(&mut self, name: &'a str, typ: &'a Type) {
+    fn add_struct_type(&mut self, name: &str, typ: &Type) {
         let text = Self::rust_struct_or_union_from_registry_type(name, typ);
         self.structs.push((name.to_string(), text));
     }
 
-    fn add_union_type(&mut self, name: &'a str, typ: &'a Type) {
+    fn add_union_type(&mut self, name: &str, typ: &Type) {
         let text = Self::rust_struct_or_union_from_registry_type(name, typ);
         self.unions.push((name.to_string(), text));
     }
 
-    fn rust_struct_or_union_from_registry_type(name: &'a str, typ: &'a Type) -> String {
+    fn rust_struct_or_union_from_registry_type(name: &str, typ: &Type) -> String {
         let category = typ.category.as_ref().unwrap();
 
         let mut s = String::new();
@@ -254,7 +260,7 @@ pub enum {name} {{
             }
 
             let c_decl = CDecl::parse(&c_decl);
-            let name = match c_decl.name.unwrap() {
+            let name = match c_decl.name.as_ref().unwrap().as_str() {
                 "type" => "typ",
                 name => name,
             };
@@ -267,7 +273,7 @@ pub enum {name} {{
         s
     }
 
-    fn add_other_type(&mut self, name: &'a str, typ: &'a Type) {
+    fn add_other_type(&mut self, name: &str, typ: &Type) {
         let mut c_decl = String::new();
         for type_content in &typ.contents {
             match type_content {
@@ -286,36 +292,14 @@ pub enum {name} {{
                 return_type,
                 params,
             } => {
-                let rust_type = Self::rust_type_from_c_fn_ptr(return_type, params);
-                self.add_type_alias(name.to_string(), &format!("Option<NonNull{name}>"));
-                self.add_type_alias(format!("NonNull{name}"), &rust_type);
+                let signature = Self::rust_signature_from_c_fn(return_type, params);
+                self.add_fn_type(name, &signature);
             }
             c_type => {
                 let rust_type = Self::rust_type_from_c_type(c_type);
                 self.add_type_alias(name.to_string(), &rust_type);
             }
         }
-    }
-
-    fn rust_type_from_c_fn_ptr(return_type: &CType, params: &[CDecl]) -> String {
-        let mut s = "unsafe extern \"system\" fn(".to_string();
-        for (i, param) in params.iter().enumerate() {
-            if i > 0 {
-                s += ", ";
-            }
-
-            s += param.name.unwrap_or("_");
-            s += ": ";
-            s += &Self::rust_type_from_c_type(&param.typ);
-        }
-        s += ")";
-
-        if !matches!(return_type, CType::Name("void")) {
-            s += " -> ";
-            s += &Self::rust_type_from_c_type(&return_type);
-        }
-
-        s
     }
 
     fn rust_type_from_c_type_name(name: &str) -> &str {
@@ -340,7 +324,7 @@ pub enum {name} {{
 
     fn rust_type_from_c_type(c_type: &CType) -> String {
         match c_type {
-            &CType::Name(name) => {
+            CType::Name(name) => {
                 return Self::rust_type_from_c_type_name(name).to_string();
             }
             CType::Const(non_const_type) => {
@@ -385,7 +369,7 @@ pub enum {name} {{
         }
     }
 
-    fn add_enum_extension(&mut self, group: &'a Enums, enu: &'a RequireEnum) {
+    fn add_enum_extension(&mut self, group: &Enums, enu: &RequireEnum) {
         let name = enu.name.clone().unwrap();
         let typ = group.name.as_ref().unwrap();
 
@@ -412,7 +396,7 @@ pub enum {name} {{
         self.constants.push((name, text));
     }
 
-    fn add_constant(&mut self, enu: &'a Enum) {
+    fn add_constant(&mut self, enu: &Enum) {
         if !Self::api_matches_vulkan(&enu.api) {
             return;
         }
@@ -459,11 +443,73 @@ pub enum {name} {{
         }
     }
 
-    fn add_command(&mut self, command: &'a Command) {
+    fn add_command(&mut self, command: &Command) {
         if !Self::api_matches_vulkan(&command.api) {
             return;
         }
 
+        let mut proto_decl = None;
+        let mut params = Vec::new();
+        for command_content in &command.contents {
+            match command_content {
+                CommandContent::Proto(proto) => {
+                    let mut c_decl = String::new();
+                    for proto_content in &proto.contents {
+                        match proto_content {
+                            ProtoContent::Text(text) => c_decl += text,
+                            ProtoContent::Type(text) => c_decl += text,
+                            ProtoContent::Name(text) => c_decl += text,
+                        }
+                    }
+                    assert!(proto_decl.is_none());
+                    proto_decl = Some(CDecl::parse(&c_decl));
+                }
+                CommandContent::Param(param) => {
+                    if !Self::api_matches_vulkan(&param.api) {
+                        continue;
+                    }
+                    let mut c_decl = String::new();
+                    for proto_content in &param.contents {
+                        match proto_content {
+                            ParamContent::Text(text) => c_decl += text,
+                            ParamContent::Type(text) => c_decl += text,
+                            ParamContent::Name(text) => c_decl += text,
+                        }
+                    }
+                    params.push(CDecl::parse(&c_decl));
+                }
+                CommandContent::ImplicitExternSyncParams(_) => (),
+            }
+        }
+
+        let proto = proto_decl.unwrap();
+        let name = proto.name.as_ref().unwrap();
+        let signature = Self::rust_signature_from_c_fn(&proto.typ, &params);
+        self.add_fn_type(&format!("PFN_{name}"), &signature);
+
         // TODO
+    }
+
+    fn rust_signature_from_c_fn(return_type: &CType, params: &[CDecl]) -> String {
+        let mut s = "(".to_string();
+        for (i, param) in params.iter().enumerate() {
+            if i > 0 {
+                s += ", ";
+            }
+            s += param.name.as_ref().unwrap();
+            s += ": ";
+            s += &Self::rust_type_from_c_type(&param.typ);
+        }
+        s += ")";
+
+        if let CType::Name(typ_name) = return_type
+            && typ_name == "void"
+        {
+            return s;
+        }
+
+        s += " -> ";
+        s += &Self::rust_type_from_c_type(&return_type);
+        s
     }
 }

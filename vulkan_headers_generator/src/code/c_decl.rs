@@ -1,26 +1,26 @@
 #[derive(Debug)]
-pub(crate) struct CDecl<'a> {
-    pub(crate) name: Option<&'a str>,
-    pub(crate) typ: CType<'a>,
+pub(crate) struct CDecl {
+    pub(crate) name: Option<String>,
+    pub(crate) typ: CType,
 }
 
 #[derive(Debug)]
-pub(crate) enum CType<'a> {
-    Name(&'a str),
-    Const(Box<CType<'a>>),
-    Ptr(Box<CType<'a>>),
+pub(crate) enum CType {
+    Name(String),
+    Const(Box<CType>),
+    Ptr(Box<CType>),
     FnPtr {
-        return_type: Box<CType<'a>>,
-        params: Vec<CDecl<'a>>,
+        return_type: Box<CType>,
+        params: Vec<CDecl>,
     },
     Array {
-        elem_type: Box<CType<'a>>,
-        len: &'a str,
+        elem_type: Box<CType>,
+        len: String,
     },
 }
 
-impl<'a> CDecl<'a> {
-    pub(crate) fn parse(s: &'a str) -> Self {
+impl CDecl {
+    pub(crate) fn parse(s: &str) -> Self {
         let mut parser = CDeclParser { s };
         let decl = parser.parse_decl();
 
@@ -98,7 +98,7 @@ impl<'a> CDeclParser<'a> {
         }
     }
 
-    fn parse_type_name(&mut self) -> CType<'a> {
+    fn parse_type_name(&mut self) -> CType {
         let mut token = self.peek_next_token().unwrap();
         if token == "const" {
             self.consume(token);
@@ -112,13 +112,13 @@ impl<'a> CDeclParser<'a> {
 
         if Self::is_ident(token) {
             self.consume(token);
-            return CType::Name(token);
+            return CType::Name(token.to_string());
         }
 
         panic!("unexpected token: {token:?}");
     }
 
-    fn parse_ptrs(&mut self, mut typ: CType<'a>) -> CType<'a> {
+    fn parse_ptrs(&mut self, mut typ: CType) -> CType {
         loop {
             let token = self.peek_next_token();
             match token {
@@ -135,7 +135,7 @@ impl<'a> CDeclParser<'a> {
         }
     }
 
-    fn parse_fn_ptr(&mut self, return_type: CType<'a>) -> CDecl<'a> {
+    fn parse_fn_ptr(&mut self, return_type: CType) -> CDecl {
         self.assert_next_token("(");
         self.assert_next_token("VKAPI_PTR");
         self.assert_next_token("*");
@@ -146,7 +146,7 @@ impl<'a> CDeclParser<'a> {
         self.assert_next_token(")");
 
         CDecl {
-            name,
+            name: name.map(str::to_string),
             typ: CType::FnPtr {
                 return_type: Box::new(return_type),
                 params,
@@ -154,43 +154,43 @@ impl<'a> CDeclParser<'a> {
         }
     }
 
-    fn parse_params(&mut self) -> Vec<CDecl<'a>> {
+    fn parse_params(&mut self) -> Vec<CDecl> {
         let mut params = Vec::new();
         loop {
-            params.push(self.parse_decl());
-
+            let param = self.parse_decl();
             let token = self.peek_next_token().unwrap();
+            if let CType::Name(typ_name) = &param.typ
+                && typ_name == "void"
+            {
+                assert!(param.name.is_none());
+                assert_eq!(token, ")");
+                assert_eq!(params.len(), 0);
+                break params;
+            }
+
+            params.push(param);
             match token {
                 "," => self.consume(token),
-                ")" => break,
+                ")" => break params,
                 _ => panic!("unexpected token: {token:?}"),
             }
         }
-
-        if params.len() == 1 {
-            let param = &params[0];
-            if matches!(param.typ, CType::Name("void")) && param.name.is_none() {
-                params = Vec::new();
-            }
-        }
-
-        params
     }
 
-    fn parse_decl(&mut self) -> CDecl<'a> {
+    fn parse_decl(&mut self) -> CDecl {
         let typ = self.parse_type_name();
         let typ = self.parse_ptrs(typ);
 
         if self.peek_next_token() == Some("(") {
             self.parse_fn_ptr(typ)
         } else {
-            let name = self.consume_opt_ident();
+            let name = self.consume_opt_ident().map(str::to_string);
             let typ = self.parse_array_extents(typ);
             CDecl { typ, name }
         }
     }
 
-    fn parse_array_extents(&mut self, mut typ: CType<'a>) -> CType<'a> {
+    fn parse_array_extents(&mut self, mut typ: CType) -> CType {
         let mut extents = Vec::new();
         loop {
             let token = self.peek_next_token();
@@ -206,7 +206,7 @@ impl<'a> CDeclParser<'a> {
         while let Some(len) = extents.pop() {
             typ = CType::Array {
                 elem_type: Box::new(typ),
-                len,
+                len: len.to_string(),
             };
         }
 
