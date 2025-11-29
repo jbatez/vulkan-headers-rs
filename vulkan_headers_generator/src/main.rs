@@ -1,15 +1,6 @@
 fn main() {
-    Generator::generate()
+    todo!();
 }
 
 use code::*;
-mod code {
-    pub(crate) use c_decl::*;
-    mod c_decl;
-
-    pub(crate) use generator::*;
-    mod generator;
-
-    pub(crate) use registry_index::*;
-    mod registry_index;
-}
+mod code {}
