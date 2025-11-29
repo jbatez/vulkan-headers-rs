@@ -324,6 +324,7 @@ pub struct RequireEnum {
     pub name: Option<String>,
     pub offset: Option<String>,
     pub protect: Option<String>,
+    pub typ: Option<String>,
     pub value: Option<String>,
 }
 

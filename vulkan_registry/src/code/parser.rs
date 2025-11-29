@@ -7,15 +7,19 @@ use quick_xml::{
 use crate::code::*;
 
 impl Registry {
-    pub fn vk() -> Self {
-        Self::parse(include_str!("../data/vk.xml"))
-    }
-
     pub fn parse(xml: &str) -> Self {
         let mut parser = Parser {
             reader: Reader::from_str(xml),
         };
         parser.parse_file()
+    }
+
+    pub fn video() -> Self {
+        Self::parse(include_str!("../data/video.xml"))
+    }
+
+    pub fn vk() -> Self {
+        Self::parse(include_str!("../data/vk.xml"))
     }
 }
 
@@ -1076,6 +1080,7 @@ impl<'a> Parser<'a> {
         let mut name = None;
         let mut offset = None;
         let mut protect = None;
+        let mut typ = None;
         let mut value = None;
 
         for attr in elem.start.attributes() {
@@ -1092,6 +1097,7 @@ impl<'a> Parser<'a> {
                 b"name" => self.save_attr(attr, &mut name),
                 b"offset" => self.save_attr(attr, &mut offset),
                 b"protect" => self.save_attr(attr, &mut protect),
+                b"type" => self.save_attr(attr, &mut typ),
                 b"value" => self.save_attr(attr, &mut value),
                 _ => panic!("unexpected attr: {attr:?}"),
             }
@@ -1110,6 +1116,7 @@ impl<'a> Parser<'a> {
             name,
             offset,
             protect,
+            typ,
             value,
         }
     }

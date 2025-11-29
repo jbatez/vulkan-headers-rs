@@ -12,6 +12,7 @@ mod tests {
 
     #[test]
     fn it_works() {
+        Registry::video();
         Registry::vk();
     }
 }
