@@ -3,4 +3,7 @@ fn main() {
 }
 
 use code::*;
-mod code {}
+mod code {
+    pub(crate) use registry_index::*;
+    mod registry_index;
+}
