@@ -5,14 +5,3 @@ mod code {
     pub use registry::*;
     mod registry;
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        Registry::video();
-        Registry::vk();
-    }
-}

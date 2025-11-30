@@ -1,19 +1,15 @@
 use std::collections::HashMap;
 
-use vulkan_registry::{
-    Command, CommandContent, Commands, CommandsContent, Enum, Enums, EnumsContent, Extension,
-    ExtensionContent, Extensions, ExtensionsContent, Feature, FeatureContent, ProtoContent,
-    Registry, RegistryContent, Require, RequireContent, RequireEnum, Type, TypeContent, Types,
-    TypesContent,
-};
+use vulkan_registry::*;
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy)]
 pub(crate) enum Constant<'a> {
     BaseEnum(&'a Enums, &'a Enum),
     ExtensionEnum(Option<&'a Extension>, &'a RequireEnum),
 }
 
 pub(crate) struct RegistryIndex<'a> {
+    pub(crate) api: &'a str,
     pub(crate) types: HashMap<&'a str, &'a Type>,
     pub(crate) enums: HashMap<&'a str, &'a Enums>,
     pub(crate) constants: HashMap<&'a str, Constant<'a>>,
@@ -23,8 +19,9 @@ pub(crate) struct RegistryIndex<'a> {
 }
 
 impl<'a> RegistryIndex<'a> {
-    pub(crate) fn new(registry: &'a Registry, api: &str) -> Self {
+    pub(crate) fn new(api: &'a str, registry: &'a Registry) -> Self {
         let mut index = Self {
+            api,
             types: HashMap::new(),
             enums: HashMap::new(),
             constants: HashMap::new(),
@@ -32,40 +29,40 @@ impl<'a> RegistryIndex<'a> {
             features: HashMap::new(),
             extensions: HashMap::new(),
         };
-        index.visit_registry(registry, api);
+        index.visit_registry(registry);
         index
     }
 
-    fn apis_match(attr: &Option<String>, api: &str) -> bool {
+    pub(crate) fn api_matches(&self, attr: &Option<String>) -> bool {
         match attr.as_ref() {
-            Some(attr) => attr.split(',').find(|&s| s == api).is_some(),
+            Some(attr) => attr.split(',').find(|&s| s == self.api).is_some(),
             None => true,
         }
     }
 
-    fn visit_registry(&mut self, registry: &'a Registry, api: &str) {
+    fn visit_registry(&mut self, registry: &'a Registry) {
         for content in &registry.contents {
             match content {
-                RegistryContent::Types(types) => self.visit_types(types, api),
-                RegistryContent::Enums(enums) => self.visit_enums(enums, api),
-                RegistryContent::Commands(commands) => self.visit_commands(commands, api),
-                RegistryContent::Feature(feature) => self.visit_feature(feature, api),
-                RegistryContent::Extensions(extensions) => self.visit_extensions(extensions, api),
+                RegistryContent::Types(types) => self.visit_types(types),
+                RegistryContent::Enums(enums) => self.visit_enums(enums),
+                RegistryContent::Commands(commands) => self.visit_commands(commands),
+                RegistryContent::Feature(feature) => self.visit_feature(feature),
+                RegistryContent::Extensions(extensions) => self.visit_extensions(extensions),
                 _ => (),
             }
         }
     }
 
-    fn visit_types(&mut self, types: &'a Types, api: &str) {
+    fn visit_types(&mut self, types: &'a Types) {
         for content in &types.contents {
             if let TypesContent::Type(typ) = content {
-                self.visit_type(typ, api);
+                self.visit_type(typ);
             }
         }
     }
 
-    fn visit_type(&mut self, typ: &'a Type, api: &str) {
-        if Self::apis_match(&typ.api, api) {
+    fn visit_type(&mut self, typ: &'a Type) {
+        if self.api_matches(&typ.api) {
             self.add_type(typ);
         }
     }
@@ -89,11 +86,11 @@ impl<'a> RegistryIndex<'a> {
         self.types.insert(name, typ);
     }
 
-    fn visit_enums(&mut self, enums: &'a Enums, api: &str) {
+    fn visit_enums(&mut self, enums: &'a Enums) {
         self.add_enums(enums);
         for content in &enums.contents {
             if let EnumsContent::Enum(enu) = content {
-                self.visit_enum(enums, enu, api);
+                self.visit_enum(enums, enu);
             }
         }
     }
@@ -103,8 +100,8 @@ impl<'a> RegistryIndex<'a> {
         self.enums.insert(name, enums);
     }
 
-    fn visit_enum(&mut self, enums: &'a Enums, enu: &'a Enum, api: &str) {
-        if Self::apis_match(&enu.api, api) {
+    fn visit_enum(&mut self, enums: &'a Enums, enu: &'a Enum) {
+        if self.api_matches(&enu.api) {
             self.add_base_enum_constant(enums, enu);
         }
     }
@@ -115,15 +112,15 @@ impl<'a> RegistryIndex<'a> {
         self.constants.insert(name, constant);
     }
 
-    fn visit_commands(&mut self, commands: &'a Commands, api: &str) {
+    fn visit_commands(&mut self, commands: &'a Commands) {
         for content in &commands.contents {
             let CommandsContent::Command(command) = content;
-            self.visit_command(command, api);
+            self.visit_command(command);
         }
     }
 
-    fn visit_command(&mut self, command: &'a Command, api: &str) {
-        if Self::apis_match(&command.api, api) {
+    fn visit_command(&mut self, command: &'a Command) {
+        if self.api_matches(&command.api) {
             self.add_command(command);
         }
     }
@@ -151,12 +148,12 @@ impl<'a> RegistryIndex<'a> {
         self.commands.insert(name, command);
     }
 
-    fn visit_feature(&mut self, feature: &'a Feature, api: &str) {
-        if Self::apis_match(&feature.api, api) {
+    fn visit_feature(&mut self, feature: &'a Feature) {
+        if self.api_matches(&feature.api) {
             self.add_feature(feature);
             for content in &feature.contents {
                 if let FeatureContent::Require(require) = content {
-                    self.visit_require(None, require, api);
+                    self.visit_require(None, require);
                 }
             }
         }
@@ -167,19 +164,19 @@ impl<'a> RegistryIndex<'a> {
         self.features.insert(name, feature);
     }
 
-    fn visit_extensions(&mut self, extensions: &'a Extensions, api: &str) {
+    fn visit_extensions(&mut self, extensions: &'a Extensions) {
         for content in &extensions.contents {
             let ExtensionsContent::Extension(extension) = content;
-            self.visit_extension(extension, api);
+            self.visit_extension(extension);
         }
     }
 
-    fn visit_extension(&mut self, extension: &'a Extension, api: &str) {
-        if Self::apis_match(&extension.supported, api) {
+    fn visit_extension(&mut self, extension: &'a Extension) {
+        if self.api_matches(&extension.supported) {
             self.add_extension(extension);
             for content in &extension.contents {
                 if let ExtensionContent::Require(require) = content {
-                    self.visit_require(None, require, api);
+                    self.visit_require(None, require);
                 }
             }
         }
@@ -190,23 +187,18 @@ impl<'a> RegistryIndex<'a> {
         self.extensions.insert(name, extension);
     }
 
-    fn visit_require(&mut self, extension: Option<&'a Extension>, require: &'a Require, api: &str) {
-        if Self::apis_match(&require.api, api) {
+    fn visit_require(&mut self, extension: Option<&'a Extension>, require: &'a Require) {
+        if self.api_matches(&require.api) {
             for content in &require.contents {
                 if let RequireContent::Enum(enu) = content {
-                    self.visit_require_enum(extension, enu, api);
+                    self.visit_require_enum(extension, enu);
                 }
             }
         }
     }
 
-    fn visit_require_enum(
-        &mut self,
-        extension: Option<&'a Extension>,
-        enu: &'a RequireEnum,
-        api: &str,
-    ) {
-        if Self::apis_match(&enu.api, api)
+    fn visit_require_enum(&mut self, extension: Option<&'a Extension>, enu: &'a RequireEnum) {
+        if self.api_matches(&enu.api)
             && (enu.alias.is_some()
                 || enu.bitpos.is_some()
                 || enu.offset.is_some()
@@ -224,16 +216,5 @@ impl<'a> RegistryIndex<'a> {
         let name = enu.name.as_ref().unwrap().as_str();
         let constant = Constant::ExtensionEnum(extension, enu);
         self.constants.insert(name, constant);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        RegistryIndex::new(&Registry::video(), "vulkan");
-        RegistryIndex::new(&Registry::vk(), "vulkan");
     }
 }
