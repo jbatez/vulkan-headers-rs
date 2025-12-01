@@ -4,9 +4,6 @@ fn main() {
 
 use code::*;
 mod code {
-    pub(crate) use generator::*;
-    mod generator;
-
     pub(crate) use module::*;
     mod module;
 
