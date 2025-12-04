@@ -4,6 +4,9 @@ fn main() {
 
 use code::*;
 mod code {
+    pub(crate) use c_decl::*;
+    mod c_decl;
+
     pub(crate) use module::*;
     mod module;
 
