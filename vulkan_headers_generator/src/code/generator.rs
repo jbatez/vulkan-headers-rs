@@ -17,7 +17,7 @@ impl Generator {
         };
         generator.generate_vk_video();
         generator.generate_vulkan();
-        generator.library.write_to_file();
+        generator.library.write_files();
     }
 
     fn generate_vk_video(&mut self) {
@@ -43,11 +43,11 @@ impl Generator {
     fn visit_video_extension(&mut self, extension: &Extension, index: &RegistryIndex) {
         if index.api_matches(&extension.supported) {
             let name = extension.name.as_ref().unwrap();
-            self.library.vk_video_modules.push(name.to_string());
+            self.library.video_modules.push(name.to_string());
 
             let mut module = Module::new("vk_video", name);
             self.visit_extension(extension, index, &mut module);
-            module.write_to_file();
+            module.write_file();
         }
     }
 

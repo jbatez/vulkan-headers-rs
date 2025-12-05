@@ -41,5 +41,11 @@ mod code {
 
     pub(crate) use vulkan::*;
     pub mod vulkan {
+        pub mod vulkan_core;
+
+        pub(crate) use vulkan::*;
+        pub mod vulkan {
+            pub use super::vulkan_core::*;
+        }
     }
 }

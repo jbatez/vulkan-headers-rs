@@ -3,6 +3,5 @@ name = "vulkan_headers"
 edition.workspace = true
 
 [features]
-default = ["prototypes"]
 exported_prototypes = []
 prototypes = ["exported_prototypes"]

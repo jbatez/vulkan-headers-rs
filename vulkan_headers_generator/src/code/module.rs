@@ -25,7 +25,7 @@ impl Module {
         }
     }
 
-    pub(crate) fn write_to_file(&mut self) {
+    pub(crate) fn write_file(&mut self) {
         let path = format!("vulkan_headers/src/code/{}/{}.rs", self.parent, self.name);
         let mut file = File::create(path).unwrap();
 
@@ -40,7 +40,6 @@ impl Module {
 
     fn sort_and_write_structs(&mut self, file: &mut File) {
         self.structs.sort();
-
         for (_, text) in &self.structs {
             writeln!(file).unwrap();
             writeln!(file, "{text}").unwrap();
@@ -49,7 +48,6 @@ impl Module {
 
     fn sort_and_write_enums(&mut self, file: &mut File) {
         self.enums.sort();
-
         for (_, text) in &self.enums {
             writeln!(file).unwrap();
             writeln!(file, "{text}").unwrap();
@@ -61,9 +59,9 @@ impl Module {
             return;
         }
 
-        self.constants.sort();
-
         writeln!(file).unwrap();
+
+        self.constants.sort();
         for (_, text) in &self.constants {
             writeln!(file, "{text}").unwrap();
         }
@@ -74,16 +72,17 @@ impl Module {
             return;
         }
 
-        self.functions.sort();
-
         writeln!(file).unwrap();
         writeln!(file, "unsafe extern \"system\" {{").unwrap();
+
+        self.functions.sort();
         for (i, (_, text)) in self.functions.iter().enumerate() {
             if i > 0 {
                 writeln!(file).unwrap();
             }
             writeln!(file, "{text}").unwrap();
         }
+
         writeln!(file, "}}").unwrap();
     }
 
@@ -92,9 +91,9 @@ impl Module {
             return;
         }
 
-        self.type_aliases.sort();
-
         writeln!(file).unwrap();
+
+        self.type_aliases.sort();
         for (_, text) in &self.type_aliases {
             writeln!(file, "{text}").unwrap();
         }
@@ -102,7 +101,6 @@ impl Module {
 
     fn sort_and_write_unions(&mut self, file: &mut File) {
         self.unions.sort();
-
         for (_, text) in &self.unions {
             writeln!(file).unwrap();
             writeln!(file, "{text}").unwrap();
