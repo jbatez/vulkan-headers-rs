@@ -59,6 +59,17 @@ impl Generator {
     }
 
     fn generate_vulkan_core(&mut self, registry: &Registry, index: &RegistryIndex) {
+        let mut module = Module::new("vulkan", "vulkan_core");
+        self.visit_core_registry(registry, index, &mut module);
+        module.write_file();
+    }
+
+    fn visit_core_registry(
+        &mut self,
+        registry: &Registry,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
         // TODO
     }
 
