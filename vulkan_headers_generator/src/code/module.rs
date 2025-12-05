@@ -40,6 +40,10 @@ impl Module {
     }
 
     fn sort_and_write_constants(&mut self, file: &mut File) {
+        if self.constants.is_empty() {
+            return;
+        }
+
         self.constants.sort();
 
         writeln!(file).unwrap();
@@ -49,6 +53,10 @@ impl Module {
     }
 
     fn sort_and_write_functions(&mut self, file: &mut File) {
+        if self.functions.is_empty() {
+            return;
+        }
+
         self.functions.sort();
 
         writeln!(file).unwrap();
@@ -63,6 +71,10 @@ impl Module {
     }
 
     fn sort_and_write_type_aliases(&mut self, file: &mut File) {
+        if self.type_aliases.is_empty() {
+            return;
+        }
+
         self.type_aliases.sort();
 
         writeln!(file).unwrap();

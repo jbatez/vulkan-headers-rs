@@ -1,5 +1,5 @@
 fn main() {
-    todo!();
+    Generator::generate();
 }
 
 use code::*;
