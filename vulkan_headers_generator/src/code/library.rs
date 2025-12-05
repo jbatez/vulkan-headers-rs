@@ -1,9 +1,8 @@
-use std::{collections::HashSet, fs::File, io::Write};
+use std::{fs::File, io::Write};
 
 pub(crate) struct Library {
     pub(crate) vk_video_modules: Vec<String>,
     pub(crate) vulkan_modules: Vec<String>,
-    pub(crate) items: HashSet<String>,
 }
 
 impl Library {
@@ -11,11 +10,10 @@ impl Library {
         Self {
             vk_video_modules: Vec::new(),
             vulkan_modules: Vec::new(),
-            items: HashSet::new(),
         }
     }
 
-    pub(crate) fn write(&mut self) {
+    pub(crate) fn write_to_file(&mut self) {
         let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
 
         writeln!(file, "pub use code::*;").unwrap();

@@ -38,4 +38,8 @@ mod code {
         pub(crate) use vulkan_video_codecs_common::*;
         pub mod vulkan_video_codecs_common;
     }
+
+    pub(crate) use vulkan::*;
+    pub mod vulkan {
+    }
 }

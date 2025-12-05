@@ -155,8 +155,7 @@ impl<'a> RegistryIndex<'a> {
     }
 
     fn visit_extensions(&mut self, extensions: &'a Extensions) {
-        for content in &extensions.contents {
-            let ExtensionsContent::Extension(extension) = content;
+        for ExtensionsContent::Extension(extension) in &extensions.contents {
             self.visit_extension(extension);
         }
     }

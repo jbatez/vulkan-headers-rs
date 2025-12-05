@@ -25,7 +25,7 @@ impl Module {
         }
     }
 
-    pub(crate) fn write(&mut self) {
+    pub(crate) fn write_to_file(&mut self) {
         let path = format!("vulkan_headers/src/code/{}/{}.rs", self.parent, self.name);
         let mut file = File::create(path).unwrap();
 
