@@ -190,6 +190,32 @@ impl Generator {
 
     fn visit_require(&mut self, require: &Require, index: &RegistryIndex, module: &mut Module) {
         if index.api_matches(&require.api) {
+            for content in &require.contents {
+                match content {
+                    RequireContent::Comment(_) => (),
+                    RequireContent::Type(typ) => self.require_type(typ, index, module),
+                    RequireContent::Enum(enu) => self.require_enum(enu, index, module),
+                    RequireContent::Command(cmd) => self.require_command(cmd, index, module),
+                    RequireContent::Feature(_) => (),
+                }
+            }
+        }
+    }
+
+    fn require_type(&mut self, typ: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
+        if self.items.insert(typ.name.clone().unwrap()) {
+            // TODO
+        }
+    }
+
+    fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {
+        if index.api_matches(&enu.api) && self.items.insert(enu.name.clone().unwrap()) {
+            // TODO
+        }
+    }
+
+    fn require_command(&mut self, cmd: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
+        if self.items.insert(cmd.name.clone().unwrap()) {
             // TODO
         }
     }
