@@ -14,8 +14,6 @@ pub(crate) struct RegistryIndex<'a> {
     pub(crate) enums: HashMap<&'a str, &'a Enums>,
     pub(crate) constants: HashMap<&'a str, Constant<'a>>,
     pub(crate) commands: HashMap<&'a str, &'a Command>,
-    pub(crate) features: HashMap<&'a str, &'a Feature>,
-    pub(crate) extensions: HashMap<&'a str, &'a Extension>,
 }
 
 impl<'a> RegistryIndex<'a> {
@@ -26,8 +24,6 @@ impl<'a> RegistryIndex<'a> {
             enums: HashMap::new(),
             constants: HashMap::new(),
             commands: HashMap::new(),
-            features: HashMap::new(),
-            extensions: HashMap::new(),
         };
         index.visit_registry(registry);
         index
@@ -150,18 +146,12 @@ impl<'a> RegistryIndex<'a> {
 
     fn visit_feature(&mut self, feature: &'a Feature) {
         if self.api_matches(&feature.api) {
-            self.add_feature(feature);
             for content in &feature.contents {
                 if let FeatureContent::Require(require) = content {
                     self.visit_require(None, require);
                 }
             }
         }
-    }
-
-    fn add_feature(&mut self, feature: &'a Feature) {
-        let name = feature.name.as_ref().unwrap().as_str();
-        self.features.insert(name, feature);
     }
 
     fn visit_extensions(&mut self, extensions: &'a Extensions) {
@@ -173,18 +163,12 @@ impl<'a> RegistryIndex<'a> {
 
     fn visit_extension(&mut self, extension: &'a Extension) {
         if self.api_matches(&extension.supported) {
-            self.add_extension(extension);
             for content in &extension.contents {
                 if let ExtensionContent::Require(require) = content {
                     self.visit_require(None, require);
                 }
             }
         }
-    }
-
-    fn add_extension(&mut self, extension: &'a Extension) {
-        let name = extension.name.as_ref().unwrap().as_str();
-        self.extensions.insert(name, extension);
     }
 
     fn visit_require(&mut self, extension: Option<&'a Extension>, require: &'a Require) {
