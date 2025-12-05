@@ -29,6 +29,7 @@ impl Library {
         writeln!(file, "[features]").unwrap();
         writeln!(file, "exported_prototypes = []").unwrap();
         writeln!(file, "prototypes = [\"exported_prototypes\"]").unwrap();
+        writeln!(file).unwrap();
 
         for platform in &self.platforms {
             writeln!(file, "{platform}_extensions = []").unwrap();
@@ -83,7 +84,7 @@ impl Library {
         for platform in &self.platforms {
             writeln!(file).unwrap();
             writeln!(file, "            {}", cfg_platform(platform)).unwrap();
-            writeln!(file, "            pub user super::vulkan_{platform}::*;").unwrap();
+            writeln!(file, "            pub use super::vulkan_{platform}::*;").unwrap();
         }
 
         writeln!(file, "        }}").unwrap();

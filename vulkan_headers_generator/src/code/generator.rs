@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 use vulkan_registry::*;
 
@@ -74,7 +74,60 @@ impl Generator {
     }
 
     fn generate_vulkan_platforms(&mut self, registry: &Registry, index: &RegistryIndex) {
-        // TODO
+        let mut modules = HashMap::new();
+        self.visit_platform_registry(registry, index, &mut modules);
+        for module in modules.values_mut() {
+            module.write_file();
+        }
+    }
+
+    fn visit_platform_registry(
+        &mut self,
+        registry: &Registry,
+        index: &RegistryIndex,
+        modules: &mut HashMap<String, Module>,
+    ) {
+        for content in &registry.contents {
+            if let RegistryContent::Extensions(extensions) = content {
+                self.visit_platform_extensions(extensions, index, modules);
+            }
+        }
+    }
+
+    fn visit_platform_extensions(
+        &mut self,
+        extensions: &Extensions,
+        index: &RegistryIndex,
+        modules: &mut HashMap<String, Module>,
+    ) {
+        for ExtensionsContent::Extension(extension) in &extensions.contents {
+            self.visit_platform_extension(extension, index, modules);
+        }
+    }
+
+    fn visit_platform_extension(
+        &mut self,
+        extension: &Extension,
+        index: &RegistryIndex,
+        modules: &mut HashMap<String, Module>,
+    ) {
+        if index.api_matches(&extension.supported) {
+            let platform = match extension.platform.as_ref().map(String::as_str) {
+                Some("provisional") => "beta",
+                Some(platform) => platform,
+                None => return,
+            };
+
+            if !modules.contains_key(platform) {
+                self.library.platforms.push(platform.to_string());
+                let name = format!("vulkan_{platform}");
+                let module = Module::new("vulkan", &name);
+                modules.insert(platform.to_string(), module);
+            }
+
+            let module = modules.get_mut(platform).unwrap();
+            self.visit_extension(extension, index, module);
+        }
     }
 
     fn visit_extension(
