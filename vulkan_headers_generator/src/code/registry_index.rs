@@ -9,7 +9,7 @@ pub(crate) enum Constant<'a> {
 }
 
 pub(crate) struct RegistryIndex<'a> {
-    pub(crate) api: &'a str,
+    api: &'a str,
     pub(crate) types: HashMap<&'a str, &'a Type>,
     pub(crate) enums: HashMap<&'a str, &'a Enums>,
     pub(crate) constants: HashMap<&'a str, Constant<'a>>,
