@@ -15,11 +15,11 @@ impl Registry {
     }
 
     pub fn video() -> Self {
-        Self::parse(include_str!("../data/video.xml"))
+        Self::parse(crate::data::VIDEO_XML)
     }
 
     pub fn vk() -> Self {
-        Self::parse(include_str!("../data/vk.xml"))
+        Self::parse(crate::data::VK_XML)
     }
 }
 
