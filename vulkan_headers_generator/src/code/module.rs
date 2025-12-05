@@ -1,7 +1,8 @@
 use std::{fs::File, io::Write};
 
-#[derive(Default)]
 pub(crate) struct Module {
+    parent: String,
+    name: String,
     pub(crate) structs: Vec<(String, String)>,
     pub(crate) enums: Vec<(String, String)>,
     pub(crate) constants: Vec<(String, String)>,
@@ -11,14 +12,30 @@ pub(crate) struct Module {
 }
 
 impl Module {
-    pub(crate) fn write_to_file(&mut self, file: &mut File) {
+    pub(crate) fn new(parent: &str, name: &str) -> Self {
+        Self {
+            parent: parent.to_string(),
+            name: name.to_string(),
+            structs: Vec::new(),
+            enums: Vec::new(),
+            constants: Vec::new(),
+            functions: Vec::new(),
+            type_aliases: Vec::new(),
+            unions: Vec::new(),
+        }
+    }
+
+    pub(crate) fn write(&mut self) {
+        let path = format!("vulkan_headers/src/code/{}/{}.rs", self.parent, self.name);
+        let mut file = File::create(path).unwrap();
+
         writeln!(file, "use crate::code::*;").unwrap();
-        self.sort_and_write_structs(file);
-        self.sort_and_write_enums(file);
-        self.sort_and_write_constants(file);
-        self.sort_and_write_functions(file);
-        self.sort_and_write_type_aliases(file);
-        self.sort_and_write_unions(file);
+        self.sort_and_write_structs(&mut file);
+        self.sort_and_write_enums(&mut file);
+        self.sort_and_write_constants(&mut file);
+        self.sort_and_write_functions(&mut file);
+        self.sort_and_write_type_aliases(&mut file);
+        self.sort_and_write_unions(&mut file);
     }
 
     fn sort_and_write_structs(&mut self, file: &mut File) {
