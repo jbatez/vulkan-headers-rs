@@ -70,7 +70,54 @@ impl Generator {
         index: &RegistryIndex,
         module: &mut Module,
     ) {
-        // TODO
+        for content in &registry.contents {
+            match content {
+                RegistryContent::Feature(feature) => {
+                    self.visit_core_feature(feature, index, module);
+                }
+                RegistryContent::Extensions(extensions) => {
+                    self.visit_core_extensions(extensions, index, module);
+                }
+                _ => (),
+            }
+        }
+    }
+
+    fn visit_core_feature(
+        &mut self,
+        feature: &Feature,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        if index.api_matches(&feature.api) {
+            for content in &feature.contents {
+                if let FeatureContent::Require(require) = content {
+                    self.visit_require(require, index, module);
+                }
+            }
+        }
+    }
+
+    fn visit_core_extensions(
+        &mut self,
+        extensions: &Extensions,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        for ExtensionsContent::Extension(extension) in &extensions.contents {
+            self.visit_core_extension(extension, index, module);
+        }
+    }
+
+    fn visit_core_extension(
+        &mut self,
+        extension: &Extension,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        if extension.platform.is_none() && index.api_matches(&extension.supported) {
+            self.visit_extension(extension, index, module);
+        }
     }
 
     fn generate_vulkan_platforms(&mut self, registry: &Registry, index: &RegistryIndex) {
@@ -111,17 +158,15 @@ impl Generator {
         index: &RegistryIndex,
         modules: &mut HashMap<String, Module>,
     ) {
-        if index.api_matches(&extension.supported) {
-            let platform = match extension.platform.as_ref().map(String::as_str) {
-                Some("provisional") => "beta",
-                Some(platform) => platform,
-                None => return,
+        if extension.platform.is_some() && index.api_matches(&extension.supported) {
+            let platform = match extension.platform.as_ref().unwrap().as_str() {
+                "provisional" => "beta",
+                platform => platform,
             };
 
             if !modules.contains_key(platform) {
                 self.library.platforms.push(platform.to_string());
-                let name = format!("vulkan_{platform}");
-                let module = Module::new("vulkan", &name);
+                let module = Module::new("vulkan", &format!("vulkan_{platform}"));
                 modules.insert(platform.to_string(), module);
             }
 
@@ -136,6 +181,16 @@ impl Generator {
         index: &RegistryIndex,
         module: &mut Module,
     ) {
-        // TODO
+        for content in &extension.contents {
+            if let ExtensionContent::Require(require) = content {
+                self.visit_require(require, index, module);
+            }
+        }
+    }
+
+    fn visit_require(&mut self, require: &Require, index: &RegistryIndex, module: &mut Module) {
+        if index.api_matches(&require.api) {
+            // TODO
+        }
     }
 }
