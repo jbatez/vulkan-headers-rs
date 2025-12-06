@@ -302,23 +302,59 @@ pub enum {name} {{
         }
 
         match name {
-            "VK_API_VERSION_MAJOR" => (),              // TODO
-            "VK_API_VERSION_MINOR" => (),              // TODO
-            "VK_API_VERSION_PATCH" => (),              // TODO
-            "VK_API_VERSION_VARIANT" => (),            // TODO
-            "VK_API_VERSION" => (),                    // TODO
-            "VK_DEFINE_HANDLE" => (),                  // TODO
-            "VK_DEFINE_NON_DISPATCHABLE_HANDLE" => (), // TODO
-            "VK_MAKE_API_VERSION" => (),               // TODO
-            "VK_MAKE_VERSION" => (),                   // TODO
-            "VK_MAKE_VIDEO_STD_VERSION" => (),         // TODO
-            "VK_NULL_HANDLE" => (),                    // TODO
-            "VK_USE_64_BIT_PTR_DEFINES" => (),         // TODO
-            "VK_VERSION_MAJOR" => (),                  // TODO
-            "VK_VERSION_MINOR" => (),                  // TODO
-            "VK_VERSION_PATCH" => (),                  // TODO
-            name => panic!("unexpected define: {name:?}"),
+            "VK_API_VERSION_MAJOR" => {
+                Self::add_function(name, VK_API_VERSION_MAJOR, module);
+            }
+            "VK_API_VERSION_MINOR" => {
+                Self::add_function(name, VK_API_VERSION_MINOR, module);
+            }
+            "VK_API_VERSION_PATCH" => {
+                Self::add_function(name, VK_API_VERSION_PATCH, module);
+            }
+            "VK_API_VERSION_VARIANT" => {
+                Self::add_function(name, VK_API_VERSION_VARIANT, module);
+            }
+            "VK_API_VERSION" => {
+                ();
+            }
+            "VK_DEFINE_HANDLE" => {
+                ();
+            }
+            "VK_DEFINE_NON_DISPATCHABLE_HANDLE" => {
+                ();
+            }
+            "VK_MAKE_API_VERSION" => {
+                Self::add_function(name, VK_MAKE_API_VERSION, module);
+            }
+            "VK_MAKE_VERSION" => {
+                Self::add_function(name, VK_MAKE_VERSION, module);
+            }
+            "VK_MAKE_VIDEO_STD_VERSION" => {
+                Self::add_function(name, VK_MAKE_VIDEO_STD_VERSION, module);
+            }
+            "VK_NULL_HANDLE" => {
+                ();
+            }
+            "VK_USE_64_BIT_PTR_DEFINES" => {
+                // TODO
+            }
+            "VK_VERSION_MAJOR" => {
+                Self::add_function(name, VK_VERSION_MAJOR, module);
+            }
+            "VK_VERSION_MINOR" => {
+                Self::add_function(name, VK_VERSION_MINOR, module);
+            }
+            "VK_VERSION_PATCH" => {
+                Self::add_function(name, VK_VERSION_PATCH, module);
+            }
+            name => {
+                panic!("unexpected define: {name:?}");
+            }
         }
+    }
+
+    fn add_function(name: &str, text: &str, module: &mut Module) {
+        module.functions.push((name.to_string(), text.to_string()));
     }
 
     fn add_enum_type(name: &str, index: &RegistryIndex, module: &mut Module) {

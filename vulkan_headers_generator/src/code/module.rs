@@ -7,6 +7,7 @@ pub(crate) struct Module {
     pub(crate) enums: Vec<(String, String)>,
     pub(crate) constants: Vec<(String, String)>,
     pub(crate) functions: Vec<(String, String)>,
+    pub(crate) extern_functions: Vec<(String, String)>,
     pub(crate) type_aliases: Vec<(String, String)>,
     pub(crate) unions: Vec<(String, String)>,
 }
@@ -20,6 +21,7 @@ impl Module {
             enums: Vec::new(),
             constants: Vec::new(),
             functions: Vec::new(),
+            extern_functions: Vec::new(),
             type_aliases: Vec::new(),
             unions: Vec::new(),
         }
@@ -34,6 +36,7 @@ impl Module {
         self.sort_and_write_enums(&mut file);
         self.sort_and_write_constants(&mut file);
         self.sort_and_write_functions(&mut file);
+        self.sort_and_write_extern_functions(&mut file);
         self.sort_and_write_type_aliases(&mut file);
         self.sort_and_write_unions(&mut file);
     }
@@ -68,15 +71,23 @@ impl Module {
     }
 
     fn sort_and_write_functions(&mut self, file: &mut File) {
-        if self.functions.is_empty() {
+        self.functions.sort();
+        for (_, text) in &self.functions {
+            writeln!(file).unwrap();
+            writeln!(file, "{text}").unwrap();
+        }
+    }
+
+    fn sort_and_write_extern_functions(&mut self, file: &mut File) {
+        if self.extern_functions.is_empty() {
             return;
         }
 
         writeln!(file).unwrap();
         writeln!(file, "unsafe extern \"system\" {{").unwrap();
 
-        self.functions.sort();
-        for (i, (_, text)) in self.functions.iter().enumerate() {
+        self.extern_functions.sort();
+        for (i, (_, text)) in self.extern_functions.iter().enumerate() {
             if i > 0 {
                 writeln!(file).unwrap();
             }
