@@ -45,3 +45,37 @@ pub(crate) fn rust_type_from_c_type(c_typ: &CType) -> String {
         }
     }
 }
+
+pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) -> String {
+    let mut s = "(".to_string();
+    for (i, param) in params.iter().enumerate() {
+        if i > 0 {
+            s += ", ";
+        } else if let CType::Name(type_name) = &param.typ
+            && type_name == "void"
+        {
+            assert_eq!(param.ident, None);
+            assert_eq!(params.len(), 1);
+            break;
+        }
+
+        match param.ident.as_ref().map(String::as_str) {
+            Some(name) => s += name,
+            None => s += "_",
+        }
+
+        s += ": ";
+        s += &rust_type_from_c_type(&param.typ);
+    }
+    s += ")";
+
+    if let CType::Name(type_name) = return_type
+        && type_name == "void"
+    {
+        return s;
+    }
+
+    s += " -> ";
+    s += &rust_type_from_c_type(return_type);
+    s
+}

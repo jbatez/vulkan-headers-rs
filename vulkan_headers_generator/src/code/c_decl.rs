@@ -143,7 +143,7 @@ impl<'a> CDeclParser<'a> {
     }
 
     fn parse_decl(&mut self) -> CDecl {
-        let typ = self.parse_type_name();
+        let typ = self.parse_maybe_const_type_name();
         let typ = self.parse_maybe_const_ptrs(typ);
         if self.peek_next_token() == Some("(") {
             self.parse_pfn_decl(Box::new(typ))
@@ -189,7 +189,7 @@ impl<'a> CDeclParser<'a> {
         let mut extents = Vec::new();
         while self.peek_next_token() == Some("[") {
             self.consume("[");
-            let len = self.consume_int_or_ident();
+            extents.push(self.consume_int_or_ident());
             self.consume("]");
         }
 

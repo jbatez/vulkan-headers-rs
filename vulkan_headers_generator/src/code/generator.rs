@@ -216,7 +216,7 @@ impl Generator {
                 "bitmask" => Self::add_bitmask_type(typ, name, module),
                 "define" => Self::add_define_type(name, module),
                 "enum" => Self::add_enum_type(name, index, module),
-                "funcpointer" => self.add_funcpointer_type(typ, index, module),
+                "funcpointer" => Self::add_funcpointer_type(typ, name, module),
                 "handle" => Self::add_handle_type(name, module),
                 "include" => (),
                 "struct" => self.add_struct_type(typ, index, module),
@@ -261,6 +261,7 @@ pub enum {name} {{
 
     fn add_typedef(name: &str, text: &str, module: &mut Module) {
         let c_decl = CDecl::parse_typedef(&text);
+
         assert_eq!(c_decl.ident.unwrap(), name);
         let alias = rust_type_from_c_type(&c_decl.typ);
         Self::add_type_alias(name, &alias, module);
@@ -345,8 +346,28 @@ pub enum {name} {{
         // TODO: add constants
     }
 
-    fn add_funcpointer_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_funcpointer_type(typ: &Type, name: &str, module: &mut Module) {
+        let text = Self::get_type_text(typ);
+        let c_decl = CDecl::parse_typedef(&text);
+
+        assert_eq!(c_decl.ident.unwrap(), name);
+        let signature = match &c_decl.typ {
+            CType::Pfn {
+                return_type,
+                params,
+            } => rust_fn_signature_from_c(return_type, params),
+            _ => panic!("expected a C function pointer type"),
+        };
+
+        Self::add_pfn_type(name, &signature, module);
+    }
+
+    fn add_pfn_type(name: &str, signature: &str, module: &mut Module) {
+        Self::add_type_alias(name, &format!("Option<NonNull{name}>"), module);
+
+        let non_null_name = format!("NonNull{name}");
+        let non_null_alias = format!("unsafe extern \"system\" fn{signature}");
+        Self::add_type_alias(&non_null_name, &non_null_alias, module);
     }
 
     fn add_handle_type(name: &str, module: &mut Module) {

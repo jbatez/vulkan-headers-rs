@@ -432,6 +432,16 @@ pub enum VkVideoSessionParametersKHR_T {
     __variant2,
 }
 
+pub type NonNullPFN_vkAllocationFunction = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, alignment: usize, allocationScope: VkSystemAllocationScope) -> *mut c_void;
+pub type NonNullPFN_vkDebugReportCallbackEXT = unsafe extern "system" fn(flags: VkDebugReportFlagsEXT, objectType: VkDebugReportObjectTypeEXT, object: u64, location: usize, messageCode: i32, pLayerPrefix: *const c_char, pMessage: *const c_char, pUserData: *mut c_void) -> VkBool32;
+pub type NonNullPFN_vkDebugUtilsMessengerCallbackEXT = unsafe extern "system" fn(messageSeverity: VkDebugUtilsMessageSeverityFlagBitsEXT, messageTypes: VkDebugUtilsMessageTypeFlagsEXT, pCallbackData: *const VkDebugUtilsMessengerCallbackDataEXT, pUserData: *mut c_void) -> VkBool32;
+pub type NonNullPFN_vkDeviceMemoryReportCallbackEXT = unsafe extern "system" fn(pCallbackData: *const VkDeviceMemoryReportCallbackDataEXT, pUserData: *mut c_void);
+pub type NonNullPFN_vkFreeFunction = unsafe extern "system" fn(pUserData: *mut c_void, pMemory: *mut c_void);
+pub type NonNullPFN_vkGetInstanceProcAddrLUNARG = unsafe extern "system" fn(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
+pub type NonNullPFN_vkInternalAllocationNotification = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, allocationType: VkInternalAllocationType, allocationScope: VkSystemAllocationScope);
+pub type NonNullPFN_vkInternalFreeNotification = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, allocationType: VkInternalAllocationType, allocationScope: VkSystemAllocationScope);
+pub type NonNullPFN_vkReallocationFunction = unsafe extern "system" fn(pUserData: *mut c_void, pOriginal: *mut c_void, size: usize, alignment: usize, allocationScope: VkSystemAllocationScope) -> *mut c_void;
+pub type NonNullPFN_vkVoidFunction = unsafe extern "system" fn();
 pub type NonNullVkAccelerationStructureKHR = NonNull<VkAccelerationStructureKHR_T>;
 pub type NonNullVkAccelerationStructureNV = NonNull<VkAccelerationStructureNV_T>;
 pub type NonNullVkBuffer = NonNull<VkBuffer_T>;
@@ -486,6 +496,16 @@ pub type NonNullVkTensorViewARM = NonNull<VkTensorViewARM_T>;
 pub type NonNullVkValidationCacheEXT = NonNull<VkValidationCacheEXT_T>;
 pub type NonNullVkVideoSessionKHR = NonNull<VkVideoSessionKHR_T>;
 pub type NonNullVkVideoSessionParametersKHR = NonNull<VkVideoSessionParametersKHR_T>;
+pub type PFN_vkAllocationFunction = Option<NonNullPFN_vkAllocationFunction>;
+pub type PFN_vkDebugReportCallbackEXT = Option<NonNullPFN_vkDebugReportCallbackEXT>;
+pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<NonNullPFN_vkDebugUtilsMessengerCallbackEXT>;
+pub type PFN_vkDeviceMemoryReportCallbackEXT = Option<NonNullPFN_vkDeviceMemoryReportCallbackEXT>;
+pub type PFN_vkFreeFunction = Option<NonNullPFN_vkFreeFunction>;
+pub type PFN_vkGetInstanceProcAddrLUNARG = Option<NonNullPFN_vkGetInstanceProcAddrLUNARG>;
+pub type PFN_vkInternalAllocationNotification = Option<NonNullPFN_vkInternalAllocationNotification>;
+pub type PFN_vkInternalFreeNotification = Option<NonNullPFN_vkInternalFreeNotification>;
+pub type PFN_vkReallocationFunction = Option<NonNullPFN_vkReallocationFunction>;
+pub type PFN_vkVoidFunction = Option<NonNullPFN_vkVoidFunction>;
 pub type VkAabbPositionsNV = VkAabbPositionsKHR;
 pub type VkAccelerationStructureBuildTypeKHR = i32;
 pub type VkAccelerationStructureCompatibilityKHR = i32;
