@@ -212,15 +212,15 @@ impl Generator {
             }
 
             match typ.category.as_ref().unwrap().as_str() {
-                "basetype" => Self::add_base_type(typ, name, module),
-                "bitmask" => Self::add_bitmask_type(typ, name, module),
+                "basetype" => Self::add_base_type(name, typ, module),
+                "bitmask" => Self::add_bitmask_type(name, typ, module),
                 "define" => Self::add_define_type(name, module),
                 "enum" => Self::add_enum_type(name, index, module),
-                "funcpointer" => Self::add_funcpointer_type(typ, name, module),
+                "funcpointer" => Self::add_funcpointer_type(name, typ, module),
                 "handle" => Self::add_handle_type(name, module),
                 "include" => (),
-                "struct" => self.add_struct_type(typ, index, module),
-                "union" => self.add_union_type(typ, index, module),
+                "struct" => Self::add_struct_type(name, typ, index, module),
+                "union" => Self::add_union_type(name, typ, index, module),
                 category => panic!("unexpected type category: {category:?}"),
             }
         }
@@ -232,17 +232,17 @@ impl Generator {
     }
 
     fn get_type_text(typ: &Type) -> String {
-        let mut ret = String::new();
+        let mut s = String::new();
         for content in &typ.contents {
             match content {
                 TypeContent::Comment(_) => (),
-                TypeContent::Text(text) => ret += text,
-                TypeContent::Type(text) => ret += text,
-                TypeContent::Name(text) => ret += text,
+                TypeContent::Text(text) => s += text,
+                TypeContent::Type(text) => s += text,
+                TypeContent::Name(text) => s += text,
                 TypeContent::Member(_) => panic!("unexpected type member"),
             }
         }
-        ret
+        s
     }
 
     fn add_extern_type(name: &str, module: &mut Module) {
@@ -267,7 +267,7 @@ pub enum {name} {{
         Self::add_type_alias(name, &alias, module);
     }
 
-    fn add_base_type(typ: &Type, name: &str, module: &mut Module) {
+    fn add_base_type(name: &str, typ: &Type, module: &mut Module) {
         let text = Self::get_type_text(typ);
         if text.starts_with("struct ") {
             CDecl::parse_struct_forward_decl(&text, name);
@@ -290,7 +290,7 @@ pub enum {name} {{
         }
     }
 
-    fn add_bitmask_type(typ: &Type, name: &str, module: &mut Module) {
+    fn add_bitmask_type(name: &str, typ: &Type, module: &mut Module) {
         let text = Self::get_type_text(typ);
         Self::add_typedef(name, &text, module);
     }
@@ -346,7 +346,7 @@ pub enum {name} {{
         // TODO: add constants
     }
 
-    fn add_funcpointer_type(typ: &Type, name: &str, module: &mut Module) {
+    fn add_funcpointer_type(name: &str, typ: &Type, module: &mut Module) {
         let text = Self::get_type_text(typ);
         let c_decl = CDecl::parse_typedef(&text);
 
@@ -379,12 +379,58 @@ pub enum {name} {{
         Self::add_type_alias(&non_null_name, &non_null_alias, module);
     }
 
-    fn add_struct_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_struct_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        let text = Self::generate_struct_or_union_text(name, typ, index);
+        module.structs.push((name.to_string(), text));
     }
 
-    fn add_union_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_union_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        let text = Self::generate_struct_or_union_text(name, typ, index);
+        module.unions.push((name.to_string(), text));
+    }
+
+    fn get_member_text(member: &Member) -> String {
+        let mut s = String::new();
+        for content in &member.contents {
+            match content {
+                MemberContent::Comment(_) => (),
+                MemberContent::Text(text) => s += text,
+                MemberContent::Type(text) => s += text,
+                MemberContent::Name(text) => s += text,
+                MemberContent::Enum(text) => s += text,
+            }
+        }
+        s
+    }
+
+    fn generate_struct_or_union_text(name: &str, typ: &Type, index: &RegistryIndex) -> String {
+        let category = typ.category.as_ref().unwrap();
+        let mut s = format!("#[derive(Clone, Copy)]\n#[repr(C)]\npub {category} {name} {{\n");
+
+        for content in &typ.contents {
+            if let TypeContent::Member(member) = content
+                && index.api_matches(&member.api)
+            {
+                let text = Self::get_member_text(member);
+                let c_decl = CDecl::parse_member_decl(&text);
+                if c_decl.bit_field_width.is_some() {
+                    // TODO
+                }
+
+                s += "    pub ";
+                match c_decl.ident.as_ref().unwrap().as_str() {
+                    "type" => s += "typ",
+                    name => s += name,
+                }
+
+                s += ": ";
+                s += &rust_type_from_c_type(&c_decl.typ);
+                s += ",\n";
+            }
+        }
+
+        s += "}";
+        s
     }
 
     fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {

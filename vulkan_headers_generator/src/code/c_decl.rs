@@ -1,6 +1,7 @@
 pub(crate) struct CDecl {
     pub(crate) ident: Option<String>,
     pub(crate) typ: CType,
+    pub(crate) bit_field_width: Option<String>,
 }
 
 pub(crate) enum CType {
@@ -18,28 +19,29 @@ pub(crate) enum CType {
 }
 
 impl CDecl {
-    pub(crate) fn parse(s: &str) -> CDecl {
-        let mut parser = CDeclParser { s };
-        let decl = parser.parse_decl();
-        assert_eq!(parser.peek_next_token(), None);
-        decl
-    }
-
-    pub(crate) fn parse_typedef(s: &str) -> CDecl {
-        let mut parser = CDeclParser { s };
-        parser.consume("typedef");
-        let decl = parser.parse_decl();
-        parser.consume(";");
-        assert_eq!(parser.peek_next_token(), None);
-        decl
-    }
-
     pub(crate) fn parse_struct_forward_decl(s: &str, name: &str) {
         let mut parser = CDeclParser { s };
         parser.consume("struct");
         parser.consume(name);
         parser.consume(";");
         assert_eq!(parser.peek_next_token(), None);
+    }
+
+    pub(crate) fn parse_typedef(s: &str) -> CDecl {
+        let mut parser = CDeclParser { s };
+        parser.consume("typedef");
+        let decl = parser.parse_decl();
+        assert_eq!(decl.bit_field_width, None);
+        parser.consume(";");
+        assert_eq!(parser.peek_next_token(), None);
+        decl
+    }
+
+    pub(crate) fn parse_member_decl(s: &str) -> CDecl {
+        let mut parser = CDeclParser { s };
+        let decl = parser.parse_decl();
+        assert_eq!(parser.peek_next_token(), None);
+        decl
     }
 }
 
@@ -150,7 +152,12 @@ impl<'a> CDeclParser<'a> {
         } else {
             let ident = self.opt_consume_ident();
             let typ = self.parse_array_extents(typ);
-            CDecl { ident, typ }
+            let bit_field_width = self.parse_bit_field_width();
+            CDecl {
+                ident,
+                typ,
+                bit_field_width,
+            }
         }
     }
 
@@ -170,6 +177,7 @@ impl<'a> CDeclParser<'a> {
                 return_type,
                 params,
             },
+            bit_field_width: None,
         }
     }
 
@@ -199,6 +207,15 @@ impl<'a> CDeclParser<'a> {
         }
 
         typ
+    }
+
+    fn parse_bit_field_width(&mut self) -> Option<String> {
+        if self.peek_next_token() == Some(":") {
+            self.consume(":");
+            Some(self.consume_int_or_ident())
+        } else {
+            None
+        }
     }
 }
 
