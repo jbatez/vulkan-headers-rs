@@ -231,7 +231,7 @@ impl Generator {
         module.type_aliases.push((name.to_string(), text));
     }
 
-    fn get_type_text(typ: &Type) -> String {
+    fn collect_type_text(typ: &Type) -> String {
         let mut s = String::new();
         for content in &typ.contents {
             match content {
@@ -268,7 +268,7 @@ pub enum {name} {{
     }
 
     fn add_base_type(name: &str, typ: &Type, module: &mut Module) {
-        let text = Self::get_type_text(typ);
+        let text = Self::collect_type_text(typ);
         if text.starts_with("struct ") {
             CDecl::parse_struct_forward_decl(&text, name);
             return Self::add_extern_type(name, module);
@@ -291,7 +291,7 @@ pub enum {name} {{
     }
 
     fn add_bitmask_type(name: &str, typ: &Type, module: &mut Module) {
-        let text = Self::get_type_text(typ);
+        let text = Self::collect_type_text(typ);
         Self::add_typedef(name, &text, module);
     }
 
@@ -326,7 +326,7 @@ pub enum {name} {{
             "VK_VERSION_MAJOR" => (),                                        // TODO
             "VK_VERSION_MINOR" => (),                                        // TODO
             "VK_VERSION_PATCH" => (),                                        // TODO
-            name => panic!("unexpected define type: {name:?}"),
+            name => panic!("unexpected define: {name:?}"),
         }
     }
 
@@ -347,7 +347,7 @@ pub enum {name} {{
     }
 
     fn add_funcpointer_type(name: &str, typ: &Type, module: &mut Module) {
-        let text = Self::get_type_text(typ);
+        let text = Self::collect_type_text(typ);
         let c_decl = CDecl::parse_typedef_decl(&text);
 
         assert_eq!(c_decl.ident.unwrap(), name);
@@ -359,10 +359,10 @@ pub enum {name} {{
             _ => panic!("expected a C function pointer type"),
         };
 
-        Self::add_pfn_type(name, &signature, module);
+        Self::add_pfn_type_aliases(name, &signature, module);
     }
 
-    fn add_pfn_type(name: &str, signature: &str, module: &mut Module) {
+    fn add_pfn_type_aliases(name: &str, signature: &str, module: &mut Module) {
         Self::add_type_alias(name, &format!("Option<NonNull{name}>"), module);
 
         let non_null_name = format!("NonNull{name}");
@@ -389,7 +389,7 @@ pub enum {name} {{
         module.unions.push((name.to_string(), text));
     }
 
-    fn get_member_text(member: &Member) -> String {
+    fn collect_member_text(member: &Member) -> String {
         let mut s = String::new();
         for content in &member.contents {
             match content {
@@ -411,7 +411,7 @@ pub enum {name} {{
             if let TypeContent::Member(member) = content
                 && index.api_matches(&member.api)
             {
-                let text = Self::get_member_text(member);
+                let text = Self::collect_member_text(member);
                 let c_decl = CDecl::parse_member_decl(&text);
                 if c_decl.bit_field_width.is_some() {
                     // TODO
