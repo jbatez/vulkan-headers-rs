@@ -245,6 +245,20 @@ impl Generator {
         ret
     }
 
+    fn add_extern_type(name: &str, module: &mut Module) {
+        let text = format!(
+            "\
+#[cfg_attr(not(doc), repr(u8))]
+pub enum {name} {{
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}}"
+        );
+        module.enums.push((name.to_string(), text));
+    }
+
     fn add_typedef(name: &str, text: &str, module: &mut Module) {
         let c_decl = CDecl::parse_typedef(&text);
         let alias = rust_type_from_c_type(&c_decl.typ);
@@ -254,8 +268,8 @@ impl Generator {
     fn add_base_type(typ: &Type, name: &str, module: &mut Module) {
         let text = Self::get_type_text(typ);
         if text.starts_with("struct ") {
-            // TODO
-            return;
+            CDecl::parse_struct_forward_decl(&text);
+            return Self::add_extern_type(name, module);
         } else if text.starts_with("typedef ") {
             return Self::add_typedef(name, &text, module);
         }

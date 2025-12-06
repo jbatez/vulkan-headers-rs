@@ -33,6 +33,14 @@ impl CDecl {
         assert_eq!(parser.peek_next_token(), None);
         decl
     }
+
+    pub(crate) fn parse_struct_forward_decl(s: &str) {
+        let mut parser = CDeclParser { s };
+        parser.consume("struct");
+        parser.consume_ident();
+        parser.consume(";");
+        assert_eq!(parser.peek_next_token(), None);
+    }
 }
 
 struct CDeclParser<'a> {
