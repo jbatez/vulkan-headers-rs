@@ -1,8 +1,11 @@
 #![cfg(target_pointer_width = "64")]
+#![allow(nonstandard_style)]
 #![no_std]
 
 pub use code::*;
 mod code {
+    pub(crate) use core::{ffi::{c_char, c_int, c_void}, ptr::NonNull};
+
     pub(crate) use vk_video::*;
     pub mod vk_video {
         pub(crate) use vulkan_video_codec_av1std::*;

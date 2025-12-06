@@ -40,11 +40,18 @@ impl Library {
         let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
 
         writeln!(file, "#![cfg(target_pointer_width = \"64\")]").unwrap();
+        writeln!(file, "#![allow(nonstandard_style)]").unwrap();
         writeln!(file, "#![no_std]").unwrap();
         writeln!(file).unwrap();
         writeln!(file, "pub use code::*;").unwrap();
         writeln!(file, "mod code {{").unwrap();
+        writeln!(
+            file,
+            "    pub(crate) use core::{{ffi::{{c_char, c_int, c_void}}, ptr::NonNull}};"
+        )
+        .unwrap();
 
+        writeln!(file).unwrap();
         self.sort_and_write_video_modules(&mut file);
         writeln!(file).unwrap();
         self.write_vulkan_module(&mut file);
