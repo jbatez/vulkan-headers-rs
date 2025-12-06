@@ -275,13 +275,16 @@ pub enum {name} {{
         }
 
         match name {
-            "CAMetalLayer" => (),       // TODO
-            "MTLBuffer_id" => (),       // TODO
-            "MTLCommandQueue_id" => (), // TODO
-            "MTLDevice_id" => (),       // TODO
-            "MTLSharedEvent_id" => (),  // TODO
-            "MTLTexture_id" => (),      // TODO
-            name => panic!("unexpected basetype: {name:?}"),
+            "CAMetalLayer" => {
+                Self::add_type_alias(name, "c_void", module);
+            }
+            "MTLBuffer_id" | "MTLCommandQueue_id" | "MTLDevice_id" | "MTLSharedEvent_id"
+            | "MTLTexture_id" => {
+                Self::add_type_alias(name, "*mut c_void", module);
+            }
+            name => {
+                panic!("unexpected basetype: {name:?}");
+            }
         }
     }
 
