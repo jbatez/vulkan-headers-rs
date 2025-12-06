@@ -214,7 +214,7 @@ impl Generator {
             match typ.category.as_ref().unwrap().as_str() {
                 "basetype" => Self::add_base_type(name, typ, module),
                 "bitmask" => Self::add_bitmask_type(name, typ, module),
-                "define" => Self::add_define_type(name, module),
+                "define" => Self::add_define_type(name, typ, module),
                 "enum" => Self::add_enum_type(name, index, module),
                 "funcpointer" => Self::add_funcpointer_type(name, typ, module),
                 "handle" => Self::add_handle_type(name, module),
@@ -295,37 +295,28 @@ pub enum {name} {{
         Self::add_typedef(name, &text, module);
     }
 
-    fn add_define_type(name: &str, module: &mut Module) {
+    fn add_define_type(name: &str, typ: &Type, module: &mut Module) {
+        let text = Self::collect_type_text(typ);
+        if let Some(value) = CDecl::parse_define_constant(&text, name) {
+            return Self::add_constant(name, "u32", value, module);
+        }
+
         match name {
-            "VK_API_VERSION_1_0" => (),                                      // TODO
-            "VK_API_VERSION_1_1" => (),                                      // TODO
-            "VK_API_VERSION_1_2" => (),                                      // TODO
-            "VK_API_VERSION_1_3" => (),                                      // TODO
-            "VK_API_VERSION_1_4" => (),                                      // TODO
-            "VK_API_VERSION_MAJOR" => (),                                    // TODO
-            "VK_API_VERSION_MINOR" => (),                                    // TODO
-            "VK_API_VERSION_PATCH" => (),                                    // TODO
-            "VK_API_VERSION_VARIANT" => (),                                  // TODO
-            "VK_API_VERSION" => (),                                          // TODO
-            "VK_DEFINE_HANDLE" => (),                                        // TODO
-            "VK_DEFINE_NON_DISPATCHABLE_HANDLE" => (),                       // TODO
-            "VK_HEADER_VERSION_COMPLETE" => (),                              // TODO
-            "VK_HEADER_VERSION" => (),                                       // TODO
-            "VK_MAKE_API_VERSION" => (),                                     // TODO
-            "VK_MAKE_VERSION" => (),                                         // TODO
-            "VK_MAKE_VIDEO_STD_VERSION" => (),                               // TODO
-            "VK_NULL_HANDLE" => (),                                          // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_AV1_DECODE_API_VERSION_1_0_0" => (),  // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_API_VERSION_1_0_0" => (),  // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_1_0_0" => (), // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_API_VERSION_1_0_0" => (), // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_API_VERSION_1_0_0" => (), // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_API_VERSION_1_0_0" => (), // TODO
-            "VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_API_VERSION_1_0_0" => (),  // TODO
-            "VK_USE_64_BIT_PTR_DEFINES" => (),                               // TODO
-            "VK_VERSION_MAJOR" => (),                                        // TODO
-            "VK_VERSION_MINOR" => (),                                        // TODO
-            "VK_VERSION_PATCH" => (),                                        // TODO
+            "VK_API_VERSION_MAJOR" => (),              // TODO
+            "VK_API_VERSION_MINOR" => (),              // TODO
+            "VK_API_VERSION_PATCH" => (),              // TODO
+            "VK_API_VERSION_VARIANT" => (),            // TODO
+            "VK_API_VERSION" => (),                    // TODO
+            "VK_DEFINE_HANDLE" => (),                  // TODO
+            "VK_DEFINE_NON_DISPATCHABLE_HANDLE" => (), // TODO
+            "VK_MAKE_API_VERSION" => (),               // TODO
+            "VK_MAKE_VERSION" => (),                   // TODO
+            "VK_MAKE_VIDEO_STD_VERSION" => (),         // TODO
+            "VK_NULL_HANDLE" => (),                    // TODO
+            "VK_USE_64_BIT_PTR_DEFINES" => (),         // TODO
+            "VK_VERSION_MAJOR" => (),                  // TODO
+            "VK_VERSION_MINOR" => (),                  // TODO
+            "VK_VERSION_PATCH" => (),                  // TODO
             name => panic!("unexpected define: {name:?}"),
         }
     }

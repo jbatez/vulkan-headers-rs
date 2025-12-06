@@ -52,6 +52,11 @@ impl CDecl {
         assert_eq!(parser.peek_next_token(), None);
         decl
     }
+
+    pub(crate) fn parse_define_constant<'a>(s: &'a str, name: &str) -> Option<&'a str> {
+        let mut parser = CDeclParser { s };
+        parser.parse_define_constant(name)
+    }
 }
 
 struct CDeclParser<'a> {
@@ -62,8 +67,28 @@ impl<'a> CDeclParser<'a> {
     fn skip_ws(&mut self) {
         loop {
             match self.s.as_bytes().first() {
-                Some(b'\n' | b'\r' | b' ') => self.s = &self.s[1..],
+                Some(b'\n' | b'\r' | b' ') => {
+                    self.s = &self.s[1..];
+                }
+                Some(b'/') => {
+                    if self.s.as_bytes().get(1) == Some(&b'/') {
+                        self.skip_line_comment();
+                    } else {
+                        break;
+                    }
+                }
                 _ => break,
+            }
+        }
+    }
+
+    fn skip_line_comment(&mut self) {
+        assert!(self.s.starts_with("//"));
+        self.s = &self.s[2..];
+        loop {
+            match self.s.as_bytes().first() {
+                Some(b'\n' | b'\r') | None => break,
+                _ => self.s = &self.s[1..],
             }
         }
     }
@@ -227,6 +252,41 @@ impl<'a> CDeclParser<'a> {
         } else {
             None
         }
+    }
+
+    fn parse_define_constant(&mut self, name: &str) -> Option<&'a str> {
+        if self.peek_next_token() == Some("#") {
+            self.consume("#");
+        } else {
+            return None;
+        }
+
+        if self.peek_next_token() == Some("define") {
+            self.consume("define");
+        } else {
+            return None;
+        }
+
+        self.consume(name);
+        if self.s.starts_with('(') {
+            return None;
+        }
+
+        Some(self.parse_define_value())
+    }
+
+    fn parse_define_value(&mut self) -> &'a str {
+        self.skip_ws();
+        let start = self.s;
+
+        let mut end = start.as_ptr();
+        while let Some(token) = self.peek_next_token() {
+            self.consume(token);
+            end = unsafe { token.as_ptr().add(token.len()) };
+        }
+
+        let len = unsafe { end.offset_from_unsigned(start.as_ptr()) };
+        &start[..len]
     }
 }
 
