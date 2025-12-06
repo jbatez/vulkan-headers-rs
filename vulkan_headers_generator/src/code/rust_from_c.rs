@@ -26,7 +26,7 @@ pub(crate) fn rust_type_from_c_type(c_typ: &CType) -> String {
             return rust_type_from_c_type_name(name).to_string();
         }
         CType::Const(_) => {
-            panic!("unexpected const C type");
+            panic!("unexpected C const type");
         }
         CType::Ptr(pointee_type) => {
             let (constness, pointee_type) = match pointee_type.as_ref() {

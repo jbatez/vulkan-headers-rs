@@ -215,7 +215,7 @@ impl Generator {
                 "basetype" => Self::add_base_type(typ, name, module),
                 "bitmask" => Self::add_bitmask_type(typ, name, module),
                 "define" => Self::add_define_type(name, module),
-                "enum" => self.add_enum_type(typ, index, module),
+                "enum" => Self::add_enum_type(name, index, module),
                 "funcpointer" => self.add_funcpointer_type(typ, index, module),
                 "handle" => self.add_handle_type(typ, index, module),
                 "include" => (),
@@ -261,6 +261,7 @@ pub enum {name} {{
 
     fn add_typedef(name: &str, text: &str, module: &mut Module) {
         let c_decl = CDecl::parse_typedef(&text);
+        assert_eq!(c_decl.ident.unwrap(), name);
         let alias = rust_type_from_c_type(&c_decl.typ);
         Self::add_type_alias(name, &alias, module);
     }
@@ -268,7 +269,7 @@ pub enum {name} {{
     fn add_base_type(typ: &Type, name: &str, module: &mut Module) {
         let text = Self::get_type_text(typ);
         if text.starts_with("struct ") {
-            CDecl::parse_struct_forward_decl(&text);
+            CDecl::parse_struct_forward_decl(&text, name);
             return Self::add_extern_type(name, module);
         } else if text.starts_with("typedef ") {
             return Self::add_typedef(name, &text, module);
@@ -328,8 +329,20 @@ pub enum {name} {{
         }
     }
 
-    fn add_enum_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_enum_type(name: &str, index: &RegistryIndex, module: &mut Module) {
+        let enums = index.enums[name];
+        let alias = match enums.typ.as_ref().unwrap().as_str() {
+            "enum" => "i32",
+            "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
+                None => "VkFlags",
+                Some("64") => "VkFlags64",
+                Some(bitwidth) => panic!("unexpected enums bitwidth: {bitwidth:?}"),
+            },
+            typ => panic!("unexpected enums type: {typ:?}"),
+        };
+        Self::add_type_alias(name, alias, module);
+
+        // TODO: add constants
     }
 
     fn add_funcpointer_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {

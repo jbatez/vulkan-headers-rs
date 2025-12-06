@@ -18,4 +18,5 @@ pub enum OH_NativeBuffer {
 
 pub type OHNativeWindow = NativeWindow;
 pub type VkSurfaceCreateFlagsOHOS = VkFlags;
+pub type VkSwapchainImageUsageFlagBitsOHOS = VkFlags;
 pub type VkSwapchainImageUsageFlagsOHOS = VkFlags;
