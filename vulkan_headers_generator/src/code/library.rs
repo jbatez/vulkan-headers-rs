@@ -47,7 +47,7 @@ impl Library {
         writeln!(file, "mod code {{").unwrap();
         writeln!(
             file,
-            "    pub(crate) use core::{{ffi::{{c_char, c_int, c_void}}, ptr::NonNull}};"
+            "    pub(crate) use core::{{ffi::{{CStr, c_char, c_int, c_void}}, ptr::NonNull}};"
         )
         .unwrap();
 

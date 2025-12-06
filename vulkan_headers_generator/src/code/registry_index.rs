@@ -164,7 +164,7 @@ impl<'a> RegistryIndex<'a> {
         if self.api_matches(&extension.supported) {
             for content in &extension.contents {
                 if let ExtensionContent::Require(require) = content {
-                    self.visit_require(None, require);
+                    self.visit_require(Some(extension), require);
                 }
             }
         }

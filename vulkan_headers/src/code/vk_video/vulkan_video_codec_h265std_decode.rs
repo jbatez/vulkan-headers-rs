@@ -38,3 +38,7 @@ pub struct StdVideoDecodeH265ReferenceInfoFlags {
     pub used_for_long_term_reference: u32,
     pub unused_for_reference: u32,
 }
+
+pub const STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE: u32 = 8;
+pub const VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_EXTENSION_NAME: &CStr = c"VK_STD_vulkan_video_codec_h265_decode";
+pub const VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_SPEC_VERSION: u32 = VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_API_VERSION_1_0_0;

@@ -17,4 +17,11 @@ pub struct VkStreamDescriptorSurfaceCreateInfoGGP {
     pub streamDescriptor: GgpStreamDescriptor,
 }
 
+pub const VK_GGP_FRAME_TOKEN_EXTENSION_NAME: &CStr = c"VK_GGP_frame_token";
+pub const VK_GGP_FRAME_TOKEN_SPEC_VERSION: u32 = 1;
+pub const VK_GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION_NAME: &CStr = c"VK_GGP_stream_descriptor_surface";
+pub const VK_GGP_STREAM_DESCRIPTOR_SURFACE_SPEC_VERSION: u32 = 1;
+pub const VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP: VkStructureType = 1000191000;
+pub const VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: VkStructureType = 1000049000;
+
 pub type VkStreamDescriptorSurfaceCreateFlagsGGP = VkFlags;

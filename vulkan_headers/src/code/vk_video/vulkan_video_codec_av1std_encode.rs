@@ -123,3 +123,6 @@ pub struct StdVideoEncodeAV1ReferenceInfoFlags {
     pub segmentation_enabled: u32,
     pub reserved: u32,
 }
+
+pub const VK_STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_EXTENSION_NAME: &CStr = c"VK_STD_vulkan_video_codec_av1_encode";
+pub const VK_STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_SPEC_VERSION: u32 = VK_STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_API_VERSION_1_0_0;

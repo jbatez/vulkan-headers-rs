@@ -36,3 +36,6 @@ pub struct StdVideoDecodeVP9PictureInfoFlags {
     pub UsePrevFrameMvs: u32,
     pub reserved: u32,
 }
+
+pub const VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_EXTENSION_NAME: &CStr = c"VK_STD_vulkan_video_codec_vp9_decode";
+pub const VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_SPEC_VERSION: u32 = VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_API_VERSION_1_0_0;

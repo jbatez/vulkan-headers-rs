@@ -143,3 +143,6 @@ pub struct StdVideoEncodeH265WeightTableFlags {
     pub luma_weight_l1_flag: u16,
     pub chroma_weight_l1_flag: u16,
 }
+
+pub const VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_EXTENSION_NAME: &CStr = c"VK_STD_vulkan_video_codec_h265_encode";
+pub const VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION: u32 = VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_API_VERSION_1_0_0;

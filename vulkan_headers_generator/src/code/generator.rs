@@ -332,6 +332,11 @@ pub enum {name} {{
 
     fn add_enum_type(name: &str, index: &RegistryIndex, module: &mut Module) {
         let enums = index.enums[name];
+        Self::add_enum_type_alias(name, enums, module);
+        Self::add_enum_constants(name, enums, index, module);
+    }
+
+    fn add_enum_type_alias(name: &str, enums: &Enums, module: &mut Module) {
         let alias = match enums.typ.as_ref().unwrap().as_str() {
             "enum" => "i32",
             "bitmask" => match enums.bitwidth.as_ref().map(String::as_str) {
@@ -342,8 +347,25 @@ pub enum {name} {{
             typ => panic!("unexpected enums type: {typ:?}"),
         };
         Self::add_type_alias(name, alias, module);
+    }
 
-        // TODO: add constants
+    fn add_enum_constants(typ: &str, enums: &Enums, index: &RegistryIndex, module: &mut Module) {
+        for content in &enums.contents {
+            if let EnumsContent::Enum(enu) = content
+                && index.api_matches(&enu.api)
+            {
+                let name = enu.name.as_ref().unwrap();
+                if let Some(alias) = enu.alias.as_ref() {
+                    Self::add_constant(name, typ, alias, module);
+                } else if let Some(bitpos) = enu.bitpos.as_ref() {
+                    Self::add_constant(name, typ, &format!("1 << {bitpos}"), module);
+                } else if let Some(value) = enu.value.as_ref() {
+                    Self::add_constant(name, typ, value, module);
+                } else {
+                    panic!("unable to determine value for {name:?}");
+                }
+            }
+        }
     }
 
     fn add_funcpointer_type(name: &str, typ: &Type, module: &mut Module) {
@@ -428,9 +450,75 @@ pub enum {name} {{
     }
 
     fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {
-        if index.api_matches(&enu.api) && self.items.insert(enu.name.clone().unwrap()) {
-            // TODO
+        let name = enu.name.as_ref().unwrap().as_str();
+        if index.api_matches(&enu.api) && self.items.insert(name.to_string()) {
+            let constant = index.constants[name];
+            let typ = Self::get_constant_type(name, constant, index);
+            let value = Self::get_constant_value(name, constant);
+            Self::add_constant(name, typ, &value, module);
         }
+    }
+
+    fn get_constant_type<'a>(
+        name: &str,
+        constant: Constant<'a>,
+        index: &'a RegistryIndex,
+    ) -> &'a str {
+        match constant {
+            Constant::BaseEnum(enums, enu) => {
+                assert_eq!(enums.typ.as_ref().unwrap(), "constants");
+                rust_type_from_c_type_name(enu.typ.as_ref().unwrap())
+            }
+            Constant::ExtensionEnum(_, enu) => {
+                if let Some(extends) = enu.extends.as_ref() {
+                    extends
+                } else if let Some(typ) = enu.typ.as_ref() {
+                    rust_type_from_c_type_name(typ)
+                } else if let Some(value) = enu.value.as_ref() {
+                    rust_type_from_c_value(value)
+                } else if let Some(alias) = enu.alias.as_ref() {
+                    let alias_constant = index.constants[alias.as_str()];
+                    Self::get_constant_type(alias, alias_constant, index)
+                } else {
+                    panic!("unable to determine type for {name:?}");
+                }
+            }
+        }
+    }
+
+    fn get_constant_value(name: &str, constant: Constant) -> String {
+        match constant {
+            Constant::BaseEnum(enums, enu) => {
+                assert_eq!(enums.typ.as_ref().unwrap(), "constants");
+                rust_value_from_c_value(enu.value.as_ref().unwrap())
+            }
+            Constant::ExtensionEnum(extension, enu) => {
+                if let Some(alias) = enu.alias.as_ref() {
+                    alias.clone()
+                } else if let Some(bitpos) = enu.bitpos.as_ref() {
+                    format!("1 << {bitpos}")
+                } else if let Some(value) = enu.value.as_ref() {
+                    rust_value_from_c_value(value)
+                } else if let Some(offset) = enu.offset.as_ref() {
+                    let dir = enu.dir.as_ref().map(String::as_str).unwrap_or("");
+                    let extnumber = match enu.extnumber.as_ref() {
+                        Some(extnumber) => extnumber,
+                        None => extension.unwrap().number.as_ref().unwrap(),
+                    };
+                    let extnumber: u32 = extnumber.parse().unwrap();
+                    let base = 1_000_000_000 + 1_000 * extnumber.checked_sub(1).unwrap();
+                    let magnitude = base + offset.parse::<u32>().unwrap();
+                    format!("{dir}{magnitude}")
+                } else {
+                    panic!("unable to determine value for {name:?}");
+                }
+            }
+        }
+    }
+
+    fn add_constant(name: &str, typ: &str, value: &str, module: &mut Module) {
+        let text = format!("pub const {name}: {typ} = {value};");
+        module.constants.push((name.to_string(), text));
     }
 
     fn require_command(&mut self, cmd: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
