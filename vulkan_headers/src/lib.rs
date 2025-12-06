@@ -1,5 +1,5 @@
 #![cfg(target_pointer_width = "64")]
-#![allow(nonstandard_style)]
+#![allow(nonstandard_style, unused_imports)]
 #![no_std]
 
 pub use code::*;
