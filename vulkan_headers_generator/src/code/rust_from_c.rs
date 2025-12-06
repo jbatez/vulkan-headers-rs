@@ -57,13 +57,7 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
             break;
         }
 
-        s += match param.ident.as_ref().map(String::as_str) {
-            Some(name) => name,
-            None => "_",
-        };
-
-        s += ": ";
-        s += &rust_type_from_c_type(&param.typ);
+        rust_decl_from_c(&mut s, param);
     }
     s += ")";
 
@@ -73,4 +67,15 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
     }
 
     s
+}
+
+pub(crate) fn rust_decl_from_c(s: &mut String, c_decl: &CDecl) {
+    *s += match c_decl.ident.as_ref().map(String::as_str) {
+        Some("type") => "typ",
+        Some(name) => name,
+        None => "_",
+    };
+
+    *s += ": ";
+    *s += &rust_type_from_c_type(&c_decl.typ);
 }
