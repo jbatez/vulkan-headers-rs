@@ -203,9 +203,54 @@ impl Generator {
     }
 
     fn require_type(&mut self, typ: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
-        if self.items.insert(typ.name.clone().unwrap()) {
-            // TODO
+        let name = typ.name.as_ref().unwrap().as_str();
+        if self.items.insert(name.to_string()) {
+            let typ = &index.types[name];
+            match typ.category.as_ref().unwrap().as_str() {
+                "basetype" => self.add_base_type(typ, index, module),
+                "bitmask" => self.add_bitmask_type(typ, index, module),
+                "define" => self.add_define_type(typ, index, module),
+                "enum" => self.add_enum_type(typ, index, module),
+                "funcpointer" => self.add_funcpointer_type(typ, index, module),
+                "handle" => self.add_handle_type(typ, index, module),
+                "include" => (),
+                "struct" => self.add_struct_type(typ, index, module),
+                "union" => self.add_union_type(typ, index, module),
+                category => panic!("unexpected type category: {category:?}"),
+            }
         }
+    }
+
+    fn add_base_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_bitmask_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_define_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_enum_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_funcpointer_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_handle_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_struct_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
+    }
+
+    fn add_union_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        // TODO
     }
 
     fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {
