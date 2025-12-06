@@ -18,6 +18,15 @@ pub(crate) enum CType {
     },
 }
 
+impl PartialEq<&str> for CType {
+    fn eq(&self, other: &&str) -> bool {
+        match self {
+            CType::Name(name) => name == other,
+            _ => false,
+        }
+    }
+}
+
 impl CDecl {
     pub(crate) fn parse_struct_forward_decl(s: &str, name: &str) {
         let mut parser = CDeclParser { s };

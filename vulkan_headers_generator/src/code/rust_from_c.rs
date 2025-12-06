@@ -51,9 +51,7 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
     for (i, param) in params.iter().enumerate() {
         if i > 0 {
             s += ", ";
-        } else if let CType::Name(type_name) = &param.typ
-            && type_name == "void"
-        {
+        } else if param.typ == "void" {
             assert_eq!(param.ident, None);
             assert_eq!(params.len(), 1);
             break;
@@ -69,13 +67,10 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
     }
     s += ")";
 
-    if let CType::Name(type_name) = return_type
-        && type_name == "void"
-    {
-        return s;
+    if *return_type != "void" {
+        s += " -> ";
+        s += &rust_type_from_c_type(return_type);
     }
 
-    s += " -> ";
-    s += &rust_type_from_c_type(return_type);
     s
 }
