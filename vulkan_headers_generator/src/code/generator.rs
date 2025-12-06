@@ -217,7 +217,7 @@ impl Generator {
                 "define" => Self::add_define_type(name, module),
                 "enum" => Self::add_enum_type(name, index, module),
                 "funcpointer" => self.add_funcpointer_type(typ, index, module),
-                "handle" => self.add_handle_type(typ, index, module),
+                "handle" => Self::add_handle_type(name, module),
                 "include" => (),
                 "struct" => self.add_struct_type(typ, index, module),
                 "union" => self.add_union_type(typ, index, module),
@@ -349,8 +349,13 @@ pub enum {name} {{
         // TODO
     }
 
-    fn add_handle_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_handle_type(name: &str, module: &mut Module) {
+        Self::add_extern_type(&format!("{name}_T"), module);
+        Self::add_type_alias(name, &format!("*mut {name}_T"), module);
+
+        let non_null_name = format!("NonNull{name}");
+        let non_null_alias = format!("NonNull<{name}_T>");
+        Self::add_type_alias(&non_null_name, &non_null_alias, module);
     }
 
     fn add_struct_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {

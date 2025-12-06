@@ -1,15 +1,503 @@
 use crate::code::*;
 
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkAccelerationStructureKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkAccelerationStructureNV_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkBufferView_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkBuffer_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkCommandBuffer_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkCommandPool_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkCuFunctionNVX_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkCuModuleNVX_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDataGraphPipelineSessionARM_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDebugReportCallbackEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDebugUtilsMessengerEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDeferredOperationKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDescriptorPool_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDescriptorSetLayout_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDescriptorSet_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDescriptorUpdateTemplate_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDeviceMemory_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDevice_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDisplayKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkDisplayModeKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkEvent_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkExternalComputeQueueNV_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkFence_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkFramebuffer_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkImageView_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkImage_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkIndirectCommandsLayoutEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkIndirectCommandsLayoutNV_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkIndirectExecutionSetEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkInstance_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkMicromapEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkOpticalFlowSessionNV_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPerformanceConfigurationINTEL_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPhysicalDevice_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPipelineBinaryKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPipelineCache_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPipelineLayout_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPipeline_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkPrivateDataSlot_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkQueryPool_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkQueue_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkRenderPass_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkSamplerYcbcrConversion_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkSampler_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkSemaphore_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkShaderEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkShaderModule_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkSurfaceKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkSwapchainKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkTensorARM_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkTensorViewARM_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkValidationCacheEXT_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkVideoSessionKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+#[cfg_attr(not(doc), repr(u8))]
+pub enum VkVideoSessionParametersKHR_T {
+    #[doc(hidden)]
+    __variant1,
+    #[doc(hidden)]
+    __variant2,
+}
+
+pub type NonNullVkAccelerationStructureKHR = NonNull<VkAccelerationStructureKHR_T>;
+pub type NonNullVkAccelerationStructureNV = NonNull<VkAccelerationStructureNV_T>;
+pub type NonNullVkBuffer = NonNull<VkBuffer_T>;
+pub type NonNullVkBufferView = NonNull<VkBufferView_T>;
+pub type NonNullVkCommandBuffer = NonNull<VkCommandBuffer_T>;
+pub type NonNullVkCommandPool = NonNull<VkCommandPool_T>;
+pub type NonNullVkCuFunctionNVX = NonNull<VkCuFunctionNVX_T>;
+pub type NonNullVkCuModuleNVX = NonNull<VkCuModuleNVX_T>;
+pub type NonNullVkDataGraphPipelineSessionARM = NonNull<VkDataGraphPipelineSessionARM_T>;
+pub type NonNullVkDebugReportCallbackEXT = NonNull<VkDebugReportCallbackEXT_T>;
+pub type NonNullVkDebugUtilsMessengerEXT = NonNull<VkDebugUtilsMessengerEXT_T>;
+pub type NonNullVkDeferredOperationKHR = NonNull<VkDeferredOperationKHR_T>;
+pub type NonNullVkDescriptorPool = NonNull<VkDescriptorPool_T>;
+pub type NonNullVkDescriptorSet = NonNull<VkDescriptorSet_T>;
+pub type NonNullVkDescriptorSetLayout = NonNull<VkDescriptorSetLayout_T>;
+pub type NonNullVkDescriptorUpdateTemplate = NonNull<VkDescriptorUpdateTemplate_T>;
+pub type NonNullVkDevice = NonNull<VkDevice_T>;
+pub type NonNullVkDeviceMemory = NonNull<VkDeviceMemory_T>;
+pub type NonNullVkDisplayKHR = NonNull<VkDisplayKHR_T>;
+pub type NonNullVkDisplayModeKHR = NonNull<VkDisplayModeKHR_T>;
+pub type NonNullVkEvent = NonNull<VkEvent_T>;
+pub type NonNullVkExternalComputeQueueNV = NonNull<VkExternalComputeQueueNV_T>;
+pub type NonNullVkFence = NonNull<VkFence_T>;
+pub type NonNullVkFramebuffer = NonNull<VkFramebuffer_T>;
+pub type NonNullVkImage = NonNull<VkImage_T>;
+pub type NonNullVkImageView = NonNull<VkImageView_T>;
+pub type NonNullVkIndirectCommandsLayoutEXT = NonNull<VkIndirectCommandsLayoutEXT_T>;
+pub type NonNullVkIndirectCommandsLayoutNV = NonNull<VkIndirectCommandsLayoutNV_T>;
+pub type NonNullVkIndirectExecutionSetEXT = NonNull<VkIndirectExecutionSetEXT_T>;
+pub type NonNullVkInstance = NonNull<VkInstance_T>;
+pub type NonNullVkMicromapEXT = NonNull<VkMicromapEXT_T>;
+pub type NonNullVkOpticalFlowSessionNV = NonNull<VkOpticalFlowSessionNV_T>;
+pub type NonNullVkPerformanceConfigurationINTEL = NonNull<VkPerformanceConfigurationINTEL_T>;
+pub type NonNullVkPhysicalDevice = NonNull<VkPhysicalDevice_T>;
+pub type NonNullVkPipeline = NonNull<VkPipeline_T>;
+pub type NonNullVkPipelineBinaryKHR = NonNull<VkPipelineBinaryKHR_T>;
+pub type NonNullVkPipelineCache = NonNull<VkPipelineCache_T>;
+pub type NonNullVkPipelineLayout = NonNull<VkPipelineLayout_T>;
+pub type NonNullVkPrivateDataSlot = NonNull<VkPrivateDataSlot_T>;
+pub type NonNullVkQueryPool = NonNull<VkQueryPool_T>;
+pub type NonNullVkQueue = NonNull<VkQueue_T>;
+pub type NonNullVkRenderPass = NonNull<VkRenderPass_T>;
+pub type NonNullVkSampler = NonNull<VkSampler_T>;
+pub type NonNullVkSamplerYcbcrConversion = NonNull<VkSamplerYcbcrConversion_T>;
+pub type NonNullVkSemaphore = NonNull<VkSemaphore_T>;
+pub type NonNullVkShaderEXT = NonNull<VkShaderEXT_T>;
+pub type NonNullVkShaderModule = NonNull<VkShaderModule_T>;
+pub type NonNullVkSurfaceKHR = NonNull<VkSurfaceKHR_T>;
+pub type NonNullVkSwapchainKHR = NonNull<VkSwapchainKHR_T>;
+pub type NonNullVkTensorARM = NonNull<VkTensorARM_T>;
+pub type NonNullVkTensorViewARM = NonNull<VkTensorViewARM_T>;
+pub type NonNullVkValidationCacheEXT = NonNull<VkValidationCacheEXT_T>;
+pub type NonNullVkVideoSessionKHR = NonNull<VkVideoSessionKHR_T>;
+pub type NonNullVkVideoSessionParametersKHR = NonNull<VkVideoSessionParametersKHR_T>;
 pub type VkAabbPositionsNV = VkAabbPositionsKHR;
 pub type VkAccelerationStructureBuildTypeKHR = i32;
 pub type VkAccelerationStructureCompatibilityKHR = i32;
 pub type VkAccelerationStructureCreateFlagBitsKHR = VkFlags;
 pub type VkAccelerationStructureCreateFlagsKHR = VkFlags;
 pub type VkAccelerationStructureInstanceNV = VkAccelerationStructureInstanceKHR;
+pub type VkAccelerationStructureKHR = *mut VkAccelerationStructureKHR_T;
 pub type VkAccelerationStructureMemoryRequirementsTypeNV = i32;
 pub type VkAccelerationStructureMotionInfoFlagsNV = VkFlags;
 pub type VkAccelerationStructureMotionInstanceFlagsNV = VkFlags;
 pub type VkAccelerationStructureMotionInstanceTypeNV = i32;
+pub type VkAccelerationStructureNV = *mut VkAccelerationStructureNV_T;
 pub type VkAccelerationStructureTypeKHR = i32;
 pub type VkAccelerationStructureTypeNV = VkAccelerationStructureTypeKHR;
 pub type VkAccessFlagBits = VkFlags;
@@ -49,6 +537,7 @@ pub type VkBlitImageInfo2KHR = VkBlitImageInfo2;
 pub type VkBlockMatchWindowCompareModeQCOM = i32;
 pub type VkBool32 = u32;
 pub type VkBorderColor = i32;
+pub type VkBuffer = *mut VkBuffer_T;
 pub type VkBufferCopy2KHR = VkBufferCopy2;
 pub type VkBufferCreateFlagBits = VkFlags;
 pub type VkBufferCreateFlags = VkFlags;
@@ -65,6 +554,7 @@ pub type VkBufferUsageFlags = VkFlags;
 pub type VkBufferUsageFlags2 = VkFlags64;
 pub type VkBufferUsageFlags2CreateInfoKHR = VkBufferUsageFlags2CreateInfo;
 pub type VkBufferUsageFlags2KHR = VkBufferUsageFlags2;
+pub type VkBufferView = *mut VkBufferView_T;
 pub type VkBufferViewCreateFlags = VkFlags;
 pub type VkBuildAccelerationStructureFlagBitsKHR = VkFlags;
 pub type VkBuildAccelerationStructureFlagBitsNV = VkBuildAccelerationStructureFlagBitsKHR;
@@ -92,6 +582,7 @@ pub type VkCoarseSampleOrderTypeNV = i32;
 pub type VkColorComponentFlagBits = VkFlags;
 pub type VkColorComponentFlags = VkFlags;
 pub type VkColorSpaceKHR = i32;
+pub type VkCommandBuffer = *mut VkCommandBuffer_T;
 pub type VkCommandBufferInheritanceRenderingInfoKHR = VkCommandBufferInheritanceRenderingInfo;
 pub type VkCommandBufferLevel = i32;
 pub type VkCommandBufferResetFlagBits = VkFlags;
@@ -99,6 +590,7 @@ pub type VkCommandBufferResetFlags = VkFlags;
 pub type VkCommandBufferSubmitInfoKHR = VkCommandBufferSubmitInfo;
 pub type VkCommandBufferUsageFlagBits = VkFlags;
 pub type VkCommandBufferUsageFlags = VkFlags;
+pub type VkCommandPool = *mut VkCommandPool_T;
 pub type VkCommandPoolCreateFlagBits = VkFlags;
 pub type VkCommandPoolCreateFlags = VkFlags;
 pub type VkCommandPoolResetFlagBits = VkFlags;
@@ -130,6 +622,8 @@ pub type VkCopyMemoryToImageInfoEXT = VkCopyMemoryToImageInfo;
 pub type VkCopyMicromapModeEXT = i32;
 pub type VkCoverageModulationModeNV = i32;
 pub type VkCoverageReductionModeNV = i32;
+pub type VkCuFunctionNVX = *mut VkCuFunctionNVX_T;
+pub type VkCuModuleNVX = *mut VkCuModuleNVX_T;
 pub type VkCubicFilterWeightsQCOM = i32;
 pub type VkCullModeFlagBits = VkFlags;
 pub type VkCullModeFlags = VkFlags;
@@ -137,10 +631,12 @@ pub type VkDataGraphModelCacheTypeQCOM = i32;
 pub type VkDataGraphPipelineDispatchFlagBitsARM = VkFlags64;
 pub type VkDataGraphPipelineDispatchFlagsARM = VkFlags64;
 pub type VkDataGraphPipelinePropertyARM = i32;
+pub type VkDataGraphPipelineSessionARM = *mut VkDataGraphPipelineSessionARM_T;
 pub type VkDataGraphPipelineSessionBindPointARM = i32;
 pub type VkDataGraphPipelineSessionBindPointTypeARM = i32;
 pub type VkDataGraphPipelineSessionCreateFlagBitsARM = VkFlags64;
 pub type VkDataGraphPipelineSessionCreateFlagsARM = VkFlags64;
+pub type VkDebugReportCallbackEXT = *mut VkDebugReportCallbackEXT_T;
 pub type VkDebugReportFlagBitsEXT = VkFlags;
 pub type VkDebugReportFlagsEXT = VkFlags;
 pub type VkDebugReportObjectTypeEXT = i32;
@@ -150,7 +646,9 @@ pub type VkDebugUtilsMessageTypeFlagBitsEXT = VkFlags;
 pub type VkDebugUtilsMessageTypeFlagsEXT = VkFlags;
 pub type VkDebugUtilsMessengerCallbackDataFlagsEXT = VkFlags;
 pub type VkDebugUtilsMessengerCreateFlagsEXT = VkFlags;
+pub type VkDebugUtilsMessengerEXT = *mut VkDebugUtilsMessengerEXT_T;
 pub type VkDefaultVertexAttributeValueKHR = i32;
+pub type VkDeferredOperationKHR = *mut VkDeferredOperationKHR_T;
 pub type VkDependencyFlagBits = VkFlags;
 pub type VkDependencyFlags = VkFlags;
 pub type VkDependencyInfoKHR = VkDependencyInfo;
@@ -160,10 +658,13 @@ pub type VkDescriptorBindingFlagBits = VkFlags;
 pub type VkDescriptorBindingFlagBitsEXT = VkDescriptorBindingFlagBits;
 pub type VkDescriptorBindingFlags = VkFlags;
 pub type VkDescriptorBindingFlagsEXT = VkDescriptorBindingFlags;
+pub type VkDescriptorPool = *mut VkDescriptorPool_T;
 pub type VkDescriptorPoolCreateFlagBits = VkFlags;
 pub type VkDescriptorPoolCreateFlags = VkFlags;
 pub type VkDescriptorPoolInlineUniformBlockCreateInfoEXT = VkDescriptorPoolInlineUniformBlockCreateInfo;
 pub type VkDescriptorPoolResetFlags = VkFlags;
+pub type VkDescriptorSet = *mut VkDescriptorSet_T;
+pub type VkDescriptorSetLayout = *mut VkDescriptorSetLayout_T;
 pub type VkDescriptorSetLayoutBindingFlagsCreateInfoEXT = VkDescriptorSetLayoutBindingFlagsCreateInfo;
 pub type VkDescriptorSetLayoutCreateFlagBits = VkFlags;
 pub type VkDescriptorSetLayoutCreateFlags = VkFlags;
@@ -171,6 +672,7 @@ pub type VkDescriptorSetLayoutSupportKHR = VkDescriptorSetLayoutSupport;
 pub type VkDescriptorSetVariableDescriptorCountAllocateInfoEXT = VkDescriptorSetVariableDescriptorCountAllocateInfo;
 pub type VkDescriptorSetVariableDescriptorCountLayoutSupportEXT = VkDescriptorSetVariableDescriptorCountLayoutSupport;
 pub type VkDescriptorType = i32;
+pub type VkDescriptorUpdateTemplate = *mut VkDescriptorUpdateTemplate_T;
 pub type VkDescriptorUpdateTemplateCreateFlags = VkFlags;
 pub type VkDescriptorUpdateTemplateCreateFlagsKHR = VkDescriptorUpdateTemplateCreateFlags;
 pub type VkDescriptorUpdateTemplateCreateInfoKHR = VkDescriptorUpdateTemplateCreateInfo;
@@ -178,6 +680,7 @@ pub type VkDescriptorUpdateTemplateEntryKHR = VkDescriptorUpdateTemplateEntry;
 pub type VkDescriptorUpdateTemplateKHR = VkDescriptorUpdateTemplate;
 pub type VkDescriptorUpdateTemplateType = i32;
 pub type VkDescriptorUpdateTemplateTypeKHR = VkDescriptorUpdateTemplateType;
+pub type VkDevice = *mut VkDevice_T;
 pub type VkDeviceAddress = u64;
 pub type VkDeviceAddressBindingFlagBitsEXT = VkFlags;
 pub type VkDeviceAddressBindingFlagsEXT = VkFlags;
@@ -198,6 +701,7 @@ pub type VkDeviceGroupRenderPassBeginInfoKHR = VkDeviceGroupRenderPassBeginInfo;
 pub type VkDeviceGroupSubmitInfoKHR = VkDeviceGroupSubmitInfo;
 pub type VkDeviceImageMemoryRequirementsKHR = VkDeviceImageMemoryRequirements;
 pub type VkDeviceImageSubresourceInfoKHR = VkDeviceImageSubresourceInfo;
+pub type VkDeviceMemory = *mut VkDeviceMemory_T;
 pub type VkDeviceMemoryOpaqueCaptureAddressInfoKHR = VkDeviceMemoryOpaqueCaptureAddressInfo;
 pub type VkDeviceMemoryReportEventTypeEXT = i32;
 pub type VkDeviceMemoryReportFlagsEXT = VkFlags;
@@ -211,7 +715,9 @@ pub type VkDirectDriverLoadingFlagsLUNARG = VkFlags;
 pub type VkDirectDriverLoadingModeLUNARG = i32;
 pub type VkDiscardRectangleModeEXT = i32;
 pub type VkDisplayEventTypeEXT = i32;
+pub type VkDisplayKHR = *mut VkDisplayKHR_T;
 pub type VkDisplayModeCreateFlagsKHR = VkFlags;
+pub type VkDisplayModeKHR = *mut VkDisplayModeKHR_T;
 pub type VkDisplayPlaneAlphaFlagBitsKHR = VkFlags;
 pub type VkDisplayPlaneAlphaFlagsKHR = VkFlags;
 pub type VkDisplayPowerStateEXT = i32;
@@ -220,12 +726,14 @@ pub type VkDisplaySurfaceStereoTypeNV = i32;
 pub type VkDriverId = i32;
 pub type VkDriverIdKHR = VkDriverId;
 pub type VkDynamicState = i32;
+pub type VkEvent = *mut VkEvent_T;
 pub type VkEventCreateFlagBits = VkFlags;
 pub type VkEventCreateFlags = VkFlags;
 pub type VkExportFenceCreateInfoKHR = VkExportFenceCreateInfo;
 pub type VkExportMemoryAllocateInfoKHR = VkExportMemoryAllocateInfo;
 pub type VkExportSemaphoreCreateInfoKHR = VkExportSemaphoreCreateInfo;
 pub type VkExternalBufferPropertiesKHR = VkExternalBufferProperties;
+pub type VkExternalComputeQueueNV = *mut VkExternalComputeQueueNV_T;
 pub type VkExternalFenceFeatureFlagBits = VkFlags;
 pub type VkExternalFenceFeatureFlagBitsKHR = VkExternalFenceFeatureFlagBits;
 pub type VkExternalFenceFeatureFlags = VkFlags;
@@ -260,6 +768,7 @@ pub type VkExternalSemaphoreHandleTypeFlagBitsKHR = VkExternalSemaphoreHandleTyp
 pub type VkExternalSemaphoreHandleTypeFlags = VkFlags;
 pub type VkExternalSemaphoreHandleTypeFlagsKHR = VkExternalSemaphoreHandleTypeFlags;
 pub type VkExternalSemaphorePropertiesKHR = VkExternalSemaphoreProperties;
+pub type VkFence = *mut VkFence_T;
 pub type VkFenceCreateFlagBits = VkFlags;
 pub type VkFenceCreateFlags = VkFlags;
 pub type VkFenceImportFlagBits = VkFlags;
@@ -283,6 +792,7 @@ pub type VkFragmentShadingRateNV = i32;
 pub type VkFragmentShadingRateTypeNV = i32;
 pub type VkFrameBoundaryFlagBitsEXT = VkFlags;
 pub type VkFrameBoundaryFlagsEXT = VkFlags;
+pub type VkFramebuffer = *mut VkFramebuffer_T;
 pub type VkFramebufferAttachmentImageInfoKHR = VkFramebufferAttachmentImageInfo;
 pub type VkFramebufferAttachmentsCreateInfoKHR = VkFramebufferAttachmentsCreateInfo;
 pub type VkFramebufferCreateFlagBits = VkFlags;
@@ -307,6 +817,7 @@ pub type VkHostImageCopyFlagBitsEXT = VkHostImageCopyFlagBits;
 pub type VkHostImageCopyFlags = VkFlags;
 pub type VkHostImageCopyFlagsEXT = VkHostImageCopyFlags;
 pub type VkHostImageLayoutTransitionInfoEXT = VkHostImageLayoutTransitionInfo;
+pub type VkImage = *mut VkImage_T;
 pub type VkImageAspectFlagBits = VkFlags;
 pub type VkImageAspectFlags = VkFlags;
 pub type VkImageBlit2KHR = VkImageBlit2;
@@ -333,6 +844,7 @@ pub type VkImageToMemoryCopyEXT = VkImageToMemoryCopy;
 pub type VkImageType = i32;
 pub type VkImageUsageFlagBits = VkFlags;
 pub type VkImageUsageFlags = VkFlags;
+pub type VkImageView = *mut VkImageView_T;
 pub type VkImageViewCreateFlagBits = VkFlags;
 pub type VkImageViewCreateFlags = VkFlags;
 pub type VkImageViewType = i32;
@@ -340,16 +852,20 @@ pub type VkImageViewUsageCreateInfoKHR = VkImageViewUsageCreateInfo;
 pub type VkIndexType = i32;
 pub type VkIndirectCommandsInputModeFlagBitsEXT = VkFlags;
 pub type VkIndirectCommandsInputModeFlagsEXT = VkFlags;
+pub type VkIndirectCommandsLayoutEXT = *mut VkIndirectCommandsLayoutEXT_T;
+pub type VkIndirectCommandsLayoutNV = *mut VkIndirectCommandsLayoutNV_T;
 pub type VkIndirectCommandsLayoutUsageFlagBitsEXT = VkFlags;
 pub type VkIndirectCommandsLayoutUsageFlagBitsNV = VkFlags;
 pub type VkIndirectCommandsLayoutUsageFlagsEXT = VkFlags;
 pub type VkIndirectCommandsLayoutUsageFlagsNV = VkFlags;
 pub type VkIndirectCommandsTokenTypeEXT = i32;
 pub type VkIndirectCommandsTokenTypeNV = i32;
+pub type VkIndirectExecutionSetEXT = *mut VkIndirectExecutionSetEXT_T;
 pub type VkIndirectExecutionSetInfoTypeEXT = i32;
 pub type VkIndirectStateFlagBitsNV = VkFlags;
 pub type VkIndirectStateFlagsNV = VkFlags;
 pub type VkInputAttachmentAspectReferenceKHR = VkInputAttachmentAspectReference;
+pub type VkInstance = *mut VkInstance_T;
 pub type VkInstanceCreateFlagBits = VkFlags;
 pub type VkInstanceCreateFlags = VkFlags;
 pub type VkInternalAllocationType = i32;
@@ -390,6 +906,7 @@ pub type VkMemoryUnmapFlagsKHR = VkMemoryUnmapFlags;
 pub type VkMemoryUnmapInfoKHR = VkMemoryUnmapInfo;
 pub type VkMicromapCreateFlagBitsEXT = VkFlags;
 pub type VkMicromapCreateFlagsEXT = VkFlags;
+pub type VkMicromapEXT = *mut VkMicromapEXT_T;
 pub type VkMicromapTypeEXT = i32;
 pub type VkMutableDescriptorTypeCreateInfoVALVE = VkMutableDescriptorTypeCreateInfoEXT;
 pub type VkMutableDescriptorTypeListVALVE = VkMutableDescriptorTypeListEXT;
@@ -404,6 +921,7 @@ pub type VkOpticalFlowPerformanceLevelNV = i32;
 pub type VkOpticalFlowSessionBindingPointNV = i32;
 pub type VkOpticalFlowSessionCreateFlagBitsNV = VkFlags;
 pub type VkOpticalFlowSessionCreateFlagsNV = VkFlags;
+pub type VkOpticalFlowSessionNV = *mut VkOpticalFlowSessionNV_T;
 pub type VkOpticalFlowUsageFlagBitsNV = VkFlags;
 pub type VkOpticalFlowUsageFlagsNV = VkFlags;
 pub type VkOutOfBandQueueTypeNV = i32;
@@ -416,6 +934,7 @@ pub type VkPeerMemoryFeatureFlagBits = VkFlags;
 pub type VkPeerMemoryFeatureFlagBitsKHR = VkPeerMemoryFeatureFlagBits;
 pub type VkPeerMemoryFeatureFlags = VkFlags;
 pub type VkPeerMemoryFeatureFlagsKHR = VkPeerMemoryFeatureFlags;
+pub type VkPerformanceConfigurationINTEL = *mut VkPerformanceConfigurationINTEL_T;
 pub type VkPerformanceConfigurationTypeINTEL = i32;
 pub type VkPerformanceCounterDescriptionFlagBitsKHR = VkFlags;
 pub type VkPerformanceCounterDescriptionFlagsARM = VkFlags;
@@ -426,6 +945,7 @@ pub type VkPerformanceCounterUnitKHR = i32;
 pub type VkPerformanceOverrideTypeINTEL = i32;
 pub type VkPerformanceParameterTypeINTEL = i32;
 pub type VkPerformanceValueTypeINTEL = i32;
+pub type VkPhysicalDevice = *mut VkPhysicalDevice_T;
 pub type VkPhysicalDevice16BitStorageFeaturesKHR = VkPhysicalDevice16BitStorageFeatures;
 pub type VkPhysicalDevice8BitStorageFeaturesKHR = VkPhysicalDevice8BitStorageFeatures;
 pub type VkPhysicalDeviceBufferAddressFeaturesEXT = VkPhysicalDeviceBufferDeviceAddressFeaturesEXT;
@@ -532,7 +1052,10 @@ pub type VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR = VkPhysicalDeviceVer
 pub type VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR = VkPhysicalDeviceVertexAttributeDivisorProperties;
 pub type VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = VkPhysicalDeviceVulkanMemoryModelFeatures;
 pub type VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR = VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures;
+pub type VkPipeline = *mut VkPipeline_T;
+pub type VkPipelineBinaryKHR = *mut VkPipelineBinaryKHR_T;
 pub type VkPipelineBindPoint = i32;
+pub type VkPipelineCache = *mut VkPipelineCache_T;
 pub type VkPipelineCacheCreateFlagBits = VkFlags;
 pub type VkPipelineCacheCreateFlags = VkFlags;
 pub type VkPipelineCacheHeaderVersion = i32;
@@ -563,6 +1086,7 @@ pub type VkPipelineDynamicStateCreateFlags = VkFlags;
 pub type VkPipelineExecutableStatisticFormatKHR = i32;
 pub type VkPipelineInfoEXT = VkPipelineInfoKHR;
 pub type VkPipelineInputAssemblyStateCreateFlags = VkFlags;
+pub type VkPipelineLayout = *mut VkPipelineLayout_T;
 pub type VkPipelineLayoutCreateFlagBits = VkFlags;
 pub type VkPipelineLayoutCreateFlags = VkFlags;
 pub type VkPipelineMultisampleStateCreateFlags = VkFlags;
@@ -611,6 +1135,7 @@ pub type VkPresentStageFlagsEXT = VkFlags;
 pub type VkPresentTimingInfoFlagBitsEXT = VkFlags;
 pub type VkPresentTimingInfoFlagsEXT = VkFlags;
 pub type VkPrimitiveTopology = i32;
+pub type VkPrivateDataSlot = *mut VkPrivateDataSlot_T;
 pub type VkPrivateDataSlotCreateFlags = VkFlags;
 pub type VkPrivateDataSlotCreateFlagsEXT = VkPrivateDataSlotCreateFlags;
 pub type VkPrivateDataSlotCreateInfoEXT = VkPrivateDataSlotCreateInfo;
@@ -623,6 +1148,7 @@ pub type VkQueryControlFlagBits = VkFlags;
 pub type VkQueryControlFlags = VkFlags;
 pub type VkQueryPipelineStatisticFlagBits = VkFlags;
 pub type VkQueryPipelineStatisticFlags = VkFlags;
+pub type VkQueryPool = *mut VkQueryPool_T;
 pub type VkQueryPoolCreateFlagBits = VkFlags;
 pub type VkQueryPoolCreateFlags = VkFlags;
 pub type VkQueryPoolCreateInfoINTEL = VkQueryPoolPerformanceQueryCreateInfoINTEL;
@@ -631,6 +1157,7 @@ pub type VkQueryResultFlagBits = VkFlags;
 pub type VkQueryResultFlags = VkFlags;
 pub type VkQueryResultStatusKHR = i32;
 pub type VkQueryType = i32;
+pub type VkQueue = *mut VkQueue_T;
 pub type VkQueueFamilyGlobalPriorityPropertiesEXT = VkQueueFamilyGlobalPriorityProperties;
 pub type VkQueueFamilyGlobalPriorityPropertiesKHR = VkQueueFamilyGlobalPriorityProperties;
 pub type VkQueueFamilyProperties2KHR = VkQueueFamilyProperties2;
@@ -648,6 +1175,7 @@ pub type VkRayTracingShaderGroupTypeKHR = i32;
 pub type VkRayTracingShaderGroupTypeNV = VkRayTracingShaderGroupTypeKHR;
 pub type VkReleaseSwapchainImagesInfoEXT = VkReleaseSwapchainImagesInfoKHR;
 pub type VkRemoteAddressNV = *mut c_void;
+pub type VkRenderPass = *mut VkRenderPass_T;
 pub type VkRenderPassAttachmentBeginInfoKHR = VkRenderPassAttachmentBeginInfo;
 pub type VkRenderPassCreateFlagBits = VkFlags;
 pub type VkRenderPassCreateFlags = VkFlags;
@@ -677,6 +1205,7 @@ pub type VkResult = i32;
 pub type VkSampleCountFlagBits = VkFlags;
 pub type VkSampleCountFlags = VkFlags;
 pub type VkSampleMask = u32;
+pub type VkSampler = *mut VkSampler_T;
 pub type VkSamplerAddressMode = i32;
 pub type VkSamplerCreateFlagBits = VkFlags;
 pub type VkSamplerCreateFlags = VkFlags;
@@ -684,6 +1213,7 @@ pub type VkSamplerMipmapMode = i32;
 pub type VkSamplerReductionMode = i32;
 pub type VkSamplerReductionModeCreateInfoEXT = VkSamplerReductionModeCreateInfo;
 pub type VkSamplerReductionModeEXT = VkSamplerReductionMode;
+pub type VkSamplerYcbcrConversion = *mut VkSamplerYcbcrConversion_T;
 pub type VkSamplerYcbcrConversionCreateInfoKHR = VkSamplerYcbcrConversionCreateInfo;
 pub type VkSamplerYcbcrConversionImageFormatPropertiesKHR = VkSamplerYcbcrConversionImageFormatProperties;
 pub type VkSamplerYcbcrConversionInfoKHR = VkSamplerYcbcrConversionInfo;
@@ -694,6 +1224,7 @@ pub type VkSamplerYcbcrRange = i32;
 pub type VkSamplerYcbcrRangeKHR = VkSamplerYcbcrRange;
 pub type VkScopeKHR = i32;
 pub type VkScopeNV = VkScopeKHR;
+pub type VkSemaphore = *mut VkSemaphore_T;
 pub type VkSemaphoreCreateFlags = VkFlags;
 pub type VkSemaphoreImportFlagBits = VkFlags;
 pub type VkSemaphoreImportFlagBitsKHR = VkSemaphoreImportFlagBits;
@@ -714,10 +1245,12 @@ pub type VkShaderCorePropertiesFlagBitsAMD = VkFlags;
 pub type VkShaderCorePropertiesFlagsAMD = VkFlags;
 pub type VkShaderCreateFlagBitsEXT = VkFlags;
 pub type VkShaderCreateFlagsEXT = VkFlags;
+pub type VkShaderEXT = *mut VkShaderEXT_T;
 pub type VkShaderFloatControlsIndependence = i32;
 pub type VkShaderFloatControlsIndependenceKHR = VkShaderFloatControlsIndependence;
 pub type VkShaderGroupShaderKHR = i32;
 pub type VkShaderInfoTypeAMD = i32;
+pub type VkShaderModule = *mut VkShaderModule_T;
 pub type VkShaderModuleCreateFlags = VkFlags;
 pub type VkShaderRequiredSubgroupSizeCreateInfoEXT = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo;
 pub type VkShaderStageFlagBits = VkFlags;
@@ -756,6 +1289,7 @@ pub type VkSubresourceLayout2EXT = VkSubresourceLayout2;
 pub type VkSubresourceLayout2KHR = VkSubresourceLayout2;
 pub type VkSurfaceCounterFlagBitsEXT = VkFlags;
 pub type VkSurfaceCounterFlagsEXT = VkFlags;
+pub type VkSurfaceKHR = *mut VkSurfaceKHR_T;
 pub type VkSurfacePresentModeCompatibilityEXT = VkSurfacePresentModeCompatibilityKHR;
 pub type VkSurfacePresentModeEXT = VkSurfacePresentModeKHR;
 pub type VkSurfacePresentScalingCapabilitiesEXT = VkSurfacePresentScalingCapabilitiesKHR;
@@ -763,16 +1297,19 @@ pub type VkSurfaceTransformFlagBitsKHR = VkFlags;
 pub type VkSurfaceTransformFlagsKHR = VkFlags;
 pub type VkSwapchainCreateFlagBitsKHR = VkFlags;
 pub type VkSwapchainCreateFlagsKHR = VkFlags;
+pub type VkSwapchainKHR = *mut VkSwapchainKHR_T;
 pub type VkSwapchainPresentFenceInfoEXT = VkSwapchainPresentFenceInfoKHR;
 pub type VkSwapchainPresentModeInfoEXT = VkSwapchainPresentModeInfoKHR;
 pub type VkSwapchainPresentModesCreateInfoEXT = VkSwapchainPresentModesCreateInfoKHR;
 pub type VkSwapchainPresentScalingCreateInfoEXT = VkSwapchainPresentScalingCreateInfoKHR;
 pub type VkSystemAllocationScope = i32;
+pub type VkTensorARM = *mut VkTensorARM_T;
 pub type VkTensorCreateFlagBitsARM = VkFlags64;
 pub type VkTensorCreateFlagsARM = VkFlags64;
 pub type VkTensorTilingARM = i32;
 pub type VkTensorUsageFlagBitsARM = VkFlags64;
 pub type VkTensorUsageFlagsARM = VkFlags64;
+pub type VkTensorViewARM = *mut VkTensorViewARM_T;
 pub type VkTensorViewCreateFlagBitsARM = VkFlags64;
 pub type VkTensorViewCreateFlagsARM = VkFlags64;
 pub type VkTessellationDomainOrigin = i32;
@@ -788,6 +1325,7 @@ pub type VkToolPurposeFlags = VkFlags;
 pub type VkToolPurposeFlagsEXT = VkToolPurposeFlags;
 pub type VkTransformMatrixNV = VkTransformMatrixKHR;
 pub type VkValidationCacheCreateFlagsEXT = VkFlags;
+pub type VkValidationCacheEXT = *mut VkValidationCacheEXT_T;
 pub type VkValidationCacheHeaderVersionEXT = i32;
 pub type VkValidationCheckEXT = i32;
 pub type VkValidationFeatureDisableEXT = i32;
@@ -865,7 +1403,9 @@ pub type VkVideoEncodeUsageFlagsKHR = VkFlags;
 pub type VkVideoEndCodingFlagsKHR = VkFlags;
 pub type VkVideoSessionCreateFlagBitsKHR = VkFlags;
 pub type VkVideoSessionCreateFlagsKHR = VkFlags;
+pub type VkVideoSessionKHR = *mut VkVideoSessionKHR_T;
 pub type VkVideoSessionParametersCreateFlagBitsKHR = VkFlags;
 pub type VkVideoSessionParametersCreateFlagsKHR = VkFlags;
+pub type VkVideoSessionParametersKHR = *mut VkVideoSessionParametersKHR_T;
 pub type VkViewportCoordinateSwizzleNV = i32;
 pub type VkWriteDescriptorSetInlineUniformBlockEXT = VkWriteDescriptorSetInlineUniformBlock;

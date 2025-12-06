@@ -39,6 +39,7 @@ impl Library {
     fn write_lib_rs(&mut self) {
         let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
 
+        writeln!(file, "#![cfg(target_pointer_width = \"64\")]").unwrap();
         writeln!(file, "#![no_std]").unwrap();
         writeln!(file).unwrap();
         writeln!(file, "pub use code::*;").unwrap();

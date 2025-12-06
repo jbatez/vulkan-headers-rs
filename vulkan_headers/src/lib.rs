@@ -1,3 +1,4 @@
+#![cfg(target_pointer_width = "64")]
 #![no_std]
 
 pub use code::*;
