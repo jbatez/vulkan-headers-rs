@@ -59,10 +59,10 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
             break;
         }
 
-        match param.ident.as_ref().map(String::as_str) {
-            Some(name) => s += name,
-            None => s += "_",
-        }
+        s += match param.ident.as_ref().map(String::as_str) {
+            Some(name) => name,
+            None => "_",
+        };
 
         s += ": ";
         s += &rust_type_from_c_type(&param.typ);

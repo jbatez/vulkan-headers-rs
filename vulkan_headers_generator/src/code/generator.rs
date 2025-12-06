@@ -418,10 +418,10 @@ pub enum {name} {{
                 }
 
                 s += "    pub ";
-                match c_decl.ident.as_ref().unwrap().as_str() {
-                    "type" => s += "typ",
-                    name => s += name,
-                }
+                s += match c_decl.ident.as_ref().unwrap().as_str() {
+                    "type" => "typ",
+                    name => name,
+                };
 
                 s += ": ";
                 s += &rust_type_from_c_type(&c_decl.typ);
