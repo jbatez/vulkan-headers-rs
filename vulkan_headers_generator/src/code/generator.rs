@@ -260,7 +260,7 @@ pub enum {name} {{
     }
 
     fn add_typedef(name: &str, text: &str, module: &mut Module) {
-        let c_decl = CDecl::parse_typedef(&text);
+        let c_decl = CDecl::parse_typedef_decl(&text);
 
         assert_eq!(c_decl.ident.unwrap(), name);
         let alias = rust_type_from_c_type(&c_decl.typ);
@@ -348,7 +348,7 @@ pub enum {name} {{
 
     fn add_funcpointer_type(name: &str, typ: &Type, module: &mut Module) {
         let text = Self::get_type_text(typ);
-        let c_decl = CDecl::parse_typedef(&text);
+        let c_decl = CDecl::parse_typedef_decl(&text);
 
         assert_eq!(c_decl.ident.unwrap(), name);
         let signature = match &c_decl.typ {
