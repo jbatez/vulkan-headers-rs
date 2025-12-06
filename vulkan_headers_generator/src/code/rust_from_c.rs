@@ -99,25 +99,30 @@ pub(crate) fn rust_value_from_c_value(mut c_value: &str) -> String {
             c_value = &c_value[1..c_value.len() - 1];
         }
 
-        if c_value.ends_with('F') && !c_value.contains("0x") {
-            c_value = &c_value[..c_value.len() - 1];
-        }
+        let prefix = if c_value.starts_with('~') {
+            c_value = &c_value[1..];
+            "!"
+        } else {
+            ""
+        };
 
-        if c_value.ends_with('L') {
-            c_value = &c_value[..c_value.len() - 1];
+        if is_digit(c_value.as_bytes()[0]) {
+            if c_value.ends_with('F') && !c_value.starts_with("0X") && !c_value.starts_with("0x") {
+                c_value = &c_value[..c_value.len() - 1];
+            }
+
             if c_value.ends_with('L') {
+                c_value = &c_value[..c_value.len() - 1];
+                if c_value.ends_with('L') {
+                    c_value = &c_value[..c_value.len() - 1];
+                }
+            }
+
+            if c_value.ends_with('U') {
                 c_value = &c_value[..c_value.len() - 1];
             }
         }
 
-        if c_value.ends_with('U') {
-            c_value = &c_value[..c_value.len() - 1];
-        }
-
-        if c_value.starts_with('~') {
-            format!("!{}", &c_value[1..])
-        } else {
-            c_value.to_string()
-        }
+        format!("{prefix}{c_value}")
     }
 }
