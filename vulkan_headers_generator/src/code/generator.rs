@@ -206,10 +206,15 @@ impl Generator {
         let name = typ.name.as_ref().unwrap().as_str();
         if self.items.insert(name.to_string()) {
             let typ = &index.types[name];
+            if let Some(alias) = typ.alias.as_ref() {
+                // TODO
+                return;
+            }
+
             match typ.category.as_ref().unwrap().as_str() {
-                "basetype" => self.add_base_type(typ, index, module),
+                "basetype" => self.add_base_type(typ, name, index, module),
                 "bitmask" => self.add_bitmask_type(typ, index, module),
-                "define" => self.add_define_type(typ, index, module),
+                "define" => self.add_define_type(typ, name, index, module),
                 "enum" => self.add_enum_type(typ, index, module),
                 "funcpointer" => self.add_funcpointer_type(typ, index, module),
                 "handle" => self.add_handle_type(typ, index, module),
@@ -221,16 +226,96 @@ impl Generator {
         }
     }
 
-    fn add_base_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn get_type_text(typ: &Type) -> String {
+        let mut ret = String::new();
+        for content in &typ.contents {
+            match content {
+                TypeContent::Comment(_) => (),
+                TypeContent::Text(text) => ret += text,
+                TypeContent::Type(text) => ret += text,
+                TypeContent::Name(text) => ret += text,
+                TypeContent::Member(_) => panic!("unexpected type member"),
+            }
+        }
+        ret
+    }
+
+    fn add_base_type(
+        &mut self,
+        typ: &Type,
+        name: &str,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        let text = Self::get_type_text(typ);
+
+        if text.starts_with("struct ") {
+            // TODO
+            return;
+        }
+
+        if text.starts_with("typedef ") {
+            let c_decl = CDecl::parse_typedef(&text);
+            // TODO
+            return;
+        }
+
+        match name {
+            "CAMetalLayer" => (),       // TODO
+            "MTLBuffer_id" => (),       // TODO
+            "MTLCommandQueue_id" => (), // TODO
+            "MTLDevice_id" => (),       // TODO
+            "MTLSharedEvent_id" => (),  // TODO
+            "MTLTexture_id" => (),      // TODO
+            name => panic!("unexpected basetype: {name:?}"),
+        }
     }
 
     fn add_bitmask_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        let text = Self::get_type_text(typ);
+        let c_decl = CDecl::parse_typedef(&text);
         // TODO
     }
 
-    fn add_define_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
-        // TODO
+    fn add_define_type(
+        &mut self,
+        typ: &Type,
+        name: &str,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        match name {
+            "VK_API_VERSION_1_0" => (),                                      // TODO
+            "VK_API_VERSION_1_1" => (),                                      // TODO
+            "VK_API_VERSION_1_2" => (),                                      // TODO
+            "VK_API_VERSION_1_3" => (),                                      // TODO
+            "VK_API_VERSION_1_4" => (),                                      // TODO
+            "VK_API_VERSION_MAJOR" => (),                                    // TODO
+            "VK_API_VERSION_MINOR" => (),                                    // TODO
+            "VK_API_VERSION_PATCH" => (),                                    // TODO
+            "VK_API_VERSION_VARIANT" => (),                                  // TODO
+            "VK_API_VERSION" => (),                                          // TODO
+            "VK_DEFINE_HANDLE" => (),                                        // TODO
+            "VK_DEFINE_NON_DISPATCHABLE_HANDLE" => (),                       // TODO
+            "VK_HEADER_VERSION_COMPLETE" => (),                              // TODO
+            "VK_HEADER_VERSION" => (),                                       // TODO
+            "VK_MAKE_API_VERSION" => (),                                     // TODO
+            "VK_MAKE_VERSION" => (),                                         // TODO
+            "VK_MAKE_VIDEO_STD_VERSION" => (),                               // TODO
+            "VK_NULL_HANDLE" => (),                                          // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_AV1_DECODE_API_VERSION_1_0_0" => (),  // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_AV1_ENCODE_API_VERSION_1_0_0" => (),  // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_1_0_0" => (), // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_API_VERSION_1_0_0" => (), // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_API_VERSION_1_0_0" => (), // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_API_VERSION_1_0_0" => (), // TODO
+            "VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_API_VERSION_1_0_0" => (),  // TODO
+            "VK_USE_64_BIT_PTR_DEFINES" => (),                               // TODO
+            "VK_VERSION_MAJOR" => (),                                        // TODO
+            "VK_VERSION_MINOR" => (),                                        // TODO
+            "VK_VERSION_PATCH" => (),                                        // TODO
+            name => panic!("unexpected define type: {name:?}"),
+        }
     }
 
     fn add_enum_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
