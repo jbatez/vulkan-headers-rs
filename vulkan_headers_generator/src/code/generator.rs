@@ -207,14 +207,14 @@ impl Generator {
         if self.items.insert(name.to_string()) {
             let typ = &index.types[name];
             if let Some(alias) = typ.alias.as_ref() {
-                // TODO
+                Self::add_type_alias(name, alias, module);
                 return;
             }
 
             match typ.category.as_ref().unwrap().as_str() {
-                "basetype" => self.add_base_type(typ, name, index, module),
-                "bitmask" => self.add_bitmask_type(typ, index, module),
-                "define" => self.add_define_type(typ, name, index, module),
+                "basetype" => Self::add_base_type(typ, name, module),
+                "bitmask" => Self::add_bitmask_type(typ, name, module),
+                "define" => Self::add_define_type(name, module),
                 "enum" => self.add_enum_type(typ, index, module),
                 "funcpointer" => self.add_funcpointer_type(typ, index, module),
                 "handle" => self.add_handle_type(typ, index, module),
@@ -224,6 +224,11 @@ impl Generator {
                 category => panic!("unexpected type category: {category:?}"),
             }
         }
+    }
+
+    fn add_type_alias(name: &str, alias: &str, module: &mut Module) {
+        let text = format!("pub type {name} = {alias};");
+        module.type_aliases.push((name.to_string(), text));
     }
 
     fn get_type_text(typ: &Type) -> String {
@@ -240,24 +245,19 @@ impl Generator {
         ret
     }
 
-    fn add_base_type(
-        &mut self,
-        typ: &Type,
-        name: &str,
-        index: &RegistryIndex,
-        module: &mut Module,
-    ) {
-        let text = Self::get_type_text(typ);
+    fn add_typedef(name: &str, text: &str, module: &mut Module) {
+        let c_decl = CDecl::parse_typedef(&text);
+        let alias = rust_type_from_c_type(&c_decl.typ);
+        Self::add_type_alias(name, &alias, module);
+    }
 
+    fn add_base_type(typ: &Type, name: &str, module: &mut Module) {
+        let text = Self::get_type_text(typ);
         if text.starts_with("struct ") {
             // TODO
             return;
-        }
-
-        if text.starts_with("typedef ") {
-            let c_decl = CDecl::parse_typedef(&text);
-            // TODO
-            return;
+        } else if text.starts_with("typedef ") {
+            return Self::add_typedef(name, &text, module);
         }
 
         match name {
@@ -271,19 +271,12 @@ impl Generator {
         }
     }
 
-    fn add_bitmask_type(&mut self, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+    fn add_bitmask_type(typ: &Type, name: &str, module: &mut Module) {
         let text = Self::get_type_text(typ);
-        let c_decl = CDecl::parse_typedef(&text);
-        // TODO
+        Self::add_typedef(name, &text, module);
     }
 
-    fn add_define_type(
-        &mut self,
-        typ: &Type,
-        name: &str,
-        index: &RegistryIndex,
-        module: &mut Module,
-    ) {
+    fn add_define_type(name: &str, module: &mut Module) {
         match name {
             "VK_API_VERSION_1_0" => (),                                      // TODO
             "VK_API_VERSION_1_1" => (),                                      // TODO

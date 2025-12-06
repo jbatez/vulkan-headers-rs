@@ -18,4 +18,7 @@ mod code {
 
     pub(crate) use registry_index::*;
     mod registry_index;
+
+    pub(crate) use rust_from_c::*;
+    mod rust_from_c;
 }
