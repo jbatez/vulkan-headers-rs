@@ -1,3 +1,5 @@
+#![no_std]
+
 pub use code::*;
 mod code {
     pub(crate) use vk_video::*;
