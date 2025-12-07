@@ -327,7 +327,7 @@ pub enum {name} {{
                 ();
             }
             "VK_USE_64_BIT_PTR_DEFINES" => {
-                // TODO
+                Self::add_constant(name, "bool", "true", module);
             }
             "VK_VERSION_MAJOR" => {
                 Self::add_function(name, VK_VERSION_MAJOR, module);

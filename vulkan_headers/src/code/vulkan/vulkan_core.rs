@@ -17278,6 +17278,7 @@ pub const VK_TOOL_PURPOSE_TRACING_BIT_EXT: VkToolPurposeFlagBits = VK_TOOL_PURPO
 pub const VK_TOOL_PURPOSE_VALIDATION_BIT: VkToolPurposeFlagBits = 1 << 0;
 pub const VK_TOOL_PURPOSE_VALIDATION_BIT_EXT: VkToolPurposeFlagBits = VK_TOOL_PURPOSE_VALIDATION_BIT;
 pub const VK_TRUE: u32 = 1;
+pub const VK_USE_64_BIT_PTR_DEFINES: bool = true;
 pub const VK_UUID_SIZE: u32 = 16;
 pub const VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT: VkValidationCacheHeaderVersionEXT = 1;
 pub const VK_VALIDATION_CHECK_ALL_EXT: VkValidationCheckEXT = 0;
