@@ -1,5 +1,30 @@
 use crate::code::*;
 
+pub(crate) fn rust_type_from_c_type(c_typ: &CType, is_param: bool) -> String {
+    match c_typ {
+        CType::Name(name) => {
+            return rust_type_from_c_type_name(name).to_string();
+        }
+        CType::Const(_) => {
+            panic!("unexpected C const type");
+        }
+        CType::Ptr(pointee_type) => {
+            return rust_ptr_type_from_c_pointee_type(&pointee_type);
+        }
+        CType::Pfn { .. } => {
+            panic!("unexpected C function pointer type");
+        }
+        CType::Array { elem_type, len } => {
+            if is_param {
+                return rust_ptr_type_from_c_pointee_type(&elem_type);
+            } else {
+                let elem_type = rust_type_from_c_type(elem_type, false);
+                return format!("[{elem_type}; {len} as usize]");
+            }
+        }
+    }
+}
+
 pub(crate) fn rust_type_from_c_type_name(name: &str) -> &str {
     match name {
         "char" => "c_char",
@@ -20,50 +45,14 @@ pub(crate) fn rust_type_from_c_type_name(name: &str) -> &str {
     }
 }
 
-pub(crate) fn rust_type_from_c_type(c_typ: &CType, is_param: bool) -> String {
-    match c_typ {
-        CType::Name(name) => {
-            return rust_type_from_c_type_name(name).to_string();
-        }
-        CType::Const(_) => {
-            panic!("unexpected C const type");
-        }
-        CType::Ptr(pointee_type) => {
-            let (constness, pointee_type) = match pointee_type.as_ref() {
-                CType::Const(pointee_type) => ("const", pointee_type.as_ref()),
-                pointee_type => ("mut", pointee_type),
-            };
-            let pointee_type = rust_type_from_c_type(pointee_type, false);
-            return format!("*{constness} {pointee_type}");
-        }
-        CType::Pfn { .. } => {
-            panic!("unexpected C function pointer type");
-        }
-        CType::Array { elem_type, len } => {
-            if is_param {
-                let (constness, pointee_type) = match elem_type.as_ref() {
-                    CType::Const(pointee_type) => ("const", pointee_type.as_ref()),
-                    pointee_type => ("mut", pointee_type),
-                };
-                let pointee_type = rust_type_from_c_type(pointee_type, false);
-                return format!("*{constness} {pointee_type}");
-            } else {
-                let elem_type = rust_type_from_c_type(elem_type, false);
-                return format!("[{elem_type}; {len} as usize]");
-            }
-        }
-    }
-}
-
-pub(crate) fn rust_decl_from_c_decl(s: &mut String, c_decl: &CDecl, is_param: bool) {
-    *s += match c_decl.ident.as_ref().map(String::as_str) {
-        Some("type") => "typ",
-        Some(name) => name,
-        None => "_",
+fn rust_ptr_type_from_c_pointee_type(pointee_type: &CType) -> String {
+    let (mutability, pointee_type) = match pointee_type {
+        CType::Const(pointee_type) => ("const", pointee_type.as_ref()),
+        pointee_type => ("mut", pointee_type),
     };
 
-    *s += ": ";
-    *s += &rust_type_from_c_type(&c_decl.typ, is_param);
+    let pointee_type = rust_type_from_c_type(pointee_type, false);
+    return format!("*{mutability} {pointee_type}");
 }
 
 pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) -> String {
@@ -87,6 +76,17 @@ pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) ->
     }
 
     s
+}
+
+pub(crate) fn rust_decl_from_c_decl(s: &mut String, c_decl: &CDecl, is_param: bool) {
+    *s += match c_decl.ident.as_ref().map(String::as_str) {
+        Some("type") => "typ",
+        Some(name) => name,
+        None => "_",
+    };
+
+    *s += ": ";
+    *s += &rust_type_from_c_type(&c_decl.typ, is_param);
 }
 
 pub(crate) fn rust_type_from_c_value(c_value: &str) -> &str {

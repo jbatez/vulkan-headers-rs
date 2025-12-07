@@ -1,6 +1,6 @@
 pub(crate) struct CDecl {
-    pub(crate) ident: Option<String>,
     pub(crate) typ: CType,
+    pub(crate) ident: Option<String>,
     pub(crate) bitfield_width: Option<u32>,
 }
 
@@ -188,8 +188,8 @@ impl<'a> CDeclParser<'a> {
             let typ = self.parse_array_extents(typ);
             let bitfield_width = self.parse_bitfield_width();
             CDecl {
-                ident,
                 typ,
+                ident,
                 bitfield_width,
             }
         }
@@ -206,11 +206,11 @@ impl<'a> CDeclParser<'a> {
         self.consume(")");
 
         CDecl {
-            ident,
             typ: CType::Pfn {
                 return_type,
                 params,
             },
+            ident,
             bitfield_width: None,
         }
     }
