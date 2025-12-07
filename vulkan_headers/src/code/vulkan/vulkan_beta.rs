@@ -304,8 +304,88 @@ pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX: VkSt
 pub const VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: VkStructureType = 1000134004;
 pub const VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV: VkStructureType = 1000613000;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCudaLaunchKernelNV(commandBuffer: VkCommandBuffer, pLaunchInfo: *const VkCudaLaunchInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchGraphAMDX(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, pCountInfo: *const VkDispatchGraphCountInfoAMDX);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchGraphIndirectAMDX(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, pCountInfo: *const VkDispatchGraphCountInfoAMDX);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchGraphIndirectCountAMDX(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, countInfo: VkDeviceAddress);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdInitializeGraphScratchMemoryAMDX(commandBuffer: VkCommandBuffer, executionGraph: VkPipeline, scratch: VkDeviceAddress, scratchSize: VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateCudaFunctionNV(device: VkDevice, pCreateInfo: *const VkCudaFunctionCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pFunction: *mut VkCudaFunctionNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateCudaModuleNV(device: VkDevice, pCreateInfo: *const VkCudaModuleCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pModule: *mut VkCudaModuleNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateExecutionGraphPipelinesAMDX(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkExecutionGraphPipelineCreateInfoAMDX, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyCudaFunctionNV(device: VkDevice, function: VkCudaFunctionNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyCudaModuleNV(device: VkDevice, module: VkCudaModuleNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetCudaModuleCacheNV(device: VkDevice, module: VkCudaModuleNV, pCacheSize: *mut usize, pCacheData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetExecutionGraphPipelineNodeIndexAMDX(device: VkDevice, executionGraph: VkPipeline, pNodeInfo: *const VkPipelineShaderStageNodeCreateInfoAMDX, pNodeIndex: *mut u32) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetExecutionGraphPipelineScratchSizeAMDX(device: VkDevice, executionGraph: VkPipeline, pSizeInfo: *mut VkExecutionGraphPipelineScratchSizeAMDX) -> VkResult;
+}
+
+pub type NonNullPFN_vkCmdCudaLaunchKernelNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLaunchInfo: *const VkCudaLaunchInfoNV);
+pub type NonNullPFN_vkCmdDispatchGraphAMDX = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, pCountInfo: *const VkDispatchGraphCountInfoAMDX);
+pub type NonNullPFN_vkCmdDispatchGraphIndirectAMDX = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, pCountInfo: *const VkDispatchGraphCountInfoAMDX);
+pub type NonNullPFN_vkCmdDispatchGraphIndirectCountAMDX = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, scratch: VkDeviceAddress, scratchSize: VkDeviceSize, countInfo: VkDeviceAddress);
+pub type NonNullPFN_vkCmdInitializeGraphScratchMemoryAMDX = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, executionGraph: VkPipeline, scratch: VkDeviceAddress, scratchSize: VkDeviceSize);
+pub type NonNullPFN_vkCreateCudaFunctionNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkCudaFunctionCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pFunction: *mut VkCudaFunctionNV) -> VkResult;
+pub type NonNullPFN_vkCreateCudaModuleNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkCudaModuleCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pModule: *mut VkCudaModuleNV) -> VkResult;
+pub type NonNullPFN_vkCreateExecutionGraphPipelinesAMDX = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkExecutionGraphPipelineCreateInfoAMDX, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkDestroyCudaFunctionNV = unsafe extern "system" fn(device: VkDevice, function: VkCudaFunctionNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyCudaModuleNV = unsafe extern "system" fn(device: VkDevice, module: VkCudaModuleNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkGetCudaModuleCacheNV = unsafe extern "system" fn(device: VkDevice, module: VkCudaModuleNV, pCacheSize: *mut usize, pCacheData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetExecutionGraphPipelineNodeIndexAMDX = unsafe extern "system" fn(device: VkDevice, executionGraph: VkPipeline, pNodeInfo: *const VkPipelineShaderStageNodeCreateInfoAMDX, pNodeIndex: *mut u32) -> VkResult;
+pub type NonNullPFN_vkGetExecutionGraphPipelineScratchSizeAMDX = unsafe extern "system" fn(device: VkDevice, executionGraph: VkPipeline, pSizeInfo: *mut VkExecutionGraphPipelineScratchSizeAMDX) -> VkResult;
 pub type NonNullVkCudaFunctionNV = NonNull<VkCudaFunctionNV_T>;
 pub type NonNullVkCudaModuleNV = NonNull<VkCudaModuleNV_T>;
+pub type PFN_vkCmdCudaLaunchKernelNV = Option<NonNullPFN_vkCmdCudaLaunchKernelNV>;
+pub type PFN_vkCmdDispatchGraphAMDX = Option<NonNullPFN_vkCmdDispatchGraphAMDX>;
+pub type PFN_vkCmdDispatchGraphIndirectAMDX = Option<NonNullPFN_vkCmdDispatchGraphIndirectAMDX>;
+pub type PFN_vkCmdDispatchGraphIndirectCountAMDX = Option<NonNullPFN_vkCmdDispatchGraphIndirectCountAMDX>;
+pub type PFN_vkCmdInitializeGraphScratchMemoryAMDX = Option<NonNullPFN_vkCmdInitializeGraphScratchMemoryAMDX>;
+pub type PFN_vkCreateCudaFunctionNV = Option<NonNullPFN_vkCreateCudaFunctionNV>;
+pub type PFN_vkCreateCudaModuleNV = Option<NonNullPFN_vkCreateCudaModuleNV>;
+pub type PFN_vkCreateExecutionGraphPipelinesAMDX = Option<NonNullPFN_vkCreateExecutionGraphPipelinesAMDX>;
+pub type PFN_vkDestroyCudaFunctionNV = Option<NonNullPFN_vkDestroyCudaFunctionNV>;
+pub type PFN_vkDestroyCudaModuleNV = Option<NonNullPFN_vkDestroyCudaModuleNV>;
+pub type PFN_vkGetCudaModuleCacheNV = Option<NonNullPFN_vkGetCudaModuleCacheNV>;
+pub type PFN_vkGetExecutionGraphPipelineNodeIndexAMDX = Option<NonNullPFN_vkGetExecutionGraphPipelineNodeIndexAMDX>;
+pub type PFN_vkGetExecutionGraphPipelineScratchSizeAMDX = Option<NonNullPFN_vkGetExecutionGraphPipelineScratchSizeAMDX>;
 pub type VkCompressedTriangleFormatAMDX = i32;
 pub type VkCudaFunctionNV = *mut VkCudaFunctionNV_T;
 pub type VkCudaModuleNV = *mut VkCudaModuleNV_T;

@@ -71,4 +71,24 @@ pub const VK_STRUCTURE_TYPE_SCREEN_BUFFER_FORMAT_PROPERTIES_QNX: VkStructureType
 pub const VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX: VkStructureType = 1000529000;
 pub const VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX: VkStructureType = 1000378000;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateScreenSurfaceQNX(instance: VkInstance, pCreateInfo: *const VkScreenSurfaceCreateInfoQNX, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceScreenPresentationSupportQNX(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, window: *mut _screen_window) -> VkBool32;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetScreenBufferPropertiesQNX(device: VkDevice, buffer: *const _screen_buffer, pProperties: *mut VkScreenBufferPropertiesQNX) -> VkResult;
+}
+
+pub type NonNullPFN_vkCreateScreenSurfaceQNX = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkScreenSurfaceCreateInfoQNX, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceScreenPresentationSupportQNX = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, window: *mut _screen_window) -> VkBool32;
+pub type NonNullPFN_vkGetScreenBufferPropertiesQNX = unsafe extern "system" fn(device: VkDevice, buffer: *const _screen_buffer, pProperties: *mut VkScreenBufferPropertiesQNX) -> VkResult;
+pub type PFN_vkCreateScreenSurfaceQNX = Option<NonNullPFN_vkCreateScreenSurfaceQNX>;
+pub type PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX = Option<NonNullPFN_vkGetPhysicalDeviceScreenPresentationSupportQNX>;
+pub type PFN_vkGetScreenBufferPropertiesQNX = Option<NonNullPFN_vkGetScreenBufferPropertiesQNX>;
 pub type VkScreenSurfaceCreateFlagsQNX = VkFlags;

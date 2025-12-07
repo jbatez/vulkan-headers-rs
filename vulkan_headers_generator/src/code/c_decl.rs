@@ -45,6 +45,14 @@ impl CDecl {
         decl
     }
 
+    pub(crate) fn parse_cmd_decl(s: &str) -> CDecl {
+        let mut parser = CDeclParser { s };
+        let decl = parser.parse_decl();
+        assert_eq!(decl.bit_field_width, None);
+        assert_eq!(parser.peek_next_token(), None);
+        decl
+    }
+
     pub(crate) fn parse_define_constant<'a>(s: &'a str, name: &str) -> Option<&'a str> {
         let mut parser = CDeclParser { s };
         parser.parse_define_constant(name)

@@ -263,7 +263,7 @@ pub enum {name} {{
         let c_decl = CDecl::parse_typedef_decl(&text);
 
         assert_eq!(c_decl.ident.unwrap(), name);
-        let alias = rust_type_from_c_type(&c_decl.typ);
+        let alias = rust_type_from_c_type(&c_decl.typ, false);
         Self::add_type_alias(name, &alias, module);
     }
 
@@ -458,7 +458,7 @@ pub enum {name} {{
                 }
 
                 s += "    pub ";
-                rust_decl_from_c(&mut s, &c_decl);
+                rust_decl_from_c_decl(&mut s, &c_decl, false);
                 s += ",\n";
             }
         }
@@ -540,8 +540,88 @@ pub enum {name} {{
     }
 
     fn require_command(&mut self, cmd: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
-        if self.items.insert(cmd.name.clone().unwrap()) {
-            // TODO
+        let name = cmd.name.as_ref().unwrap().as_str();
+        if self.items.insert(name.to_string()) {
+            let cmd = index.commands[name];
+            let signature = if let Some(alias) = cmd.alias.as_ref() {
+                let alias_cmd = index.commands[alias.as_str()];
+                Self::collect_command_signature(alias_cmd, index)
+            } else {
+                Self::collect_command_signature(cmd, index)
+            };
+
+            Self::add_pfn_type_aliases(&format!("PFN_{name}"), &signature, module);
+            Self::add_extern_function(name, cmd, &signature, index, module);
         }
+    }
+
+    fn collect_proto_text(proto: &Proto) -> String {
+        let mut s = String::new();
+        for content in &proto.contents {
+            match content {
+                ProtoContent::Text(text) => s += text,
+                ProtoContent::Type(text) => s += text,
+                ProtoContent::Name(text) => s += text,
+            }
+        }
+        s
+    }
+
+    fn collect_param_text(param: &Param) -> String {
+        let mut s = String::new();
+        for content in &param.contents {
+            match content {
+                ParamContent::Text(text) => s += text,
+                ParamContent::Type(text) => s += text,
+                ParamContent::Name(text) => s += text,
+            }
+        }
+        s
+    }
+
+    fn collect_command_signature(cmd: &Command, index: &RegistryIndex) -> String {
+        let mut return_type = None;
+        let mut params = Vec::new();
+
+        for content in &cmd.contents {
+            match content {
+                CommandContent::Proto(proto) => {
+                    let text = Self::collect_proto_text(proto);
+                    let c_decl = CDecl::parse_cmd_decl(&text);
+                    assert!(return_type.is_none());
+                    return_type = Some(c_decl.typ);
+                }
+                CommandContent::Param(param) => {
+                    if index.api_matches(&param.api) {
+                        let text = Self::collect_param_text(param);
+                        params.push(CDecl::parse_cmd_decl(&text));
+                    }
+                }
+                CommandContent::ImplicitExternSyncParams(_) => (),
+            }
+        }
+
+        rust_fn_signature_from_c(&return_type.unwrap(), &params)
+    }
+
+    fn add_extern_function(
+        name: &str,
+        cmd: &Command,
+        signature: &str,
+        index: &RegistryIndex,
+        module: &mut Module,
+    ) {
+        let feature = if cmd.export.is_some() && index.api_matches(&cmd.export) {
+            "exported_prototypes"
+        } else {
+            "prototypes"
+        };
+
+        let mut text = String::new();
+        text += &format!("    /// Available if built with `{feature}`.\n");
+        text += &format!("    #[cfg(any(doc, feature = \"{feature}\"))]\n");
+        text += &format!("    pub fn {name}{signature};");
+
+        module.extern_functions.push((name.to_string(), text));
     }
 }

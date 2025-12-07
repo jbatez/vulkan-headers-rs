@@ -17553,16 +17553,3553 @@ pub const fn VK_VERSION_PATCH(version: u32) -> u32 {
     version & 0xFFF
 }
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireDrmDisplayEXT(physicalDevice: VkPhysicalDevice, drmFd: i32, display: VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireNextImage2KHR(device: VkDevice, pAcquireInfo: *const VkAcquireNextImageInfoKHR, pImageIndex: *mut u32) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireNextImageKHR(device: VkDevice, swapchain: VkSwapchainKHR, timeout: u64, semaphore: VkSemaphore, fence: VkFence, pImageIndex: *mut u32) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquirePerformanceConfigurationINTEL(device: VkDevice, pAcquireInfo: *const VkPerformanceConfigurationAcquireInfoINTEL, pConfiguration: *mut VkPerformanceConfigurationINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireProfilingLockKHR(device: VkDevice, pInfo: *const VkAcquireProfilingLockInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkAllocateCommandBuffers(device: VkDevice, pAllocateInfo: *const VkCommandBufferAllocateInfo, pCommandBuffers: *mut VkCommandBuffer) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkAllocateDescriptorSets(device: VkDevice, pAllocateInfo: *const VkDescriptorSetAllocateInfo, pDescriptorSets: *mut VkDescriptorSet) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkAllocateMemory(device: VkDevice, pAllocateInfo: *const VkMemoryAllocateInfo, pAllocator: *const VkAllocationCallbacks, pMemory: *mut VkDeviceMemory) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAntiLagUpdateAMD(device: VkDevice, pData: *const VkAntiLagDataAMD);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkBeginCommandBuffer(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkCommandBufferBeginInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindAccelerationStructureMemoryNV(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindAccelerationStructureMemoryInfoNV) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkBindBufferMemory(device: VkDevice, buffer: VkBuffer, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkBindBufferMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindBufferMemory2KHR(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindDataGraphPipelineSessionMemoryARM(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindDataGraphPipelineSessionMemoryInfoARM) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkBindImageMemory(device: VkDevice, image: VkImage, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkBindImageMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindImageMemory2KHR(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindOpticalFlowSessionImageNV(device: VkDevice, session: VkOpticalFlowSessionNV, bindingPoint: VkOpticalFlowSessionBindingPointNV, view: VkImageView, layout: VkImageLayout) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindTensorMemoryARM(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindTensorMemoryInfoARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBindVideoSessionMemoryKHR(device: VkDevice, videoSession: VkVideoSessionKHR, bindSessionMemoryInfoCount: u32, pBindSessionMemoryInfos: *const VkBindVideoSessionMemoryInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBuildAccelerationStructuresKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, ppBuildRangeInfos: *const *const VkAccelerationStructureBuildRangeInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkBuildMicromapsEXT(device: VkDevice, deferredOperation: VkDeferredOperationKHR, infoCount: u32, pInfos: *const VkMicromapBuildInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginConditionalRenderingEXT(commandBuffer: VkCommandBuffer, pConditionalRenderingBegin: *const VkConditionalRenderingBeginInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginCustomResolveEXT(commandBuffer: VkCommandBuffer, pBeginCustomResolveInfo: *const VkBeginCustomResolveInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginDebugUtilsLabelEXT(commandBuffer: VkCommandBuffer, pLabelInfo: *const VkDebugUtilsLabelEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginPerTileExecutionQCOM(commandBuffer: VkCommandBuffer, pPerTileBeginInfo: *const VkPerTileBeginInfoQCOM);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBeginQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginQueryIndexedEXT(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags, index: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBeginRenderPass(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, contents: VkSubpassContents);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBeginRenderPass2(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginRenderPass2KHR(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBeginRendering(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginRenderingKHR(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginTransformFeedbackEXT(commandBuffer: VkCommandBuffer, firstCounterBuffer: u32, counterBufferCount: u32, pCounterBuffers: *const VkBuffer, pCounterBufferOffsets: *const VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBeginVideoCodingKHR(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkVideoBeginCodingInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(commandBuffer: VkCommandBuffer, pBindDescriptorBufferEmbeddedSamplersInfo: *const VkBindDescriptorBufferEmbeddedSamplersInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindDescriptorBufferEmbeddedSamplersEXT(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindDescriptorBuffersEXT(commandBuffer: VkCommandBuffer, bufferCount: u32, pBindingInfos: *const VkDescriptorBufferBindingInfoEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindDescriptorSets(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet, dynamicOffsetCount: u32, pDynamicOffsets: *const u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindDescriptorSets2(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindDescriptorSets2KHR(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindIndexBuffer(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, indexType: VkIndexType);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindIndexBuffer2(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindIndexBuffer2KHR(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindInvocationMaskHUAWEI(commandBuffer: VkCommandBuffer, imageView: VkImageView, imageLayout: VkImageLayout);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindPipeline(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindPipelineShaderGroupNV(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline, groupIndex: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindShadersEXT(commandBuffer: VkCommandBuffer, stageCount: u32, pStages: *const VkShaderStageFlagBits, pShaders: *const VkShaderEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindShadingRateImageNV(commandBuffer: VkCommandBuffer, imageView: VkImageView, imageLayout: VkImageLayout);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindTileMemoryQCOM(commandBuffer: VkCommandBuffer, pTileMemoryBindInfo: *const VkTileMemoryBindInfoQCOM);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindTransformFeedbackBuffersEXT(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindVertexBuffers(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBindVertexBuffers2(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBindVertexBuffers2EXT(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBlitImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageBlit, filter: VkFilter);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdBlitImage2(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBlitImage2KHR(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildAccelerationStructureNV(commandBuffer: VkCommandBuffer, pInfo: *const VkAccelerationStructureInfoNV, instanceData: VkBuffer, instanceOffset: VkDeviceSize, update: VkBool32, dst: VkAccelerationStructureNV, src: VkAccelerationStructureNV, scratch: VkBuffer, scratchOffset: VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildAccelerationStructuresIndirectKHR(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, pIndirectDeviceAddresses: *const VkDeviceAddress, pIndirectStrides: *const u32, ppMaxPrimitiveCounts: *const *const u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildAccelerationStructuresKHR(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, ppBuildRangeInfos: *const *const VkAccelerationStructureBuildRangeInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildClusterAccelerationStructureIndirectNV(commandBuffer: VkCommandBuffer, pCommandInfos: *const VkClusterAccelerationStructureCommandsInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildMicromapsEXT(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkMicromapBuildInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdBuildPartitionedAccelerationStructuresNV(commandBuffer: VkCommandBuffer, pBuildInfo: *const VkBuildPartitionedAccelerationStructureInfoNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdClearAttachments(commandBuffer: VkCommandBuffer, attachmentCount: u32, pAttachments: *const VkClearAttachment, rectCount: u32, pRects: *const VkClearRect);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdClearColorImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pColor: *const VkClearColorValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdClearDepthStencilImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pDepthStencil: *const VkClearDepthStencilValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdControlVideoCodingKHR(commandBuffer: VkCommandBuffer, pCodingControlInfo: *const VkVideoCodingControlInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdConvertCooperativeVectorMatrixNV(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkConvertCooperativeVectorMatrixInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyAccelerationStructureKHR(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyAccelerationStructureInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyAccelerationStructureNV(commandBuffer: VkCommandBuffer, dst: VkAccelerationStructureNV, src: VkAccelerationStructureNV, mode: VkCopyAccelerationStructureModeKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyAccelerationStructureToMemoryKHR(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyBuffer(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferCopy);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyBuffer2(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyBuffer2KHR(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyBufferToImage(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkBufferImageCopy);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyBufferToImage2(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyBufferToImage2KHR(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageCopy);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyImage2(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyImage2KHR(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyImageToBuffer(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferImageCopy);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyImageToBuffer2(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyImageToBuffer2KHR(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryIndirectKHR(commandBuffer: VkCommandBuffer, pCopyMemoryIndirectInfo: *const VkCopyMemoryIndirectInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryIndirectNV(commandBuffer: VkCommandBuffer, copyBufferAddress: VkDeviceAddress, copyCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryToAccelerationStructureKHR(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMemoryToAccelerationStructureInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryToImageIndirectKHR(commandBuffer: VkCommandBuffer, pCopyMemoryToImageIndirectInfo: *const VkCopyMemoryToImageIndirectInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryToImageIndirectNV(commandBuffer: VkCommandBuffer, copyBufferAddress: VkDeviceAddress, copyCount: u32, stride: u32, dstImage: VkImage, dstImageLayout: VkImageLayout, pImageSubresources: *const VkImageSubresourceLayers);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMemoryToMicromapEXT(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMemoryToMicromapInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMicromapEXT(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMicromapInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyMicromapToMemoryEXT(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMicromapToMemoryInfoEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdCopyQueryPoolResults(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, stride: VkDeviceSize, flags: VkQueryResultFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCopyTensorARM(commandBuffer: VkCommandBuffer, pCopyTensorInfo: *const VkCopyTensorInfoARM);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdCuLaunchKernelNVX(commandBuffer: VkCommandBuffer, pLaunchInfo: *const VkCuLaunchInfoNVX);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDebugMarkerBeginEXT(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkDebugMarkerMarkerInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDebugMarkerEndEXT(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDebugMarkerInsertEXT(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkDebugMarkerMarkerInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDecodeVideoKHR(commandBuffer: VkCommandBuffer, pDecodeInfo: *const VkVideoDecodeInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDecompressMemoryEXT(commandBuffer: VkCommandBuffer, pDecompressMemoryInfoEXT: *const VkDecompressMemoryInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDecompressMemoryIndirectCountEXT(commandBuffer: VkCommandBuffer, decompressionMethod: VkMemoryDecompressionMethodFlagsEXT, indirectCommandsAddress: VkDeviceAddress, indirectCommandsCountAddress: VkDeviceAddress, maxDecompressionCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDecompressMemoryIndirectCountNV(commandBuffer: VkCommandBuffer, indirectCommandsAddress: VkDeviceAddress, indirectCommandsCountAddress: VkDeviceAddress, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDecompressMemoryNV(commandBuffer: VkCommandBuffer, decompressRegionCount: u32, pDecompressMemoryRegions: *const VkDecompressMemoryRegionNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDispatch(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDispatchBase(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchBaseKHR(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchDataGraphARM(commandBuffer: VkCommandBuffer, session: VkDataGraphPipelineSessionARM, pInfo: *const VkDataGraphPipelineDispatchInfoARM);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDispatchIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDispatchTileQCOM(commandBuffer: VkCommandBuffer, pDispatchTileInfo: *const VkDispatchTileInfoQCOM);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDraw(commandBuffer: VkCommandBuffer, vertexCount: u32, instanceCount: u32, firstVertex: u32, firstInstance: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawClusterHUAWEI(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawClusterIndirectHUAWEI(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDrawIndexed(commandBuffer: VkCommandBuffer, indexCount: u32, instanceCount: u32, firstIndex: u32, vertexOffset: i32, firstInstance: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDrawIndexedIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDrawIndexedIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawIndexedIndirectCountAMD(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawIndexedIndirectCountKHR(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDrawIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawIndirectByteCountEXT(commandBuffer: VkCommandBuffer, instanceCount: u32, firstInstance: u32, counterBuffer: VkBuffer, counterBufferOffset: VkDeviceSize, counterOffset: u32, vertexStride: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdDrawIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawIndirectCountAMD(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawIndirectCountKHR(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksEXT(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksIndirectCountEXT(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksIndirectCountNV(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksIndirectEXT(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksIndirectNV(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMeshTasksNV(commandBuffer: VkCommandBuffer, taskCount: u32, firstTask: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMultiEXT(commandBuffer: VkCommandBuffer, drawCount: u32, pVertexInfo: *const VkMultiDrawInfoEXT, instanceCount: u32, firstInstance: u32, stride: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdDrawMultiIndexedEXT(commandBuffer: VkCommandBuffer, drawCount: u32, pIndexInfo: *const VkMultiDrawIndexedInfoEXT, instanceCount: u32, firstInstance: u32, stride: u32, pVertexOffset: *const i32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEncodeVideoKHR(commandBuffer: VkCommandBuffer, pEncodeInfo: *const VkVideoEncodeInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndConditionalRenderingEXT(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndDebugUtilsLabelEXT(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndPerTileExecutionQCOM(commandBuffer: VkCommandBuffer, pPerTileEndInfo: *const VkPerTileEndInfoQCOM);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdEndQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndQueryIndexedEXT(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, index: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdEndRenderPass(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdEndRenderPass2(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndRenderPass2KHR(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdEndRendering(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndRendering2EXT(commandBuffer: VkCommandBuffer, pRenderingEndInfo: *const VkRenderingEndInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndRendering2KHR(commandBuffer: VkCommandBuffer, pRenderingEndInfo: *const VkRenderingEndInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndRenderingKHR(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndTransformFeedbackEXT(commandBuffer: VkCommandBuffer, firstCounterBuffer: u32, counterBufferCount: u32, pCounterBuffers: *const VkBuffer, pCounterBufferOffsets: *const VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdEndVideoCodingKHR(commandBuffer: VkCommandBuffer, pEndCodingInfo: *const VkVideoEndCodingInfoKHR);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdExecuteCommands(commandBuffer: VkCommandBuffer, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdExecuteGeneratedCommandsEXT(commandBuffer: VkCommandBuffer, isPreprocessed: VkBool32, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdExecuteGeneratedCommandsNV(commandBuffer: VkCommandBuffer, isPreprocessed: VkBool32, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdFillBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, size: VkDeviceSize, data: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdInsertDebugUtilsLabelEXT(commandBuffer: VkCommandBuffer, pLabelInfo: *const VkDebugUtilsLabelEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdNextSubpass(commandBuffer: VkCommandBuffer, contents: VkSubpassContents);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdNextSubpass2(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdNextSubpass2KHR(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdOpticalFlowExecuteNV(commandBuffer: VkCommandBuffer, session: VkOpticalFlowSessionNV, pExecuteInfo: *const VkOpticalFlowExecuteInfoNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPipelineBarrier(commandBuffer: VkCommandBuffer, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, dependencyFlags: VkDependencyFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPipelineBarrier2(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPipelineBarrier2KHR(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPreprocessGeneratedCommandsEXT(commandBuffer: VkCommandBuffer, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoEXT, stateCommandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPreprocessGeneratedCommandsNV(commandBuffer: VkCommandBuffer, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushConstants(commandBuffer: VkCommandBuffer, layout: VkPipelineLayout, stageFlags: VkShaderStageFlags, offset: u32, size: u32, pValues: *const c_void);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushConstants2(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPushConstants2KHR(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushDescriptorSet(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushDescriptorSet2(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPushDescriptorSet2KHR(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPushDescriptorSetKHR(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushDescriptorSetWithTemplate(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdPushDescriptorSetWithTemplate2(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPushDescriptorSetWithTemplate2KHR(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdPushDescriptorSetWithTemplateKHR(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdResetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdResetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdResetEvent2KHR(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdResetQueryPool(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdResolveImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageResolve);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdResolveImage2(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdResolveImage2KHR(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetAlphaToCoverageEnableEXT(commandBuffer: VkCommandBuffer, alphaToCoverageEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetAlphaToOneEnableEXT(commandBuffer: VkCommandBuffer, alphaToOneEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetAttachmentFeedbackLoopEnableEXT(commandBuffer: VkCommandBuffer, aspectMask: VkImageAspectFlags);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetBlendConstants(commandBuffer: VkCommandBuffer, blendConstants: *const f32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCheckpointNV(commandBuffer: VkCommandBuffer, pCheckpointMarker: *const c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoarseSampleOrderNV(commandBuffer: VkCommandBuffer, sampleOrderType: VkCoarseSampleOrderTypeNV, customSampleOrderCount: u32, pCustomSampleOrders: *const VkCoarseSampleOrderCustomNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetColorBlendAdvancedEXT(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendAdvanced: *const VkColorBlendAdvancedEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetColorBlendEnableEXT(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendEnables: *const VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetColorBlendEquationEXT(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendEquations: *const VkColorBlendEquationEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetColorWriteEnableEXT(commandBuffer: VkCommandBuffer, attachmentCount: u32, pColorWriteEnables: *const VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetColorWriteMaskEXT(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorWriteMasks: *const VkColorComponentFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetConservativeRasterizationModeEXT(commandBuffer: VkCommandBuffer, conservativeRasterizationMode: VkConservativeRasterizationModeEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageModulationModeNV(commandBuffer: VkCommandBuffer, coverageModulationMode: VkCoverageModulationModeNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageModulationTableEnableNV(commandBuffer: VkCommandBuffer, coverageModulationTableEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageModulationTableNV(commandBuffer: VkCommandBuffer, coverageModulationTableCount: u32, pCoverageModulationTable: *const f32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageReductionModeNV(commandBuffer: VkCommandBuffer, coverageReductionMode: VkCoverageReductionModeNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageToColorEnableNV(commandBuffer: VkCommandBuffer, coverageToColorEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCoverageToColorLocationNV(commandBuffer: VkCommandBuffer, coverageToColorLocation: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetCullMode(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetCullModeEXT(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthBias(commandBuffer: VkCommandBuffer, depthBiasConstantFactor: f32, depthBiasClamp: f32, depthBiasSlopeFactor: f32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthBias2EXT(commandBuffer: VkCommandBuffer, pDepthBiasInfo: *const VkDepthBiasInfoEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthBiasEnable(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthBiasEnableEXT(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthBounds(commandBuffer: VkCommandBuffer, minDepthBounds: f32, maxDepthBounds: f32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthBoundsTestEnable(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthBoundsTestEnableEXT(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthClampEnableEXT(commandBuffer: VkCommandBuffer, depthClampEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthClampRangeEXT(commandBuffer: VkCommandBuffer, depthClampMode: VkDepthClampModeEXT, pDepthClampRange: *const VkDepthClampRangeEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthClipEnableEXT(commandBuffer: VkCommandBuffer, depthClipEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthClipNegativeOneToOneEXT(commandBuffer: VkCommandBuffer, negativeOneToOne: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthCompareOp(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthCompareOpEXT(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthTestEnable(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthTestEnableEXT(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDepthWriteEnable(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDepthWriteEnableEXT(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDescriptorBufferOffsets2EXT(commandBuffer: VkCommandBuffer, pSetDescriptorBufferOffsetsInfo: *const VkSetDescriptorBufferOffsetsInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, setCount: u32, pBufferIndices: *const u32, pOffsets: *const VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetDeviceMask(commandBuffer: VkCommandBuffer, deviceMask: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDeviceMaskKHR(commandBuffer: VkCommandBuffer, deviceMask: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDiscardRectangleEXT(commandBuffer: VkCommandBuffer, firstDiscardRectangle: u32, discardRectangleCount: u32, pDiscardRectangles: *const VkRect2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDiscardRectangleEnableEXT(commandBuffer: VkCommandBuffer, discardRectangleEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetDiscardRectangleModeEXT(commandBuffer: VkCommandBuffer, discardRectangleMode: VkDiscardRectangleModeEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetEvent2KHR(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetExclusiveScissorEnableNV(commandBuffer: VkCommandBuffer, firstExclusiveScissor: u32, exclusiveScissorCount: u32, pExclusiveScissorEnables: *const VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetExclusiveScissorNV(commandBuffer: VkCommandBuffer, firstExclusiveScissor: u32, exclusiveScissorCount: u32, pExclusiveScissors: *const VkRect2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetExtraPrimitiveOverestimationSizeEXT(commandBuffer: VkCommandBuffer, extraPrimitiveOverestimationSize: f32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetFragmentShadingRateEnumNV(commandBuffer: VkCommandBuffer, shadingRate: VkFragmentShadingRateNV, combinerOps: *const VkFragmentShadingRateCombinerOpKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetFragmentShadingRateKHR(commandBuffer: VkCommandBuffer, pFragmentSize: *const VkExtent2D, combinerOps: *const VkFragmentShadingRateCombinerOpKHR);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetFrontFace(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetFrontFaceEXT(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLineRasterizationModeEXT(commandBuffer: VkCommandBuffer, lineRasterizationMode: VkLineRasterizationModeEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetLineStipple(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLineStippleEXT(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLineStippleEnableEXT(commandBuffer: VkCommandBuffer, stippledLineEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLineStippleKHR(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetLineWidth(commandBuffer: VkCommandBuffer, lineWidth: f32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLogicOpEXT(commandBuffer: VkCommandBuffer, logicOp: VkLogicOp);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetLogicOpEnableEXT(commandBuffer: VkCommandBuffer, logicOpEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPatchControlPointsEXT(commandBuffer: VkCommandBuffer, patchControlPoints: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPerformanceMarkerINTEL(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkPerformanceMarkerInfoINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPerformanceOverrideINTEL(commandBuffer: VkCommandBuffer, pOverrideInfo: *const VkPerformanceOverrideInfoINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPerformanceStreamMarkerINTEL(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkPerformanceStreamMarkerInfoINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPolygonModeEXT(commandBuffer: VkCommandBuffer, polygonMode: VkPolygonMode);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetPrimitiveRestartEnable(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPrimitiveRestartEnableEXT(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetPrimitiveTopology(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetPrimitiveTopologyEXT(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetProvokingVertexModeEXT(commandBuffer: VkCommandBuffer, provokingVertexMode: VkProvokingVertexModeEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRasterizationSamplesEXT(commandBuffer: VkCommandBuffer, rasterizationSamples: VkSampleCountFlagBits);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRasterizationStreamEXT(commandBuffer: VkCommandBuffer, rasterizationStream: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetRasterizerDiscardEnable(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRasterizerDiscardEnableEXT(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRayTracingPipelineStackSizeKHR(commandBuffer: VkCommandBuffer, pipelineStackSize: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetRenderingAttachmentLocations(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRenderingAttachmentLocationsKHR(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetRenderingInputAttachmentIndices(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRenderingInputAttachmentIndicesKHR(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetRepresentativeFragmentTestEnableNV(commandBuffer: VkCommandBuffer, representativeFragmentTestEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetSampleLocationsEXT(commandBuffer: VkCommandBuffer, pSampleLocationsInfo: *const VkSampleLocationsInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetSampleLocationsEnableEXT(commandBuffer: VkCommandBuffer, sampleLocationsEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetSampleMaskEXT(commandBuffer: VkCommandBuffer, samples: VkSampleCountFlagBits, pSampleMask: *const VkSampleMask);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetScissor(commandBuffer: VkCommandBuffer, firstScissor: u32, scissorCount: u32, pScissors: *const VkRect2D);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetScissorWithCount(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetScissorWithCountEXT(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetShadingRateImageEnableNV(commandBuffer: VkCommandBuffer, shadingRateImageEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetStencilCompareMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, compareMask: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetStencilOp(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetStencilOpEXT(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetStencilReference(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, reference: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetStencilTestEnable(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetStencilTestEnableEXT(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetStencilWriteMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, writeMask: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetTessellationDomainOriginEXT(commandBuffer: VkCommandBuffer, domainOrigin: VkTessellationDomainOrigin);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetVertexInputEXT(commandBuffer: VkCommandBuffer, vertexBindingDescriptionCount: u32, pVertexBindingDescriptions: *const VkVertexInputBindingDescription2EXT, vertexAttributeDescriptionCount: u32, pVertexAttributeDescriptions: *const VkVertexInputAttributeDescription2EXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetViewport(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewports: *const VkViewport);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetViewportShadingRatePaletteNV(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pShadingRatePalettes: *const VkShadingRatePaletteNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetViewportSwizzleNV(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewportSwizzles: *const VkViewportSwizzleNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetViewportWScalingEnableNV(commandBuffer: VkCommandBuffer, viewportWScalingEnable: VkBool32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetViewportWScalingNV(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewportWScalings: *const VkViewportWScalingNV);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdSetViewportWithCount(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetViewportWithCountEXT(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSubpassShadingHUAWEI(commandBuffer: VkCommandBuffer);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdTraceRaysIndirect2KHR(commandBuffer: VkCommandBuffer, indirectDeviceAddress: VkDeviceAddress);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdTraceRaysIndirectKHR(commandBuffer: VkCommandBuffer, pRaygenShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pMissShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pHitShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pCallableShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, indirectDeviceAddress: VkDeviceAddress);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdTraceRaysKHR(commandBuffer: VkCommandBuffer, pRaygenShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pMissShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pHitShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pCallableShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, width: u32, height: u32, depth: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdTraceRaysNV(commandBuffer: VkCommandBuffer, raygenShaderBindingTableBuffer: VkBuffer, raygenShaderBindingOffset: VkDeviceSize, missShaderBindingTableBuffer: VkBuffer, missShaderBindingOffset: VkDeviceSize, missShaderBindingStride: VkDeviceSize, hitShaderBindingTableBuffer: VkBuffer, hitShaderBindingOffset: VkDeviceSize, hitShaderBindingStride: VkDeviceSize, callableShaderBindingTableBuffer: VkBuffer, callableShaderBindingOffset: VkDeviceSize, callableShaderBindingStride: VkDeviceSize, width: u32, height: u32, depth: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdUpdateBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, dataSize: VkDeviceSize, pData: *const c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdUpdatePipelineIndirectBufferNV(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdWaitEvents(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdWaitEvents2(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWaitEvents2KHR(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteAccelerationStructuresPropertiesKHR(commandBuffer: VkCommandBuffer, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureKHR, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteAccelerationStructuresPropertiesNV(commandBuffer: VkCommandBuffer, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureNV, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteBufferMarker2AMD(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, marker: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteBufferMarkerAMD(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, marker: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteMicromapsPropertiesEXT(commandBuffer: VkCommandBuffer, micromapCount: u32, pMicromaps: *const VkMicromapEXT, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdWriteTimestamp(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, queryPool: VkQueryPool, query: u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCmdWriteTimestamp2(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdWriteTimestamp2KHR(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCompileDeferredNV(device: VkDevice, pipeline: VkPipeline, shader: u32) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkConvertCooperativeVectorMatrixNV(device: VkDevice, pInfo: *const VkConvertCooperativeVectorMatrixInfoNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyAccelerationStructureKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyAccelerationStructureInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyAccelerationStructureToMemoryKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCopyImageToImage(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyImageToImageEXT(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCopyImageToMemory(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyImageToMemoryEXT(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyMemoryToAccelerationStructureKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMemoryToAccelerationStructureInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCopyMemoryToImage(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyMemoryToImageEXT(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyMemoryToMicromapEXT(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMemoryToMicromapInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyMicromapEXT(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMicromapInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCopyMicromapToMemoryEXT(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMicromapToMemoryInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateAccelerationStructureKHR(device: VkDevice, pCreateInfo: *const VkAccelerationStructureCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pAccelerationStructure: *mut VkAccelerationStructureKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateAccelerationStructureNV(device: VkDevice, pCreateInfo: *const VkAccelerationStructureCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pAccelerationStructure: *mut VkAccelerationStructureNV) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateBuffer(device: VkDevice, pCreateInfo: *const VkBufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pBuffer: *mut VkBuffer) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateBufferView(device: VkDevice, pCreateInfo: *const VkBufferViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkBufferView) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateCommandPool(device: VkDevice, pCreateInfo: *const VkCommandPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pCommandPool: *mut VkCommandPool) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateComputePipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkComputePipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateCuFunctionNVX(device: VkDevice, pCreateInfo: *const VkCuFunctionCreateInfoNVX, pAllocator: *const VkAllocationCallbacks, pFunction: *mut VkCuFunctionNVX) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateCuModuleNVX(device: VkDevice, pCreateInfo: *const VkCuModuleCreateInfoNVX, pAllocator: *const VkAllocationCallbacks, pModule: *mut VkCuModuleNVX) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDataGraphPipelineSessionARM(device: VkDevice, pCreateInfo: *const VkDataGraphPipelineSessionCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pSession: *mut VkDataGraphPipelineSessionARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDataGraphPipelinesARM(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkDataGraphPipelineCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDebugReportCallbackEXT(instance: VkInstance, pCreateInfo: *const VkDebugReportCallbackCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pCallback: *mut VkDebugReportCallbackEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDebugUtilsMessengerEXT(instance: VkInstance, pCreateInfo: *const VkDebugUtilsMessengerCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pMessenger: *mut VkDebugUtilsMessengerEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDeferredOperationKHR(device: VkDevice, pAllocator: *const VkAllocationCallbacks, pDeferredOperation: *mut VkDeferredOperationKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateDescriptorPool(device: VkDevice, pCreateInfo: *const VkDescriptorPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorPool: *mut VkDescriptorPool) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateDescriptorSetLayout(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pSetLayout: *mut VkDescriptorSetLayout) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateDescriptorUpdateTemplate(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDescriptorUpdateTemplateKHR(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateDevice(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDisplayModeKHR(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pCreateInfo: *const VkDisplayModeCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pMode: *mut VkDisplayModeKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateDisplayPlaneSurfaceKHR(instance: VkInstance, pCreateInfo: *const VkDisplaySurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateEvent(device: VkDevice, pCreateInfo: *const VkEventCreateInfo, pAllocator: *const VkAllocationCallbacks, pEvent: *mut VkEvent) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateExternalComputeQueueNV(device: VkDevice, pCreateInfo: *const VkExternalComputeQueueCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pExternalQueue: *mut VkExternalComputeQueueNV) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateFence(device: VkDevice, pCreateInfo: *const VkFenceCreateInfo, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateFramebuffer(device: VkDevice, pCreateInfo: *const VkFramebufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pFramebuffer: *mut VkFramebuffer) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateGraphicsPipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkGraphicsPipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateHeadlessSurfaceEXT(instance: VkInstance, pCreateInfo: *const VkHeadlessSurfaceCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateImage(device: VkDevice, pCreateInfo: *const VkImageCreateInfo, pAllocator: *const VkAllocationCallbacks, pImage: *mut VkImage) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateImageView(device: VkDevice, pCreateInfo: *const VkImageViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkImageView) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateIndirectCommandsLayoutEXT(device: VkDevice, pCreateInfo: *const VkIndirectCommandsLayoutCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pIndirectCommandsLayout: *mut VkIndirectCommandsLayoutEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateIndirectCommandsLayoutNV(device: VkDevice, pCreateInfo: *const VkIndirectCommandsLayoutCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pIndirectCommandsLayout: *mut VkIndirectCommandsLayoutNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateIndirectExecutionSetEXT(device: VkDevice, pCreateInfo: *const VkIndirectExecutionSetCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pIndirectExecutionSet: *mut VkIndirectExecutionSetEXT) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateInstance(pCreateInfo: *const VkInstanceCreateInfo, pAllocator: *const VkAllocationCallbacks, pInstance: *mut VkInstance) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateMicromapEXT(device: VkDevice, pCreateInfo: *const VkMicromapCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pMicromap: *mut VkMicromapEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateOpticalFlowSessionNV(device: VkDevice, pCreateInfo: *const VkOpticalFlowSessionCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pSession: *mut VkOpticalFlowSessionNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreatePipelineBinariesKHR(device: VkDevice, pCreateInfo: *const VkPipelineBinaryCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pBinaries: *mut VkPipelineBinaryHandlesInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreatePipelineCache(device: VkDevice, pCreateInfo: *const VkPipelineCacheCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineCache: *mut VkPipelineCache) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreatePipelineLayout(device: VkDevice, pCreateInfo: *const VkPipelineLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineLayout: *mut VkPipelineLayout) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreatePrivateDataSlot(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreatePrivateDataSlotEXT(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateQueryPool(device: VkDevice, pCreateInfo: *const VkQueryPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pQueryPool: *mut VkQueryPool) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateRayTracingPipelinesKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkRayTracingPipelineCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateRayTracingPipelinesNV(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkRayTracingPipelineCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateRenderPass(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateRenderPass2(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateRenderPass2KHR(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateSampler(device: VkDevice, pCreateInfo: *const VkSamplerCreateInfo, pAllocator: *const VkAllocationCallbacks, pSampler: *mut VkSampler) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateSamplerYcbcrConversion(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateSamplerYcbcrConversionKHR(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateSemaphore(device: VkDevice, pCreateInfo: *const VkSemaphoreCreateInfo, pAllocator: *const VkAllocationCallbacks, pSemaphore: *mut VkSemaphore) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkCreateShaderModule(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pAllocator: *const VkAllocationCallbacks, pShaderModule: *mut VkShaderModule) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateShadersEXT(device: VkDevice, createInfoCount: u32, pCreateInfos: *const VkShaderCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pShaders: *mut VkShaderEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateSharedSwapchainsKHR(device: VkDevice, swapchainCount: u32, pCreateInfos: *const VkSwapchainCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSwapchains: *mut VkSwapchainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateSwapchainKHR(device: VkDevice, pCreateInfo: *const VkSwapchainCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSwapchain: *mut VkSwapchainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateTensorARM(device: VkDevice, pCreateInfo: *const VkTensorCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pTensor: *mut VkTensorARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateTensorViewARM(device: VkDevice, pCreateInfo: *const VkTensorViewCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pView: *mut VkTensorViewARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateValidationCacheEXT(device: VkDevice, pCreateInfo: *const VkValidationCacheCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pValidationCache: *mut VkValidationCacheEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateVideoSessionKHR(device: VkDevice, pCreateInfo: *const VkVideoSessionCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pVideoSession: *mut VkVideoSessionKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateVideoSessionParametersKHR(device: VkDevice, pCreateInfo: *const VkVideoSessionParametersCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pVideoSessionParameters: *mut VkVideoSessionParametersKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDebugMarkerSetObjectNameEXT(device: VkDevice, pNameInfo: *const VkDebugMarkerObjectNameInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDebugMarkerSetObjectTagEXT(device: VkDevice, pTagInfo: *const VkDebugMarkerObjectTagInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDebugReportMessageEXT(instance: VkInstance, flags: VkDebugReportFlagsEXT, objectType: VkDebugReportObjectTypeEXT, object: u64, location: usize, messageCode: i32, pLayerPrefix: *const c_char, pMessage: *const c_char);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDeferredOperationJoinKHR(device: VkDevice, operation: VkDeferredOperationKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyAccelerationStructureKHR(device: VkDevice, accelerationStructure: VkAccelerationStructureKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyAccelerationStructureNV(device: VkDevice, accelerationStructure: VkAccelerationStructureNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyBuffer(device: VkDevice, buffer: VkBuffer, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyBufferView(device: VkDevice, bufferView: VkBufferView, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyCommandPool(device: VkDevice, commandPool: VkCommandPool, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyCuFunctionNVX(device: VkDevice, function: VkCuFunctionNVX, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyCuModuleNVX(device: VkDevice, module: VkCuModuleNVX, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyDataGraphPipelineSessionARM(device: VkDevice, session: VkDataGraphPipelineSessionARM, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyDebugReportCallbackEXT(instance: VkInstance, callback: VkDebugReportCallbackEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyDebugUtilsMessengerEXT(instance: VkInstance, messenger: VkDebugUtilsMessengerEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyDeferredOperationKHR(device: VkDevice, operation: VkDeferredOperationKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyDescriptorSetLayout(device: VkDevice, descriptorSetLayout: VkDescriptorSetLayout, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyDescriptorUpdateTemplate(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyDescriptorUpdateTemplateKHR(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyDevice(device: VkDevice, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyEvent(device: VkDevice, event: VkEvent, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyExternalComputeQueueNV(device: VkDevice, externalQueue: VkExternalComputeQueueNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyFence(device: VkDevice, fence: VkFence, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyFramebuffer(device: VkDevice, framebuffer: VkFramebuffer, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyImage(device: VkDevice, image: VkImage, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyImageView(device: VkDevice, imageView: VkImageView, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyIndirectCommandsLayoutEXT(device: VkDevice, indirectCommandsLayout: VkIndirectCommandsLayoutEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyIndirectCommandsLayoutNV(device: VkDevice, indirectCommandsLayout: VkIndirectCommandsLayoutNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyIndirectExecutionSetEXT(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyInstance(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyMicromapEXT(device: VkDevice, micromap: VkMicromapEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyOpticalFlowSessionNV(device: VkDevice, session: VkOpticalFlowSessionNV, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyPipeline(device: VkDevice, pipeline: VkPipeline, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyPipelineBinaryKHR(device: VkDevice, pipelineBinary: VkPipelineBinaryKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyPipelineCache(device: VkDevice, pipelineCache: VkPipelineCache, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyPipelineLayout(device: VkDevice, pipelineLayout: VkPipelineLayout, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyPrivateDataSlot(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyPrivateDataSlotEXT(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyQueryPool(device: VkDevice, queryPool: VkQueryPool, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyRenderPass(device: VkDevice, renderPass: VkRenderPass, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroySampler(device: VkDevice, sampler: VkSampler, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroySamplerYcbcrConversion(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroySamplerYcbcrConversionKHR(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroySemaphore(device: VkDevice, semaphore: VkSemaphore, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyShaderEXT(device: VkDevice, shader: VkShaderEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDestroyShaderModule(device: VkDevice, shaderModule: VkShaderModule, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroySurfaceKHR(instance: VkInstance, surface: VkSurfaceKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroySwapchainKHR(device: VkDevice, swapchain: VkSwapchainKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyTensorARM(device: VkDevice, tensor: VkTensorARM, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyTensorViewARM(device: VkDevice, tensorView: VkTensorViewARM, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyValidationCacheEXT(device: VkDevice, validationCache: VkValidationCacheEXT, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyVideoSessionKHR(device: VkDevice, videoSession: VkVideoSessionKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyVideoSessionParametersKHR(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkDeviceWaitIdle(device: VkDevice) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDisplayPowerControlEXT(device: VkDevice, display: VkDisplayKHR, pDisplayPowerInfo: *const VkDisplayPowerInfoEXT) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEndCommandBuffer(commandBuffer: VkCommandBuffer) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumerateDeviceLayerProperties(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumerateInstanceExtensionProperties(pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumerateInstanceLayerProperties(pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumerateInstanceVersion(pApiVersion: *mut u32) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumeratePhysicalDeviceGroups(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkEnumeratePhysicalDeviceGroupsKHR(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pCounterCount: *mut u32, pCounters: *mut VkPerformanceCounterARM, pCounterDescriptions: *mut VkPerformanceCounterDescriptionARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pCounterCount: *mut u32, pCounters: *mut VkPerformanceCounterKHR, pCounterDescriptions: *mut VkPerformanceCounterDescriptionKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkEnumeratePhysicalDevices(instance: VkInstance, pPhysicalDeviceCount: *mut u32, pPhysicalDevices: *mut VkPhysicalDevice) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkFlushMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkFreeCommandBuffers(device: VkDevice, commandPool: VkCommandPool, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkFreeDescriptorSets(device: VkDevice, descriptorPool: VkDescriptorPool, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkFreeMemory(device: VkDevice, memory: VkDeviceMemory, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAccelerationStructureBuildSizesKHR(device: VkDevice, buildType: VkAccelerationStructureBuildTypeKHR, pBuildInfo: *const VkAccelerationStructureBuildGeometryInfoKHR, pMaxPrimitiveCounts: *const u32, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAccelerationStructureDeviceAddressKHR(device: VkDevice, pInfo: *const VkAccelerationStructureDeviceAddressInfoKHR) -> VkDeviceAddress;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAccelerationStructureHandleNV(device: VkDevice, accelerationStructure: VkAccelerationStructureNV, dataSize: usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAccelerationStructureMemoryRequirementsNV(device: VkDevice, pInfo: *const VkAccelerationStructureMemoryRequirementsInfoNV, pMemoryRequirements: *mut VkMemoryRequirements2KHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkAccelerationStructureCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetBufferDeviceAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferDeviceAddressEXT(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferDeviceAddressKHR(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetBufferMemoryRequirements(device: VkDevice, buffer: VkBuffer, pMemoryRequirements: *mut VkMemoryRequirements);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetBufferMemoryRequirements2(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferMemoryRequirements2KHR(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetBufferOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferOpaqueCaptureAddressKHR(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkBufferCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetCalibratedTimestampsEXT(device: VkDevice, timestampCount: u32, pTimestampInfos: *const VkCalibratedTimestampInfoKHR, pTimestamps: *mut u64, pMaxDeviation: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetCalibratedTimestampsKHR(device: VkDevice, timestampCount: u32, pTimestampInfos: *const VkCalibratedTimestampInfoKHR, pTimestamps: *mut u64, pMaxDeviation: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetClusterAccelerationStructureBuildSizesNV(device: VkDevice, pInfo: *const VkClusterAccelerationStructureInputInfoNV, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDataGraphPipelineAvailablePropertiesARM(device: VkDevice, pPipelineInfo: *const VkDataGraphPipelineInfoARM, pPropertiesCount: *mut u32, pProperties: *mut VkDataGraphPipelinePropertyARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDataGraphPipelinePropertiesARM(device: VkDevice, pPipelineInfo: *const VkDataGraphPipelineInfoARM, propertiesCount: u32, pProperties: *mut VkDataGraphPipelinePropertyQueryResultARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDataGraphPipelineSessionBindPointRequirementsARM(device: VkDevice, pInfo: *const VkDataGraphPipelineSessionBindPointRequirementsInfoARM, pBindPointRequirementCount: *mut u32, pBindPointRequirements: *mut VkDataGraphPipelineSessionBindPointRequirementARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDataGraphPipelineSessionMemoryRequirementsARM(device: VkDevice, pInfo: *const VkDataGraphPipelineSessionMemoryRequirementsInfoARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeferredOperationMaxConcurrencyKHR(device: VkDevice, operation: VkDeferredOperationKHR) -> u32;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeferredOperationResultKHR(device: VkDevice, operation: VkDeferredOperationKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorEXT(device: VkDevice, pDescriptorInfo: *const VkDescriptorGetInfoEXT, dataSize: usize, pDescriptor: *mut c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorSetHostMappingVALVE(device: VkDevice, descriptorSet: VkDescriptorSet, ppData: *mut *mut c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorSetLayoutBindingOffsetEXT(device: VkDevice, layout: VkDescriptorSetLayout, binding: u32, pOffset: *mut VkDeviceSize);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorSetLayoutHostMappingInfoVALVE(device: VkDevice, pBindingReference: *const VkDescriptorSetBindingReferenceVALVE, pHostMapping: *mut VkDescriptorSetLayoutHostMappingInfoVALVE);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorSetLayoutSizeEXT(device: VkDevice, layout: VkDescriptorSetLayout, pLayoutSizeInBytes: *mut VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDescriptorSetLayoutSupport(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDescriptorSetLayoutSupportKHR(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceAccelerationStructureCompatibilityKHR(device: VkDevice, pVersionInfo: *const VkAccelerationStructureVersionInfoKHR, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceBufferMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceBufferMemoryRequirementsKHR(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceFaultInfoEXT(device: VkDevice, pFaultCounts: *mut VkDeviceFaultCountsEXT, pFaultInfo: *mut VkDeviceFaultInfoEXT) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceGroupPeerMemoryFeatures(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceGroupPeerMemoryFeaturesKHR(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceGroupPresentCapabilitiesKHR(device: VkDevice, pDeviceGroupPresentCapabilities: *mut VkDeviceGroupPresentCapabilitiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceGroupSurfacePresentModesKHR(device: VkDevice, surface: VkSurfaceKHR, pModes: *mut VkDeviceGroupPresentModeFlagsKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceImageMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceImageMemoryRequirementsKHR(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceImageSparseMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceImageSparseMemoryRequirementsKHR(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceImageSubresourceLayout(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceImageSubresourceLayoutKHR(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceMemoryCommitment(device: VkDevice, memory: VkDeviceMemory, pCommittedMemoryInBytes: *mut VkDeviceSize);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceMemoryOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceMemoryOpaqueCaptureAddressKHR(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceMicromapCompatibilityEXT(device: VkDevice, pVersionInfo: *const VkMicromapVersionInfoEXT, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceProcAddr(device: VkDevice, pName: *const c_char) -> PFN_vkVoidFunction;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceQueue(device: VkDevice, queueFamilyIndex: u32, queueIndex: u32, pQueue: *mut VkQueue);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetDeviceQueue2(device: VkDevice, pQueueInfo: *const VkDeviceQueueInfo2, pQueue: *mut VkQueue);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(device: VkDevice, renderpass: VkRenderPass, pMaxWorkgroupSize: *mut VkExtent2D) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceTensorMemoryRequirementsARM(device: VkDevice, pInfo: *const VkDeviceTensorMemoryRequirementsARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDisplayModeProperties2KHR(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pPropertyCount: *mut u32, pProperties: *mut VkDisplayModeProperties2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDisplayModePropertiesKHR(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pPropertyCount: *mut u32, pProperties: *mut VkDisplayModePropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDisplayPlaneCapabilities2KHR(physicalDevice: VkPhysicalDevice, pDisplayPlaneInfo: *const VkDisplayPlaneInfo2KHR, pCapabilities: *mut VkDisplayPlaneCapabilities2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDisplayPlaneCapabilitiesKHR(physicalDevice: VkPhysicalDevice, mode: VkDisplayModeKHR, planeIndex: u32, pCapabilities: *mut VkDisplayPlaneCapabilitiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDisplayPlaneSupportedDisplaysKHR(physicalDevice: VkPhysicalDevice, planeIndex: u32, pDisplayCount: *mut u32, pDisplays: *mut VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDrmDisplayEXT(physicalDevice: VkPhysicalDevice, drmFd: i32, connectorId: u32, display: *mut VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDynamicRenderingTilePropertiesQCOM(device: VkDevice, pRenderingInfo: *const VkRenderingInfo, pProperties: *mut VkTilePropertiesQCOM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetEncodedVideoSessionParametersKHR(device: VkDevice, pVideoSessionParametersInfo: *const VkVideoEncodeSessionParametersGetInfoKHR, pFeedbackInfo: *mut VkVideoEncodeSessionParametersFeedbackInfoKHR, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetEventStatus(device: VkDevice, event: VkEvent) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetExternalComputeQueueDataNV(externalQueue: VkExternalComputeQueueNV, params: *mut VkExternalComputeQueueDataParamsNV, pData: *mut c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetFenceFdKHR(device: VkDevice, pGetFdInfo: *const VkFenceGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetFenceStatus(device: VkDevice, fence: VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetFramebufferTilePropertiesQCOM(device: VkDevice, framebuffer: VkFramebuffer, pPropertiesCount: *mut u32, pProperties: *mut VkTilePropertiesQCOM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetGeneratedCommandsMemoryRequirementsEXT(device: VkDevice, pInfo: *const VkGeneratedCommandsMemoryRequirementsInfoEXT, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetGeneratedCommandsMemoryRequirementsNV(device: VkDevice, pInfo: *const VkGeneratedCommandsMemoryRequirementsInfoNV, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageDrmFormatModifierPropertiesEXT(device: VkDevice, image: VkImage, pProperties: *mut VkImageDrmFormatModifierPropertiesEXT) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageMemoryRequirements(device: VkDevice, image: VkImage, pMemoryRequirements: *mut VkMemoryRequirements);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageMemoryRequirements2(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageMemoryRequirements2KHR(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkImageCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageSparseMemoryRequirements(device: VkDevice, image: VkImage, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageSparseMemoryRequirements2(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageSparseMemoryRequirements2KHR(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageSubresourceLayout(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource, pLayout: *mut VkSubresourceLayout);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetImageSubresourceLayout2(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageSubresourceLayout2EXT(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageSubresourceLayout2KHR(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageViewAddressNVX(device: VkDevice, imageView: VkImageView, pProperties: *mut VkImageViewAddressPropertiesNVX) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageViewHandle64NVX(device: VkDevice, pInfo: *const VkImageViewHandleInfoNVX) -> u64;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageViewHandleNVX(device: VkDevice, pInfo: *const VkImageViewHandleInfoNVX) -> u32;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetImageViewOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkImageViewCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetInstanceProcAddr(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetLatencyTimingsNV(device: VkDevice, swapchain: VkSwapchainKHR, pLatencyMarkerInfo: *mut VkGetLatencyMarkerInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryFdKHR(device: VkDevice, pGetFdInfo: *const VkMemoryGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryFdPropertiesKHR(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, fd: c_int, pMemoryFdProperties: *mut VkMemoryFdPropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryHostPointerPropertiesEXT(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, pHostPointer: *const c_void, pMemoryHostPointerProperties: *mut VkMemoryHostPointerPropertiesEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryRemoteAddressNV(device: VkDevice, pMemoryGetRemoteAddressInfo: *const VkMemoryGetRemoteAddressInfoNV, pAddress: *mut VkRemoteAddressNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMicromapBuildSizesEXT(device: VkDevice, buildType: VkAccelerationStructureBuildTypeKHR, pBuildInfo: *const VkMicromapBuildInfoEXT, pSizeInfo: *mut VkMicromapBuildSizesInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPartitionedAccelerationStructuresBuildSizesNV(device: VkDevice, pInfo: *const VkPartitionedAccelerationStructureInstancesInputNV, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPastPresentationTimingEXT(device: VkDevice, pPastPresentationTimingInfo: *const VkPastPresentationTimingInfoEXT, pPastPresentationTimingProperties: *mut VkPastPresentationTimingPropertiesEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPastPresentationTimingGOOGLE(device: VkDevice, swapchain: VkSwapchainKHR, pPresentationTimingCount: *mut u32, pPresentationTimings: *mut VkPastPresentationTimingGOOGLE) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPerformanceParameterINTEL(device: VkDevice, parameter: VkPerformanceParameterTypeINTEL, pValue: *mut VkPerformanceValueINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(physicalDevice: VkPhysicalDevice, pTimeDomainCount: *mut u32, pTimeDomains: *mut VkTimeDomainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCalibrateableTimeDomainsKHR(physicalDevice: VkPhysicalDevice, pTimeDomainCount: *mut u32, pTimeDomains: *mut VkTimeDomainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixFlexibleDimensionsPropertiesNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixPropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixPropertiesNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceCooperativeVectorPropertiesNV(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeVectorPropertiesNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceDisplayPlaneProperties2KHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPlaneProperties2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceDisplayPlanePropertiesKHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPlanePropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceDisplayProperties2KHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayProperties2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceDisplayPropertiesKHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPropertiesKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalBufferProperties(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalBufferPropertiesKHR(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalFenceProperties(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalFencePropertiesKHR(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalImageFormatPropertiesNV(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, externalHandleType: VkExternalMemoryHandleTypeFlagsNV, pExternalImageFormatProperties: *mut VkExternalImageFormatPropertiesNV) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice: VkPhysicalDevice, pExternalTensorInfo: *const VkPhysicalDeviceExternalTensorInfoARM, pExternalTensorProperties: *mut VkExternalTensorPropertiesARM);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceFeatures(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceFeatures2(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceFeatures2KHR(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceFormatProperties2(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceFormatProperties2KHR(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceFragmentShadingRatesKHR(physicalDevice: VkPhysicalDevice, pFragmentShadingRateCount: *mut u32, pFragmentShadingRates: *mut VkPhysicalDeviceFragmentShadingRateKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceImageFormatProperties2(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceImageFormatProperties2KHR(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceMemoryProperties(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceMemoryProperties2(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceMemoryProperties2KHR(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceMultisamplePropertiesEXT(physicalDevice: VkPhysicalDevice, samples: VkSampleCountFlagBits, pMultisampleProperties: *mut VkMultisamplePropertiesEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceOpticalFlowImageFormatsNV(physicalDevice: VkPhysicalDevice, pOpticalFlowImageFormatInfo: *const VkOpticalFlowImageFormatInfoNV, pFormatCount: *mut u32, pImageFormatProperties: *mut VkOpticalFlowImageFormatPropertiesNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDevicePresentRectanglesKHR(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pRectCount: *mut u32, pRects: *mut VkRect2D) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceProperties(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceProperties2(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceProperties2KHR(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice: VkPhysicalDevice, pQueueFamilyDataGraphProcessingEngineInfo: *const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM, pQueueFamilyDataGraphProcessingEngineProperties: *mut VkQueueFamilyDataGraphProcessingEnginePropertiesARM);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pQueueFamilyDataGraphPropertyCount: *mut u32, pQueueFamilyDataGraphProperties: *mut VkQueueFamilyDataGraphPropertiesARM) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(physicalDevice: VkPhysicalDevice, pPerformanceQueryCreateInfo: *const VkQueryPoolPerformanceCreateInfoKHR, pNumPasses: *mut u32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyProperties2(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceQueueFamilyProperties2KHR(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceSparseImageFormatProperties2(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSparseImageFormatProperties2KHR(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(physicalDevice: VkPhysicalDevice, pCombinationCount: *mut u32, pCombinations: *mut VkFramebufferMixedSamplesCombinationNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceCapabilities2EXT(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceCapabilities: *mut VkSurfaceCapabilities2EXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceCapabilities2KHR(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pSurfaceCapabilities: *mut VkSurfaceCapabilities2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceCapabilitiesKHR(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceCapabilities: *mut VkSurfaceCapabilitiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceFormats2KHR(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pSurfaceFormatCount: *mut u32, pSurfaceFormats: *mut VkSurfaceFormat2KHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceFormatCount: *mut u32, pSurfaceFormats: *mut VkSurfaceFormatKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfacePresentModesKHR(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pPresentModeCount: *mut u32, pPresentModes: *mut VkPresentModeKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfaceSupportKHR(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, surface: VkSurfaceKHR, pSupported: *mut VkBool32) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPhysicalDeviceToolProperties(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceToolPropertiesEXT(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice: VkPhysicalDevice, pVideoProfile: *const VkVideoProfileInfoKHR, pCapabilities: *mut VkVideoCapabilitiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(physicalDevice: VkPhysicalDevice, pQualityLevelInfo: *const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR, pQualityLevelProperties: *mut VkVideoEncodeQualityLevelPropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceVideoFormatPropertiesKHR(physicalDevice: VkPhysicalDevice, pVideoFormatInfo: *const VkPhysicalDeviceVideoFormatInfoKHR, pVideoFormatPropertyCount: *mut u32, pVideoFormatProperties: *mut VkVideoFormatPropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineBinaryDataKHR(device: VkDevice, pInfo: *const VkPipelineBinaryDataInfoKHR, pPipelineBinaryKey: *mut VkPipelineBinaryKeyKHR, pPipelineBinaryDataSize: *mut usize, pPipelineBinaryData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPipelineCacheData(device: VkDevice, pipelineCache: VkPipelineCache, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineExecutableInternalRepresentationsKHR(device: VkDevice, pExecutableInfo: *const VkPipelineExecutableInfoKHR, pInternalRepresentationCount: *mut u32, pInternalRepresentations: *mut VkPipelineExecutableInternalRepresentationKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineExecutablePropertiesKHR(device: VkDevice, pPipelineInfo: *const VkPipelineInfoKHR, pExecutableCount: *mut u32, pProperties: *mut VkPipelineExecutablePropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineExecutableStatisticsKHR(device: VkDevice, pExecutableInfo: *const VkPipelineExecutableInfoKHR, pStatisticCount: *mut u32, pStatistics: *mut VkPipelineExecutableStatisticKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineIndirectDeviceAddressNV(device: VkDevice, pInfo: *const VkPipelineIndirectDeviceAddressInfoNV) -> VkDeviceAddress;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineIndirectMemoryRequirementsNV(device: VkDevice, pCreateInfo: *const VkComputePipelineCreateInfo, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelineKeyKHR(device: VkDevice, pPipelineCreateInfo: *const VkPipelineCreateInfoKHR, pPipelineKey: *mut VkPipelineBinaryKeyKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPipelinePropertiesEXT(device: VkDevice, pPipelineInfo: *const VkPipelineInfoEXT, pPipelineProperties: *mut VkBaseOutStructure) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPrivateDataEXT(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetQueryPoolResults(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dataSize: usize, pData: *mut c_void, stride: VkDeviceSize, flags: VkQueryResultFlags) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetQueueCheckpointData2NV(queue: VkQueue, pCheckpointDataCount: *mut u32, pCheckpointData: *mut VkCheckpointData2NV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetQueueCheckpointDataNV(queue: VkQueue, pCheckpointDataCount: *mut u32, pCheckpointData: *mut VkCheckpointDataNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRayTracingShaderGroupHandlesKHR(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRayTracingShaderGroupHandlesNV(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRayTracingShaderGroupStackSizeKHR(device: VkDevice, pipeline: VkPipeline, group: u32, groupShader: VkShaderGroupShaderKHR) -> VkDeviceSize;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRefreshCycleDurationGOOGLE(device: VkDevice, swapchain: VkSwapchainKHR, pDisplayTimingProperties: *mut VkRefreshCycleDurationGOOGLE) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetRenderAreaGranularity(device: VkDevice, renderPass: VkRenderPass, pGranularity: *mut VkExtent2D);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetRenderingAreaGranularity(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetRenderingAreaGranularityKHR(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSamplerOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkSamplerCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkGetSemaphoreCounterValue(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSemaphoreCounterValueKHR(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSemaphoreFdKHR(device: VkDevice, pGetFdInfo: *const VkSemaphoreGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetShaderBinaryDataEXT(device: VkDevice, shader: VkShaderEXT, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetShaderInfoAMD(device: VkDevice, pipeline: VkPipeline, shaderStage: VkShaderStageFlagBits, infoType: VkShaderInfoTypeAMD, pInfoSize: *mut usize, pInfo: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetShaderModuleCreateInfoIdentifierEXT(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pIdentifier: *mut VkShaderModuleIdentifierEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetShaderModuleIdentifierEXT(device: VkDevice, shaderModule: VkShaderModule, pIdentifier: *mut VkShaderModuleIdentifierEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainCounterEXT(device: VkDevice, swapchain: VkSwapchainKHR, counter: VkSurfaceCounterFlagBitsEXT, pCounterValue: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainImagesKHR(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainImageCount: *mut u32, pSwapchainImages: *mut VkImage) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainStatusKHR(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainTimeDomainPropertiesEXT(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainTimeDomainProperties: *mut VkSwapchainTimeDomainPropertiesEXT, pTimeDomainsCounter: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainTimingPropertiesEXT(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainTimingProperties: *mut VkSwapchainTimingPropertiesEXT, pSwapchainTimingPropertiesCounter: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetTensorMemoryRequirementsARM(device: VkDevice, pInfo: *const VkTensorMemoryRequirementsInfoARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetTensorOpaqueCaptureDescriptorDataARM(device: VkDevice, pInfo: *const VkTensorCaptureDescriptorDataInfoARM, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetTensorViewOpaqueCaptureDescriptorDataARM(device: VkDevice, pInfo: *const VkTensorViewCaptureDescriptorDataInfoARM, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetValidationCacheDataEXT(device: VkDevice, validationCache: VkValidationCacheEXT, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetVideoSessionMemoryRequirementsKHR(device: VkDevice, videoSession: VkVideoSessionKHR, pMemoryRequirementsCount: *mut u32, pMemoryRequirements: *mut VkVideoSessionMemoryRequirementsKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkImportFenceFdKHR(device: VkDevice, pImportFenceFdInfo: *const VkImportFenceFdInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkImportSemaphoreFdKHR(device: VkDevice, pImportSemaphoreFdInfo: *const VkImportSemaphoreFdInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkInitializePerformanceApiINTEL(device: VkDevice, pInitializeInfo: *const VkInitializePerformanceApiInfoINTEL) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkInvalidateMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkLatencySleepNV(device: VkDevice, swapchain: VkSwapchainKHR, pSleepInfo: *const VkLatencySleepInfoNV) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkMapMemory(device: VkDevice, memory: VkDeviceMemory, offset: VkDeviceSize, size: VkDeviceSize, flags: VkMemoryMapFlags, ppData: *mut *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkMapMemory2(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkMapMemory2KHR(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkMergePipelineCaches(device: VkDevice, dstCache: VkPipelineCache, srcCacheCount: u32, pSrcCaches: *const VkPipelineCache) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkMergeValidationCachesEXT(device: VkDevice, dstCache: VkValidationCacheEXT, srcCacheCount: u32, pSrcCaches: *const VkValidationCacheEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueBeginDebugUtilsLabelEXT(queue: VkQueue, pLabelInfo: *const VkDebugUtilsLabelEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkQueueBindSparse(queue: VkQueue, bindInfoCount: u32, pBindInfo: *const VkBindSparseInfo, fence: VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueEndDebugUtilsLabelEXT(queue: VkQueue);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueInsertDebugUtilsLabelEXT(queue: VkQueue, pLabelInfo: *const VkDebugUtilsLabelEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueNotifyOutOfBandNV(queue: VkQueue, pQueueTypeInfo: *const VkOutOfBandQueueTypeInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueuePresentKHR(queue: VkQueue, pPresentInfo: *const VkPresentInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueSetPerformanceConfigurationINTEL(queue: VkQueue, configuration: VkPerformanceConfigurationINTEL) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkQueueSubmit(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo, fence: VkFence) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkQueueSubmit2(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueSubmit2KHR(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkQueueWaitIdle(queue: VkQueue) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkRegisterDeviceEventEXT(device: VkDevice, pDeviceEventInfo: *const VkDeviceEventInfoEXT, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkRegisterDisplayEventEXT(device: VkDevice, display: VkDisplayKHR, pDisplayEventInfo: *const VkDisplayEventInfoEXT, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseCapturedPipelineDataKHR(device: VkDevice, pInfo: *const VkReleaseCapturedPipelineDataInfoKHR, pAllocator: *const VkAllocationCallbacks) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseDisplayEXT(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleasePerformanceConfigurationINTEL(device: VkDevice, configuration: VkPerformanceConfigurationINTEL) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseProfilingLockKHR(device: VkDevice);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseSwapchainImagesEXT(device: VkDevice, pReleaseInfo: *const VkReleaseSwapchainImagesInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseSwapchainImagesKHR(device: VkDevice, pReleaseInfo: *const VkReleaseSwapchainImagesInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetCommandBuffer(commandBuffer: VkCommandBuffer, flags: VkCommandBufferResetFlags) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolResetFlags) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, flags: VkDescriptorPoolResetFlags) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetEvent(device: VkDevice, event: VkEvent) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkResetQueryPool(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkResetQueryPoolEXT(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetDebugUtilsObjectNameEXT(device: VkDevice, pNameInfo: *const VkDebugUtilsObjectNameInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetDebugUtilsObjectTagEXT(device: VkDevice, pTagInfo: *const VkDebugUtilsObjectTagInfoEXT) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetDeviceMemoryPriorityEXT(device: VkDevice, memory: VkDeviceMemory, priority: f32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkSetEvent(device: VkDevice, event: VkEvent) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetHdrMetadataEXT(device: VkDevice, swapchainCount: u32, pSwapchains: *const VkSwapchainKHR, pMetadata: *const VkHdrMetadataEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetLatencyMarkerNV(device: VkDevice, swapchain: VkSwapchainKHR, pLatencyMarkerInfo: *const VkSetLatencyMarkerInfoNV);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetLatencySleepModeNV(device: VkDevice, swapchain: VkSwapchainKHR, pSleepModeInfo: *const VkLatencySleepModeInfoNV) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetLocalDimmingAMD(device: VkDevice, swapChain: VkSwapchainKHR, localDimmingEnable: VkBool32);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkSetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetPrivateDataEXT(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetSwapchainPresentTimingQueueSizeEXT(device: VkDevice, swapchain: VkSwapchainKHR, size: u32) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkSignalSemaphore(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSignalSemaphoreKHR(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSubmitDebugUtilsMessageEXT(instance: VkInstance, messageSeverity: VkDebugUtilsMessageSeverityFlagBitsEXT, messageTypes: VkDebugUtilsMessageTypeFlagsEXT, pCallbackData: *const VkDebugUtilsMessengerCallbackDataEXT);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkTransitionImageLayout(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkTransitionImageLayoutEXT(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkTrimCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkTrimCommandPoolKHR(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUninitializePerformanceApiINTEL(device: VkDevice);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkUnmapMemory(device: VkDevice, memory: VkDeviceMemory);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkUnmapMemory2(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUnmapMemory2KHR(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkUpdateDescriptorSetWithTemplate(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUpdateDescriptorSetWithTemplateKHR(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkUpdateDescriptorSets(device: VkDevice, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet, descriptorCopyCount: u32, pDescriptorCopies: *const VkCopyDescriptorSet);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUpdateIndirectExecutionSetPipelineEXT(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, executionSetWriteCount: u32, pExecutionSetWrites: *const VkWriteIndirectExecutionSetPipelineEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUpdateIndirectExecutionSetShaderEXT(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, executionSetWriteCount: u32, pExecutionSetWrites: *const VkWriteIndirectExecutionSetShaderEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkUpdateVideoSessionParametersKHR(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pUpdateInfo: *const VkVideoSessionParametersUpdateInfoKHR) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkWaitForFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence, waitAll: VkBool32, timeout: u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkWaitForPresent2KHR(device: VkDevice, swapchain: VkSwapchainKHR, pPresentWait2Info: *const VkPresentWait2InfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkWaitForPresentKHR(device: VkDevice, swapchain: VkSwapchainKHR, presentId: u64, timeout: u64) -> VkResult;
+
+    /// Available if built with `exported_prototypes`.
+    #[cfg(any(doc, feature = "exported_prototypes"))]
+    pub fn vkWaitSemaphores(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkWaitSemaphoresKHR(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkWriteAccelerationStructuresPropertiesKHR(device: VkDevice, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureKHR, queryType: VkQueryType, dataSize: usize, pData: *mut c_void, stride: usize) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkWriteMicromapsPropertiesEXT(device: VkDevice, micromapCount: u32, pMicromaps: *const VkMicromapEXT, queryType: VkQueryType, dataSize: usize, pData: *mut c_void, stride: usize) -> VkResult;
+}
+
+pub type NonNullPFN_vkAcquireDrmDisplayEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, drmFd: i32, display: VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkAcquireNextImage2KHR = unsafe extern "system" fn(device: VkDevice, pAcquireInfo: *const VkAcquireNextImageInfoKHR, pImageIndex: *mut u32) -> VkResult;
+pub type NonNullPFN_vkAcquireNextImageKHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, timeout: u64, semaphore: VkSemaphore, fence: VkFence, pImageIndex: *mut u32) -> VkResult;
+pub type NonNullPFN_vkAcquirePerformanceConfigurationINTEL = unsafe extern "system" fn(device: VkDevice, pAcquireInfo: *const VkPerformanceConfigurationAcquireInfoINTEL, pConfiguration: *mut VkPerformanceConfigurationINTEL) -> VkResult;
+pub type NonNullPFN_vkAcquireProfilingLockKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkAcquireProfilingLockInfoKHR) -> VkResult;
+pub type NonNullPFN_vkAllocateCommandBuffers = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkCommandBufferAllocateInfo, pCommandBuffers: *mut VkCommandBuffer) -> VkResult;
+pub type NonNullPFN_vkAllocateDescriptorSets = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkDescriptorSetAllocateInfo, pDescriptorSets: *mut VkDescriptorSet) -> VkResult;
+pub type NonNullPFN_vkAllocateMemory = unsafe extern "system" fn(device: VkDevice, pAllocateInfo: *const VkMemoryAllocateInfo, pAllocator: *const VkAllocationCallbacks, pMemory: *mut VkDeviceMemory) -> VkResult;
 pub type NonNullPFN_vkAllocationFunction = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, alignment: usize, allocationScope: VkSystemAllocationScope) -> *mut c_void;
+pub type NonNullPFN_vkAntiLagUpdateAMD = unsafe extern "system" fn(device: VkDevice, pData: *const VkAntiLagDataAMD);
+pub type NonNullPFN_vkBeginCommandBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkCommandBufferBeginInfo) -> VkResult;
+pub type NonNullPFN_vkBindAccelerationStructureMemoryNV = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindAccelerationStructureMemoryInfoNV) -> VkResult;
+pub type NonNullPFN_vkBindBufferMemory = unsafe extern "system" fn(device: VkDevice, buffer: VkBuffer, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+pub type NonNullPFN_vkBindBufferMemory2 = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkBindBufferMemory2KHR = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkBindDataGraphPipelineSessionMemoryARM = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindDataGraphPipelineSessionMemoryInfoARM) -> VkResult;
+pub type NonNullPFN_vkBindImageMemory = unsafe extern "system" fn(device: VkDevice, image: VkImage, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
+pub type NonNullPFN_vkBindImageMemory2 = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkBindImageMemory2KHR = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkBindOpticalFlowSessionImageNV = unsafe extern "system" fn(device: VkDevice, session: VkOpticalFlowSessionNV, bindingPoint: VkOpticalFlowSessionBindingPointNV, view: VkImageView, layout: VkImageLayout) -> VkResult;
+pub type NonNullPFN_vkBindTensorMemoryARM = unsafe extern "system" fn(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindTensorMemoryInfoARM) -> VkResult;
+pub type NonNullPFN_vkBindVideoSessionMemoryKHR = unsafe extern "system" fn(device: VkDevice, videoSession: VkVideoSessionKHR, bindSessionMemoryInfoCount: u32, pBindSessionMemoryInfos: *const VkBindVideoSessionMemoryInfoKHR) -> VkResult;
+pub type NonNullPFN_vkBuildAccelerationStructuresKHR = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, ppBuildRangeInfos: *const *const VkAccelerationStructureBuildRangeInfoKHR) -> VkResult;
+pub type NonNullPFN_vkBuildMicromapsEXT = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, infoCount: u32, pInfos: *const VkMicromapBuildInfoEXT) -> VkResult;
+pub type NonNullPFN_vkCmdBeginConditionalRenderingEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pConditionalRenderingBegin: *const VkConditionalRenderingBeginInfoEXT);
+pub type NonNullPFN_vkCmdBeginCustomResolveEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBeginCustomResolveInfo: *const VkBeginCustomResolveInfoEXT);
+pub type NonNullPFN_vkCmdBeginDebugUtilsLabelEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLabelInfo: *const VkDebugUtilsLabelEXT);
+pub type NonNullPFN_vkCmdBeginPerTileExecutionQCOM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPerTileBeginInfo: *const VkPerTileBeginInfoQCOM);
+pub type NonNullPFN_vkCmdBeginQuery = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags);
+pub type NonNullPFN_vkCmdBeginQueryIndexedEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags, index: u32);
+pub type NonNullPFN_vkCmdBeginRenderPass = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, contents: VkSubpassContents);
+pub type NonNullPFN_vkCmdBeginRenderPass2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
+pub type NonNullPFN_vkCmdBeginRenderPass2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
+pub type NonNullPFN_vkCmdBeginRendering = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
+pub type NonNullPFN_vkCmdBeginRenderingKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
+pub type NonNullPFN_vkCmdBeginTransformFeedbackEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstCounterBuffer: u32, counterBufferCount: u32, pCounterBuffers: *const VkBuffer, pCounterBufferOffsets: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdBeginVideoCodingKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkVideoBeginCodingInfoKHR);
+pub type NonNullPFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBindDescriptorBufferEmbeddedSamplersInfo: *const VkBindDescriptorBufferEmbeddedSamplersInfoEXT);
+pub type NonNullPFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32);
+pub type NonNullPFN_vkCmdBindDescriptorBuffersEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, bufferCount: u32, pBindingInfos: *const VkDescriptorBufferBindingInfoEXT);
+pub type NonNullPFN_vkCmdBindDescriptorSets = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet, dynamicOffsetCount: u32, pDynamicOffsets: *const u32);
+pub type NonNullPFN_vkCmdBindDescriptorSets2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
+pub type NonNullPFN_vkCmdBindDescriptorSets2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
+pub type NonNullPFN_vkCmdBindIndexBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, indexType: VkIndexType);
+pub type NonNullPFN_vkCmdBindIndexBuffer2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
+pub type NonNullPFN_vkCmdBindIndexBuffer2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
+pub type NonNullPFN_vkCmdBindInvocationMaskHUAWEI = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, imageView: VkImageView, imageLayout: VkImageLayout);
+pub type NonNullPFN_vkCmdBindPipeline = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
+pub type NonNullPFN_vkCmdBindPipelineShaderGroupNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline, groupIndex: u32);
+pub type NonNullPFN_vkCmdBindShadersEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stageCount: u32, pStages: *const VkShaderStageFlagBits, pShaders: *const VkShaderEXT);
+pub type NonNullPFN_vkCmdBindShadingRateImageNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, imageView: VkImageView, imageLayout: VkImageLayout);
+pub type NonNullPFN_vkCmdBindTileMemoryQCOM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pTileMemoryBindInfo: *const VkTileMemoryBindInfoQCOM);
+pub type NonNullPFN_vkCmdBindTransformFeedbackBuffersEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdBindVertexBuffers = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdBindVertexBuffers2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdBindVertexBuffers2EXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdBlitImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageBlit, filter: VkFilter);
+pub type NonNullPFN_vkCmdBlitImage2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
+pub type NonNullPFN_vkCmdBlitImage2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
+pub type NonNullPFN_vkCmdBuildAccelerationStructureNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkAccelerationStructureInfoNV, instanceData: VkBuffer, instanceOffset: VkDeviceSize, update: VkBool32, dst: VkAccelerationStructureNV, src: VkAccelerationStructureNV, scratch: VkBuffer, scratchOffset: VkDeviceSize);
+pub type NonNullPFN_vkCmdBuildAccelerationStructuresIndirectKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, pIndirectDeviceAddresses: *const VkDeviceAddress, pIndirectStrides: *const u32, ppMaxPrimitiveCounts: *const *const u32);
+pub type NonNullPFN_vkCmdBuildAccelerationStructuresKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkAccelerationStructureBuildGeometryInfoKHR, ppBuildRangeInfos: *const *const VkAccelerationStructureBuildRangeInfoKHR);
+pub type NonNullPFN_vkCmdBuildClusterAccelerationStructureIndirectNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCommandInfos: *const VkClusterAccelerationStructureCommandsInfoNV);
+pub type NonNullPFN_vkCmdBuildMicromapsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkMicromapBuildInfoEXT);
+pub type NonNullPFN_vkCmdBuildPartitionedAccelerationStructuresNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pBuildInfo: *const VkBuildPartitionedAccelerationStructureInfoNV);
+pub type NonNullPFN_vkCmdClearAttachments = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, attachmentCount: u32, pAttachments: *const VkClearAttachment, rectCount: u32, pRects: *const VkClearRect);
+pub type NonNullPFN_vkCmdClearColorImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pColor: *const VkClearColorValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+pub type NonNullPFN_vkCmdClearDepthStencilImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pDepthStencil: *const VkClearDepthStencilValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
+pub type NonNullPFN_vkCmdControlVideoCodingKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCodingControlInfo: *const VkVideoCodingControlInfoKHR);
+pub type NonNullPFN_vkCmdConvertCooperativeVectorMatrixNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, infoCount: u32, pInfos: *const VkConvertCooperativeVectorMatrixInfoNV);
+pub type NonNullPFN_vkCmdCopyAccelerationStructureKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyAccelerationStructureInfoKHR);
+pub type NonNullPFN_vkCmdCopyAccelerationStructureNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, dst: VkAccelerationStructureNV, src: VkAccelerationStructureNV, mode: VkCopyAccelerationStructureModeKHR);
+pub type NonNullPFN_vkCmdCopyAccelerationStructureToMemoryKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR);
+pub type NonNullPFN_vkCmdCopyBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferCopy);
+pub type NonNullPFN_vkCmdCopyBuffer2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
+pub type NonNullPFN_vkCmdCopyBuffer2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
+pub type NonNullPFN_vkCmdCopyBufferToImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkBufferImageCopy);
+pub type NonNullPFN_vkCmdCopyBufferToImage2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
+pub type NonNullPFN_vkCmdCopyBufferToImage2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
+pub type NonNullPFN_vkCmdCopyImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageCopy);
+pub type NonNullPFN_vkCmdCopyImage2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
+pub type NonNullPFN_vkCmdCopyImage2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
+pub type NonNullPFN_vkCmdCopyImageToBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferImageCopy);
+pub type NonNullPFN_vkCmdCopyImageToBuffer2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
+pub type NonNullPFN_vkCmdCopyImageToBuffer2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
+pub type NonNullPFN_vkCmdCopyMemoryIndirectKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyMemoryIndirectInfo: *const VkCopyMemoryIndirectInfoKHR);
+pub type NonNullPFN_vkCmdCopyMemoryIndirectNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, copyBufferAddress: VkDeviceAddress, copyCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMemoryToAccelerationStructureInfoKHR);
+pub type NonNullPFN_vkCmdCopyMemoryToImageIndirectKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyMemoryToImageIndirectInfo: *const VkCopyMemoryToImageIndirectInfoKHR);
+pub type NonNullPFN_vkCmdCopyMemoryToImageIndirectNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, copyBufferAddress: VkDeviceAddress, copyCount: u32, stride: u32, dstImage: VkImage, dstImageLayout: VkImageLayout, pImageSubresources: *const VkImageSubresourceLayers);
+pub type NonNullPFN_vkCmdCopyMemoryToMicromapEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMemoryToMicromapInfoEXT);
+pub type NonNullPFN_vkCmdCopyMicromapEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMicromapInfoEXT);
+pub type NonNullPFN_vkCmdCopyMicromapToMemoryEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMicromapToMemoryInfoEXT);
+pub type NonNullPFN_vkCmdCopyQueryPoolResults = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, stride: VkDeviceSize, flags: VkQueryResultFlags);
+pub type NonNullPFN_vkCmdCopyTensorARM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCopyTensorInfo: *const VkCopyTensorInfoARM);
+pub type NonNullPFN_vkCmdCuLaunchKernelNVX = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLaunchInfo: *const VkCuLaunchInfoNVX);
+pub type NonNullPFN_vkCmdDebugMarkerBeginEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkDebugMarkerMarkerInfoEXT);
+pub type NonNullPFN_vkCmdDebugMarkerEndEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdDebugMarkerInsertEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkDebugMarkerMarkerInfoEXT);
+pub type NonNullPFN_vkCmdDecodeVideoKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDecodeInfo: *const VkVideoDecodeInfoKHR);
+pub type NonNullPFN_vkCmdDecompressMemoryEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDecompressMemoryInfoEXT: *const VkDecompressMemoryInfoEXT);
+pub type NonNullPFN_vkCmdDecompressMemoryIndirectCountEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, decompressionMethod: VkMemoryDecompressionMethodFlagsEXT, indirectCommandsAddress: VkDeviceAddress, indirectCommandsCountAddress: VkDeviceAddress, maxDecompressionCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDecompressMemoryIndirectCountNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, indirectCommandsAddress: VkDeviceAddress, indirectCommandsCountAddress: VkDeviceAddress, stride: u32);
+pub type NonNullPFN_vkCmdDecompressMemoryNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, decompressRegionCount: u32, pDecompressMemoryRegions: *const VkDecompressMemoryRegionNV);
+pub type NonNullPFN_vkCmdDispatch = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+pub type NonNullPFN_vkCmdDispatchBase = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+pub type NonNullPFN_vkCmdDispatchBaseKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+pub type NonNullPFN_vkCmdDispatchDataGraphARM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, session: VkDataGraphPipelineSessionARM, pInfo: *const VkDataGraphPipelineDispatchInfoARM);
+pub type NonNullPFN_vkCmdDispatchIndirect = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
+pub type NonNullPFN_vkCmdDispatchTileQCOM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDispatchTileInfo: *const VkDispatchTileInfoQCOM);
+pub type NonNullPFN_vkCmdDraw = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, vertexCount: u32, instanceCount: u32, firstVertex: u32, firstInstance: u32);
+pub type NonNullPFN_vkCmdDrawClusterHUAWEI = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+pub type NonNullPFN_vkCmdDrawClusterIndirectHUAWEI = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
+pub type NonNullPFN_vkCmdDrawIndexed = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, indexCount: u32, instanceCount: u32, firstIndex: u32, vertexOffset: i32, firstInstance: u32);
+pub type NonNullPFN_vkCmdDrawIndexedIndirect = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndexedIndirectCount = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndexedIndirectCountAMD = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndexedIndirectCountKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndirect = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndirectByteCountEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, instanceCount: u32, firstInstance: u32, counterBuffer: VkBuffer, counterBufferOffset: VkDeviceSize, counterOffset: u32, vertexStride: u32);
+pub type NonNullPFN_vkCmdDrawIndirectCount = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndirectCountAMD = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawIndirectCountKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksIndirectCountEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksIndirectCountNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksIndirectEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksIndirectNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMeshTasksNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, taskCount: u32, firstTask: u32);
+pub type NonNullPFN_vkCmdDrawMultiEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, drawCount: u32, pVertexInfo: *const VkMultiDrawInfoEXT, instanceCount: u32, firstInstance: u32, stride: u32);
+pub type NonNullPFN_vkCmdDrawMultiIndexedEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, drawCount: u32, pIndexInfo: *const VkMultiDrawIndexedInfoEXT, instanceCount: u32, firstInstance: u32, stride: u32, pVertexOffset: *const i32);
+pub type NonNullPFN_vkCmdEncodeVideoKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pEncodeInfo: *const VkVideoEncodeInfoKHR);
+pub type NonNullPFN_vkCmdEndConditionalRenderingEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdEndDebugUtilsLabelEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdEndPerTileExecutionQCOM = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPerTileEndInfo: *const VkPerTileEndInfoQCOM);
+pub type NonNullPFN_vkCmdEndQuery = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32);
+pub type NonNullPFN_vkCmdEndQueryIndexedEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, index: u32);
+pub type NonNullPFN_vkCmdEndRenderPass = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdEndRenderPass2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
+pub type NonNullPFN_vkCmdEndRenderPass2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
+pub type NonNullPFN_vkCmdEndRendering = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdEndRendering2EXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderingEndInfo: *const VkRenderingEndInfoKHR);
+pub type NonNullPFN_vkCmdEndRendering2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRenderingEndInfo: *const VkRenderingEndInfoKHR);
+pub type NonNullPFN_vkCmdEndRenderingKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdEndTransformFeedbackEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstCounterBuffer: u32, counterBufferCount: u32, pCounterBuffers: *const VkBuffer, pCounterBufferOffsets: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdEndVideoCodingKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pEndCodingInfo: *const VkVideoEndCodingInfoKHR);
+pub type NonNullPFN_vkCmdExecuteCommands = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+pub type NonNullPFN_vkCmdExecuteGeneratedCommandsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, isPreprocessed: VkBool32, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoEXT);
+pub type NonNullPFN_vkCmdExecuteGeneratedCommandsNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, isPreprocessed: VkBool32, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
+pub type NonNullPFN_vkCmdFillBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, size: VkDeviceSize, data: u32);
+pub type NonNullPFN_vkCmdInsertDebugUtilsLabelEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLabelInfo: *const VkDebugUtilsLabelEXT);
+pub type NonNullPFN_vkCmdNextSubpass = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, contents: VkSubpassContents);
+pub type NonNullPFN_vkCmdNextSubpass2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
+pub type NonNullPFN_vkCmdNextSubpass2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
+pub type NonNullPFN_vkCmdOpticalFlowExecuteNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, session: VkOpticalFlowSessionNV, pExecuteInfo: *const VkOpticalFlowExecuteInfoNV);
+pub type NonNullPFN_vkCmdPipelineBarrier = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, dependencyFlags: VkDependencyFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+pub type NonNullPFN_vkCmdPipelineBarrier2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdPipelineBarrier2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdPreprocessGeneratedCommandsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoEXT, stateCommandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdPreprocessGeneratedCommandsNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
+pub type NonNullPFN_vkCmdPushConstants = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, layout: VkPipelineLayout, stageFlags: VkShaderStageFlags, offset: u32, size: u32, pValues: *const c_void);
+pub type NonNullPFN_vkCmdPushConstants2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
+pub type NonNullPFN_vkCmdPushConstants2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
+pub type NonNullPFN_vkCmdPushDescriptorSet = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
+pub type NonNullPFN_vkCmdPushDescriptorSet2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
+pub type NonNullPFN_vkCmdPushDescriptorSet2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
+pub type NonNullPFN_vkCmdPushDescriptorSetKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
+pub type NonNullPFN_vkCmdPushDescriptorSetWithTemplate = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
+pub type NonNullPFN_vkCmdPushDescriptorSetWithTemplate2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
+pub type NonNullPFN_vkCmdPushDescriptorSetWithTemplate2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
+pub type NonNullPFN_vkCmdPushDescriptorSetWithTemplateKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
+pub type NonNullPFN_vkCmdResetEvent = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+pub type NonNullPFN_vkCmdResetEvent2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
+pub type NonNullPFN_vkCmdResetEvent2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
+pub type NonNullPFN_vkCmdResetQueryPool = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+pub type NonNullPFN_vkCmdResolveImage = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageResolve);
+pub type NonNullPFN_vkCmdResolveImage2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
+pub type NonNullPFN_vkCmdResolveImage2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
+pub type NonNullPFN_vkCmdSetAlphaToCoverageEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, alphaToCoverageEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetAlphaToOneEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, alphaToOneEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetAttachmentFeedbackLoopEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, aspectMask: VkImageAspectFlags);
+pub type NonNullPFN_vkCmdSetBlendConstants = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, blendConstants: *const f32);
+pub type NonNullPFN_vkCmdSetCheckpointNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pCheckpointMarker: *const c_void);
+pub type NonNullPFN_vkCmdSetCoarseSampleOrderNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, sampleOrderType: VkCoarseSampleOrderTypeNV, customSampleOrderCount: u32, pCustomSampleOrders: *const VkCoarseSampleOrderCustomNV);
+pub type NonNullPFN_vkCmdSetColorBlendAdvancedEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendAdvanced: *const VkColorBlendAdvancedEXT);
+pub type NonNullPFN_vkCmdSetColorBlendEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendEnables: *const VkBool32);
+pub type NonNullPFN_vkCmdSetColorBlendEquationEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendEquations: *const VkColorBlendEquationEXT);
+pub type NonNullPFN_vkCmdSetColorWriteEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, attachmentCount: u32, pColorWriteEnables: *const VkBool32);
+pub type NonNullPFN_vkCmdSetColorWriteMaskEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorWriteMasks: *const VkColorComponentFlags);
+pub type NonNullPFN_vkCmdSetConservativeRasterizationModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, conservativeRasterizationMode: VkConservativeRasterizationModeEXT);
+pub type NonNullPFN_vkCmdSetCoverageModulationModeNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageModulationMode: VkCoverageModulationModeNV);
+pub type NonNullPFN_vkCmdSetCoverageModulationTableEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageModulationTableEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetCoverageModulationTableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageModulationTableCount: u32, pCoverageModulationTable: *const f32);
+pub type NonNullPFN_vkCmdSetCoverageReductionModeNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageReductionMode: VkCoverageReductionModeNV);
+pub type NonNullPFN_vkCmdSetCoverageToColorEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageToColorEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetCoverageToColorLocationNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageToColorLocation: u32);
+pub type NonNullPFN_vkCmdSetCullMode = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
+pub type NonNullPFN_vkCmdSetCullModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
+pub type NonNullPFN_vkCmdSetDepthBias = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBiasConstantFactor: f32, depthBiasClamp: f32, depthBiasSlopeFactor: f32);
+pub type NonNullPFN_vkCmdSetDepthBias2EXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pDepthBiasInfo: *const VkDepthBiasInfoEXT);
+pub type NonNullPFN_vkCmdSetDepthBiasEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthBiasEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthBounds = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, minDepthBounds: f32, maxDepthBounds: f32);
+pub type NonNullPFN_vkCmdSetDepthBoundsTestEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthBoundsTestEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthClampEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthClampEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthClampRangeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthClampMode: VkDepthClampModeEXT, pDepthClampRange: *const VkDepthClampRangeEXT);
+pub type NonNullPFN_vkCmdSetDepthClipEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthClipEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthClipNegativeOneToOneEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, negativeOneToOne: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthCompareOp = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
+pub type NonNullPFN_vkCmdSetDepthCompareOpEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
+pub type NonNullPFN_vkCmdSetDepthTestEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthTestEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthWriteEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDepthWriteEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDescriptorBufferOffsets2EXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSetDescriptorBufferOffsetsInfo: *const VkSetDescriptorBufferOffsetsInfoEXT);
+pub type NonNullPFN_vkCmdSetDescriptorBufferOffsetsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, setCount: u32, pBufferIndices: *const u32, pOffsets: *const VkDeviceSize);
+pub type NonNullPFN_vkCmdSetDeviceMask = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, deviceMask: u32);
+pub type NonNullPFN_vkCmdSetDeviceMaskKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, deviceMask: u32);
+pub type NonNullPFN_vkCmdSetDiscardRectangleEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstDiscardRectangle: u32, discardRectangleCount: u32, pDiscardRectangles: *const VkRect2D);
+pub type NonNullPFN_vkCmdSetDiscardRectangleEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, discardRectangleEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetDiscardRectangleModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, discardRectangleMode: VkDiscardRectangleModeEXT);
+pub type NonNullPFN_vkCmdSetEvent = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
+pub type NonNullPFN_vkCmdSetEvent2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdSetEvent2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdSetExclusiveScissorEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstExclusiveScissor: u32, exclusiveScissorCount: u32, pExclusiveScissorEnables: *const VkBool32);
+pub type NonNullPFN_vkCmdSetExclusiveScissorNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstExclusiveScissor: u32, exclusiveScissorCount: u32, pExclusiveScissors: *const VkRect2D);
+pub type NonNullPFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, extraPrimitiveOverestimationSize: f32);
+pub type NonNullPFN_vkCmdSetFragmentShadingRateEnumNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, shadingRate: VkFragmentShadingRateNV, combinerOps: *const VkFragmentShadingRateCombinerOpKHR);
+pub type NonNullPFN_vkCmdSetFragmentShadingRateKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pFragmentSize: *const VkExtent2D, combinerOps: *const VkFragmentShadingRateCombinerOpKHR);
+pub type NonNullPFN_vkCmdSetFrontFace = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
+pub type NonNullPFN_vkCmdSetFrontFaceEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
+pub type NonNullPFN_vkCmdSetLineRasterizationModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, lineRasterizationMode: VkLineRasterizationModeEXT);
+pub type NonNullPFN_vkCmdSetLineStipple = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+pub type NonNullPFN_vkCmdSetLineStippleEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+pub type NonNullPFN_vkCmdSetLineStippleEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stippledLineEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetLineStippleKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
+pub type NonNullPFN_vkCmdSetLineWidth = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, lineWidth: f32);
+pub type NonNullPFN_vkCmdSetLogicOpEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, logicOp: VkLogicOp);
+pub type NonNullPFN_vkCmdSetLogicOpEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, logicOpEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetPatchControlPointsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, patchControlPoints: u32);
+pub type NonNullPFN_vkCmdSetPerformanceMarkerINTEL = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkPerformanceMarkerInfoINTEL) -> VkResult;
+pub type NonNullPFN_vkCmdSetPerformanceOverrideINTEL = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pOverrideInfo: *const VkPerformanceOverrideInfoINTEL) -> VkResult;
+pub type NonNullPFN_vkCmdSetPerformanceStreamMarkerINTEL = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pMarkerInfo: *const VkPerformanceStreamMarkerInfoINTEL) -> VkResult;
+pub type NonNullPFN_vkCmdSetPolygonModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, polygonMode: VkPolygonMode);
+pub type NonNullPFN_vkCmdSetPrimitiveRestartEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetPrimitiveRestartEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetPrimitiveTopology = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
+pub type NonNullPFN_vkCmdSetPrimitiveTopologyEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
+pub type NonNullPFN_vkCmdSetProvokingVertexModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, provokingVertexMode: VkProvokingVertexModeEXT);
+pub type NonNullPFN_vkCmdSetRasterizationSamplesEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, rasterizationSamples: VkSampleCountFlagBits);
+pub type NonNullPFN_vkCmdSetRasterizationStreamEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, rasterizationStream: u32);
+pub type NonNullPFN_vkCmdSetRasterizerDiscardEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetRasterizerDiscardEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetRayTracingPipelineStackSizeKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineStackSize: u32);
+pub type NonNullPFN_vkCmdSetRenderingAttachmentLocations = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
+pub type NonNullPFN_vkCmdSetRenderingAttachmentLocationsKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
+pub type NonNullPFN_vkCmdSetRenderingInputAttachmentIndices = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
+pub type NonNullPFN_vkCmdSetRenderingInputAttachmentIndicesKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
+pub type NonNullPFN_vkCmdSetRepresentativeFragmentTestEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, representativeFragmentTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetSampleLocationsEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pSampleLocationsInfo: *const VkSampleLocationsInfoEXT);
+pub type NonNullPFN_vkCmdSetSampleLocationsEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, sampleLocationsEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetSampleMaskEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, samples: VkSampleCountFlagBits, pSampleMask: *const VkSampleMask);
+pub type NonNullPFN_vkCmdSetScissor = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstScissor: u32, scissorCount: u32, pScissors: *const VkRect2D);
+pub type NonNullPFN_vkCmdSetScissorWithCount = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
+pub type NonNullPFN_vkCmdSetScissorWithCountEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
+pub type NonNullPFN_vkCmdSetShadingRateImageEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, shadingRateImageEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetStencilCompareMask = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, compareMask: u32);
+pub type NonNullPFN_vkCmdSetStencilOp = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
+pub type NonNullPFN_vkCmdSetStencilOpEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
+pub type NonNullPFN_vkCmdSetStencilReference = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, reference: u32);
+pub type NonNullPFN_vkCmdSetStencilTestEnable = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetStencilTestEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetStencilWriteMask = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, writeMask: u32);
+pub type NonNullPFN_vkCmdSetTessellationDomainOriginEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, domainOrigin: VkTessellationDomainOrigin);
+pub type NonNullPFN_vkCmdSetVertexInputEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, vertexBindingDescriptionCount: u32, pVertexBindingDescriptions: *const VkVertexInputBindingDescription2EXT, vertexAttributeDescriptionCount: u32, pVertexAttributeDescriptions: *const VkVertexInputAttributeDescription2EXT);
+pub type NonNullPFN_vkCmdSetViewport = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewports: *const VkViewport);
+pub type NonNullPFN_vkCmdSetViewportShadingRatePaletteNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pShadingRatePalettes: *const VkShadingRatePaletteNV);
+pub type NonNullPFN_vkCmdSetViewportSwizzleNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewportSwizzles: *const VkViewportSwizzleNV);
+pub type NonNullPFN_vkCmdSetViewportWScalingEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, viewportWScalingEnable: VkBool32);
+pub type NonNullPFN_vkCmdSetViewportWScalingNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewportWScalings: *const VkViewportWScalingNV);
+pub type NonNullPFN_vkCmdSetViewportWithCount = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
+pub type NonNullPFN_vkCmdSetViewportWithCountEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
+pub type NonNullPFN_vkCmdSubpassShadingHUAWEI = unsafe extern "system" fn(commandBuffer: VkCommandBuffer);
+pub type NonNullPFN_vkCmdTraceRaysIndirect2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, indirectDeviceAddress: VkDeviceAddress);
+pub type NonNullPFN_vkCmdTraceRaysIndirectKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRaygenShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pMissShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pHitShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pCallableShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, indirectDeviceAddress: VkDeviceAddress);
+pub type NonNullPFN_vkCmdTraceRaysKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pRaygenShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pMissShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pHitShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, pCallableShaderBindingTable: *const VkStridedDeviceAddressRegionKHR, width: u32, height: u32, depth: u32);
+pub type NonNullPFN_vkCmdTraceRaysNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, raygenShaderBindingTableBuffer: VkBuffer, raygenShaderBindingOffset: VkDeviceSize, missShaderBindingTableBuffer: VkBuffer, missShaderBindingOffset: VkDeviceSize, missShaderBindingStride: VkDeviceSize, hitShaderBindingTableBuffer: VkBuffer, hitShaderBindingOffset: VkDeviceSize, hitShaderBindingStride: VkDeviceSize, callableShaderBindingTableBuffer: VkBuffer, callableShaderBindingOffset: VkDeviceSize, callableShaderBindingStride: VkDeviceSize, width: u32, height: u32, depth: u32);
+pub type NonNullPFN_vkCmdUpdateBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, dataSize: VkDeviceSize, pData: *const c_void);
+pub type NonNullPFN_vkCmdUpdatePipelineIndirectBufferNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
+pub type NonNullPFN_vkCmdWaitEvents = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
+pub type NonNullPFN_vkCmdWaitEvents2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdWaitEvents2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
+pub type NonNullPFN_vkCmdWriteAccelerationStructuresPropertiesKHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureKHR, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+pub type NonNullPFN_vkCmdWriteAccelerationStructuresPropertiesNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureNV, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+pub type NonNullPFN_vkCmdWriteBufferMarker2AMD = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, marker: u32);
+pub type NonNullPFN_vkCmdWriteBufferMarkerAMD = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, marker: u32);
+pub type NonNullPFN_vkCmdWriteMicromapsPropertiesEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, micromapCount: u32, pMicromaps: *const VkMicromapEXT, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
+pub type NonNullPFN_vkCmdWriteTimestamp = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, queryPool: VkQueryPool, query: u32);
+pub type NonNullPFN_vkCmdWriteTimestamp2 = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
+pub type NonNullPFN_vkCmdWriteTimestamp2KHR = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
+pub type NonNullPFN_vkCompileDeferredNV = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, shader: u32) -> VkResult;
+pub type NonNullPFN_vkConvertCooperativeVectorMatrixNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkConvertCooperativeVectorMatrixInfoNV) -> VkResult;
+pub type NonNullPFN_vkCopyAccelerationStructureKHR = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyAccelerationStructureInfoKHR) -> VkResult;
+pub type NonNullPFN_vkCopyAccelerationStructureToMemoryKHR = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR) -> VkResult;
+pub type NonNullPFN_vkCopyImageToImage = unsafe extern "system" fn(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
+pub type NonNullPFN_vkCopyImageToImageEXT = unsafe extern "system" fn(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
+pub type NonNullPFN_vkCopyImageToMemory = unsafe extern "system" fn(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkCopyImageToMemoryEXT = unsafe extern "system" fn(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
+pub type NonNullPFN_vkCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMemoryToAccelerationStructureInfoKHR) -> VkResult;
+pub type NonNullPFN_vkCopyMemoryToImage = unsafe extern "system" fn(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
+pub type NonNullPFN_vkCopyMemoryToImageEXT = unsafe extern "system" fn(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
+pub type NonNullPFN_vkCopyMemoryToMicromapEXT = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMemoryToMicromapInfoEXT) -> VkResult;
+pub type NonNullPFN_vkCopyMicromapEXT = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMicromapInfoEXT) -> VkResult;
+pub type NonNullPFN_vkCopyMicromapToMemoryEXT = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMicromapToMemoryInfoEXT) -> VkResult;
+pub type NonNullPFN_vkCreateAccelerationStructureKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkAccelerationStructureCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pAccelerationStructure: *mut VkAccelerationStructureKHR) -> VkResult;
+pub type NonNullPFN_vkCreateAccelerationStructureNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkAccelerationStructureCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pAccelerationStructure: *mut VkAccelerationStructureNV) -> VkResult;
+pub type NonNullPFN_vkCreateBuffer = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkBufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pBuffer: *mut VkBuffer) -> VkResult;
+pub type NonNullPFN_vkCreateBufferView = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkBufferViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkBufferView) -> VkResult;
+pub type NonNullPFN_vkCreateCommandPool = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkCommandPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pCommandPool: *mut VkCommandPool) -> VkResult;
+pub type NonNullPFN_vkCreateComputePipelines = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkComputePipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkCreateCuFunctionNVX = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkCuFunctionCreateInfoNVX, pAllocator: *const VkAllocationCallbacks, pFunction: *mut VkCuFunctionNVX) -> VkResult;
+pub type NonNullPFN_vkCreateCuModuleNVX = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkCuModuleCreateInfoNVX, pAllocator: *const VkAllocationCallbacks, pModule: *mut VkCuModuleNVX) -> VkResult;
+pub type NonNullPFN_vkCreateDataGraphPipelineSessionARM = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDataGraphPipelineSessionCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pSession: *mut VkDataGraphPipelineSessionARM) -> VkResult;
+pub type NonNullPFN_vkCreateDataGraphPipelinesARM = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkDataGraphPipelineCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkCreateDebugReportCallbackEXT = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkDebugReportCallbackCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pCallback: *mut VkDebugReportCallbackEXT) -> VkResult;
+pub type NonNullPFN_vkCreateDebugUtilsMessengerEXT = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkDebugUtilsMessengerCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pMessenger: *mut VkDebugUtilsMessengerEXT) -> VkResult;
+pub type NonNullPFN_vkCreateDeferredOperationKHR = unsafe extern "system" fn(device: VkDevice, pAllocator: *const VkAllocationCallbacks, pDeferredOperation: *mut VkDeferredOperationKHR) -> VkResult;
+pub type NonNullPFN_vkCreateDescriptorPool = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorPool: *mut VkDescriptorPool) -> VkResult;
+pub type NonNullPFN_vkCreateDescriptorSetLayout = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pSetLayout: *mut VkDescriptorSetLayout) -> VkResult;
+pub type NonNullPFN_vkCreateDescriptorUpdateTemplate = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
+pub type NonNullPFN_vkCreateDescriptorUpdateTemplateKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
+pub type NonNullPFN_vkCreateDevice = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
+pub type NonNullPFN_vkCreateDisplayModeKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pCreateInfo: *const VkDisplayModeCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pMode: *mut VkDisplayModeKHR) -> VkResult;
+pub type NonNullPFN_vkCreateDisplayPlaneSurfaceKHR = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkDisplaySurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkCreateEvent = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkEventCreateInfo, pAllocator: *const VkAllocationCallbacks, pEvent: *mut VkEvent) -> VkResult;
+pub type NonNullPFN_vkCreateExternalComputeQueueNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkExternalComputeQueueCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pExternalQueue: *mut VkExternalComputeQueueNV) -> VkResult;
+pub type NonNullPFN_vkCreateFence = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkFenceCreateInfo, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+pub type NonNullPFN_vkCreateFramebuffer = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkFramebufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pFramebuffer: *mut VkFramebuffer) -> VkResult;
+pub type NonNullPFN_vkCreateGraphicsPipelines = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkGraphicsPipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkCreateHeadlessSurfaceEXT = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkHeadlessSurfaceCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkCreateImage = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkImageCreateInfo, pAllocator: *const VkAllocationCallbacks, pImage: *mut VkImage) -> VkResult;
+pub type NonNullPFN_vkCreateImageView = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkImageViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkImageView) -> VkResult;
+pub type NonNullPFN_vkCreateIndirectCommandsLayoutEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkIndirectCommandsLayoutCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pIndirectCommandsLayout: *mut VkIndirectCommandsLayoutEXT) -> VkResult;
+pub type NonNullPFN_vkCreateIndirectCommandsLayoutNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkIndirectCommandsLayoutCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pIndirectCommandsLayout: *mut VkIndirectCommandsLayoutNV) -> VkResult;
+pub type NonNullPFN_vkCreateIndirectExecutionSetEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkIndirectExecutionSetCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pIndirectExecutionSet: *mut VkIndirectExecutionSetEXT) -> VkResult;
+pub type NonNullPFN_vkCreateInstance = unsafe extern "system" fn(pCreateInfo: *const VkInstanceCreateInfo, pAllocator: *const VkAllocationCallbacks, pInstance: *mut VkInstance) -> VkResult;
+pub type NonNullPFN_vkCreateMicromapEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkMicromapCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pMicromap: *mut VkMicromapEXT) -> VkResult;
+pub type NonNullPFN_vkCreateOpticalFlowSessionNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkOpticalFlowSessionCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pSession: *mut VkOpticalFlowSessionNV) -> VkResult;
+pub type NonNullPFN_vkCreatePipelineBinariesKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkPipelineBinaryCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pBinaries: *mut VkPipelineBinaryHandlesInfoKHR) -> VkResult;
+pub type NonNullPFN_vkCreatePipelineCache = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkPipelineCacheCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineCache: *mut VkPipelineCache) -> VkResult;
+pub type NonNullPFN_vkCreatePipelineLayout = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkPipelineLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineLayout: *mut VkPipelineLayout) -> VkResult;
+pub type NonNullPFN_vkCreatePrivateDataSlot = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
+pub type NonNullPFN_vkCreatePrivateDataSlotEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
+pub type NonNullPFN_vkCreateQueryPool = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkQueryPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pQueryPool: *mut VkQueryPool) -> VkResult;
+pub type NonNullPFN_vkCreateRayTracingPipelinesKHR = unsafe extern "system" fn(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkRayTracingPipelineCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkCreateRayTracingPipelinesNV = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkRayTracingPipelineCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
+pub type NonNullPFN_vkCreateRenderPass = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+pub type NonNullPFN_vkCreateRenderPass2 = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+pub type NonNullPFN_vkCreateRenderPass2KHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
+pub type NonNullPFN_vkCreateSampler = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkSamplerCreateInfo, pAllocator: *const VkAllocationCallbacks, pSampler: *mut VkSampler) -> VkResult;
+pub type NonNullPFN_vkCreateSamplerYcbcrConversion = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
+pub type NonNullPFN_vkCreateSamplerYcbcrConversionKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
+pub type NonNullPFN_vkCreateSemaphore = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkSemaphoreCreateInfo, pAllocator: *const VkAllocationCallbacks, pSemaphore: *mut VkSemaphore) -> VkResult;
+pub type NonNullPFN_vkCreateShaderModule = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pAllocator: *const VkAllocationCallbacks, pShaderModule: *mut VkShaderModule) -> VkResult;
+pub type NonNullPFN_vkCreateShadersEXT = unsafe extern "system" fn(device: VkDevice, createInfoCount: u32, pCreateInfos: *const VkShaderCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pShaders: *mut VkShaderEXT) -> VkResult;
+pub type NonNullPFN_vkCreateSharedSwapchainsKHR = unsafe extern "system" fn(device: VkDevice, swapchainCount: u32, pCreateInfos: *const VkSwapchainCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSwapchains: *mut VkSwapchainKHR) -> VkResult;
+pub type NonNullPFN_vkCreateSwapchainKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkSwapchainCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSwapchain: *mut VkSwapchainKHR) -> VkResult;
+pub type NonNullPFN_vkCreateTensorARM = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkTensorCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pTensor: *mut VkTensorARM) -> VkResult;
+pub type NonNullPFN_vkCreateTensorViewARM = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkTensorViewCreateInfoARM, pAllocator: *const VkAllocationCallbacks, pView: *mut VkTensorViewARM) -> VkResult;
+pub type NonNullPFN_vkCreateValidationCacheEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkValidationCacheCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pValidationCache: *mut VkValidationCacheEXT) -> VkResult;
+pub type NonNullPFN_vkCreateVideoSessionKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkVideoSessionCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pVideoSession: *mut VkVideoSessionKHR) -> VkResult;
+pub type NonNullPFN_vkCreateVideoSessionParametersKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkVideoSessionParametersCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pVideoSessionParameters: *mut VkVideoSessionParametersKHR) -> VkResult;
+pub type NonNullPFN_vkDebugMarkerSetObjectNameEXT = unsafe extern "system" fn(device: VkDevice, pNameInfo: *const VkDebugMarkerObjectNameInfoEXT) -> VkResult;
+pub type NonNullPFN_vkDebugMarkerSetObjectTagEXT = unsafe extern "system" fn(device: VkDevice, pTagInfo: *const VkDebugMarkerObjectTagInfoEXT) -> VkResult;
 pub type NonNullPFN_vkDebugReportCallbackEXT = unsafe extern "system" fn(flags: VkDebugReportFlagsEXT, objectType: VkDebugReportObjectTypeEXT, object: u64, location: usize, messageCode: i32, pLayerPrefix: *const c_char, pMessage: *const c_char, pUserData: *mut c_void) -> VkBool32;
+pub type NonNullPFN_vkDebugReportMessageEXT = unsafe extern "system" fn(instance: VkInstance, flags: VkDebugReportFlagsEXT, objectType: VkDebugReportObjectTypeEXT, object: u64, location: usize, messageCode: i32, pLayerPrefix: *const c_char, pMessage: *const c_char);
 pub type NonNullPFN_vkDebugUtilsMessengerCallbackEXT = unsafe extern "system" fn(messageSeverity: VkDebugUtilsMessageSeverityFlagBitsEXT, messageTypes: VkDebugUtilsMessageTypeFlagsEXT, pCallbackData: *const VkDebugUtilsMessengerCallbackDataEXT, pUserData: *mut c_void) -> VkBool32;
+pub type NonNullPFN_vkDeferredOperationJoinKHR = unsafe extern "system" fn(device: VkDevice, operation: VkDeferredOperationKHR) -> VkResult;
+pub type NonNullPFN_vkDestroyAccelerationStructureKHR = unsafe extern "system" fn(device: VkDevice, accelerationStructure: VkAccelerationStructureKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyAccelerationStructureNV = unsafe extern "system" fn(device: VkDevice, accelerationStructure: VkAccelerationStructureNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyBuffer = unsafe extern "system" fn(device: VkDevice, buffer: VkBuffer, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyBufferView = unsafe extern "system" fn(device: VkDevice, bufferView: VkBufferView, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyCommandPool = unsafe extern "system" fn(device: VkDevice, commandPool: VkCommandPool, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyCuFunctionNVX = unsafe extern "system" fn(device: VkDevice, function: VkCuFunctionNVX, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyCuModuleNVX = unsafe extern "system" fn(device: VkDevice, module: VkCuModuleNVX, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDataGraphPipelineSessionARM = unsafe extern "system" fn(device: VkDevice, session: VkDataGraphPipelineSessionARM, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDebugReportCallbackEXT = unsafe extern "system" fn(instance: VkInstance, callback: VkDebugReportCallbackEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDebugUtilsMessengerEXT = unsafe extern "system" fn(instance: VkInstance, messenger: VkDebugUtilsMessengerEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDeferredOperationKHR = unsafe extern "system" fn(device: VkDevice, operation: VkDeferredOperationKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDescriptorPool = unsafe extern "system" fn(device: VkDevice, descriptorPool: VkDescriptorPool, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDescriptorSetLayout = unsafe extern "system" fn(device: VkDevice, descriptorSetLayout: VkDescriptorSetLayout, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDescriptorUpdateTemplate = unsafe extern "system" fn(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDescriptorUpdateTemplateKHR = unsafe extern "system" fn(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyDevice = unsafe extern "system" fn(device: VkDevice, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyEvent = unsafe extern "system" fn(device: VkDevice, event: VkEvent, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyExternalComputeQueueNV = unsafe extern "system" fn(device: VkDevice, externalQueue: VkExternalComputeQueueNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyFence = unsafe extern "system" fn(device: VkDevice, fence: VkFence, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyFramebuffer = unsafe extern "system" fn(device: VkDevice, framebuffer: VkFramebuffer, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyImage = unsafe extern "system" fn(device: VkDevice, image: VkImage, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyImageView = unsafe extern "system" fn(device: VkDevice, imageView: VkImageView, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyIndirectCommandsLayoutEXT = unsafe extern "system" fn(device: VkDevice, indirectCommandsLayout: VkIndirectCommandsLayoutEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyIndirectCommandsLayoutNV = unsafe extern "system" fn(device: VkDevice, indirectCommandsLayout: VkIndirectCommandsLayoutNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyIndirectExecutionSetEXT = unsafe extern "system" fn(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyInstance = unsafe extern "system" fn(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyMicromapEXT = unsafe extern "system" fn(device: VkDevice, micromap: VkMicromapEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyOpticalFlowSessionNV = unsafe extern "system" fn(device: VkDevice, session: VkOpticalFlowSessionNV, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPipeline = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPipelineBinaryKHR = unsafe extern "system" fn(device: VkDevice, pipelineBinary: VkPipelineBinaryKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPipelineCache = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPipelineLayout = unsafe extern "system" fn(device: VkDevice, pipelineLayout: VkPipelineLayout, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPrivateDataSlot = unsafe extern "system" fn(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyPrivateDataSlotEXT = unsafe extern "system" fn(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyQueryPool = unsafe extern "system" fn(device: VkDevice, queryPool: VkQueryPool, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyRenderPass = unsafe extern "system" fn(device: VkDevice, renderPass: VkRenderPass, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySampler = unsafe extern "system" fn(device: VkDevice, sampler: VkSampler, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySamplerYcbcrConversion = unsafe extern "system" fn(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySamplerYcbcrConversionKHR = unsafe extern "system" fn(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySemaphore = unsafe extern "system" fn(device: VkDevice, semaphore: VkSemaphore, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyShaderEXT = unsafe extern "system" fn(device: VkDevice, shader: VkShaderEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyShaderModule = unsafe extern "system" fn(device: VkDevice, shaderModule: VkShaderModule, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySurfaceKHR = unsafe extern "system" fn(instance: VkInstance, surface: VkSurfaceKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroySwapchainKHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyTensorARM = unsafe extern "system" fn(device: VkDevice, tensor: VkTensorARM, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyTensorViewARM = unsafe extern "system" fn(device: VkDevice, tensorView: VkTensorViewARM, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyValidationCacheEXT = unsafe extern "system" fn(device: VkDevice, validationCache: VkValidationCacheEXT, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyVideoSessionKHR = unsafe extern "system" fn(device: VkDevice, videoSession: VkVideoSessionKHR, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkDestroyVideoSessionParametersKHR = unsafe extern "system" fn(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pAllocator: *const VkAllocationCallbacks);
 pub type NonNullPFN_vkDeviceMemoryReportCallbackEXT = unsafe extern "system" fn(pCallbackData: *const VkDeviceMemoryReportCallbackDataEXT, pUserData: *mut c_void);
+pub type NonNullPFN_vkDeviceWaitIdle = unsafe extern "system" fn(device: VkDevice) -> VkResult;
+pub type NonNullPFN_vkDisplayPowerControlEXT = unsafe extern "system" fn(device: VkDevice, display: VkDisplayKHR, pDisplayPowerInfo: *const VkDisplayPowerInfoEXT) -> VkResult;
+pub type NonNullPFN_vkEndCommandBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer) -> VkResult;
+pub type NonNullPFN_vkEnumerateDeviceExtensionProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+pub type NonNullPFN_vkEnumerateDeviceLayerProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+pub type NonNullPFN_vkEnumerateInstanceExtensionProperties = unsafe extern "system" fn(pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+pub type NonNullPFN_vkEnumerateInstanceLayerProperties = unsafe extern "system" fn(pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
+pub type NonNullPFN_vkEnumerateInstanceVersion = unsafe extern "system" fn(pApiVersion: *mut u32) -> VkResult;
+pub type NonNullPFN_vkEnumeratePhysicalDeviceGroups = unsafe extern "system" fn(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
+pub type NonNullPFN_vkEnumeratePhysicalDeviceGroupsKHR = unsafe extern "system" fn(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
+pub type NonNullPFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pCounterCount: *mut u32, pCounters: *mut VkPerformanceCounterARM, pCounterDescriptions: *mut VkPerformanceCounterDescriptionARM) -> VkResult;
+pub type NonNullPFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pCounterCount: *mut u32, pCounters: *mut VkPerformanceCounterKHR, pCounterDescriptions: *mut VkPerformanceCounterDescriptionKHR) -> VkResult;
+pub type NonNullPFN_vkEnumeratePhysicalDevices = unsafe extern "system" fn(instance: VkInstance, pPhysicalDeviceCount: *mut u32, pPhysicalDevices: *mut VkPhysicalDevice) -> VkResult;
+pub type NonNullPFN_vkFlushMappedMemoryRanges = unsafe extern "system" fn(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+pub type NonNullPFN_vkFreeCommandBuffers = unsafe extern "system" fn(device: VkDevice, commandPool: VkCommandPool, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
+pub type NonNullPFN_vkFreeDescriptorSets = unsafe extern "system" fn(device: VkDevice, descriptorPool: VkDescriptorPool, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet) -> VkResult;
 pub type NonNullPFN_vkFreeFunction = unsafe extern "system" fn(pUserData: *mut c_void, pMemory: *mut c_void);
+pub type NonNullPFN_vkFreeMemory = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkGetAccelerationStructureBuildSizesKHR = unsafe extern "system" fn(device: VkDevice, buildType: VkAccelerationStructureBuildTypeKHR, pBuildInfo: *const VkAccelerationStructureBuildGeometryInfoKHR, pMaxPrimitiveCounts: *const u32, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+pub type NonNullPFN_vkGetAccelerationStructureDeviceAddressKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkAccelerationStructureDeviceAddressInfoKHR) -> VkDeviceAddress;
+pub type NonNullPFN_vkGetAccelerationStructureHandleNV = unsafe extern "system" fn(device: VkDevice, accelerationStructure: VkAccelerationStructureNV, dataSize: usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetAccelerationStructureMemoryRequirementsNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkAccelerationStructureMemoryRequirementsInfoNV, pMemoryRequirements: *mut VkMemoryRequirements2KHR);
+pub type NonNullPFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkAccelerationStructureCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetBufferDeviceAddress = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+pub type NonNullPFN_vkGetBufferDeviceAddressEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+pub type NonNullPFN_vkGetBufferDeviceAddressKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
+pub type NonNullPFN_vkGetBufferMemoryRequirements = unsafe extern "system" fn(device: VkDevice, buffer: VkBuffer, pMemoryRequirements: *mut VkMemoryRequirements);
+pub type NonNullPFN_vkGetBufferMemoryRequirements2 = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetBufferMemoryRequirements2KHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetBufferOpaqueCaptureAddress = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
+pub type NonNullPFN_vkGetBufferOpaqueCaptureAddressKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
+pub type NonNullPFN_vkGetBufferOpaqueCaptureDescriptorDataEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkBufferCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetCalibratedTimestampsEXT = unsafe extern "system" fn(device: VkDevice, timestampCount: u32, pTimestampInfos: *const VkCalibratedTimestampInfoKHR, pTimestamps: *mut u64, pMaxDeviation: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetCalibratedTimestampsKHR = unsafe extern "system" fn(device: VkDevice, timestampCount: u32, pTimestampInfos: *const VkCalibratedTimestampInfoKHR, pTimestamps: *mut u64, pMaxDeviation: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetClusterAccelerationStructureBuildSizesNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkClusterAccelerationStructureInputInfoNV, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+pub type NonNullPFN_vkGetDataGraphPipelineAvailablePropertiesARM = unsafe extern "system" fn(device: VkDevice, pPipelineInfo: *const VkDataGraphPipelineInfoARM, pPropertiesCount: *mut u32, pProperties: *mut VkDataGraphPipelinePropertyARM) -> VkResult;
+pub type NonNullPFN_vkGetDataGraphPipelinePropertiesARM = unsafe extern "system" fn(device: VkDevice, pPipelineInfo: *const VkDataGraphPipelineInfoARM, propertiesCount: u32, pProperties: *mut VkDataGraphPipelinePropertyQueryResultARM) -> VkResult;
+pub type NonNullPFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDataGraphPipelineSessionBindPointRequirementsInfoARM, pBindPointRequirementCount: *mut u32, pBindPointRequirements: *mut VkDataGraphPipelineSessionBindPointRequirementARM) -> VkResult;
+pub type NonNullPFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDataGraphPipelineSessionMemoryRequirementsInfoARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDeferredOperationMaxConcurrencyKHR = unsafe extern "system" fn(device: VkDevice, operation: VkDeferredOperationKHR) -> u32;
+pub type NonNullPFN_vkGetDeferredOperationResultKHR = unsafe extern "system" fn(device: VkDevice, operation: VkDeferredOperationKHR) -> VkResult;
+pub type NonNullPFN_vkGetDescriptorEXT = unsafe extern "system" fn(device: VkDevice, pDescriptorInfo: *const VkDescriptorGetInfoEXT, dataSize: usize, pDescriptor: *mut c_void);
+pub type NonNullPFN_vkGetDescriptorSetHostMappingVALVE = unsafe extern "system" fn(device: VkDevice, descriptorSet: VkDescriptorSet, ppData: *mut *mut c_void);
+pub type NonNullPFN_vkGetDescriptorSetLayoutBindingOffsetEXT = unsafe extern "system" fn(device: VkDevice, layout: VkDescriptorSetLayout, binding: u32, pOffset: *mut VkDeviceSize);
+pub type NonNullPFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE = unsafe extern "system" fn(device: VkDevice, pBindingReference: *const VkDescriptorSetBindingReferenceVALVE, pHostMapping: *mut VkDescriptorSetLayoutHostMappingInfoVALVE);
+pub type NonNullPFN_vkGetDescriptorSetLayoutSizeEXT = unsafe extern "system" fn(device: VkDevice, layout: VkDescriptorSetLayout, pLayoutSizeInBytes: *mut VkDeviceSize);
+pub type NonNullPFN_vkGetDescriptorSetLayoutSupport = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
+pub type NonNullPFN_vkGetDescriptorSetLayoutSupportKHR = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
+pub type NonNullPFN_vkGetDeviceAccelerationStructureCompatibilityKHR = unsafe extern "system" fn(device: VkDevice, pVersionInfo: *const VkAccelerationStructureVersionInfoKHR, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
+pub type NonNullPFN_vkGetDeviceBufferMemoryRequirements = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceBufferMemoryRequirementsKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceFaultInfoEXT = unsafe extern "system" fn(device: VkDevice, pFaultCounts: *mut VkDeviceFaultCountsEXT, pFaultInfo: *mut VkDeviceFaultInfoEXT) -> VkResult;
+pub type NonNullPFN_vkGetDeviceGroupPeerMemoryFeatures = unsafe extern "system" fn(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
+pub type NonNullPFN_vkGetDeviceGroupPeerMemoryFeaturesKHR = unsafe extern "system" fn(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
+pub type NonNullPFN_vkGetDeviceGroupPresentCapabilitiesKHR = unsafe extern "system" fn(device: VkDevice, pDeviceGroupPresentCapabilities: *mut VkDeviceGroupPresentCapabilitiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetDeviceGroupSurfacePresentModesKHR = unsafe extern "system" fn(device: VkDevice, surface: VkSurfaceKHR, pModes: *mut VkDeviceGroupPresentModeFlagsKHR) -> VkResult;
+pub type NonNullPFN_vkGetDeviceImageMemoryRequirements = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceImageMemoryRequirementsKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceImageSparseMemoryRequirements = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceImageSparseMemoryRequirementsKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+pub type NonNullPFN_vkGetDeviceImageSubresourceLayout = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
+pub type NonNullPFN_vkGetDeviceImageSubresourceLayoutKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
+pub type NonNullPFN_vkGetDeviceMemoryCommitment = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory, pCommittedMemoryInBytes: *mut VkDeviceSize);
+pub type NonNullPFN_vkGetDeviceMemoryOpaqueCaptureAddress = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+pub type NonNullPFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+pub type NonNullPFN_vkGetDeviceMicromapCompatibilityEXT = unsafe extern "system" fn(device: VkDevice, pVersionInfo: *const VkMicromapVersionInfoEXT, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
+pub type NonNullPFN_vkGetDeviceProcAddr = unsafe extern "system" fn(device: VkDevice, pName: *const c_char) -> PFN_vkVoidFunction;
+pub type NonNullPFN_vkGetDeviceQueue = unsafe extern "system" fn(device: VkDevice, queueFamilyIndex: u32, queueIndex: u32, pQueue: *mut VkQueue);
+pub type NonNullPFN_vkGetDeviceQueue2 = unsafe extern "system" fn(device: VkDevice, pQueueInfo: *const VkDeviceQueueInfo2, pQueue: *mut VkQueue);
+pub type NonNullPFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = unsafe extern "system" fn(device: VkDevice, renderpass: VkRenderPass, pMaxWorkgroupSize: *mut VkExtent2D) -> VkResult;
+pub type NonNullPFN_vkGetDeviceTensorMemoryRequirementsARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkDeviceTensorMemoryRequirementsARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetDisplayModeProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pPropertyCount: *mut u32, pProperties: *mut VkDisplayModeProperties2KHR) -> VkResult;
+pub type NonNullPFN_vkGetDisplayModePropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR, pPropertyCount: *mut u32, pProperties: *mut VkDisplayModePropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetDisplayPlaneCapabilities2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pDisplayPlaneInfo: *const VkDisplayPlaneInfo2KHR, pCapabilities: *mut VkDisplayPlaneCapabilities2KHR) -> VkResult;
+pub type NonNullPFN_vkGetDisplayPlaneCapabilitiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, mode: VkDisplayModeKHR, planeIndex: u32, pCapabilities: *mut VkDisplayPlaneCapabilitiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetDisplayPlaneSupportedDisplaysKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, planeIndex: u32, pDisplayCount: *mut u32, pDisplays: *mut VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkGetDrmDisplayEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, drmFd: i32, connectorId: u32, display: *mut VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkGetDynamicRenderingTilePropertiesQCOM = unsafe extern "system" fn(device: VkDevice, pRenderingInfo: *const VkRenderingInfo, pProperties: *mut VkTilePropertiesQCOM) -> VkResult;
+pub type NonNullPFN_vkGetEncodedVideoSessionParametersKHR = unsafe extern "system" fn(device: VkDevice, pVideoSessionParametersInfo: *const VkVideoEncodeSessionParametersGetInfoKHR, pFeedbackInfo: *mut VkVideoEncodeSessionParametersFeedbackInfoKHR, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetEventStatus = unsafe extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
+pub type NonNullPFN_vkGetExternalComputeQueueDataNV = unsafe extern "system" fn(externalQueue: VkExternalComputeQueueNV, params: *mut VkExternalComputeQueueDataParamsNV, pData: *mut c_void);
+pub type NonNullPFN_vkGetFenceFdKHR = unsafe extern "system" fn(device: VkDevice, pGetFdInfo: *const VkFenceGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+pub type NonNullPFN_vkGetFenceStatus = unsafe extern "system" fn(device: VkDevice, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkGetFramebufferTilePropertiesQCOM = unsafe extern "system" fn(device: VkDevice, framebuffer: VkFramebuffer, pPropertiesCount: *mut u32, pProperties: *mut VkTilePropertiesQCOM) -> VkResult;
+pub type NonNullPFN_vkGetGeneratedCommandsMemoryRequirementsEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkGeneratedCommandsMemoryRequirementsInfoEXT, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetGeneratedCommandsMemoryRequirementsNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkGeneratedCommandsMemoryRequirementsInfoNV, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetImageDrmFormatModifierPropertiesEXT = unsafe extern "system" fn(device: VkDevice, image: VkImage, pProperties: *mut VkImageDrmFormatModifierPropertiesEXT) -> VkResult;
+pub type NonNullPFN_vkGetImageMemoryRequirements = unsafe extern "system" fn(device: VkDevice, image: VkImage, pMemoryRequirements: *mut VkMemoryRequirements);
+pub type NonNullPFN_vkGetImageMemoryRequirements2 = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetImageMemoryRequirements2KHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetImageOpaqueCaptureDescriptorDataEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetImageSparseMemoryRequirements = unsafe extern "system" fn(device: VkDevice, image: VkImage, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements);
+pub type NonNullPFN_vkGetImageSparseMemoryRequirements2 = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+pub type NonNullPFN_vkGetImageSparseMemoryRequirements2KHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
+pub type NonNullPFN_vkGetImageSubresourceLayout = unsafe extern "system" fn(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource, pLayout: *mut VkSubresourceLayout);
+pub type NonNullPFN_vkGetImageSubresourceLayout2 = unsafe extern "system" fn(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+pub type NonNullPFN_vkGetImageSubresourceLayout2EXT = unsafe extern "system" fn(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+pub type NonNullPFN_vkGetImageSubresourceLayout2KHR = unsafe extern "system" fn(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
+pub type NonNullPFN_vkGetImageViewAddressNVX = unsafe extern "system" fn(device: VkDevice, imageView: VkImageView, pProperties: *mut VkImageViewAddressPropertiesNVX) -> VkResult;
+pub type NonNullPFN_vkGetImageViewHandle64NVX = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageViewHandleInfoNVX) -> u64;
+pub type NonNullPFN_vkGetImageViewHandleNVX = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageViewHandleInfoNVX) -> u32;
+pub type NonNullPFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkImageViewCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetInstanceProcAddr = unsafe extern "system" fn(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
 pub type NonNullPFN_vkGetInstanceProcAddrLUNARG = unsafe extern "system" fn(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
+pub type NonNullPFN_vkGetLatencyTimingsNV = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pLatencyMarkerInfo: *mut VkGetLatencyMarkerInfoNV);
+pub type NonNullPFN_vkGetMemoryFdKHR = unsafe extern "system" fn(device: VkDevice, pGetFdInfo: *const VkMemoryGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+pub type NonNullPFN_vkGetMemoryFdPropertiesKHR = unsafe extern "system" fn(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, fd: c_int, pMemoryFdProperties: *mut VkMemoryFdPropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, pHostPointer: *const c_void, pMemoryHostPointerProperties: *mut VkMemoryHostPointerPropertiesEXT) -> VkResult;
+pub type NonNullPFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(device: VkDevice, pMemoryGetRemoteAddressInfo: *const VkMemoryGetRemoteAddressInfoNV, pAddress: *mut VkRemoteAddressNV) -> VkResult;
+pub type NonNullPFN_vkGetMicromapBuildSizesEXT = unsafe extern "system" fn(device: VkDevice, buildType: VkAccelerationStructureBuildTypeKHR, pBuildInfo: *const VkMicromapBuildInfoEXT, pSizeInfo: *mut VkMicromapBuildSizesInfoEXT);
+pub type NonNullPFN_vkGetPartitionedAccelerationStructuresBuildSizesNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkPartitionedAccelerationStructureInstancesInputNV, pSizeInfo: *mut VkAccelerationStructureBuildSizesInfoKHR);
+pub type NonNullPFN_vkGetPastPresentationTimingEXT = unsafe extern "system" fn(device: VkDevice, pPastPresentationTimingInfo: *const VkPastPresentationTimingInfoEXT, pPastPresentationTimingProperties: *mut VkPastPresentationTimingPropertiesEXT) -> VkResult;
+pub type NonNullPFN_vkGetPastPresentationTimingGOOGLE = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pPresentationTimingCount: *mut u32, pPresentationTimings: *mut VkPastPresentationTimingGOOGLE) -> VkResult;
+pub type NonNullPFN_vkGetPerformanceParameterINTEL = unsafe extern "system" fn(device: VkDevice, parameter: VkPerformanceParameterTypeINTEL, pValue: *mut VkPerformanceValueINTEL) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pTimeDomainCount: *mut u32, pTimeDomains: *mut VkTimeDomainKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pTimeDomainCount: *mut u32, pTimeDomains: *mut VkTimeDomainKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixFlexibleDimensionsPropertiesNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixPropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeMatrixPropertiesNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkCooperativeVectorPropertiesNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPlaneProperties2KHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPlanePropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceDisplayProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayProperties2KHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceDisplayPropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceExternalBufferProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalFenceProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalFencePropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, externalHandleType: VkExternalMemoryHandleTypeFlagsNV, pExternalImageFormatProperties: *mut VkExternalImageFormatPropertiesNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceExternalSemaphoreProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceExternalTensorPropertiesARM = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pExternalTensorInfo: *const VkPhysicalDeviceExternalTensorInfoARM, pExternalTensorProperties: *mut VkExternalTensorPropertiesARM);
+pub type NonNullPFN_vkGetPhysicalDeviceFeatures = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
+pub type NonNullPFN_vkGetPhysicalDeviceFeatures2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
+pub type NonNullPFN_vkGetPhysicalDeviceFeatures2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
+pub type NonNullPFN_vkGetPhysicalDeviceFormatProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceFormatProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceFormatProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceFragmentShadingRatesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFragmentShadingRateCount: *mut u32, pFragmentShadingRates: *mut VkPhysicalDeviceFragmentShadingRateKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceImageFormatProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceImageFormatProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceImageFormatProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceMemoryProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceMemoryProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceMemoryProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceMultisamplePropertiesEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, samples: VkSampleCountFlagBits, pMultisampleProperties: *mut VkMultisamplePropertiesEXT);
+pub type NonNullPFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pOpticalFlowImageFormatInfo: *const VkOpticalFlowImageFormatInfoNV, pFormatCount: *mut u32, pImageFormatProperties: *mut VkOpticalFlowImageFormatPropertiesNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDevicePresentRectanglesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pRectCount: *mut u32, pRects: *mut VkRect2D) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pQueueFamilyDataGraphProcessingEngineInfo: *const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM, pQueueFamilyDataGraphProcessingEngineProperties: *mut VkQueueFamilyDataGraphProcessingEnginePropertiesARM);
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pQueueFamilyDataGraphPropertyCount: *mut u32, pQueueFamilyDataGraphProperties: *mut VkQueueFamilyDataGraphPropertiesARM) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pPerformanceQueryCreateInfo: *const VkQueryPoolPerformanceCreateInfoKHR, pNumPasses: *mut u32);
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
+pub type NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties2 = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
+pub type NonNullPFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pCombinationCount: *mut u32, pCombinations: *mut VkFramebufferMixedSamplesCombinationNV) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceCapabilities: *mut VkSurfaceCapabilities2EXT) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pSurfaceCapabilities: *mut VkSurfaceCapabilities2KHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceCapabilities: *mut VkSurfaceCapabilitiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceFormats2KHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pSurfaceFormatCount: *mut u32, pSurfaceFormats: *mut VkSurfaceFormat2KHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceFormatsKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pSurfaceFormatCount: *mut u32, pSurfaceFormats: *mut VkSurfaceFormatKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfacePresentModesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pPresentModeCount: *mut u32, pPresentModes: *mut VkPresentModeKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfaceSupportKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, surface: VkSurfaceKHR, pSupported: *mut VkBool32) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceToolProperties = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceToolPropertiesEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceVideoCapabilitiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pVideoProfile: *const VkVideoProfileInfoKHR, pCapabilities: *mut VkVideoCapabilitiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pQualityLevelInfo: *const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR, pQualityLevelProperties: *mut VkVideoEncodeQualityLevelPropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pVideoFormatInfo: *const VkPhysicalDeviceVideoFormatInfoKHR, pVideoFormatPropertyCount: *mut u32, pVideoFormatProperties: *mut VkVideoFormatPropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPipelineBinaryDataKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkPipelineBinaryDataInfoKHR, pPipelineBinaryKey: *mut VkPipelineBinaryKeyKHR, pPipelineBinaryDataSize: *mut usize, pPipelineBinaryData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetPipelineCacheData = unsafe extern "system" fn(device: VkDevice, pipelineCache: VkPipelineCache, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetPipelineExecutableInternalRepresentationsKHR = unsafe extern "system" fn(device: VkDevice, pExecutableInfo: *const VkPipelineExecutableInfoKHR, pInternalRepresentationCount: *mut u32, pInternalRepresentations: *mut VkPipelineExecutableInternalRepresentationKHR) -> VkResult;
+pub type NonNullPFN_vkGetPipelineExecutablePropertiesKHR = unsafe extern "system" fn(device: VkDevice, pPipelineInfo: *const VkPipelineInfoKHR, pExecutableCount: *mut u32, pProperties: *mut VkPipelineExecutablePropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPipelineExecutableStatisticsKHR = unsafe extern "system" fn(device: VkDevice, pExecutableInfo: *const VkPipelineExecutableInfoKHR, pStatisticCount: *mut u32, pStatistics: *mut VkPipelineExecutableStatisticKHR) -> VkResult;
+pub type NonNullPFN_vkGetPipelineIndirectDeviceAddressNV = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkPipelineIndirectDeviceAddressInfoNV) -> VkDeviceAddress;
+pub type NonNullPFN_vkGetPipelineIndirectMemoryRequirementsNV = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkComputePipelineCreateInfo, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetPipelineKeyKHR = unsafe extern "system" fn(device: VkDevice, pPipelineCreateInfo: *const VkPipelineCreateInfoKHR, pPipelineKey: *mut VkPipelineBinaryKeyKHR) -> VkResult;
+pub type NonNullPFN_vkGetPipelinePropertiesEXT = unsafe extern "system" fn(device: VkDevice, pPipelineInfo: *const VkPipelineInfoEXT, pPipelineProperties: *mut VkBaseOutStructure) -> VkResult;
+pub type NonNullPFN_vkGetPrivateData = unsafe extern "system" fn(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
+pub type NonNullPFN_vkGetPrivateDataEXT = unsafe extern "system" fn(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
+pub type NonNullPFN_vkGetQueryPoolResults = unsafe extern "system" fn(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dataSize: usize, pData: *mut c_void, stride: VkDeviceSize, flags: VkQueryResultFlags) -> VkResult;
+pub type NonNullPFN_vkGetQueueCheckpointData2NV = unsafe extern "system" fn(queue: VkQueue, pCheckpointDataCount: *mut u32, pCheckpointData: *mut VkCheckpointData2NV);
+pub type NonNullPFN_vkGetQueueCheckpointDataNV = unsafe extern "system" fn(queue: VkQueue, pCheckpointDataCount: *mut u32, pCheckpointData: *mut VkCheckpointDataNV);
+pub type NonNullPFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetRayTracingShaderGroupHandlesKHR = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetRayTracingShaderGroupHandlesNV = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, firstGroup: u32, groupCount: u32, dataSize: usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetRayTracingShaderGroupStackSizeKHR = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, group: u32, groupShader: VkShaderGroupShaderKHR) -> VkDeviceSize;
+pub type NonNullPFN_vkGetRefreshCycleDurationGOOGLE = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pDisplayTimingProperties: *mut VkRefreshCycleDurationGOOGLE) -> VkResult;
+pub type NonNullPFN_vkGetRenderAreaGranularity = unsafe extern "system" fn(device: VkDevice, renderPass: VkRenderPass, pGranularity: *mut VkExtent2D);
+pub type NonNullPFN_vkGetRenderingAreaGranularity = unsafe extern "system" fn(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
+pub type NonNullPFN_vkGetRenderingAreaGranularityKHR = unsafe extern "system" fn(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
+pub type NonNullPFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkSamplerCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetSemaphoreCounterValue = unsafe extern "system" fn(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetSemaphoreCounterValueKHR = unsafe extern "system" fn(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetSemaphoreFdKHR = unsafe extern "system" fn(device: VkDevice, pGetFdInfo: *const VkSemaphoreGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
+pub type NonNullPFN_vkGetShaderBinaryDataEXT = unsafe extern "system" fn(device: VkDevice, shader: VkShaderEXT, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetShaderInfoAMD = unsafe extern "system" fn(device: VkDevice, pipeline: VkPipeline, shaderStage: VkShaderStageFlagBits, infoType: VkShaderInfoTypeAMD, pInfoSize: *mut usize, pInfo: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetShaderModuleCreateInfoIdentifierEXT = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pIdentifier: *mut VkShaderModuleIdentifierEXT);
+pub type NonNullPFN_vkGetShaderModuleIdentifierEXT = unsafe extern "system" fn(device: VkDevice, shaderModule: VkShaderModule, pIdentifier: *mut VkShaderModuleIdentifierEXT);
+pub type NonNullPFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, counter: VkSurfaceCounterFlagBitsEXT, pCounterValue: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetSwapchainImagesKHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainImageCount: *mut u32, pSwapchainImages: *mut VkImage) -> VkResult;
+pub type NonNullPFN_vkGetSwapchainStatusKHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+pub type NonNullPFN_vkGetSwapchainTimeDomainPropertiesEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainTimeDomainProperties: *mut VkSwapchainTimeDomainPropertiesEXT, pTimeDomainsCounter: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetSwapchainTimingPropertiesEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pSwapchainTimingProperties: *mut VkSwapchainTimingPropertiesEXT, pSwapchainTimingPropertiesCounter: *mut u64) -> VkResult;
+pub type NonNullPFN_vkGetTensorMemoryRequirementsARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkTensorMemoryRequirementsInfoARM, pMemoryRequirements: *mut VkMemoryRequirements2);
+pub type NonNullPFN_vkGetTensorOpaqueCaptureDescriptorDataARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkTensorCaptureDescriptorDataInfoARM, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkTensorViewCaptureDescriptorDataInfoARM, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetValidationCacheDataEXT = unsafe extern "system" fn(device: VkDevice, validationCache: VkValidationCacheEXT, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetVideoSessionMemoryRequirementsKHR = unsafe extern "system" fn(device: VkDevice, videoSession: VkVideoSessionKHR, pMemoryRequirementsCount: *mut u32, pMemoryRequirements: *mut VkVideoSessionMemoryRequirementsKHR) -> VkResult;
+pub type NonNullPFN_vkImportFenceFdKHR = unsafe extern "system" fn(device: VkDevice, pImportFenceFdInfo: *const VkImportFenceFdInfoKHR) -> VkResult;
+pub type NonNullPFN_vkImportSemaphoreFdKHR = unsafe extern "system" fn(device: VkDevice, pImportSemaphoreFdInfo: *const VkImportSemaphoreFdInfoKHR) -> VkResult;
+pub type NonNullPFN_vkInitializePerformanceApiINTEL = unsafe extern "system" fn(device: VkDevice, pInitializeInfo: *const VkInitializePerformanceApiInfoINTEL) -> VkResult;
 pub type NonNullPFN_vkInternalAllocationNotification = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, allocationType: VkInternalAllocationType, allocationScope: VkSystemAllocationScope);
 pub type NonNullPFN_vkInternalFreeNotification = unsafe extern "system" fn(pUserData: *mut c_void, size: usize, allocationType: VkInternalAllocationType, allocationScope: VkSystemAllocationScope);
+pub type NonNullPFN_vkInvalidateMappedMemoryRanges = unsafe extern "system" fn(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
+pub type NonNullPFN_vkLatencySleepNV = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pSleepInfo: *const VkLatencySleepInfoNV) -> VkResult;
+pub type NonNullPFN_vkMapMemory = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory, offset: VkDeviceSize, size: VkDeviceSize, flags: VkMemoryMapFlags, ppData: *mut *mut c_void) -> VkResult;
+pub type NonNullPFN_vkMapMemory2 = unsafe extern "system" fn(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
+pub type NonNullPFN_vkMapMemory2KHR = unsafe extern "system" fn(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
+pub type NonNullPFN_vkMergePipelineCaches = unsafe extern "system" fn(device: VkDevice, dstCache: VkPipelineCache, srcCacheCount: u32, pSrcCaches: *const VkPipelineCache) -> VkResult;
+pub type NonNullPFN_vkMergeValidationCachesEXT = unsafe extern "system" fn(device: VkDevice, dstCache: VkValidationCacheEXT, srcCacheCount: u32, pSrcCaches: *const VkValidationCacheEXT) -> VkResult;
+pub type NonNullPFN_vkQueueBeginDebugUtilsLabelEXT = unsafe extern "system" fn(queue: VkQueue, pLabelInfo: *const VkDebugUtilsLabelEXT);
+pub type NonNullPFN_vkQueueBindSparse = unsafe extern "system" fn(queue: VkQueue, bindInfoCount: u32, pBindInfo: *const VkBindSparseInfo, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkQueueEndDebugUtilsLabelEXT = unsafe extern "system" fn(queue: VkQueue);
+pub type NonNullPFN_vkQueueInsertDebugUtilsLabelEXT = unsafe extern "system" fn(queue: VkQueue, pLabelInfo: *const VkDebugUtilsLabelEXT);
+pub type NonNullPFN_vkQueueNotifyOutOfBandNV = unsafe extern "system" fn(queue: VkQueue, pQueueTypeInfo: *const VkOutOfBandQueueTypeInfoNV);
+pub type NonNullPFN_vkQueuePresentKHR = unsafe extern "system" fn(queue: VkQueue, pPresentInfo: *const VkPresentInfoKHR) -> VkResult;
+pub type NonNullPFN_vkQueueSetPerformanceConfigurationINTEL = unsafe extern "system" fn(queue: VkQueue, configuration: VkPerformanceConfigurationINTEL) -> VkResult;
+pub type NonNullPFN_vkQueueSubmit = unsafe extern "system" fn(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkQueueSubmit2 = unsafe extern "system" fn(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkQueueSubmit2KHR = unsafe extern "system" fn(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkQueueWaitIdle = unsafe extern "system" fn(queue: VkQueue) -> VkResult;
 pub type NonNullPFN_vkReallocationFunction = unsafe extern "system" fn(pUserData: *mut c_void, pOriginal: *mut c_void, size: usize, alignment: usize, allocationScope: VkSystemAllocationScope) -> *mut c_void;
+pub type NonNullPFN_vkRegisterDeviceEventEXT = unsafe extern "system" fn(device: VkDevice, pDeviceEventInfo: *const VkDeviceEventInfoEXT, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+pub type NonNullPFN_vkRegisterDisplayEventEXT = unsafe extern "system" fn(device: VkDevice, display: VkDisplayKHR, pDisplayEventInfo: *const VkDisplayEventInfoEXT, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
+pub type NonNullPFN_vkReleaseCapturedPipelineDataKHR = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkReleaseCapturedPipelineDataInfoKHR, pAllocator: *const VkAllocationCallbacks) -> VkResult;
+pub type NonNullPFN_vkReleaseDisplayEXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkReleasePerformanceConfigurationINTEL = unsafe extern "system" fn(device: VkDevice, configuration: VkPerformanceConfigurationINTEL) -> VkResult;
+pub type NonNullPFN_vkReleaseProfilingLockKHR = unsafe extern "system" fn(device: VkDevice);
+pub type NonNullPFN_vkReleaseSwapchainImagesEXT = unsafe extern "system" fn(device: VkDevice, pReleaseInfo: *const VkReleaseSwapchainImagesInfoKHR) -> VkResult;
+pub type NonNullPFN_vkReleaseSwapchainImagesKHR = unsafe extern "system" fn(device: VkDevice, pReleaseInfo: *const VkReleaseSwapchainImagesInfoKHR) -> VkResult;
+pub type NonNullPFN_vkResetCommandBuffer = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, flags: VkCommandBufferResetFlags) -> VkResult;
+pub type NonNullPFN_vkResetCommandPool = unsafe extern "system" fn(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolResetFlags) -> VkResult;
+pub type NonNullPFN_vkResetDescriptorPool = unsafe extern "system" fn(device: VkDevice, descriptorPool: VkDescriptorPool, flags: VkDescriptorPoolResetFlags) -> VkResult;
+pub type NonNullPFN_vkResetEvent = unsafe extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
+pub type NonNullPFN_vkResetFences = unsafe extern "system" fn(device: VkDevice, fenceCount: u32, pFences: *const VkFence) -> VkResult;
+pub type NonNullPFN_vkResetQueryPool = unsafe extern "system" fn(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+pub type NonNullPFN_vkResetQueryPoolEXT = unsafe extern "system" fn(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
+pub type NonNullPFN_vkSetDebugUtilsObjectNameEXT = unsafe extern "system" fn(device: VkDevice, pNameInfo: *const VkDebugUtilsObjectNameInfoEXT) -> VkResult;
+pub type NonNullPFN_vkSetDebugUtilsObjectTagEXT = unsafe extern "system" fn(device: VkDevice, pTagInfo: *const VkDebugUtilsObjectTagInfoEXT) -> VkResult;
+pub type NonNullPFN_vkSetDeviceMemoryPriorityEXT = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory, priority: f32);
+pub type NonNullPFN_vkSetEvent = unsafe extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
+pub type NonNullPFN_vkSetHdrMetadataEXT = unsafe extern "system" fn(device: VkDevice, swapchainCount: u32, pSwapchains: *const VkSwapchainKHR, pMetadata: *const VkHdrMetadataEXT);
+pub type NonNullPFN_vkSetLatencyMarkerNV = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pLatencyMarkerInfo: *const VkSetLatencyMarkerInfoNV);
+pub type NonNullPFN_vkSetLatencySleepModeNV = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pSleepModeInfo: *const VkLatencySleepModeInfoNV) -> VkResult;
+pub type NonNullPFN_vkSetLocalDimmingAMD = unsafe extern "system" fn(device: VkDevice, swapChain: VkSwapchainKHR, localDimmingEnable: VkBool32);
+pub type NonNullPFN_vkSetPrivateData = unsafe extern "system" fn(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
+pub type NonNullPFN_vkSetPrivateDataEXT = unsafe extern "system" fn(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
+pub type NonNullPFN_vkSetSwapchainPresentTimingQueueSizeEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, size: u32) -> VkResult;
+pub type NonNullPFN_vkSignalSemaphore = unsafe extern "system" fn(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
+pub type NonNullPFN_vkSignalSemaphoreKHR = unsafe extern "system" fn(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
+pub type NonNullPFN_vkSubmitDebugUtilsMessageEXT = unsafe extern "system" fn(instance: VkInstance, messageSeverity: VkDebugUtilsMessageSeverityFlagBitsEXT, messageTypes: VkDebugUtilsMessageTypeFlagsEXT, pCallbackData: *const VkDebugUtilsMessengerCallbackDataEXT);
+pub type NonNullPFN_vkTransitionImageLayout = unsafe extern "system" fn(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
+pub type NonNullPFN_vkTransitionImageLayoutEXT = unsafe extern "system" fn(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
+pub type NonNullPFN_vkTrimCommandPool = unsafe extern "system" fn(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
+pub type NonNullPFN_vkTrimCommandPoolKHR = unsafe extern "system" fn(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
+pub type NonNullPFN_vkUninitializePerformanceApiINTEL = unsafe extern "system" fn(device: VkDevice);
+pub type NonNullPFN_vkUnmapMemory = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory);
+pub type NonNullPFN_vkUnmapMemory2 = unsafe extern "system" fn(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
+pub type NonNullPFN_vkUnmapMemory2KHR = unsafe extern "system" fn(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
+pub type NonNullPFN_vkUpdateDescriptorSetWithTemplate = unsafe extern "system" fn(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
+pub type NonNullPFN_vkUpdateDescriptorSetWithTemplateKHR = unsafe extern "system" fn(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
+pub type NonNullPFN_vkUpdateDescriptorSets = unsafe extern "system" fn(device: VkDevice, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet, descriptorCopyCount: u32, pDescriptorCopies: *const VkCopyDescriptorSet);
+pub type NonNullPFN_vkUpdateIndirectExecutionSetPipelineEXT = unsafe extern "system" fn(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, executionSetWriteCount: u32, pExecutionSetWrites: *const VkWriteIndirectExecutionSetPipelineEXT);
+pub type NonNullPFN_vkUpdateIndirectExecutionSetShaderEXT = unsafe extern "system" fn(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, executionSetWriteCount: u32, pExecutionSetWrites: *const VkWriteIndirectExecutionSetShaderEXT);
+pub type NonNullPFN_vkUpdateVideoSessionParametersKHR = unsafe extern "system" fn(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pUpdateInfo: *const VkVideoSessionParametersUpdateInfoKHR) -> VkResult;
 pub type NonNullPFN_vkVoidFunction = unsafe extern "system" fn();
+pub type NonNullPFN_vkWaitForFences = unsafe extern "system" fn(device: VkDevice, fenceCount: u32, pFences: *const VkFence, waitAll: VkBool32, timeout: u64) -> VkResult;
+pub type NonNullPFN_vkWaitForPresent2KHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, pPresentWait2Info: *const VkPresentWait2InfoKHR) -> VkResult;
+pub type NonNullPFN_vkWaitForPresentKHR = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR, presentId: u64, timeout: u64) -> VkResult;
+pub type NonNullPFN_vkWaitSemaphores = unsafe extern "system" fn(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
+pub type NonNullPFN_vkWaitSemaphoresKHR = unsafe extern "system" fn(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
+pub type NonNullPFN_vkWriteAccelerationStructuresPropertiesKHR = unsafe extern "system" fn(device: VkDevice, accelerationStructureCount: u32, pAccelerationStructures: *const VkAccelerationStructureKHR, queryType: VkQueryType, dataSize: usize, pData: *mut c_void, stride: usize) -> VkResult;
+pub type NonNullPFN_vkWriteMicromapsPropertiesEXT = unsafe extern "system" fn(device: VkDevice, micromapCount: u32, pMicromaps: *const VkMicromapEXT, queryType: VkQueryType, dataSize: usize, pData: *mut c_void, stride: usize) -> VkResult;
 pub type NonNullVkAccelerationStructureKHR = NonNull<VkAccelerationStructureKHR_T>;
 pub type NonNullVkAccelerationStructureNV = NonNull<VkAccelerationStructureNV_T>;
 pub type NonNullVkBuffer = NonNull<VkBuffer_T>;
@@ -17617,16 +21154,723 @@ pub type NonNullVkTensorViewARM = NonNull<VkTensorViewARM_T>;
 pub type NonNullVkValidationCacheEXT = NonNull<VkValidationCacheEXT_T>;
 pub type NonNullVkVideoSessionKHR = NonNull<VkVideoSessionKHR_T>;
 pub type NonNullVkVideoSessionParametersKHR = NonNull<VkVideoSessionParametersKHR_T>;
+pub type PFN_vkAcquireDrmDisplayEXT = Option<NonNullPFN_vkAcquireDrmDisplayEXT>;
+pub type PFN_vkAcquireNextImage2KHR = Option<NonNullPFN_vkAcquireNextImage2KHR>;
+pub type PFN_vkAcquireNextImageKHR = Option<NonNullPFN_vkAcquireNextImageKHR>;
+pub type PFN_vkAcquirePerformanceConfigurationINTEL = Option<NonNullPFN_vkAcquirePerformanceConfigurationINTEL>;
+pub type PFN_vkAcquireProfilingLockKHR = Option<NonNullPFN_vkAcquireProfilingLockKHR>;
+pub type PFN_vkAllocateCommandBuffers = Option<NonNullPFN_vkAllocateCommandBuffers>;
+pub type PFN_vkAllocateDescriptorSets = Option<NonNullPFN_vkAllocateDescriptorSets>;
+pub type PFN_vkAllocateMemory = Option<NonNullPFN_vkAllocateMemory>;
 pub type PFN_vkAllocationFunction = Option<NonNullPFN_vkAllocationFunction>;
+pub type PFN_vkAntiLagUpdateAMD = Option<NonNullPFN_vkAntiLagUpdateAMD>;
+pub type PFN_vkBeginCommandBuffer = Option<NonNullPFN_vkBeginCommandBuffer>;
+pub type PFN_vkBindAccelerationStructureMemoryNV = Option<NonNullPFN_vkBindAccelerationStructureMemoryNV>;
+pub type PFN_vkBindBufferMemory = Option<NonNullPFN_vkBindBufferMemory>;
+pub type PFN_vkBindBufferMemory2 = Option<NonNullPFN_vkBindBufferMemory2>;
+pub type PFN_vkBindBufferMemory2KHR = Option<NonNullPFN_vkBindBufferMemory2KHR>;
+pub type PFN_vkBindDataGraphPipelineSessionMemoryARM = Option<NonNullPFN_vkBindDataGraphPipelineSessionMemoryARM>;
+pub type PFN_vkBindImageMemory = Option<NonNullPFN_vkBindImageMemory>;
+pub type PFN_vkBindImageMemory2 = Option<NonNullPFN_vkBindImageMemory2>;
+pub type PFN_vkBindImageMemory2KHR = Option<NonNullPFN_vkBindImageMemory2KHR>;
+pub type PFN_vkBindOpticalFlowSessionImageNV = Option<NonNullPFN_vkBindOpticalFlowSessionImageNV>;
+pub type PFN_vkBindTensorMemoryARM = Option<NonNullPFN_vkBindTensorMemoryARM>;
+pub type PFN_vkBindVideoSessionMemoryKHR = Option<NonNullPFN_vkBindVideoSessionMemoryKHR>;
+pub type PFN_vkBuildAccelerationStructuresKHR = Option<NonNullPFN_vkBuildAccelerationStructuresKHR>;
+pub type PFN_vkBuildMicromapsEXT = Option<NonNullPFN_vkBuildMicromapsEXT>;
+pub type PFN_vkCmdBeginConditionalRenderingEXT = Option<NonNullPFN_vkCmdBeginConditionalRenderingEXT>;
+pub type PFN_vkCmdBeginCustomResolveEXT = Option<NonNullPFN_vkCmdBeginCustomResolveEXT>;
+pub type PFN_vkCmdBeginDebugUtilsLabelEXT = Option<NonNullPFN_vkCmdBeginDebugUtilsLabelEXT>;
+pub type PFN_vkCmdBeginPerTileExecutionQCOM = Option<NonNullPFN_vkCmdBeginPerTileExecutionQCOM>;
+pub type PFN_vkCmdBeginQuery = Option<NonNullPFN_vkCmdBeginQuery>;
+pub type PFN_vkCmdBeginQueryIndexedEXT = Option<NonNullPFN_vkCmdBeginQueryIndexedEXT>;
+pub type PFN_vkCmdBeginRenderPass = Option<NonNullPFN_vkCmdBeginRenderPass>;
+pub type PFN_vkCmdBeginRenderPass2 = Option<NonNullPFN_vkCmdBeginRenderPass2>;
+pub type PFN_vkCmdBeginRenderPass2KHR = Option<NonNullPFN_vkCmdBeginRenderPass2KHR>;
+pub type PFN_vkCmdBeginRendering = Option<NonNullPFN_vkCmdBeginRendering>;
+pub type PFN_vkCmdBeginRenderingKHR = Option<NonNullPFN_vkCmdBeginRenderingKHR>;
+pub type PFN_vkCmdBeginTransformFeedbackEXT = Option<NonNullPFN_vkCmdBeginTransformFeedbackEXT>;
+pub type PFN_vkCmdBeginVideoCodingKHR = Option<NonNullPFN_vkCmdBeginVideoCodingKHR>;
+pub type PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = Option<NonNullPFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT>;
+pub type PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = Option<NonNullPFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT>;
+pub type PFN_vkCmdBindDescriptorBuffersEXT = Option<NonNullPFN_vkCmdBindDescriptorBuffersEXT>;
+pub type PFN_vkCmdBindDescriptorSets = Option<NonNullPFN_vkCmdBindDescriptorSets>;
+pub type PFN_vkCmdBindDescriptorSets2 = Option<NonNullPFN_vkCmdBindDescriptorSets2>;
+pub type PFN_vkCmdBindDescriptorSets2KHR = Option<NonNullPFN_vkCmdBindDescriptorSets2KHR>;
+pub type PFN_vkCmdBindIndexBuffer = Option<NonNullPFN_vkCmdBindIndexBuffer>;
+pub type PFN_vkCmdBindIndexBuffer2 = Option<NonNullPFN_vkCmdBindIndexBuffer2>;
+pub type PFN_vkCmdBindIndexBuffer2KHR = Option<NonNullPFN_vkCmdBindIndexBuffer2KHR>;
+pub type PFN_vkCmdBindInvocationMaskHUAWEI = Option<NonNullPFN_vkCmdBindInvocationMaskHUAWEI>;
+pub type PFN_vkCmdBindPipeline = Option<NonNullPFN_vkCmdBindPipeline>;
+pub type PFN_vkCmdBindPipelineShaderGroupNV = Option<NonNullPFN_vkCmdBindPipelineShaderGroupNV>;
+pub type PFN_vkCmdBindShadersEXT = Option<NonNullPFN_vkCmdBindShadersEXT>;
+pub type PFN_vkCmdBindShadingRateImageNV = Option<NonNullPFN_vkCmdBindShadingRateImageNV>;
+pub type PFN_vkCmdBindTileMemoryQCOM = Option<NonNullPFN_vkCmdBindTileMemoryQCOM>;
+pub type PFN_vkCmdBindTransformFeedbackBuffersEXT = Option<NonNullPFN_vkCmdBindTransformFeedbackBuffersEXT>;
+pub type PFN_vkCmdBindVertexBuffers = Option<NonNullPFN_vkCmdBindVertexBuffers>;
+pub type PFN_vkCmdBindVertexBuffers2 = Option<NonNullPFN_vkCmdBindVertexBuffers2>;
+pub type PFN_vkCmdBindVertexBuffers2EXT = Option<NonNullPFN_vkCmdBindVertexBuffers2EXT>;
+pub type PFN_vkCmdBlitImage = Option<NonNullPFN_vkCmdBlitImage>;
+pub type PFN_vkCmdBlitImage2 = Option<NonNullPFN_vkCmdBlitImage2>;
+pub type PFN_vkCmdBlitImage2KHR = Option<NonNullPFN_vkCmdBlitImage2KHR>;
+pub type PFN_vkCmdBuildAccelerationStructureNV = Option<NonNullPFN_vkCmdBuildAccelerationStructureNV>;
+pub type PFN_vkCmdBuildAccelerationStructuresIndirectKHR = Option<NonNullPFN_vkCmdBuildAccelerationStructuresIndirectKHR>;
+pub type PFN_vkCmdBuildAccelerationStructuresKHR = Option<NonNullPFN_vkCmdBuildAccelerationStructuresKHR>;
+pub type PFN_vkCmdBuildClusterAccelerationStructureIndirectNV = Option<NonNullPFN_vkCmdBuildClusterAccelerationStructureIndirectNV>;
+pub type PFN_vkCmdBuildMicromapsEXT = Option<NonNullPFN_vkCmdBuildMicromapsEXT>;
+pub type PFN_vkCmdBuildPartitionedAccelerationStructuresNV = Option<NonNullPFN_vkCmdBuildPartitionedAccelerationStructuresNV>;
+pub type PFN_vkCmdClearAttachments = Option<NonNullPFN_vkCmdClearAttachments>;
+pub type PFN_vkCmdClearColorImage = Option<NonNullPFN_vkCmdClearColorImage>;
+pub type PFN_vkCmdClearDepthStencilImage = Option<NonNullPFN_vkCmdClearDepthStencilImage>;
+pub type PFN_vkCmdControlVideoCodingKHR = Option<NonNullPFN_vkCmdControlVideoCodingKHR>;
+pub type PFN_vkCmdConvertCooperativeVectorMatrixNV = Option<NonNullPFN_vkCmdConvertCooperativeVectorMatrixNV>;
+pub type PFN_vkCmdCopyAccelerationStructureKHR = Option<NonNullPFN_vkCmdCopyAccelerationStructureKHR>;
+pub type PFN_vkCmdCopyAccelerationStructureNV = Option<NonNullPFN_vkCmdCopyAccelerationStructureNV>;
+pub type PFN_vkCmdCopyAccelerationStructureToMemoryKHR = Option<NonNullPFN_vkCmdCopyAccelerationStructureToMemoryKHR>;
+pub type PFN_vkCmdCopyBuffer = Option<NonNullPFN_vkCmdCopyBuffer>;
+pub type PFN_vkCmdCopyBuffer2 = Option<NonNullPFN_vkCmdCopyBuffer2>;
+pub type PFN_vkCmdCopyBuffer2KHR = Option<NonNullPFN_vkCmdCopyBuffer2KHR>;
+pub type PFN_vkCmdCopyBufferToImage = Option<NonNullPFN_vkCmdCopyBufferToImage>;
+pub type PFN_vkCmdCopyBufferToImage2 = Option<NonNullPFN_vkCmdCopyBufferToImage2>;
+pub type PFN_vkCmdCopyBufferToImage2KHR = Option<NonNullPFN_vkCmdCopyBufferToImage2KHR>;
+pub type PFN_vkCmdCopyImage = Option<NonNullPFN_vkCmdCopyImage>;
+pub type PFN_vkCmdCopyImage2 = Option<NonNullPFN_vkCmdCopyImage2>;
+pub type PFN_vkCmdCopyImage2KHR = Option<NonNullPFN_vkCmdCopyImage2KHR>;
+pub type PFN_vkCmdCopyImageToBuffer = Option<NonNullPFN_vkCmdCopyImageToBuffer>;
+pub type PFN_vkCmdCopyImageToBuffer2 = Option<NonNullPFN_vkCmdCopyImageToBuffer2>;
+pub type PFN_vkCmdCopyImageToBuffer2KHR = Option<NonNullPFN_vkCmdCopyImageToBuffer2KHR>;
+pub type PFN_vkCmdCopyMemoryIndirectKHR = Option<NonNullPFN_vkCmdCopyMemoryIndirectKHR>;
+pub type PFN_vkCmdCopyMemoryIndirectNV = Option<NonNullPFN_vkCmdCopyMemoryIndirectNV>;
+pub type PFN_vkCmdCopyMemoryToAccelerationStructureKHR = Option<NonNullPFN_vkCmdCopyMemoryToAccelerationStructureKHR>;
+pub type PFN_vkCmdCopyMemoryToImageIndirectKHR = Option<NonNullPFN_vkCmdCopyMemoryToImageIndirectKHR>;
+pub type PFN_vkCmdCopyMemoryToImageIndirectNV = Option<NonNullPFN_vkCmdCopyMemoryToImageIndirectNV>;
+pub type PFN_vkCmdCopyMemoryToMicromapEXT = Option<NonNullPFN_vkCmdCopyMemoryToMicromapEXT>;
+pub type PFN_vkCmdCopyMicromapEXT = Option<NonNullPFN_vkCmdCopyMicromapEXT>;
+pub type PFN_vkCmdCopyMicromapToMemoryEXT = Option<NonNullPFN_vkCmdCopyMicromapToMemoryEXT>;
+pub type PFN_vkCmdCopyQueryPoolResults = Option<NonNullPFN_vkCmdCopyQueryPoolResults>;
+pub type PFN_vkCmdCopyTensorARM = Option<NonNullPFN_vkCmdCopyTensorARM>;
+pub type PFN_vkCmdCuLaunchKernelNVX = Option<NonNullPFN_vkCmdCuLaunchKernelNVX>;
+pub type PFN_vkCmdDebugMarkerBeginEXT = Option<NonNullPFN_vkCmdDebugMarkerBeginEXT>;
+pub type PFN_vkCmdDebugMarkerEndEXT = Option<NonNullPFN_vkCmdDebugMarkerEndEXT>;
+pub type PFN_vkCmdDebugMarkerInsertEXT = Option<NonNullPFN_vkCmdDebugMarkerInsertEXT>;
+pub type PFN_vkCmdDecodeVideoKHR = Option<NonNullPFN_vkCmdDecodeVideoKHR>;
+pub type PFN_vkCmdDecompressMemoryEXT = Option<NonNullPFN_vkCmdDecompressMemoryEXT>;
+pub type PFN_vkCmdDecompressMemoryIndirectCountEXT = Option<NonNullPFN_vkCmdDecompressMemoryIndirectCountEXT>;
+pub type PFN_vkCmdDecompressMemoryIndirectCountNV = Option<NonNullPFN_vkCmdDecompressMemoryIndirectCountNV>;
+pub type PFN_vkCmdDecompressMemoryNV = Option<NonNullPFN_vkCmdDecompressMemoryNV>;
+pub type PFN_vkCmdDispatch = Option<NonNullPFN_vkCmdDispatch>;
+pub type PFN_vkCmdDispatchBase = Option<NonNullPFN_vkCmdDispatchBase>;
+pub type PFN_vkCmdDispatchBaseKHR = Option<NonNullPFN_vkCmdDispatchBaseKHR>;
+pub type PFN_vkCmdDispatchDataGraphARM = Option<NonNullPFN_vkCmdDispatchDataGraphARM>;
+pub type PFN_vkCmdDispatchIndirect = Option<NonNullPFN_vkCmdDispatchIndirect>;
+pub type PFN_vkCmdDispatchTileQCOM = Option<NonNullPFN_vkCmdDispatchTileQCOM>;
+pub type PFN_vkCmdDraw = Option<NonNullPFN_vkCmdDraw>;
+pub type PFN_vkCmdDrawClusterHUAWEI = Option<NonNullPFN_vkCmdDrawClusterHUAWEI>;
+pub type PFN_vkCmdDrawClusterIndirectHUAWEI = Option<NonNullPFN_vkCmdDrawClusterIndirectHUAWEI>;
+pub type PFN_vkCmdDrawIndexed = Option<NonNullPFN_vkCmdDrawIndexed>;
+pub type PFN_vkCmdDrawIndexedIndirect = Option<NonNullPFN_vkCmdDrawIndexedIndirect>;
+pub type PFN_vkCmdDrawIndexedIndirectCount = Option<NonNullPFN_vkCmdDrawIndexedIndirectCount>;
+pub type PFN_vkCmdDrawIndexedIndirectCountAMD = Option<NonNullPFN_vkCmdDrawIndexedIndirectCountAMD>;
+pub type PFN_vkCmdDrawIndexedIndirectCountKHR = Option<NonNullPFN_vkCmdDrawIndexedIndirectCountKHR>;
+pub type PFN_vkCmdDrawIndirect = Option<NonNullPFN_vkCmdDrawIndirect>;
+pub type PFN_vkCmdDrawIndirectByteCountEXT = Option<NonNullPFN_vkCmdDrawIndirectByteCountEXT>;
+pub type PFN_vkCmdDrawIndirectCount = Option<NonNullPFN_vkCmdDrawIndirectCount>;
+pub type PFN_vkCmdDrawIndirectCountAMD = Option<NonNullPFN_vkCmdDrawIndirectCountAMD>;
+pub type PFN_vkCmdDrawIndirectCountKHR = Option<NonNullPFN_vkCmdDrawIndirectCountKHR>;
+pub type PFN_vkCmdDrawMeshTasksEXT = Option<NonNullPFN_vkCmdDrawMeshTasksEXT>;
+pub type PFN_vkCmdDrawMeshTasksIndirectCountEXT = Option<NonNullPFN_vkCmdDrawMeshTasksIndirectCountEXT>;
+pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = Option<NonNullPFN_vkCmdDrawMeshTasksIndirectCountNV>;
+pub type PFN_vkCmdDrawMeshTasksIndirectEXT = Option<NonNullPFN_vkCmdDrawMeshTasksIndirectEXT>;
+pub type PFN_vkCmdDrawMeshTasksIndirectNV = Option<NonNullPFN_vkCmdDrawMeshTasksIndirectNV>;
+pub type PFN_vkCmdDrawMeshTasksNV = Option<NonNullPFN_vkCmdDrawMeshTasksNV>;
+pub type PFN_vkCmdDrawMultiEXT = Option<NonNullPFN_vkCmdDrawMultiEXT>;
+pub type PFN_vkCmdDrawMultiIndexedEXT = Option<NonNullPFN_vkCmdDrawMultiIndexedEXT>;
+pub type PFN_vkCmdEncodeVideoKHR = Option<NonNullPFN_vkCmdEncodeVideoKHR>;
+pub type PFN_vkCmdEndConditionalRenderingEXT = Option<NonNullPFN_vkCmdEndConditionalRenderingEXT>;
+pub type PFN_vkCmdEndDebugUtilsLabelEXT = Option<NonNullPFN_vkCmdEndDebugUtilsLabelEXT>;
+pub type PFN_vkCmdEndPerTileExecutionQCOM = Option<NonNullPFN_vkCmdEndPerTileExecutionQCOM>;
+pub type PFN_vkCmdEndQuery = Option<NonNullPFN_vkCmdEndQuery>;
+pub type PFN_vkCmdEndQueryIndexedEXT = Option<NonNullPFN_vkCmdEndQueryIndexedEXT>;
+pub type PFN_vkCmdEndRenderPass = Option<NonNullPFN_vkCmdEndRenderPass>;
+pub type PFN_vkCmdEndRenderPass2 = Option<NonNullPFN_vkCmdEndRenderPass2>;
+pub type PFN_vkCmdEndRenderPass2KHR = Option<NonNullPFN_vkCmdEndRenderPass2KHR>;
+pub type PFN_vkCmdEndRendering = Option<NonNullPFN_vkCmdEndRendering>;
+pub type PFN_vkCmdEndRendering2EXT = Option<NonNullPFN_vkCmdEndRendering2EXT>;
+pub type PFN_vkCmdEndRendering2KHR = Option<NonNullPFN_vkCmdEndRendering2KHR>;
+pub type PFN_vkCmdEndRenderingKHR = Option<NonNullPFN_vkCmdEndRenderingKHR>;
+pub type PFN_vkCmdEndTransformFeedbackEXT = Option<NonNullPFN_vkCmdEndTransformFeedbackEXT>;
+pub type PFN_vkCmdEndVideoCodingKHR = Option<NonNullPFN_vkCmdEndVideoCodingKHR>;
+pub type PFN_vkCmdExecuteCommands = Option<NonNullPFN_vkCmdExecuteCommands>;
+pub type PFN_vkCmdExecuteGeneratedCommandsEXT = Option<NonNullPFN_vkCmdExecuteGeneratedCommandsEXT>;
+pub type PFN_vkCmdExecuteGeneratedCommandsNV = Option<NonNullPFN_vkCmdExecuteGeneratedCommandsNV>;
+pub type PFN_vkCmdFillBuffer = Option<NonNullPFN_vkCmdFillBuffer>;
+pub type PFN_vkCmdInsertDebugUtilsLabelEXT = Option<NonNullPFN_vkCmdInsertDebugUtilsLabelEXT>;
+pub type PFN_vkCmdNextSubpass = Option<NonNullPFN_vkCmdNextSubpass>;
+pub type PFN_vkCmdNextSubpass2 = Option<NonNullPFN_vkCmdNextSubpass2>;
+pub type PFN_vkCmdNextSubpass2KHR = Option<NonNullPFN_vkCmdNextSubpass2KHR>;
+pub type PFN_vkCmdOpticalFlowExecuteNV = Option<NonNullPFN_vkCmdOpticalFlowExecuteNV>;
+pub type PFN_vkCmdPipelineBarrier = Option<NonNullPFN_vkCmdPipelineBarrier>;
+pub type PFN_vkCmdPipelineBarrier2 = Option<NonNullPFN_vkCmdPipelineBarrier2>;
+pub type PFN_vkCmdPipelineBarrier2KHR = Option<NonNullPFN_vkCmdPipelineBarrier2KHR>;
+pub type PFN_vkCmdPreprocessGeneratedCommandsEXT = Option<NonNullPFN_vkCmdPreprocessGeneratedCommandsEXT>;
+pub type PFN_vkCmdPreprocessGeneratedCommandsNV = Option<NonNullPFN_vkCmdPreprocessGeneratedCommandsNV>;
+pub type PFN_vkCmdPushConstants = Option<NonNullPFN_vkCmdPushConstants>;
+pub type PFN_vkCmdPushConstants2 = Option<NonNullPFN_vkCmdPushConstants2>;
+pub type PFN_vkCmdPushConstants2KHR = Option<NonNullPFN_vkCmdPushConstants2KHR>;
+pub type PFN_vkCmdPushDescriptorSet = Option<NonNullPFN_vkCmdPushDescriptorSet>;
+pub type PFN_vkCmdPushDescriptorSet2 = Option<NonNullPFN_vkCmdPushDescriptorSet2>;
+pub type PFN_vkCmdPushDescriptorSet2KHR = Option<NonNullPFN_vkCmdPushDescriptorSet2KHR>;
+pub type PFN_vkCmdPushDescriptorSetKHR = Option<NonNullPFN_vkCmdPushDescriptorSetKHR>;
+pub type PFN_vkCmdPushDescriptorSetWithTemplate = Option<NonNullPFN_vkCmdPushDescriptorSetWithTemplate>;
+pub type PFN_vkCmdPushDescriptorSetWithTemplate2 = Option<NonNullPFN_vkCmdPushDescriptorSetWithTemplate2>;
+pub type PFN_vkCmdPushDescriptorSetWithTemplate2KHR = Option<NonNullPFN_vkCmdPushDescriptorSetWithTemplate2KHR>;
+pub type PFN_vkCmdPushDescriptorSetWithTemplateKHR = Option<NonNullPFN_vkCmdPushDescriptorSetWithTemplateKHR>;
+pub type PFN_vkCmdResetEvent = Option<NonNullPFN_vkCmdResetEvent>;
+pub type PFN_vkCmdResetEvent2 = Option<NonNullPFN_vkCmdResetEvent2>;
+pub type PFN_vkCmdResetEvent2KHR = Option<NonNullPFN_vkCmdResetEvent2KHR>;
+pub type PFN_vkCmdResetQueryPool = Option<NonNullPFN_vkCmdResetQueryPool>;
+pub type PFN_vkCmdResolveImage = Option<NonNullPFN_vkCmdResolveImage>;
+pub type PFN_vkCmdResolveImage2 = Option<NonNullPFN_vkCmdResolveImage2>;
+pub type PFN_vkCmdResolveImage2KHR = Option<NonNullPFN_vkCmdResolveImage2KHR>;
+pub type PFN_vkCmdSetAlphaToCoverageEnableEXT = Option<NonNullPFN_vkCmdSetAlphaToCoverageEnableEXT>;
+pub type PFN_vkCmdSetAlphaToOneEnableEXT = Option<NonNullPFN_vkCmdSetAlphaToOneEnableEXT>;
+pub type PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT = Option<NonNullPFN_vkCmdSetAttachmentFeedbackLoopEnableEXT>;
+pub type PFN_vkCmdSetBlendConstants = Option<NonNullPFN_vkCmdSetBlendConstants>;
+pub type PFN_vkCmdSetCheckpointNV = Option<NonNullPFN_vkCmdSetCheckpointNV>;
+pub type PFN_vkCmdSetCoarseSampleOrderNV = Option<NonNullPFN_vkCmdSetCoarseSampleOrderNV>;
+pub type PFN_vkCmdSetColorBlendAdvancedEXT = Option<NonNullPFN_vkCmdSetColorBlendAdvancedEXT>;
+pub type PFN_vkCmdSetColorBlendEnableEXT = Option<NonNullPFN_vkCmdSetColorBlendEnableEXT>;
+pub type PFN_vkCmdSetColorBlendEquationEXT = Option<NonNullPFN_vkCmdSetColorBlendEquationEXT>;
+pub type PFN_vkCmdSetColorWriteEnableEXT = Option<NonNullPFN_vkCmdSetColorWriteEnableEXT>;
+pub type PFN_vkCmdSetColorWriteMaskEXT = Option<NonNullPFN_vkCmdSetColorWriteMaskEXT>;
+pub type PFN_vkCmdSetConservativeRasterizationModeEXT = Option<NonNullPFN_vkCmdSetConservativeRasterizationModeEXT>;
+pub type PFN_vkCmdSetCoverageModulationModeNV = Option<NonNullPFN_vkCmdSetCoverageModulationModeNV>;
+pub type PFN_vkCmdSetCoverageModulationTableEnableNV = Option<NonNullPFN_vkCmdSetCoverageModulationTableEnableNV>;
+pub type PFN_vkCmdSetCoverageModulationTableNV = Option<NonNullPFN_vkCmdSetCoverageModulationTableNV>;
+pub type PFN_vkCmdSetCoverageReductionModeNV = Option<NonNullPFN_vkCmdSetCoverageReductionModeNV>;
+pub type PFN_vkCmdSetCoverageToColorEnableNV = Option<NonNullPFN_vkCmdSetCoverageToColorEnableNV>;
+pub type PFN_vkCmdSetCoverageToColorLocationNV = Option<NonNullPFN_vkCmdSetCoverageToColorLocationNV>;
+pub type PFN_vkCmdSetCullMode = Option<NonNullPFN_vkCmdSetCullMode>;
+pub type PFN_vkCmdSetCullModeEXT = Option<NonNullPFN_vkCmdSetCullModeEXT>;
+pub type PFN_vkCmdSetDepthBias = Option<NonNullPFN_vkCmdSetDepthBias>;
+pub type PFN_vkCmdSetDepthBias2EXT = Option<NonNullPFN_vkCmdSetDepthBias2EXT>;
+pub type PFN_vkCmdSetDepthBiasEnable = Option<NonNullPFN_vkCmdSetDepthBiasEnable>;
+pub type PFN_vkCmdSetDepthBiasEnableEXT = Option<NonNullPFN_vkCmdSetDepthBiasEnableEXT>;
+pub type PFN_vkCmdSetDepthBounds = Option<NonNullPFN_vkCmdSetDepthBounds>;
+pub type PFN_vkCmdSetDepthBoundsTestEnable = Option<NonNullPFN_vkCmdSetDepthBoundsTestEnable>;
+pub type PFN_vkCmdSetDepthBoundsTestEnableEXT = Option<NonNullPFN_vkCmdSetDepthBoundsTestEnableEXT>;
+pub type PFN_vkCmdSetDepthClampEnableEXT = Option<NonNullPFN_vkCmdSetDepthClampEnableEXT>;
+pub type PFN_vkCmdSetDepthClampRangeEXT = Option<NonNullPFN_vkCmdSetDepthClampRangeEXT>;
+pub type PFN_vkCmdSetDepthClipEnableEXT = Option<NonNullPFN_vkCmdSetDepthClipEnableEXT>;
+pub type PFN_vkCmdSetDepthClipNegativeOneToOneEXT = Option<NonNullPFN_vkCmdSetDepthClipNegativeOneToOneEXT>;
+pub type PFN_vkCmdSetDepthCompareOp = Option<NonNullPFN_vkCmdSetDepthCompareOp>;
+pub type PFN_vkCmdSetDepthCompareOpEXT = Option<NonNullPFN_vkCmdSetDepthCompareOpEXT>;
+pub type PFN_vkCmdSetDepthTestEnable = Option<NonNullPFN_vkCmdSetDepthTestEnable>;
+pub type PFN_vkCmdSetDepthTestEnableEXT = Option<NonNullPFN_vkCmdSetDepthTestEnableEXT>;
+pub type PFN_vkCmdSetDepthWriteEnable = Option<NonNullPFN_vkCmdSetDepthWriteEnable>;
+pub type PFN_vkCmdSetDepthWriteEnableEXT = Option<NonNullPFN_vkCmdSetDepthWriteEnableEXT>;
+pub type PFN_vkCmdSetDescriptorBufferOffsets2EXT = Option<NonNullPFN_vkCmdSetDescriptorBufferOffsets2EXT>;
+pub type PFN_vkCmdSetDescriptorBufferOffsetsEXT = Option<NonNullPFN_vkCmdSetDescriptorBufferOffsetsEXT>;
+pub type PFN_vkCmdSetDeviceMask = Option<NonNullPFN_vkCmdSetDeviceMask>;
+pub type PFN_vkCmdSetDeviceMaskKHR = Option<NonNullPFN_vkCmdSetDeviceMaskKHR>;
+pub type PFN_vkCmdSetDiscardRectangleEXT = Option<NonNullPFN_vkCmdSetDiscardRectangleEXT>;
+pub type PFN_vkCmdSetDiscardRectangleEnableEXT = Option<NonNullPFN_vkCmdSetDiscardRectangleEnableEXT>;
+pub type PFN_vkCmdSetDiscardRectangleModeEXT = Option<NonNullPFN_vkCmdSetDiscardRectangleModeEXT>;
+pub type PFN_vkCmdSetEvent = Option<NonNullPFN_vkCmdSetEvent>;
+pub type PFN_vkCmdSetEvent2 = Option<NonNullPFN_vkCmdSetEvent2>;
+pub type PFN_vkCmdSetEvent2KHR = Option<NonNullPFN_vkCmdSetEvent2KHR>;
+pub type PFN_vkCmdSetExclusiveScissorEnableNV = Option<NonNullPFN_vkCmdSetExclusiveScissorEnableNV>;
+pub type PFN_vkCmdSetExclusiveScissorNV = Option<NonNullPFN_vkCmdSetExclusiveScissorNV>;
+pub type PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT = Option<NonNullPFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT>;
+pub type PFN_vkCmdSetFragmentShadingRateEnumNV = Option<NonNullPFN_vkCmdSetFragmentShadingRateEnumNV>;
+pub type PFN_vkCmdSetFragmentShadingRateKHR = Option<NonNullPFN_vkCmdSetFragmentShadingRateKHR>;
+pub type PFN_vkCmdSetFrontFace = Option<NonNullPFN_vkCmdSetFrontFace>;
+pub type PFN_vkCmdSetFrontFaceEXT = Option<NonNullPFN_vkCmdSetFrontFaceEXT>;
+pub type PFN_vkCmdSetLineRasterizationModeEXT = Option<NonNullPFN_vkCmdSetLineRasterizationModeEXT>;
+pub type PFN_vkCmdSetLineStipple = Option<NonNullPFN_vkCmdSetLineStipple>;
+pub type PFN_vkCmdSetLineStippleEXT = Option<NonNullPFN_vkCmdSetLineStippleEXT>;
+pub type PFN_vkCmdSetLineStippleEnableEXT = Option<NonNullPFN_vkCmdSetLineStippleEnableEXT>;
+pub type PFN_vkCmdSetLineStippleKHR = Option<NonNullPFN_vkCmdSetLineStippleKHR>;
+pub type PFN_vkCmdSetLineWidth = Option<NonNullPFN_vkCmdSetLineWidth>;
+pub type PFN_vkCmdSetLogicOpEXT = Option<NonNullPFN_vkCmdSetLogicOpEXT>;
+pub type PFN_vkCmdSetLogicOpEnableEXT = Option<NonNullPFN_vkCmdSetLogicOpEnableEXT>;
+pub type PFN_vkCmdSetPatchControlPointsEXT = Option<NonNullPFN_vkCmdSetPatchControlPointsEXT>;
+pub type PFN_vkCmdSetPerformanceMarkerINTEL = Option<NonNullPFN_vkCmdSetPerformanceMarkerINTEL>;
+pub type PFN_vkCmdSetPerformanceOverrideINTEL = Option<NonNullPFN_vkCmdSetPerformanceOverrideINTEL>;
+pub type PFN_vkCmdSetPerformanceStreamMarkerINTEL = Option<NonNullPFN_vkCmdSetPerformanceStreamMarkerINTEL>;
+pub type PFN_vkCmdSetPolygonModeEXT = Option<NonNullPFN_vkCmdSetPolygonModeEXT>;
+pub type PFN_vkCmdSetPrimitiveRestartEnable = Option<NonNullPFN_vkCmdSetPrimitiveRestartEnable>;
+pub type PFN_vkCmdSetPrimitiveRestartEnableEXT = Option<NonNullPFN_vkCmdSetPrimitiveRestartEnableEXT>;
+pub type PFN_vkCmdSetPrimitiveTopology = Option<NonNullPFN_vkCmdSetPrimitiveTopology>;
+pub type PFN_vkCmdSetPrimitiveTopologyEXT = Option<NonNullPFN_vkCmdSetPrimitiveTopologyEXT>;
+pub type PFN_vkCmdSetProvokingVertexModeEXT = Option<NonNullPFN_vkCmdSetProvokingVertexModeEXT>;
+pub type PFN_vkCmdSetRasterizationSamplesEXT = Option<NonNullPFN_vkCmdSetRasterizationSamplesEXT>;
+pub type PFN_vkCmdSetRasterizationStreamEXT = Option<NonNullPFN_vkCmdSetRasterizationStreamEXT>;
+pub type PFN_vkCmdSetRasterizerDiscardEnable = Option<NonNullPFN_vkCmdSetRasterizerDiscardEnable>;
+pub type PFN_vkCmdSetRasterizerDiscardEnableEXT = Option<NonNullPFN_vkCmdSetRasterizerDiscardEnableEXT>;
+pub type PFN_vkCmdSetRayTracingPipelineStackSizeKHR = Option<NonNullPFN_vkCmdSetRayTracingPipelineStackSizeKHR>;
+pub type PFN_vkCmdSetRenderingAttachmentLocations = Option<NonNullPFN_vkCmdSetRenderingAttachmentLocations>;
+pub type PFN_vkCmdSetRenderingAttachmentLocationsKHR = Option<NonNullPFN_vkCmdSetRenderingAttachmentLocationsKHR>;
+pub type PFN_vkCmdSetRenderingInputAttachmentIndices = Option<NonNullPFN_vkCmdSetRenderingInputAttachmentIndices>;
+pub type PFN_vkCmdSetRenderingInputAttachmentIndicesKHR = Option<NonNullPFN_vkCmdSetRenderingInputAttachmentIndicesKHR>;
+pub type PFN_vkCmdSetRepresentativeFragmentTestEnableNV = Option<NonNullPFN_vkCmdSetRepresentativeFragmentTestEnableNV>;
+pub type PFN_vkCmdSetSampleLocationsEXT = Option<NonNullPFN_vkCmdSetSampleLocationsEXT>;
+pub type PFN_vkCmdSetSampleLocationsEnableEXT = Option<NonNullPFN_vkCmdSetSampleLocationsEnableEXT>;
+pub type PFN_vkCmdSetSampleMaskEXT = Option<NonNullPFN_vkCmdSetSampleMaskEXT>;
+pub type PFN_vkCmdSetScissor = Option<NonNullPFN_vkCmdSetScissor>;
+pub type PFN_vkCmdSetScissorWithCount = Option<NonNullPFN_vkCmdSetScissorWithCount>;
+pub type PFN_vkCmdSetScissorWithCountEXT = Option<NonNullPFN_vkCmdSetScissorWithCountEXT>;
+pub type PFN_vkCmdSetShadingRateImageEnableNV = Option<NonNullPFN_vkCmdSetShadingRateImageEnableNV>;
+pub type PFN_vkCmdSetStencilCompareMask = Option<NonNullPFN_vkCmdSetStencilCompareMask>;
+pub type PFN_vkCmdSetStencilOp = Option<NonNullPFN_vkCmdSetStencilOp>;
+pub type PFN_vkCmdSetStencilOpEXT = Option<NonNullPFN_vkCmdSetStencilOpEXT>;
+pub type PFN_vkCmdSetStencilReference = Option<NonNullPFN_vkCmdSetStencilReference>;
+pub type PFN_vkCmdSetStencilTestEnable = Option<NonNullPFN_vkCmdSetStencilTestEnable>;
+pub type PFN_vkCmdSetStencilTestEnableEXT = Option<NonNullPFN_vkCmdSetStencilTestEnableEXT>;
+pub type PFN_vkCmdSetStencilWriteMask = Option<NonNullPFN_vkCmdSetStencilWriteMask>;
+pub type PFN_vkCmdSetTessellationDomainOriginEXT = Option<NonNullPFN_vkCmdSetTessellationDomainOriginEXT>;
+pub type PFN_vkCmdSetVertexInputEXT = Option<NonNullPFN_vkCmdSetVertexInputEXT>;
+pub type PFN_vkCmdSetViewport = Option<NonNullPFN_vkCmdSetViewport>;
+pub type PFN_vkCmdSetViewportShadingRatePaletteNV = Option<NonNullPFN_vkCmdSetViewportShadingRatePaletteNV>;
+pub type PFN_vkCmdSetViewportSwizzleNV = Option<NonNullPFN_vkCmdSetViewportSwizzleNV>;
+pub type PFN_vkCmdSetViewportWScalingEnableNV = Option<NonNullPFN_vkCmdSetViewportWScalingEnableNV>;
+pub type PFN_vkCmdSetViewportWScalingNV = Option<NonNullPFN_vkCmdSetViewportWScalingNV>;
+pub type PFN_vkCmdSetViewportWithCount = Option<NonNullPFN_vkCmdSetViewportWithCount>;
+pub type PFN_vkCmdSetViewportWithCountEXT = Option<NonNullPFN_vkCmdSetViewportWithCountEXT>;
+pub type PFN_vkCmdSubpassShadingHUAWEI = Option<NonNullPFN_vkCmdSubpassShadingHUAWEI>;
+pub type PFN_vkCmdTraceRaysIndirect2KHR = Option<NonNullPFN_vkCmdTraceRaysIndirect2KHR>;
+pub type PFN_vkCmdTraceRaysIndirectKHR = Option<NonNullPFN_vkCmdTraceRaysIndirectKHR>;
+pub type PFN_vkCmdTraceRaysKHR = Option<NonNullPFN_vkCmdTraceRaysKHR>;
+pub type PFN_vkCmdTraceRaysNV = Option<NonNullPFN_vkCmdTraceRaysNV>;
+pub type PFN_vkCmdUpdateBuffer = Option<NonNullPFN_vkCmdUpdateBuffer>;
+pub type PFN_vkCmdUpdatePipelineIndirectBufferNV = Option<NonNullPFN_vkCmdUpdatePipelineIndirectBufferNV>;
+pub type PFN_vkCmdWaitEvents = Option<NonNullPFN_vkCmdWaitEvents>;
+pub type PFN_vkCmdWaitEvents2 = Option<NonNullPFN_vkCmdWaitEvents2>;
+pub type PFN_vkCmdWaitEvents2KHR = Option<NonNullPFN_vkCmdWaitEvents2KHR>;
+pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = Option<NonNullPFN_vkCmdWriteAccelerationStructuresPropertiesKHR>;
+pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = Option<NonNullPFN_vkCmdWriteAccelerationStructuresPropertiesNV>;
+pub type PFN_vkCmdWriteBufferMarker2AMD = Option<NonNullPFN_vkCmdWriteBufferMarker2AMD>;
+pub type PFN_vkCmdWriteBufferMarkerAMD = Option<NonNullPFN_vkCmdWriteBufferMarkerAMD>;
+pub type PFN_vkCmdWriteMicromapsPropertiesEXT = Option<NonNullPFN_vkCmdWriteMicromapsPropertiesEXT>;
+pub type PFN_vkCmdWriteTimestamp = Option<NonNullPFN_vkCmdWriteTimestamp>;
+pub type PFN_vkCmdWriteTimestamp2 = Option<NonNullPFN_vkCmdWriteTimestamp2>;
+pub type PFN_vkCmdWriteTimestamp2KHR = Option<NonNullPFN_vkCmdWriteTimestamp2KHR>;
+pub type PFN_vkCompileDeferredNV = Option<NonNullPFN_vkCompileDeferredNV>;
+pub type PFN_vkConvertCooperativeVectorMatrixNV = Option<NonNullPFN_vkConvertCooperativeVectorMatrixNV>;
+pub type PFN_vkCopyAccelerationStructureKHR = Option<NonNullPFN_vkCopyAccelerationStructureKHR>;
+pub type PFN_vkCopyAccelerationStructureToMemoryKHR = Option<NonNullPFN_vkCopyAccelerationStructureToMemoryKHR>;
+pub type PFN_vkCopyImageToImage = Option<NonNullPFN_vkCopyImageToImage>;
+pub type PFN_vkCopyImageToImageEXT = Option<NonNullPFN_vkCopyImageToImageEXT>;
+pub type PFN_vkCopyImageToMemory = Option<NonNullPFN_vkCopyImageToMemory>;
+pub type PFN_vkCopyImageToMemoryEXT = Option<NonNullPFN_vkCopyImageToMemoryEXT>;
+pub type PFN_vkCopyMemoryToAccelerationStructureKHR = Option<NonNullPFN_vkCopyMemoryToAccelerationStructureKHR>;
+pub type PFN_vkCopyMemoryToImage = Option<NonNullPFN_vkCopyMemoryToImage>;
+pub type PFN_vkCopyMemoryToImageEXT = Option<NonNullPFN_vkCopyMemoryToImageEXT>;
+pub type PFN_vkCopyMemoryToMicromapEXT = Option<NonNullPFN_vkCopyMemoryToMicromapEXT>;
+pub type PFN_vkCopyMicromapEXT = Option<NonNullPFN_vkCopyMicromapEXT>;
+pub type PFN_vkCopyMicromapToMemoryEXT = Option<NonNullPFN_vkCopyMicromapToMemoryEXT>;
+pub type PFN_vkCreateAccelerationStructureKHR = Option<NonNullPFN_vkCreateAccelerationStructureKHR>;
+pub type PFN_vkCreateAccelerationStructureNV = Option<NonNullPFN_vkCreateAccelerationStructureNV>;
+pub type PFN_vkCreateBuffer = Option<NonNullPFN_vkCreateBuffer>;
+pub type PFN_vkCreateBufferView = Option<NonNullPFN_vkCreateBufferView>;
+pub type PFN_vkCreateCommandPool = Option<NonNullPFN_vkCreateCommandPool>;
+pub type PFN_vkCreateComputePipelines = Option<NonNullPFN_vkCreateComputePipelines>;
+pub type PFN_vkCreateCuFunctionNVX = Option<NonNullPFN_vkCreateCuFunctionNVX>;
+pub type PFN_vkCreateCuModuleNVX = Option<NonNullPFN_vkCreateCuModuleNVX>;
+pub type PFN_vkCreateDataGraphPipelineSessionARM = Option<NonNullPFN_vkCreateDataGraphPipelineSessionARM>;
+pub type PFN_vkCreateDataGraphPipelinesARM = Option<NonNullPFN_vkCreateDataGraphPipelinesARM>;
+pub type PFN_vkCreateDebugReportCallbackEXT = Option<NonNullPFN_vkCreateDebugReportCallbackEXT>;
+pub type PFN_vkCreateDebugUtilsMessengerEXT = Option<NonNullPFN_vkCreateDebugUtilsMessengerEXT>;
+pub type PFN_vkCreateDeferredOperationKHR = Option<NonNullPFN_vkCreateDeferredOperationKHR>;
+pub type PFN_vkCreateDescriptorPool = Option<NonNullPFN_vkCreateDescriptorPool>;
+pub type PFN_vkCreateDescriptorSetLayout = Option<NonNullPFN_vkCreateDescriptorSetLayout>;
+pub type PFN_vkCreateDescriptorUpdateTemplate = Option<NonNullPFN_vkCreateDescriptorUpdateTemplate>;
+pub type PFN_vkCreateDescriptorUpdateTemplateKHR = Option<NonNullPFN_vkCreateDescriptorUpdateTemplateKHR>;
+pub type PFN_vkCreateDevice = Option<NonNullPFN_vkCreateDevice>;
+pub type PFN_vkCreateDisplayModeKHR = Option<NonNullPFN_vkCreateDisplayModeKHR>;
+pub type PFN_vkCreateDisplayPlaneSurfaceKHR = Option<NonNullPFN_vkCreateDisplayPlaneSurfaceKHR>;
+pub type PFN_vkCreateEvent = Option<NonNullPFN_vkCreateEvent>;
+pub type PFN_vkCreateExternalComputeQueueNV = Option<NonNullPFN_vkCreateExternalComputeQueueNV>;
+pub type PFN_vkCreateFence = Option<NonNullPFN_vkCreateFence>;
+pub type PFN_vkCreateFramebuffer = Option<NonNullPFN_vkCreateFramebuffer>;
+pub type PFN_vkCreateGraphicsPipelines = Option<NonNullPFN_vkCreateGraphicsPipelines>;
+pub type PFN_vkCreateHeadlessSurfaceEXT = Option<NonNullPFN_vkCreateHeadlessSurfaceEXT>;
+pub type PFN_vkCreateImage = Option<NonNullPFN_vkCreateImage>;
+pub type PFN_vkCreateImageView = Option<NonNullPFN_vkCreateImageView>;
+pub type PFN_vkCreateIndirectCommandsLayoutEXT = Option<NonNullPFN_vkCreateIndirectCommandsLayoutEXT>;
+pub type PFN_vkCreateIndirectCommandsLayoutNV = Option<NonNullPFN_vkCreateIndirectCommandsLayoutNV>;
+pub type PFN_vkCreateIndirectExecutionSetEXT = Option<NonNullPFN_vkCreateIndirectExecutionSetEXT>;
+pub type PFN_vkCreateInstance = Option<NonNullPFN_vkCreateInstance>;
+pub type PFN_vkCreateMicromapEXT = Option<NonNullPFN_vkCreateMicromapEXT>;
+pub type PFN_vkCreateOpticalFlowSessionNV = Option<NonNullPFN_vkCreateOpticalFlowSessionNV>;
+pub type PFN_vkCreatePipelineBinariesKHR = Option<NonNullPFN_vkCreatePipelineBinariesKHR>;
+pub type PFN_vkCreatePipelineCache = Option<NonNullPFN_vkCreatePipelineCache>;
+pub type PFN_vkCreatePipelineLayout = Option<NonNullPFN_vkCreatePipelineLayout>;
+pub type PFN_vkCreatePrivateDataSlot = Option<NonNullPFN_vkCreatePrivateDataSlot>;
+pub type PFN_vkCreatePrivateDataSlotEXT = Option<NonNullPFN_vkCreatePrivateDataSlotEXT>;
+pub type PFN_vkCreateQueryPool = Option<NonNullPFN_vkCreateQueryPool>;
+pub type PFN_vkCreateRayTracingPipelinesKHR = Option<NonNullPFN_vkCreateRayTracingPipelinesKHR>;
+pub type PFN_vkCreateRayTracingPipelinesNV = Option<NonNullPFN_vkCreateRayTracingPipelinesNV>;
+pub type PFN_vkCreateRenderPass = Option<NonNullPFN_vkCreateRenderPass>;
+pub type PFN_vkCreateRenderPass2 = Option<NonNullPFN_vkCreateRenderPass2>;
+pub type PFN_vkCreateRenderPass2KHR = Option<NonNullPFN_vkCreateRenderPass2KHR>;
+pub type PFN_vkCreateSampler = Option<NonNullPFN_vkCreateSampler>;
+pub type PFN_vkCreateSamplerYcbcrConversion = Option<NonNullPFN_vkCreateSamplerYcbcrConversion>;
+pub type PFN_vkCreateSamplerYcbcrConversionKHR = Option<NonNullPFN_vkCreateSamplerYcbcrConversionKHR>;
+pub type PFN_vkCreateSemaphore = Option<NonNullPFN_vkCreateSemaphore>;
+pub type PFN_vkCreateShaderModule = Option<NonNullPFN_vkCreateShaderModule>;
+pub type PFN_vkCreateShadersEXT = Option<NonNullPFN_vkCreateShadersEXT>;
+pub type PFN_vkCreateSharedSwapchainsKHR = Option<NonNullPFN_vkCreateSharedSwapchainsKHR>;
+pub type PFN_vkCreateSwapchainKHR = Option<NonNullPFN_vkCreateSwapchainKHR>;
+pub type PFN_vkCreateTensorARM = Option<NonNullPFN_vkCreateTensorARM>;
+pub type PFN_vkCreateTensorViewARM = Option<NonNullPFN_vkCreateTensorViewARM>;
+pub type PFN_vkCreateValidationCacheEXT = Option<NonNullPFN_vkCreateValidationCacheEXT>;
+pub type PFN_vkCreateVideoSessionKHR = Option<NonNullPFN_vkCreateVideoSessionKHR>;
+pub type PFN_vkCreateVideoSessionParametersKHR = Option<NonNullPFN_vkCreateVideoSessionParametersKHR>;
+pub type PFN_vkDebugMarkerSetObjectNameEXT = Option<NonNullPFN_vkDebugMarkerSetObjectNameEXT>;
+pub type PFN_vkDebugMarkerSetObjectTagEXT = Option<NonNullPFN_vkDebugMarkerSetObjectTagEXT>;
 pub type PFN_vkDebugReportCallbackEXT = Option<NonNullPFN_vkDebugReportCallbackEXT>;
+pub type PFN_vkDebugReportMessageEXT = Option<NonNullPFN_vkDebugReportMessageEXT>;
 pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<NonNullPFN_vkDebugUtilsMessengerCallbackEXT>;
+pub type PFN_vkDeferredOperationJoinKHR = Option<NonNullPFN_vkDeferredOperationJoinKHR>;
+pub type PFN_vkDestroyAccelerationStructureKHR = Option<NonNullPFN_vkDestroyAccelerationStructureKHR>;
+pub type PFN_vkDestroyAccelerationStructureNV = Option<NonNullPFN_vkDestroyAccelerationStructureNV>;
+pub type PFN_vkDestroyBuffer = Option<NonNullPFN_vkDestroyBuffer>;
+pub type PFN_vkDestroyBufferView = Option<NonNullPFN_vkDestroyBufferView>;
+pub type PFN_vkDestroyCommandPool = Option<NonNullPFN_vkDestroyCommandPool>;
+pub type PFN_vkDestroyCuFunctionNVX = Option<NonNullPFN_vkDestroyCuFunctionNVX>;
+pub type PFN_vkDestroyCuModuleNVX = Option<NonNullPFN_vkDestroyCuModuleNVX>;
+pub type PFN_vkDestroyDataGraphPipelineSessionARM = Option<NonNullPFN_vkDestroyDataGraphPipelineSessionARM>;
+pub type PFN_vkDestroyDebugReportCallbackEXT = Option<NonNullPFN_vkDestroyDebugReportCallbackEXT>;
+pub type PFN_vkDestroyDebugUtilsMessengerEXT = Option<NonNullPFN_vkDestroyDebugUtilsMessengerEXT>;
+pub type PFN_vkDestroyDeferredOperationKHR = Option<NonNullPFN_vkDestroyDeferredOperationKHR>;
+pub type PFN_vkDestroyDescriptorPool = Option<NonNullPFN_vkDestroyDescriptorPool>;
+pub type PFN_vkDestroyDescriptorSetLayout = Option<NonNullPFN_vkDestroyDescriptorSetLayout>;
+pub type PFN_vkDestroyDescriptorUpdateTemplate = Option<NonNullPFN_vkDestroyDescriptorUpdateTemplate>;
+pub type PFN_vkDestroyDescriptorUpdateTemplateKHR = Option<NonNullPFN_vkDestroyDescriptorUpdateTemplateKHR>;
+pub type PFN_vkDestroyDevice = Option<NonNullPFN_vkDestroyDevice>;
+pub type PFN_vkDestroyEvent = Option<NonNullPFN_vkDestroyEvent>;
+pub type PFN_vkDestroyExternalComputeQueueNV = Option<NonNullPFN_vkDestroyExternalComputeQueueNV>;
+pub type PFN_vkDestroyFence = Option<NonNullPFN_vkDestroyFence>;
+pub type PFN_vkDestroyFramebuffer = Option<NonNullPFN_vkDestroyFramebuffer>;
+pub type PFN_vkDestroyImage = Option<NonNullPFN_vkDestroyImage>;
+pub type PFN_vkDestroyImageView = Option<NonNullPFN_vkDestroyImageView>;
+pub type PFN_vkDestroyIndirectCommandsLayoutEXT = Option<NonNullPFN_vkDestroyIndirectCommandsLayoutEXT>;
+pub type PFN_vkDestroyIndirectCommandsLayoutNV = Option<NonNullPFN_vkDestroyIndirectCommandsLayoutNV>;
+pub type PFN_vkDestroyIndirectExecutionSetEXT = Option<NonNullPFN_vkDestroyIndirectExecutionSetEXT>;
+pub type PFN_vkDestroyInstance = Option<NonNullPFN_vkDestroyInstance>;
+pub type PFN_vkDestroyMicromapEXT = Option<NonNullPFN_vkDestroyMicromapEXT>;
+pub type PFN_vkDestroyOpticalFlowSessionNV = Option<NonNullPFN_vkDestroyOpticalFlowSessionNV>;
+pub type PFN_vkDestroyPipeline = Option<NonNullPFN_vkDestroyPipeline>;
+pub type PFN_vkDestroyPipelineBinaryKHR = Option<NonNullPFN_vkDestroyPipelineBinaryKHR>;
+pub type PFN_vkDestroyPipelineCache = Option<NonNullPFN_vkDestroyPipelineCache>;
+pub type PFN_vkDestroyPipelineLayout = Option<NonNullPFN_vkDestroyPipelineLayout>;
+pub type PFN_vkDestroyPrivateDataSlot = Option<NonNullPFN_vkDestroyPrivateDataSlot>;
+pub type PFN_vkDestroyPrivateDataSlotEXT = Option<NonNullPFN_vkDestroyPrivateDataSlotEXT>;
+pub type PFN_vkDestroyQueryPool = Option<NonNullPFN_vkDestroyQueryPool>;
+pub type PFN_vkDestroyRenderPass = Option<NonNullPFN_vkDestroyRenderPass>;
+pub type PFN_vkDestroySampler = Option<NonNullPFN_vkDestroySampler>;
+pub type PFN_vkDestroySamplerYcbcrConversion = Option<NonNullPFN_vkDestroySamplerYcbcrConversion>;
+pub type PFN_vkDestroySamplerYcbcrConversionKHR = Option<NonNullPFN_vkDestroySamplerYcbcrConversionKHR>;
+pub type PFN_vkDestroySemaphore = Option<NonNullPFN_vkDestroySemaphore>;
+pub type PFN_vkDestroyShaderEXT = Option<NonNullPFN_vkDestroyShaderEXT>;
+pub type PFN_vkDestroyShaderModule = Option<NonNullPFN_vkDestroyShaderModule>;
+pub type PFN_vkDestroySurfaceKHR = Option<NonNullPFN_vkDestroySurfaceKHR>;
+pub type PFN_vkDestroySwapchainKHR = Option<NonNullPFN_vkDestroySwapchainKHR>;
+pub type PFN_vkDestroyTensorARM = Option<NonNullPFN_vkDestroyTensorARM>;
+pub type PFN_vkDestroyTensorViewARM = Option<NonNullPFN_vkDestroyTensorViewARM>;
+pub type PFN_vkDestroyValidationCacheEXT = Option<NonNullPFN_vkDestroyValidationCacheEXT>;
+pub type PFN_vkDestroyVideoSessionKHR = Option<NonNullPFN_vkDestroyVideoSessionKHR>;
+pub type PFN_vkDestroyVideoSessionParametersKHR = Option<NonNullPFN_vkDestroyVideoSessionParametersKHR>;
 pub type PFN_vkDeviceMemoryReportCallbackEXT = Option<NonNullPFN_vkDeviceMemoryReportCallbackEXT>;
+pub type PFN_vkDeviceWaitIdle = Option<NonNullPFN_vkDeviceWaitIdle>;
+pub type PFN_vkDisplayPowerControlEXT = Option<NonNullPFN_vkDisplayPowerControlEXT>;
+pub type PFN_vkEndCommandBuffer = Option<NonNullPFN_vkEndCommandBuffer>;
+pub type PFN_vkEnumerateDeviceExtensionProperties = Option<NonNullPFN_vkEnumerateDeviceExtensionProperties>;
+pub type PFN_vkEnumerateDeviceLayerProperties = Option<NonNullPFN_vkEnumerateDeviceLayerProperties>;
+pub type PFN_vkEnumerateInstanceExtensionProperties = Option<NonNullPFN_vkEnumerateInstanceExtensionProperties>;
+pub type PFN_vkEnumerateInstanceLayerProperties = Option<NonNullPFN_vkEnumerateInstanceLayerProperties>;
+pub type PFN_vkEnumerateInstanceVersion = Option<NonNullPFN_vkEnumerateInstanceVersion>;
+pub type PFN_vkEnumeratePhysicalDeviceGroups = Option<NonNullPFN_vkEnumeratePhysicalDeviceGroups>;
+pub type PFN_vkEnumeratePhysicalDeviceGroupsKHR = Option<NonNullPFN_vkEnumeratePhysicalDeviceGroupsKHR>;
+pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = Option<NonNullPFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM>;
+pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = Option<NonNullPFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR>;
+pub type PFN_vkEnumeratePhysicalDevices = Option<NonNullPFN_vkEnumeratePhysicalDevices>;
+pub type PFN_vkFlushMappedMemoryRanges = Option<NonNullPFN_vkFlushMappedMemoryRanges>;
+pub type PFN_vkFreeCommandBuffers = Option<NonNullPFN_vkFreeCommandBuffers>;
+pub type PFN_vkFreeDescriptorSets = Option<NonNullPFN_vkFreeDescriptorSets>;
 pub type PFN_vkFreeFunction = Option<NonNullPFN_vkFreeFunction>;
+pub type PFN_vkFreeMemory = Option<NonNullPFN_vkFreeMemory>;
+pub type PFN_vkGetAccelerationStructureBuildSizesKHR = Option<NonNullPFN_vkGetAccelerationStructureBuildSizesKHR>;
+pub type PFN_vkGetAccelerationStructureDeviceAddressKHR = Option<NonNullPFN_vkGetAccelerationStructureDeviceAddressKHR>;
+pub type PFN_vkGetAccelerationStructureHandleNV = Option<NonNullPFN_vkGetAccelerationStructureHandleNV>;
+pub type PFN_vkGetAccelerationStructureMemoryRequirementsNV = Option<NonNullPFN_vkGetAccelerationStructureMemoryRequirementsNV>;
+pub type PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = Option<NonNullPFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT>;
+pub type PFN_vkGetBufferDeviceAddress = Option<NonNullPFN_vkGetBufferDeviceAddress>;
+pub type PFN_vkGetBufferDeviceAddressEXT = Option<NonNullPFN_vkGetBufferDeviceAddressEXT>;
+pub type PFN_vkGetBufferDeviceAddressKHR = Option<NonNullPFN_vkGetBufferDeviceAddressKHR>;
+pub type PFN_vkGetBufferMemoryRequirements = Option<NonNullPFN_vkGetBufferMemoryRequirements>;
+pub type PFN_vkGetBufferMemoryRequirements2 = Option<NonNullPFN_vkGetBufferMemoryRequirements2>;
+pub type PFN_vkGetBufferMemoryRequirements2KHR = Option<NonNullPFN_vkGetBufferMemoryRequirements2KHR>;
+pub type PFN_vkGetBufferOpaqueCaptureAddress = Option<NonNullPFN_vkGetBufferOpaqueCaptureAddress>;
+pub type PFN_vkGetBufferOpaqueCaptureAddressKHR = Option<NonNullPFN_vkGetBufferOpaqueCaptureAddressKHR>;
+pub type PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT = Option<NonNullPFN_vkGetBufferOpaqueCaptureDescriptorDataEXT>;
+pub type PFN_vkGetCalibratedTimestampsEXT = Option<NonNullPFN_vkGetCalibratedTimestampsEXT>;
+pub type PFN_vkGetCalibratedTimestampsKHR = Option<NonNullPFN_vkGetCalibratedTimestampsKHR>;
+pub type PFN_vkGetClusterAccelerationStructureBuildSizesNV = Option<NonNullPFN_vkGetClusterAccelerationStructureBuildSizesNV>;
+pub type PFN_vkGetDataGraphPipelineAvailablePropertiesARM = Option<NonNullPFN_vkGetDataGraphPipelineAvailablePropertiesARM>;
+pub type PFN_vkGetDataGraphPipelinePropertiesARM = Option<NonNullPFN_vkGetDataGraphPipelinePropertiesARM>;
+pub type PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM = Option<NonNullPFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM>;
+pub type PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM = Option<NonNullPFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM>;
+pub type PFN_vkGetDeferredOperationMaxConcurrencyKHR = Option<NonNullPFN_vkGetDeferredOperationMaxConcurrencyKHR>;
+pub type PFN_vkGetDeferredOperationResultKHR = Option<NonNullPFN_vkGetDeferredOperationResultKHR>;
+pub type PFN_vkGetDescriptorEXT = Option<NonNullPFN_vkGetDescriptorEXT>;
+pub type PFN_vkGetDescriptorSetHostMappingVALVE = Option<NonNullPFN_vkGetDescriptorSetHostMappingVALVE>;
+pub type PFN_vkGetDescriptorSetLayoutBindingOffsetEXT = Option<NonNullPFN_vkGetDescriptorSetLayoutBindingOffsetEXT>;
+pub type PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE = Option<NonNullPFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE>;
+pub type PFN_vkGetDescriptorSetLayoutSizeEXT = Option<NonNullPFN_vkGetDescriptorSetLayoutSizeEXT>;
+pub type PFN_vkGetDescriptorSetLayoutSupport = Option<NonNullPFN_vkGetDescriptorSetLayoutSupport>;
+pub type PFN_vkGetDescriptorSetLayoutSupportKHR = Option<NonNullPFN_vkGetDescriptorSetLayoutSupportKHR>;
+pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR = Option<NonNullPFN_vkGetDeviceAccelerationStructureCompatibilityKHR>;
+pub type PFN_vkGetDeviceBufferMemoryRequirements = Option<NonNullPFN_vkGetDeviceBufferMemoryRequirements>;
+pub type PFN_vkGetDeviceBufferMemoryRequirementsKHR = Option<NonNullPFN_vkGetDeviceBufferMemoryRequirementsKHR>;
+pub type PFN_vkGetDeviceFaultInfoEXT = Option<NonNullPFN_vkGetDeviceFaultInfoEXT>;
+pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = Option<NonNullPFN_vkGetDeviceGroupPeerMemoryFeatures>;
+pub type PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR = Option<NonNullPFN_vkGetDeviceGroupPeerMemoryFeaturesKHR>;
+pub type PFN_vkGetDeviceGroupPresentCapabilitiesKHR = Option<NonNullPFN_vkGetDeviceGroupPresentCapabilitiesKHR>;
+pub type PFN_vkGetDeviceGroupSurfacePresentModesKHR = Option<NonNullPFN_vkGetDeviceGroupSurfacePresentModesKHR>;
+pub type PFN_vkGetDeviceImageMemoryRequirements = Option<NonNullPFN_vkGetDeviceImageMemoryRequirements>;
+pub type PFN_vkGetDeviceImageMemoryRequirementsKHR = Option<NonNullPFN_vkGetDeviceImageMemoryRequirementsKHR>;
+pub type PFN_vkGetDeviceImageSparseMemoryRequirements = Option<NonNullPFN_vkGetDeviceImageSparseMemoryRequirements>;
+pub type PFN_vkGetDeviceImageSparseMemoryRequirementsKHR = Option<NonNullPFN_vkGetDeviceImageSparseMemoryRequirementsKHR>;
+pub type PFN_vkGetDeviceImageSubresourceLayout = Option<NonNullPFN_vkGetDeviceImageSubresourceLayout>;
+pub type PFN_vkGetDeviceImageSubresourceLayoutKHR = Option<NonNullPFN_vkGetDeviceImageSubresourceLayoutKHR>;
+pub type PFN_vkGetDeviceMemoryCommitment = Option<NonNullPFN_vkGetDeviceMemoryCommitment>;
+pub type PFN_vkGetDeviceMemoryOpaqueCaptureAddress = Option<NonNullPFN_vkGetDeviceMemoryOpaqueCaptureAddress>;
+pub type PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR = Option<NonNullPFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR>;
+pub type PFN_vkGetDeviceMicromapCompatibilityEXT = Option<NonNullPFN_vkGetDeviceMicromapCompatibilityEXT>;
+pub type PFN_vkGetDeviceProcAddr = Option<NonNullPFN_vkGetDeviceProcAddr>;
+pub type PFN_vkGetDeviceQueue = Option<NonNullPFN_vkGetDeviceQueue>;
+pub type PFN_vkGetDeviceQueue2 = Option<NonNullPFN_vkGetDeviceQueue2>;
+pub type PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = Option<NonNullPFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI>;
+pub type PFN_vkGetDeviceTensorMemoryRequirementsARM = Option<NonNullPFN_vkGetDeviceTensorMemoryRequirementsARM>;
+pub type PFN_vkGetDisplayModeProperties2KHR = Option<NonNullPFN_vkGetDisplayModeProperties2KHR>;
+pub type PFN_vkGetDisplayModePropertiesKHR = Option<NonNullPFN_vkGetDisplayModePropertiesKHR>;
+pub type PFN_vkGetDisplayPlaneCapabilities2KHR = Option<NonNullPFN_vkGetDisplayPlaneCapabilities2KHR>;
+pub type PFN_vkGetDisplayPlaneCapabilitiesKHR = Option<NonNullPFN_vkGetDisplayPlaneCapabilitiesKHR>;
+pub type PFN_vkGetDisplayPlaneSupportedDisplaysKHR = Option<NonNullPFN_vkGetDisplayPlaneSupportedDisplaysKHR>;
+pub type PFN_vkGetDrmDisplayEXT = Option<NonNullPFN_vkGetDrmDisplayEXT>;
+pub type PFN_vkGetDynamicRenderingTilePropertiesQCOM = Option<NonNullPFN_vkGetDynamicRenderingTilePropertiesQCOM>;
+pub type PFN_vkGetEncodedVideoSessionParametersKHR = Option<NonNullPFN_vkGetEncodedVideoSessionParametersKHR>;
+pub type PFN_vkGetEventStatus = Option<NonNullPFN_vkGetEventStatus>;
+pub type PFN_vkGetExternalComputeQueueDataNV = Option<NonNullPFN_vkGetExternalComputeQueueDataNV>;
+pub type PFN_vkGetFenceFdKHR = Option<NonNullPFN_vkGetFenceFdKHR>;
+pub type PFN_vkGetFenceStatus = Option<NonNullPFN_vkGetFenceStatus>;
+pub type PFN_vkGetFramebufferTilePropertiesQCOM = Option<NonNullPFN_vkGetFramebufferTilePropertiesQCOM>;
+pub type PFN_vkGetGeneratedCommandsMemoryRequirementsEXT = Option<NonNullPFN_vkGetGeneratedCommandsMemoryRequirementsEXT>;
+pub type PFN_vkGetGeneratedCommandsMemoryRequirementsNV = Option<NonNullPFN_vkGetGeneratedCommandsMemoryRequirementsNV>;
+pub type PFN_vkGetImageDrmFormatModifierPropertiesEXT = Option<NonNullPFN_vkGetImageDrmFormatModifierPropertiesEXT>;
+pub type PFN_vkGetImageMemoryRequirements = Option<NonNullPFN_vkGetImageMemoryRequirements>;
+pub type PFN_vkGetImageMemoryRequirements2 = Option<NonNullPFN_vkGetImageMemoryRequirements2>;
+pub type PFN_vkGetImageMemoryRequirements2KHR = Option<NonNullPFN_vkGetImageMemoryRequirements2KHR>;
+pub type PFN_vkGetImageOpaqueCaptureDescriptorDataEXT = Option<NonNullPFN_vkGetImageOpaqueCaptureDescriptorDataEXT>;
+pub type PFN_vkGetImageSparseMemoryRequirements = Option<NonNullPFN_vkGetImageSparseMemoryRequirements>;
+pub type PFN_vkGetImageSparseMemoryRequirements2 = Option<NonNullPFN_vkGetImageSparseMemoryRequirements2>;
+pub type PFN_vkGetImageSparseMemoryRequirements2KHR = Option<NonNullPFN_vkGetImageSparseMemoryRequirements2KHR>;
+pub type PFN_vkGetImageSubresourceLayout = Option<NonNullPFN_vkGetImageSubresourceLayout>;
+pub type PFN_vkGetImageSubresourceLayout2 = Option<NonNullPFN_vkGetImageSubresourceLayout2>;
+pub type PFN_vkGetImageSubresourceLayout2EXT = Option<NonNullPFN_vkGetImageSubresourceLayout2EXT>;
+pub type PFN_vkGetImageSubresourceLayout2KHR = Option<NonNullPFN_vkGetImageSubresourceLayout2KHR>;
+pub type PFN_vkGetImageViewAddressNVX = Option<NonNullPFN_vkGetImageViewAddressNVX>;
+pub type PFN_vkGetImageViewHandle64NVX = Option<NonNullPFN_vkGetImageViewHandle64NVX>;
+pub type PFN_vkGetImageViewHandleNVX = Option<NonNullPFN_vkGetImageViewHandleNVX>;
+pub type PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT = Option<NonNullPFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT>;
+pub type PFN_vkGetInstanceProcAddr = Option<NonNullPFN_vkGetInstanceProcAddr>;
 pub type PFN_vkGetInstanceProcAddrLUNARG = Option<NonNullPFN_vkGetInstanceProcAddrLUNARG>;
+pub type PFN_vkGetLatencyTimingsNV = Option<NonNullPFN_vkGetLatencyTimingsNV>;
+pub type PFN_vkGetMemoryFdKHR = Option<NonNullPFN_vkGetMemoryFdKHR>;
+pub type PFN_vkGetMemoryFdPropertiesKHR = Option<NonNullPFN_vkGetMemoryFdPropertiesKHR>;
+pub type PFN_vkGetMemoryHostPointerPropertiesEXT = Option<NonNullPFN_vkGetMemoryHostPointerPropertiesEXT>;
+pub type PFN_vkGetMemoryRemoteAddressNV = Option<NonNullPFN_vkGetMemoryRemoteAddressNV>;
+pub type PFN_vkGetMicromapBuildSizesEXT = Option<NonNullPFN_vkGetMicromapBuildSizesEXT>;
+pub type PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV = Option<NonNullPFN_vkGetPartitionedAccelerationStructuresBuildSizesNV>;
+pub type PFN_vkGetPastPresentationTimingEXT = Option<NonNullPFN_vkGetPastPresentationTimingEXT>;
+pub type PFN_vkGetPastPresentationTimingGOOGLE = Option<NonNullPFN_vkGetPastPresentationTimingGOOGLE>;
+pub type PFN_vkGetPerformanceParameterINTEL = Option<NonNullPFN_vkGetPerformanceParameterINTEL>;
+pub type PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = Option<NonNullPFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT>;
+pub type PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR = Option<NonNullPFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR>;
+pub type PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = Option<NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV>;
+pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = Option<NonNullPFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV>;
+pub type PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV = Option<NonNullPFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV>;
+pub type PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceDisplayProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceDisplayProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceDisplayPropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceDisplayPropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceExternalBufferProperties = Option<NonNullPFN_vkGetPhysicalDeviceExternalBufferProperties>;
+pub type PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceExternalFenceProperties = Option<NonNullPFN_vkGetPhysicalDeviceExternalFenceProperties>;
+pub type PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceExternalFencePropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = Option<NonNullPFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV>;
+pub type PFN_vkGetPhysicalDeviceExternalSemaphoreProperties = Option<NonNullPFN_vkGetPhysicalDeviceExternalSemaphoreProperties>;
+pub type PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM = Option<NonNullPFN_vkGetPhysicalDeviceExternalTensorPropertiesARM>;
+pub type PFN_vkGetPhysicalDeviceFeatures = Option<NonNullPFN_vkGetPhysicalDeviceFeatures>;
+pub type PFN_vkGetPhysicalDeviceFeatures2 = Option<NonNullPFN_vkGetPhysicalDeviceFeatures2>;
+pub type PFN_vkGetPhysicalDeviceFeatures2KHR = Option<NonNullPFN_vkGetPhysicalDeviceFeatures2KHR>;
+pub type PFN_vkGetPhysicalDeviceFormatProperties = Option<NonNullPFN_vkGetPhysicalDeviceFormatProperties>;
+pub type PFN_vkGetPhysicalDeviceFormatProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceFormatProperties2>;
+pub type PFN_vkGetPhysicalDeviceFormatProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceFormatProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR = Option<NonNullPFN_vkGetPhysicalDeviceFragmentShadingRatesKHR>;
+pub type PFN_vkGetPhysicalDeviceImageFormatProperties = Option<NonNullPFN_vkGetPhysicalDeviceImageFormatProperties>;
+pub type PFN_vkGetPhysicalDeviceImageFormatProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceImageFormatProperties2>;
+pub type PFN_vkGetPhysicalDeviceImageFormatProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceImageFormatProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceMemoryProperties = Option<NonNullPFN_vkGetPhysicalDeviceMemoryProperties>;
+pub type PFN_vkGetPhysicalDeviceMemoryProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceMemoryProperties2>;
+pub type PFN_vkGetPhysicalDeviceMemoryProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceMemoryProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT = Option<NonNullPFN_vkGetPhysicalDeviceMultisamplePropertiesEXT>;
+pub type PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV = Option<NonNullPFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV>;
+pub type PFN_vkGetPhysicalDevicePresentRectanglesKHR = Option<NonNullPFN_vkGetPhysicalDevicePresentRectanglesKHR>;
+pub type PFN_vkGetPhysicalDeviceProperties = Option<NonNullPFN_vkGetPhysicalDeviceProperties>;
+pub type PFN_vkGetPhysicalDeviceProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceProperties2>;
+pub type PFN_vkGetPhysicalDeviceProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties2>;
+pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties = Option<NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties>;
+pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties2 = Option<NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties2>;
+pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR = Option<NonNullPFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR>;
+pub type PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = Option<NonNullPFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV>;
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT>;
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR>;
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR>;
+pub type PFN_vkGetPhysicalDeviceSurfaceFormats2KHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceFormats2KHR>;
+pub type PFN_vkGetPhysicalDeviceSurfaceFormatsKHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceFormatsKHR>;
+pub type PFN_vkGetPhysicalDeviceSurfacePresentModesKHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfacePresentModesKHR>;
+pub type PFN_vkGetPhysicalDeviceSurfaceSupportKHR = Option<NonNullPFN_vkGetPhysicalDeviceSurfaceSupportKHR>;
+pub type PFN_vkGetPhysicalDeviceToolProperties = Option<NonNullPFN_vkGetPhysicalDeviceToolProperties>;
+pub type PFN_vkGetPhysicalDeviceToolPropertiesEXT = Option<NonNullPFN_vkGetPhysicalDeviceToolPropertiesEXT>;
+pub type PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceVideoCapabilitiesKHR>;
+pub type PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR = Option<NonNullPFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR>;
+pub type PFN_vkGetPipelineBinaryDataKHR = Option<NonNullPFN_vkGetPipelineBinaryDataKHR>;
+pub type PFN_vkGetPipelineCacheData = Option<NonNullPFN_vkGetPipelineCacheData>;
+pub type PFN_vkGetPipelineExecutableInternalRepresentationsKHR = Option<NonNullPFN_vkGetPipelineExecutableInternalRepresentationsKHR>;
+pub type PFN_vkGetPipelineExecutablePropertiesKHR = Option<NonNullPFN_vkGetPipelineExecutablePropertiesKHR>;
+pub type PFN_vkGetPipelineExecutableStatisticsKHR = Option<NonNullPFN_vkGetPipelineExecutableStatisticsKHR>;
+pub type PFN_vkGetPipelineIndirectDeviceAddressNV = Option<NonNullPFN_vkGetPipelineIndirectDeviceAddressNV>;
+pub type PFN_vkGetPipelineIndirectMemoryRequirementsNV = Option<NonNullPFN_vkGetPipelineIndirectMemoryRequirementsNV>;
+pub type PFN_vkGetPipelineKeyKHR = Option<NonNullPFN_vkGetPipelineKeyKHR>;
+pub type PFN_vkGetPipelinePropertiesEXT = Option<NonNullPFN_vkGetPipelinePropertiesEXT>;
+pub type PFN_vkGetPrivateData = Option<NonNullPFN_vkGetPrivateData>;
+pub type PFN_vkGetPrivateDataEXT = Option<NonNullPFN_vkGetPrivateDataEXT>;
+pub type PFN_vkGetQueryPoolResults = Option<NonNullPFN_vkGetQueryPoolResults>;
+pub type PFN_vkGetQueueCheckpointData2NV = Option<NonNullPFN_vkGetQueueCheckpointData2NV>;
+pub type PFN_vkGetQueueCheckpointDataNV = Option<NonNullPFN_vkGetQueueCheckpointDataNV>;
+pub type PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = Option<NonNullPFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR>;
+pub type PFN_vkGetRayTracingShaderGroupHandlesKHR = Option<NonNullPFN_vkGetRayTracingShaderGroupHandlesKHR>;
+pub type PFN_vkGetRayTracingShaderGroupHandlesNV = Option<NonNullPFN_vkGetRayTracingShaderGroupHandlesNV>;
+pub type PFN_vkGetRayTracingShaderGroupStackSizeKHR = Option<NonNullPFN_vkGetRayTracingShaderGroupStackSizeKHR>;
+pub type PFN_vkGetRefreshCycleDurationGOOGLE = Option<NonNullPFN_vkGetRefreshCycleDurationGOOGLE>;
+pub type PFN_vkGetRenderAreaGranularity = Option<NonNullPFN_vkGetRenderAreaGranularity>;
+pub type PFN_vkGetRenderingAreaGranularity = Option<NonNullPFN_vkGetRenderingAreaGranularity>;
+pub type PFN_vkGetRenderingAreaGranularityKHR = Option<NonNullPFN_vkGetRenderingAreaGranularityKHR>;
+pub type PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT = Option<NonNullPFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT>;
+pub type PFN_vkGetSemaphoreCounterValue = Option<NonNullPFN_vkGetSemaphoreCounterValue>;
+pub type PFN_vkGetSemaphoreCounterValueKHR = Option<NonNullPFN_vkGetSemaphoreCounterValueKHR>;
+pub type PFN_vkGetSemaphoreFdKHR = Option<NonNullPFN_vkGetSemaphoreFdKHR>;
+pub type PFN_vkGetShaderBinaryDataEXT = Option<NonNullPFN_vkGetShaderBinaryDataEXT>;
+pub type PFN_vkGetShaderInfoAMD = Option<NonNullPFN_vkGetShaderInfoAMD>;
+pub type PFN_vkGetShaderModuleCreateInfoIdentifierEXT = Option<NonNullPFN_vkGetShaderModuleCreateInfoIdentifierEXT>;
+pub type PFN_vkGetShaderModuleIdentifierEXT = Option<NonNullPFN_vkGetShaderModuleIdentifierEXT>;
+pub type PFN_vkGetSwapchainCounterEXT = Option<NonNullPFN_vkGetSwapchainCounterEXT>;
+pub type PFN_vkGetSwapchainImagesKHR = Option<NonNullPFN_vkGetSwapchainImagesKHR>;
+pub type PFN_vkGetSwapchainStatusKHR = Option<NonNullPFN_vkGetSwapchainStatusKHR>;
+pub type PFN_vkGetSwapchainTimeDomainPropertiesEXT = Option<NonNullPFN_vkGetSwapchainTimeDomainPropertiesEXT>;
+pub type PFN_vkGetSwapchainTimingPropertiesEXT = Option<NonNullPFN_vkGetSwapchainTimingPropertiesEXT>;
+pub type PFN_vkGetTensorMemoryRequirementsARM = Option<NonNullPFN_vkGetTensorMemoryRequirementsARM>;
+pub type PFN_vkGetTensorOpaqueCaptureDescriptorDataARM = Option<NonNullPFN_vkGetTensorOpaqueCaptureDescriptorDataARM>;
+pub type PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM = Option<NonNullPFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM>;
+pub type PFN_vkGetValidationCacheDataEXT = Option<NonNullPFN_vkGetValidationCacheDataEXT>;
+pub type PFN_vkGetVideoSessionMemoryRequirementsKHR = Option<NonNullPFN_vkGetVideoSessionMemoryRequirementsKHR>;
+pub type PFN_vkImportFenceFdKHR = Option<NonNullPFN_vkImportFenceFdKHR>;
+pub type PFN_vkImportSemaphoreFdKHR = Option<NonNullPFN_vkImportSemaphoreFdKHR>;
+pub type PFN_vkInitializePerformanceApiINTEL = Option<NonNullPFN_vkInitializePerformanceApiINTEL>;
 pub type PFN_vkInternalAllocationNotification = Option<NonNullPFN_vkInternalAllocationNotification>;
 pub type PFN_vkInternalFreeNotification = Option<NonNullPFN_vkInternalFreeNotification>;
+pub type PFN_vkInvalidateMappedMemoryRanges = Option<NonNullPFN_vkInvalidateMappedMemoryRanges>;
+pub type PFN_vkLatencySleepNV = Option<NonNullPFN_vkLatencySleepNV>;
+pub type PFN_vkMapMemory = Option<NonNullPFN_vkMapMemory>;
+pub type PFN_vkMapMemory2 = Option<NonNullPFN_vkMapMemory2>;
+pub type PFN_vkMapMemory2KHR = Option<NonNullPFN_vkMapMemory2KHR>;
+pub type PFN_vkMergePipelineCaches = Option<NonNullPFN_vkMergePipelineCaches>;
+pub type PFN_vkMergeValidationCachesEXT = Option<NonNullPFN_vkMergeValidationCachesEXT>;
+pub type PFN_vkQueueBeginDebugUtilsLabelEXT = Option<NonNullPFN_vkQueueBeginDebugUtilsLabelEXT>;
+pub type PFN_vkQueueBindSparse = Option<NonNullPFN_vkQueueBindSparse>;
+pub type PFN_vkQueueEndDebugUtilsLabelEXT = Option<NonNullPFN_vkQueueEndDebugUtilsLabelEXT>;
+pub type PFN_vkQueueInsertDebugUtilsLabelEXT = Option<NonNullPFN_vkQueueInsertDebugUtilsLabelEXT>;
+pub type PFN_vkQueueNotifyOutOfBandNV = Option<NonNullPFN_vkQueueNotifyOutOfBandNV>;
+pub type PFN_vkQueuePresentKHR = Option<NonNullPFN_vkQueuePresentKHR>;
+pub type PFN_vkQueueSetPerformanceConfigurationINTEL = Option<NonNullPFN_vkQueueSetPerformanceConfigurationINTEL>;
+pub type PFN_vkQueueSubmit = Option<NonNullPFN_vkQueueSubmit>;
+pub type PFN_vkQueueSubmit2 = Option<NonNullPFN_vkQueueSubmit2>;
+pub type PFN_vkQueueSubmit2KHR = Option<NonNullPFN_vkQueueSubmit2KHR>;
+pub type PFN_vkQueueWaitIdle = Option<NonNullPFN_vkQueueWaitIdle>;
 pub type PFN_vkReallocationFunction = Option<NonNullPFN_vkReallocationFunction>;
+pub type PFN_vkRegisterDeviceEventEXT = Option<NonNullPFN_vkRegisterDeviceEventEXT>;
+pub type PFN_vkRegisterDisplayEventEXT = Option<NonNullPFN_vkRegisterDisplayEventEXT>;
+pub type PFN_vkReleaseCapturedPipelineDataKHR = Option<NonNullPFN_vkReleaseCapturedPipelineDataKHR>;
+pub type PFN_vkReleaseDisplayEXT = Option<NonNullPFN_vkReleaseDisplayEXT>;
+pub type PFN_vkReleasePerformanceConfigurationINTEL = Option<NonNullPFN_vkReleasePerformanceConfigurationINTEL>;
+pub type PFN_vkReleaseProfilingLockKHR = Option<NonNullPFN_vkReleaseProfilingLockKHR>;
+pub type PFN_vkReleaseSwapchainImagesEXT = Option<NonNullPFN_vkReleaseSwapchainImagesEXT>;
+pub type PFN_vkReleaseSwapchainImagesKHR = Option<NonNullPFN_vkReleaseSwapchainImagesKHR>;
+pub type PFN_vkResetCommandBuffer = Option<NonNullPFN_vkResetCommandBuffer>;
+pub type PFN_vkResetCommandPool = Option<NonNullPFN_vkResetCommandPool>;
+pub type PFN_vkResetDescriptorPool = Option<NonNullPFN_vkResetDescriptorPool>;
+pub type PFN_vkResetEvent = Option<NonNullPFN_vkResetEvent>;
+pub type PFN_vkResetFences = Option<NonNullPFN_vkResetFences>;
+pub type PFN_vkResetQueryPool = Option<NonNullPFN_vkResetQueryPool>;
+pub type PFN_vkResetQueryPoolEXT = Option<NonNullPFN_vkResetQueryPoolEXT>;
+pub type PFN_vkSetDebugUtilsObjectNameEXT = Option<NonNullPFN_vkSetDebugUtilsObjectNameEXT>;
+pub type PFN_vkSetDebugUtilsObjectTagEXT = Option<NonNullPFN_vkSetDebugUtilsObjectTagEXT>;
+pub type PFN_vkSetDeviceMemoryPriorityEXT = Option<NonNullPFN_vkSetDeviceMemoryPriorityEXT>;
+pub type PFN_vkSetEvent = Option<NonNullPFN_vkSetEvent>;
+pub type PFN_vkSetHdrMetadataEXT = Option<NonNullPFN_vkSetHdrMetadataEXT>;
+pub type PFN_vkSetLatencyMarkerNV = Option<NonNullPFN_vkSetLatencyMarkerNV>;
+pub type PFN_vkSetLatencySleepModeNV = Option<NonNullPFN_vkSetLatencySleepModeNV>;
+pub type PFN_vkSetLocalDimmingAMD = Option<NonNullPFN_vkSetLocalDimmingAMD>;
+pub type PFN_vkSetPrivateData = Option<NonNullPFN_vkSetPrivateData>;
+pub type PFN_vkSetPrivateDataEXT = Option<NonNullPFN_vkSetPrivateDataEXT>;
+pub type PFN_vkSetSwapchainPresentTimingQueueSizeEXT = Option<NonNullPFN_vkSetSwapchainPresentTimingQueueSizeEXT>;
+pub type PFN_vkSignalSemaphore = Option<NonNullPFN_vkSignalSemaphore>;
+pub type PFN_vkSignalSemaphoreKHR = Option<NonNullPFN_vkSignalSemaphoreKHR>;
+pub type PFN_vkSubmitDebugUtilsMessageEXT = Option<NonNullPFN_vkSubmitDebugUtilsMessageEXT>;
+pub type PFN_vkTransitionImageLayout = Option<NonNullPFN_vkTransitionImageLayout>;
+pub type PFN_vkTransitionImageLayoutEXT = Option<NonNullPFN_vkTransitionImageLayoutEXT>;
+pub type PFN_vkTrimCommandPool = Option<NonNullPFN_vkTrimCommandPool>;
+pub type PFN_vkTrimCommandPoolKHR = Option<NonNullPFN_vkTrimCommandPoolKHR>;
+pub type PFN_vkUninitializePerformanceApiINTEL = Option<NonNullPFN_vkUninitializePerformanceApiINTEL>;
+pub type PFN_vkUnmapMemory = Option<NonNullPFN_vkUnmapMemory>;
+pub type PFN_vkUnmapMemory2 = Option<NonNullPFN_vkUnmapMemory2>;
+pub type PFN_vkUnmapMemory2KHR = Option<NonNullPFN_vkUnmapMemory2KHR>;
+pub type PFN_vkUpdateDescriptorSetWithTemplate = Option<NonNullPFN_vkUpdateDescriptorSetWithTemplate>;
+pub type PFN_vkUpdateDescriptorSetWithTemplateKHR = Option<NonNullPFN_vkUpdateDescriptorSetWithTemplateKHR>;
+pub type PFN_vkUpdateDescriptorSets = Option<NonNullPFN_vkUpdateDescriptorSets>;
+pub type PFN_vkUpdateIndirectExecutionSetPipelineEXT = Option<NonNullPFN_vkUpdateIndirectExecutionSetPipelineEXT>;
+pub type PFN_vkUpdateIndirectExecutionSetShaderEXT = Option<NonNullPFN_vkUpdateIndirectExecutionSetShaderEXT>;
+pub type PFN_vkUpdateVideoSessionParametersKHR = Option<NonNullPFN_vkUpdateVideoSessionParametersKHR>;
 pub type PFN_vkVoidFunction = Option<NonNullPFN_vkVoidFunction>;
+pub type PFN_vkWaitForFences = Option<NonNullPFN_vkWaitForFences>;
+pub type PFN_vkWaitForPresent2KHR = Option<NonNullPFN_vkWaitForPresent2KHR>;
+pub type PFN_vkWaitForPresentKHR = Option<NonNullPFN_vkWaitForPresentKHR>;
+pub type PFN_vkWaitSemaphores = Option<NonNullPFN_vkWaitSemaphores>;
+pub type PFN_vkWaitSemaphoresKHR = Option<NonNullPFN_vkWaitSemaphoresKHR>;
+pub type PFN_vkWriteAccelerationStructuresPropertiesKHR = Option<NonNullPFN_vkWriteAccelerationStructuresPropertiesKHR>;
+pub type PFN_vkWriteMicromapsPropertiesEXT = Option<NonNullPFN_vkWriteMicromapsPropertiesEXT>;
 pub type VkAabbPositionsNV = VkAabbPositionsKHR;
 pub type VkAccelerationStructureBuildTypeKHR = i32;
 pub type VkAccelerationStructureCompatibilityKHR = i32;

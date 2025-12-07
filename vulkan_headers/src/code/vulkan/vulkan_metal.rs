@@ -172,6 +172,32 @@ pub const VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT: VkStructureType = 
 pub const VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT: VkStructureType = 1000602001;
 pub const VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT: VkStructureType = 1000217000;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateMetalSurfaceEXT(instance: VkInstance, pCreateInfo: *const VkMetalSurfaceCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkExportMetalObjectsEXT(device: VkDevice, pMetalObjectsInfo: *mut VkExportMetalObjectsInfoEXT);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryMetalHandleEXT(device: VkDevice, pGetMetalHandleInfo: *const VkMemoryGetMetalHandleInfoEXT, pHandle: *mut *mut c_void) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryMetalHandlePropertiesEXT(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, pHandle: *const c_void, pMemoryMetalHandleProperties: *mut VkMemoryMetalHandlePropertiesEXT) -> VkResult;
+}
+
+pub type NonNullPFN_vkCreateMetalSurfaceEXT = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkMetalSurfaceCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkExportMetalObjectsEXT = unsafe extern "system" fn(device: VkDevice, pMetalObjectsInfo: *mut VkExportMetalObjectsInfoEXT);
+pub type NonNullPFN_vkGetMemoryMetalHandleEXT = unsafe extern "system" fn(device: VkDevice, pGetMetalHandleInfo: *const VkMemoryGetMetalHandleInfoEXT, pHandle: *mut *mut c_void) -> VkResult;
+pub type NonNullPFN_vkGetMemoryMetalHandlePropertiesEXT = unsafe extern "system" fn(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, pHandle: *const c_void, pMemoryMetalHandleProperties: *mut VkMemoryMetalHandlePropertiesEXT) -> VkResult;
+pub type PFN_vkCreateMetalSurfaceEXT = Option<NonNullPFN_vkCreateMetalSurfaceEXT>;
+pub type PFN_vkExportMetalObjectsEXT = Option<NonNullPFN_vkExportMetalObjectsEXT>;
+pub type PFN_vkGetMemoryMetalHandleEXT = Option<NonNullPFN_vkGetMemoryMetalHandleEXT>;
+pub type PFN_vkGetMemoryMetalHandlePropertiesEXT = Option<NonNullPFN_vkGetMemoryMetalHandlePropertiesEXT>;
 pub type VkExportMetalObjectTypeFlagBitsEXT = VkFlags;
 pub type VkExportMetalObjectTypeFlagsEXT = VkFlags;
 pub type VkMetalSurfaceCreateFlagsEXT = VkFlags;

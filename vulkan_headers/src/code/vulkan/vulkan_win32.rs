@@ -233,5 +233,97 @@ pub const VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR: VkStruct
 pub const VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV: VkStructureType = 1000058000;
 pub const VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR: VkStructureType = 1000009000;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireFullScreenExclusiveModeEXT(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireWinrtDisplayNV(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateWin32SurfaceKHR(instance: VkInstance, pCreateInfo: *const VkWin32SurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetDeviceGroupSurfacePresentModes2EXT(device: VkDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pModes: *mut VkDeviceGroupPresentModeFlagsKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetFenceWin32HandleKHR(device: VkDevice, pGetWin32HandleInfo: *const VkFenceGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryWin32HandleKHR(device: VkDevice, pGetWin32HandleInfo: *const VkMemoryGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryWin32HandleNV(device: VkDevice, memory: VkDeviceMemory, handleType: VkExternalMemoryHandleTypeFlagsNV, pHandle: *mut HANDLE) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryWin32HandlePropertiesKHR(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, handle: HANDLE, pMemoryWin32HandleProperties: *mut VkMemoryWin32HandlePropertiesKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceSurfacePresentModes2EXT(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pPresentModeCount: *mut u32, pPresentModes: *mut VkPresentModeKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetPhysicalDeviceWin32PresentationSupportKHR(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32) -> VkBool32;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSemaphoreWin32HandleKHR(device: VkDevice, pGetWin32HandleInfo: *const VkSemaphoreGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetWinrtDisplayNV(physicalDevice: VkPhysicalDevice, deviceRelativeId: u32, pDisplay: *mut VkDisplayKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkImportFenceWin32HandleKHR(device: VkDevice, pImportFenceWin32HandleInfo: *const VkImportFenceWin32HandleInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkImportSemaphoreWin32HandleKHR(device: VkDevice, pImportSemaphoreWin32HandleInfo: *const VkImportSemaphoreWin32HandleInfoKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkReleaseFullScreenExclusiveModeEXT(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+}
+
+pub type NonNullPFN_vkAcquireFullScreenExclusiveModeEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+pub type NonNullPFN_vkAcquireWinrtDisplayNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, display: VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkCreateWin32SurfaceKHR = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkWin32SurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkGetDeviceGroupSurfacePresentModes2EXT = unsafe extern "system" fn(device: VkDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pModes: *mut VkDeviceGroupPresentModeFlagsKHR) -> VkResult;
+pub type NonNullPFN_vkGetFenceWin32HandleKHR = unsafe extern "system" fn(device: VkDevice, pGetWin32HandleInfo: *const VkFenceGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+pub type NonNullPFN_vkGetMemoryWin32HandleKHR = unsafe extern "system" fn(device: VkDevice, pGetWin32HandleInfo: *const VkMemoryGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+pub type NonNullPFN_vkGetMemoryWin32HandleNV = unsafe extern "system" fn(device: VkDevice, memory: VkDeviceMemory, handleType: VkExternalMemoryHandleTypeFlagsNV, pHandle: *mut HANDLE) -> VkResult;
+pub type NonNullPFN_vkGetMemoryWin32HandlePropertiesKHR = unsafe extern "system" fn(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, handle: HANDLE, pMemoryWin32HandleProperties: *mut VkMemoryWin32HandlePropertiesKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceSurfacePresentModes2EXT = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR, pPresentModeCount: *mut u32, pPresentModes: *mut VkPresentModeKHR) -> VkResult;
+pub type NonNullPFN_vkGetPhysicalDeviceWin32PresentationSupportKHR = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32) -> VkBool32;
+pub type NonNullPFN_vkGetSemaphoreWin32HandleKHR = unsafe extern "system" fn(device: VkDevice, pGetWin32HandleInfo: *const VkSemaphoreGetWin32HandleInfoKHR, pHandle: *mut HANDLE) -> VkResult;
+pub type NonNullPFN_vkGetWinrtDisplayNV = unsafe extern "system" fn(physicalDevice: VkPhysicalDevice, deviceRelativeId: u32, pDisplay: *mut VkDisplayKHR) -> VkResult;
+pub type NonNullPFN_vkImportFenceWin32HandleKHR = unsafe extern "system" fn(device: VkDevice, pImportFenceWin32HandleInfo: *const VkImportFenceWin32HandleInfoKHR) -> VkResult;
+pub type NonNullPFN_vkImportSemaphoreWin32HandleKHR = unsafe extern "system" fn(device: VkDevice, pImportSemaphoreWin32HandleInfo: *const VkImportSemaphoreWin32HandleInfoKHR) -> VkResult;
+pub type NonNullPFN_vkReleaseFullScreenExclusiveModeEXT = unsafe extern "system" fn(device: VkDevice, swapchain: VkSwapchainKHR) -> VkResult;
+pub type PFN_vkAcquireFullScreenExclusiveModeEXT = Option<NonNullPFN_vkAcquireFullScreenExclusiveModeEXT>;
+pub type PFN_vkAcquireWinrtDisplayNV = Option<NonNullPFN_vkAcquireWinrtDisplayNV>;
+pub type PFN_vkCreateWin32SurfaceKHR = Option<NonNullPFN_vkCreateWin32SurfaceKHR>;
+pub type PFN_vkGetDeviceGroupSurfacePresentModes2EXT = Option<NonNullPFN_vkGetDeviceGroupSurfacePresentModes2EXT>;
+pub type PFN_vkGetFenceWin32HandleKHR = Option<NonNullPFN_vkGetFenceWin32HandleKHR>;
+pub type PFN_vkGetMemoryWin32HandleKHR = Option<NonNullPFN_vkGetMemoryWin32HandleKHR>;
+pub type PFN_vkGetMemoryWin32HandleNV = Option<NonNullPFN_vkGetMemoryWin32HandleNV>;
+pub type PFN_vkGetMemoryWin32HandlePropertiesKHR = Option<NonNullPFN_vkGetMemoryWin32HandlePropertiesKHR>;
+pub type PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT = Option<NonNullPFN_vkGetPhysicalDeviceSurfacePresentModes2EXT>;
+pub type PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR = Option<NonNullPFN_vkGetPhysicalDeviceWin32PresentationSupportKHR>;
+pub type PFN_vkGetSemaphoreWin32HandleKHR = Option<NonNullPFN_vkGetSemaphoreWin32HandleKHR>;
+pub type PFN_vkGetWinrtDisplayNV = Option<NonNullPFN_vkGetWinrtDisplayNV>;
+pub type PFN_vkImportFenceWin32HandleKHR = Option<NonNullPFN_vkImportFenceWin32HandleKHR>;
+pub type PFN_vkImportSemaphoreWin32HandleKHR = Option<NonNullPFN_vkImportSemaphoreWin32HandleKHR>;
+pub type PFN_vkReleaseFullScreenExclusiveModeEXT = Option<NonNullPFN_vkReleaseFullScreenExclusiveModeEXT>;
 pub type VkFullScreenExclusiveEXT = i32;
 pub type VkWin32SurfaceCreateFlagsKHR = VkFlags;

@@ -204,7 +204,69 @@ pub const VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA: VkStructure
 pub const VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA: VkStructureType = 1000365001;
 pub const VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA: VkStructureType = 1000366008;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateBufferCollectionFUCHSIA(device: VkDevice, pCreateInfo: *const VkBufferCollectionCreateInfoFUCHSIA, pAllocator: *const VkAllocationCallbacks, pCollection: *mut VkBufferCollectionFUCHSIA) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateImagePipeSurfaceFUCHSIA(instance: VkInstance, pCreateInfo: *const VkImagePipeSurfaceCreateInfoFUCHSIA, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkDestroyBufferCollectionFUCHSIA(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pAllocator: *const VkAllocationCallbacks);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetBufferCollectionPropertiesFUCHSIA(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pProperties: *mut VkBufferCollectionPropertiesFUCHSIA) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryZirconHandleFUCHSIA(device: VkDevice, pGetZirconHandleInfo: *const VkMemoryGetZirconHandleInfoFUCHSIA, pZirconHandle: *mut zx_handle_t) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryZirconHandlePropertiesFUCHSIA(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, zirconHandle: zx_handle_t, pMemoryZirconHandleProperties: *mut VkMemoryZirconHandlePropertiesFUCHSIA) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSemaphoreZirconHandleFUCHSIA(device: VkDevice, pGetZirconHandleInfo: *const VkSemaphoreGetZirconHandleInfoFUCHSIA, pZirconHandle: *mut zx_handle_t) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkImportSemaphoreZirconHandleFUCHSIA(device: VkDevice, pImportSemaphoreZirconHandleInfo: *const VkImportSemaphoreZirconHandleInfoFUCHSIA) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetBufferCollectionBufferConstraintsFUCHSIA(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pBufferConstraintsInfo: *const VkBufferConstraintsInfoFUCHSIA) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkSetBufferCollectionImageConstraintsFUCHSIA(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pImageConstraintsInfo: *const VkImageConstraintsInfoFUCHSIA) -> VkResult;
+}
+
+pub type NonNullPFN_vkCreateBufferCollectionFUCHSIA = unsafe extern "system" fn(device: VkDevice, pCreateInfo: *const VkBufferCollectionCreateInfoFUCHSIA, pAllocator: *const VkAllocationCallbacks, pCollection: *mut VkBufferCollectionFUCHSIA) -> VkResult;
+pub type NonNullPFN_vkCreateImagePipeSurfaceFUCHSIA = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkImagePipeSurfaceCreateInfoFUCHSIA, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkDestroyBufferCollectionFUCHSIA = unsafe extern "system" fn(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pAllocator: *const VkAllocationCallbacks);
+pub type NonNullPFN_vkGetBufferCollectionPropertiesFUCHSIA = unsafe extern "system" fn(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pProperties: *mut VkBufferCollectionPropertiesFUCHSIA) -> VkResult;
+pub type NonNullPFN_vkGetMemoryZirconHandleFUCHSIA = unsafe extern "system" fn(device: VkDevice, pGetZirconHandleInfo: *const VkMemoryGetZirconHandleInfoFUCHSIA, pZirconHandle: *mut zx_handle_t) -> VkResult;
+pub type NonNullPFN_vkGetMemoryZirconHandlePropertiesFUCHSIA = unsafe extern "system" fn(device: VkDevice, handleType: VkExternalMemoryHandleTypeFlagBits, zirconHandle: zx_handle_t, pMemoryZirconHandleProperties: *mut VkMemoryZirconHandlePropertiesFUCHSIA) -> VkResult;
+pub type NonNullPFN_vkGetSemaphoreZirconHandleFUCHSIA = unsafe extern "system" fn(device: VkDevice, pGetZirconHandleInfo: *const VkSemaphoreGetZirconHandleInfoFUCHSIA, pZirconHandle: *mut zx_handle_t) -> VkResult;
+pub type NonNullPFN_vkImportSemaphoreZirconHandleFUCHSIA = unsafe extern "system" fn(device: VkDevice, pImportSemaphoreZirconHandleInfo: *const VkImportSemaphoreZirconHandleInfoFUCHSIA) -> VkResult;
+pub type NonNullPFN_vkSetBufferCollectionBufferConstraintsFUCHSIA = unsafe extern "system" fn(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pBufferConstraintsInfo: *const VkBufferConstraintsInfoFUCHSIA) -> VkResult;
+pub type NonNullPFN_vkSetBufferCollectionImageConstraintsFUCHSIA = unsafe extern "system" fn(device: VkDevice, collection: VkBufferCollectionFUCHSIA, pImageConstraintsInfo: *const VkImageConstraintsInfoFUCHSIA) -> VkResult;
 pub type NonNullVkBufferCollectionFUCHSIA = NonNull<VkBufferCollectionFUCHSIA_T>;
+pub type PFN_vkCreateBufferCollectionFUCHSIA = Option<NonNullPFN_vkCreateBufferCollectionFUCHSIA>;
+pub type PFN_vkCreateImagePipeSurfaceFUCHSIA = Option<NonNullPFN_vkCreateImagePipeSurfaceFUCHSIA>;
+pub type PFN_vkDestroyBufferCollectionFUCHSIA = Option<NonNullPFN_vkDestroyBufferCollectionFUCHSIA>;
+pub type PFN_vkGetBufferCollectionPropertiesFUCHSIA = Option<NonNullPFN_vkGetBufferCollectionPropertiesFUCHSIA>;
+pub type PFN_vkGetMemoryZirconHandleFUCHSIA = Option<NonNullPFN_vkGetMemoryZirconHandleFUCHSIA>;
+pub type PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA = Option<NonNullPFN_vkGetMemoryZirconHandlePropertiesFUCHSIA>;
+pub type PFN_vkGetSemaphoreZirconHandleFUCHSIA = Option<NonNullPFN_vkGetSemaphoreZirconHandleFUCHSIA>;
+pub type PFN_vkImportSemaphoreZirconHandleFUCHSIA = Option<NonNullPFN_vkImportSemaphoreZirconHandleFUCHSIA>;
+pub type PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA = Option<NonNullPFN_vkSetBufferCollectionBufferConstraintsFUCHSIA>;
+pub type PFN_vkSetBufferCollectionImageConstraintsFUCHSIA = Option<NonNullPFN_vkSetBufferCollectionImageConstraintsFUCHSIA>;
 pub type VkBufferCollectionFUCHSIA = *mut VkBufferCollectionFUCHSIA_T;
 pub type VkImageConstraintsInfoFlagBitsFUCHSIA = VkFlags;
 pub type VkImageConstraintsInfoFlagsFUCHSIA = VkFlags;

@@ -108,6 +108,44 @@ pub const VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS: VkStructureType = 10006850
 pub const VK_STRUCTURE_TYPE_SWAPCHAIN_IMAGE_CREATE_INFO_OHOS: VkStructureType = 1000453002;
 pub const VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_OHOS: VkSwapchainImageUsageFlagBitsOHOS = 1 << 0;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkAcquireImageOHOS(device: VkDevice, image: VkImage, nativeFenceFd: i32, semaphore: VkSemaphore, fence: VkFence) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateSurfaceOHOS(instance: VkInstance, pCreateInfo: *const VkSurfaceCreateInfoOHOS, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryNativeBufferOHOS(device: VkDevice, pInfo: *const VkMemoryGetNativeBufferInfoOHOS, pBuffer: *mut *mut OH_NativeBuffer) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetNativeBufferPropertiesOHOS(device: VkDevice, buffer: *const OH_NativeBuffer, pProperties: *mut VkNativeBufferPropertiesOHOS) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetSwapchainGrallocUsageOHOS(device: VkDevice, format: VkFormat, imageUsage: VkImageUsageFlags, grallocUsage: *mut u64) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkQueueSignalReleaseImageOHOS(queue: VkQueue, waitSemaphoreCount: u32, pWaitSemaphores: *const VkSemaphore, image: VkImage, pNativeFenceFd: *mut i32) -> VkResult;
+}
+
+pub type NonNullPFN_vkAcquireImageOHOS = unsafe extern "system" fn(device: VkDevice, image: VkImage, nativeFenceFd: i32, semaphore: VkSemaphore, fence: VkFence) -> VkResult;
+pub type NonNullPFN_vkCreateSurfaceOHOS = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkSurfaceCreateInfoOHOS, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkGetMemoryNativeBufferOHOS = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkMemoryGetNativeBufferInfoOHOS, pBuffer: *mut *mut OH_NativeBuffer) -> VkResult;
+pub type NonNullPFN_vkGetNativeBufferPropertiesOHOS = unsafe extern "system" fn(device: VkDevice, buffer: *const OH_NativeBuffer, pProperties: *mut VkNativeBufferPropertiesOHOS) -> VkResult;
+pub type NonNullPFN_vkGetSwapchainGrallocUsageOHOS = unsafe extern "system" fn(device: VkDevice, format: VkFormat, imageUsage: VkImageUsageFlags, grallocUsage: *mut u64) -> VkResult;
+pub type NonNullPFN_vkQueueSignalReleaseImageOHOS = unsafe extern "system" fn(queue: VkQueue, waitSemaphoreCount: u32, pWaitSemaphores: *const VkSemaphore, image: VkImage, pNativeFenceFd: *mut i32) -> VkResult;
+pub type PFN_vkAcquireImageOHOS = Option<NonNullPFN_vkAcquireImageOHOS>;
+pub type PFN_vkCreateSurfaceOHOS = Option<NonNullPFN_vkCreateSurfaceOHOS>;
+pub type PFN_vkGetMemoryNativeBufferOHOS = Option<NonNullPFN_vkGetMemoryNativeBufferOHOS>;
+pub type PFN_vkGetNativeBufferPropertiesOHOS = Option<NonNullPFN_vkGetNativeBufferPropertiesOHOS>;
+pub type PFN_vkGetSwapchainGrallocUsageOHOS = Option<NonNullPFN_vkGetSwapchainGrallocUsageOHOS>;
+pub type PFN_vkQueueSignalReleaseImageOHOS = Option<NonNullPFN_vkQueueSignalReleaseImageOHOS>;
 pub type VkSurfaceCreateFlagsOHOS = VkFlags;
 pub type VkSwapchainImageUsageFlagBitsOHOS = VkFlags;
 pub type VkSwapchainImageUsageFlagsOHOS = VkFlags;

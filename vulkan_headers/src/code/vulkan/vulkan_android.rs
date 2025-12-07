@@ -127,4 +127,24 @@ pub const VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID: VkS
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID: VkStructureType = 1000468000;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID: VkStructureType = 1000468001;
 
+unsafe extern "system" {
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCreateAndroidSurfaceKHR(instance: VkInstance, pCreateInfo: *const VkAndroidSurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetAndroidHardwareBufferPropertiesANDROID(device: VkDevice, buffer: *const AHardwareBuffer, pProperties: *mut VkAndroidHardwareBufferPropertiesANDROID) -> VkResult;
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkGetMemoryAndroidHardwareBufferANDROID(device: VkDevice, pInfo: *const VkMemoryGetAndroidHardwareBufferInfoANDROID, pBuffer: *mut *mut AHardwareBuffer) -> VkResult;
+}
+
+pub type NonNullPFN_vkCreateAndroidSurfaceKHR = unsafe extern "system" fn(instance: VkInstance, pCreateInfo: *const VkAndroidSurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
+pub type NonNullPFN_vkGetAndroidHardwareBufferPropertiesANDROID = unsafe extern "system" fn(device: VkDevice, buffer: *const AHardwareBuffer, pProperties: *mut VkAndroidHardwareBufferPropertiesANDROID) -> VkResult;
+pub type NonNullPFN_vkGetMemoryAndroidHardwareBufferANDROID = unsafe extern "system" fn(device: VkDevice, pInfo: *const VkMemoryGetAndroidHardwareBufferInfoANDROID, pBuffer: *mut *mut AHardwareBuffer) -> VkResult;
+pub type PFN_vkCreateAndroidSurfaceKHR = Option<NonNullPFN_vkCreateAndroidSurfaceKHR>;
+pub type PFN_vkGetAndroidHardwareBufferPropertiesANDROID = Option<NonNullPFN_vkGetAndroidHardwareBufferPropertiesANDROID>;
+pub type PFN_vkGetMemoryAndroidHardwareBufferANDROID = Option<NonNullPFN_vkGetMemoryAndroidHardwareBufferANDROID>;
 pub type VkAndroidSurfaceCreateFlagsKHR = VkFlags;
