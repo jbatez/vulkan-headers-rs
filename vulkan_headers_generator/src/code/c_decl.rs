@@ -121,14 +121,14 @@ impl<'a> CDeclParser<'a> {
         let token = self.peek_next_token().unwrap();
         assert!(is_ident(token));
         self.s = &self.s[token.len()..];
-        token.to_string()
+        token.to_owned()
     }
 
     fn consume_int_or_ident(&mut self) -> String {
         let token = self.peek_next_token().unwrap();
         assert!(is_int_or_ident(token));
         self.s = &self.s[token.len()..];
-        token.to_string()
+        token.to_owned()
     }
 
     fn opt_consume_ident(&mut self) -> Option<String> {
@@ -137,7 +137,7 @@ impl<'a> CDeclParser<'a> {
             && is_ident(token)
         {
             self.s = &self.s[token.len()..];
-            Some(token.to_string())
+            Some(token.to_owned())
         } else {
             None
         }
@@ -159,7 +159,7 @@ impl<'a> CDeclParser<'a> {
         }
 
         let name = self.consume_ident();
-        CType::Name(name.to_string())
+        CType::Name(name.to_owned())
     }
 
     fn parse_maybe_const_ptrs(&mut self, mut typ: CType) -> CType {

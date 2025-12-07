@@ -44,7 +44,7 @@ impl Generator {
 
     fn visit_video_extension(&mut self, extension: &Extension, index: &RegistryIndex) {
         let name = extension.name.as_ref().unwrap();
-        self.library.video_modules.push(name.to_string());
+        self.library.video_modules.push(name.to_owned());
 
         let mut module = Module::new("vk_video", name);
         self.visit_extension(extension, index, &mut module);
@@ -167,9 +167,9 @@ impl Generator {
         };
 
         if !modules.contains_key(platform) {
-            self.library.platforms.push(platform.to_string());
+            self.library.platforms.push(platform.to_owned());
             let module = Module::new("vulkan", &format!("vulkan_{platform}"));
-            modules.insert(platform.to_string(), module);
+            modules.insert(platform.to_owned(), module);
         }
 
         let module = modules.get_mut(platform).unwrap();
@@ -205,7 +205,7 @@ impl Generator {
 
     fn require_type(&mut self, typ: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
         let name = typ.name.as_ref().unwrap().as_str();
-        if self.items.insert(name.to_string()) {
+        if self.items.insert(name.to_owned()) {
             let typ = &index.types[name];
             if let Some(alias) = typ.alias.as_ref() {
                 Self::add_type_alias(name, alias, module);
@@ -228,7 +228,7 @@ impl Generator {
 
     fn add_type_alias(name: &str, alias: &str, module: &mut Module) {
         let text = format!("pub type {name} = {alias};");
-        module.type_aliases.push((name.to_string(), text));
+        module.type_aliases.push((name.to_owned(), text));
     }
 
     fn collect_type_text(typ: &Type) -> String {
@@ -331,7 +331,7 @@ impl Generator {
     }
 
     fn add_function(name: &str, text: &str, module: &mut Module) {
-        module.functions.push((name.to_string(), text.to_string()));
+        module.functions.push((name.to_owned(), text.to_owned()));
     }
 
     fn add_enum_type(name: &str, index: &RegistryIndex, module: &mut Module) {
@@ -416,17 +416,17 @@ pub enum {name} {{
     __variant2,
 }}"
         );
-        module.enums.push((name.to_string(), text));
+        module.enums.push((name.to_owned(), text));
     }
 
     fn add_struct_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {
         let text = Self::generate_rust_struct_or_union(name, typ, index);
-        module.structs.push((name.to_string(), text));
+        module.structs.push((name.to_owned(), text));
     }
 
     fn add_union_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {
         let text = Self::generate_rust_struct_or_union(name, typ, index);
-        module.unions.push((name.to_string(), text));
+        module.unions.push((name.to_owned(), text));
     }
 
     fn generate_rust_struct_or_union(name: &str, typ: &Type, index: &RegistryIndex) -> String {
@@ -493,7 +493,7 @@ pub enum {name} {{
 
     fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {
         let name = enu.name.as_ref().unwrap().as_str();
-        if index.api_matches(&enu.api) && self.items.insert(name.to_string()) {
+        if index.api_matches(&enu.api) && self.items.insert(name.to_owned()) {
             let constant = index.constants[name];
             let typ = Self::get_constant_type(name, constant, index);
             let value = Self::get_constant_value(name, constant);
@@ -560,12 +560,12 @@ pub enum {name} {{
 
     fn add_constant(name: &str, typ: &str, value: &str, module: &mut Module) {
         let text = format!("pub const {name}: {typ} = {value};");
-        module.constants.push((name.to_string(), text));
+        module.constants.push((name.to_owned(), text));
     }
 
     fn require_command(&mut self, cmd: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
         let name = cmd.name.as_ref().unwrap().as_str();
-        if self.items.insert(name.to_string()) {
+        if self.items.insert(name.to_owned()) {
             let cmd = index.commands[name];
             let signature = if let Some(alias) = cmd.alias.as_ref() {
                 let alias_cmd = index.commands[alias.as_str()];
@@ -646,6 +646,6 @@ pub enum {name} {{
         text += &format!("    #[cfg(any(doc, feature = \"{feature}\"))]\n");
         text += &format!("    pub fn {name}{signature};");
 
-        module.extern_functions.push((name.to_string(), text));
+        module.extern_functions.push((name.to_owned(), text));
     }
 }

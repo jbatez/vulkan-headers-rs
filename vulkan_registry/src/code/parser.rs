@@ -47,7 +47,7 @@ impl<'a> Parser<'a> {
         assert_eq!(*out, None);
         let decoder = self.reader.decoder();
         let value = attr.decode_and_unescape_value(decoder).unwrap();
-        *out = Some(value.to_string());
+        *out = Some(value.into_owned());
     }
 
     fn assert_is_ws(&mut self, text: &[u8]) {
@@ -396,7 +396,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_contents(elem, |this, content| match content {
             Content::Text(text) => {
-                contents.push(TypeContent::Text(text.to_string()));
+                contents.push(TypeContent::Text(text.to_owned()));
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"comment" => {
@@ -477,7 +477,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_contents(elem, |this, content| match content {
             Content::Text(text) => {
-                contents.push(MemberContent::Text(text.to_string()));
+                contents.push(MemberContent::Text(text.to_owned()));
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"comment" => {
@@ -740,7 +740,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_contents(elem, |this, content| match content {
             Content::Text(text) => {
-                contents.push(ProtoContent::Text(text.to_string()));
+                contents.push(ProtoContent::Text(text.to_owned()));
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {
@@ -790,7 +790,7 @@ impl<'a> Parser<'a> {
         let mut contents = Vec::new();
         self.parse_contents(elem, |this, content| match content {
             Content::Text(text) => {
-                contents.push(ParamContent::Text(text.to_string()));
+                contents.push(ParamContent::Text(text.to_owned()));
             }
             Content::Elem(elem) => match elem.start.name().as_ref() {
                 b"type" => {

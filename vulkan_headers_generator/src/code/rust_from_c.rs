@@ -3,7 +3,7 @@ use crate::code::*;
 pub(crate) fn rust_type_from_c_type(c_typ: &CType, is_param: bool) -> String {
     match c_typ {
         CType::Name(name) => {
-            return rust_type_from_c_type_name(name).to_string();
+            return rust_type_from_c_type_name(name).to_owned();
         }
         CType::Const(_) => {
             panic!("unexpected C const type");
@@ -52,41 +52,41 @@ fn rust_ptr_type_from_c_pointee_type(pointee_type: &CType) -> String {
     };
 
     let pointee_type = rust_type_from_c_type(pointee_type, false);
-    return format!("*{mutability} {pointee_type}");
+    format!("*{mutability} {pointee_type}")
 }
 
 pub(crate) fn rust_fn_signature_from_c(return_type: &CType, params: &[CDecl]) -> String {
-    let mut s = "(".to_string();
+    let mut out = "(".to_owned();
     for (i, param) in params.iter().enumerate() {
         if i > 0 {
-            s += ", ";
+            out += ", ";
         } else if param.typ == "void" {
             assert_eq!(param.ident, None);
             assert_eq!(params.len(), 1);
             break;
         }
 
-        rust_decl_from_c_decl(&mut s, param, true);
+        rust_decl_from_c_decl(&mut out, param, true);
     }
-    s += ")";
+    out += ")";
 
     if *return_type != "void" {
-        s += " -> ";
-        s += &rust_type_from_c_type(return_type, false);
+        out += " -> ";
+        out += &rust_type_from_c_type(return_type, false);
     }
 
-    s
+    out
 }
 
-pub(crate) fn rust_decl_from_c_decl(s: &mut String, c_decl: &CDecl, is_param: bool) {
-    *s += match c_decl.ident.as_ref().map(String::as_str) {
+pub(crate) fn rust_decl_from_c_decl(out: &mut String, c_decl: &CDecl, is_param: bool) {
+    *out += match c_decl.ident.as_ref().map(String::as_str) {
         Some("type") => "typ",
         Some(name) => name,
         None => "_",
     };
 
-    *s += ": ";
-    *s += &rust_type_from_c_type(&c_decl.typ, is_param);
+    *out += ": ";
+    *out += &rust_type_from_c_type(&c_decl.typ, is_param);
 }
 
 pub(crate) fn rust_type_from_c_value(c_value: &str) -> &str {

@@ -16,8 +16,8 @@ pub(crate) struct Module {
 impl Module {
     pub(crate) fn new(parent: &str, name: &str) -> Self {
         Self {
-            parent: parent.to_string(),
-            name: name.to_string(),
+            parent: parent.to_owned(),
+            name: name.to_owned(),
             re_exports: Vec::new(),
             structs: Vec::new(),
             enums: Vec::new(),
