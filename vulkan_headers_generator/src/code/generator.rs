@@ -492,8 +492,7 @@ pub enum {name} {{
         if width > 64 {
             panic!("bitfields larger than 64 bits");
         } else if width > 32 {
-            *s += "    pub bitfields1: u32,\n";
-            *s += "    pub bitfields2: u32,\n";
+            *s += "    pub bitfields: [u32; 2],\n";
         } else if width > 0 {
             *s += "    pub bitfields: u32,\n"
         }

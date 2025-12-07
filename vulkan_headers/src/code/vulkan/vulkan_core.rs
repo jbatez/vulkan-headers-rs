@@ -221,8 +221,7 @@ pub struct VkAccelerationStructureInfoNV {
 #[repr(C)]
 pub struct VkAccelerationStructureInstanceKHR {
     pub transform: VkTransformMatrixKHR,
-    pub bitfields1: u32,
-    pub bitfields2: u32,
+    pub bitfields: [u32; 2],
     pub accelerationStructureReference: u64,
 }
 
@@ -231,8 +230,7 @@ pub struct VkAccelerationStructureInstanceKHR {
 pub struct VkAccelerationStructureMatrixMotionInstanceNV {
     pub transformT0: VkTransformMatrixKHR,
     pub transformT1: VkTransformMatrixKHR,
-    pub bitfields1: u32,
-    pub bitfields2: u32,
+    pub bitfields: [u32; 2],
     pub accelerationStructureReference: u64,
 }
 
@@ -267,8 +265,7 @@ pub struct VkAccelerationStructureMotionInstanceNV {
 pub struct VkAccelerationStructureSRTMotionInstanceNV {
     pub transformT0: VkSRTDataNV,
     pub transformT1: VkSRTDataNV,
-    pub bitfields1: u32,
-    pub bitfields2: u32,
+    pub bitfields: [u32; 2],
     pub accelerationStructureReference: u64,
 }
 
