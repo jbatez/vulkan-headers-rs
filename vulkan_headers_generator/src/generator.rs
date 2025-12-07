@@ -2,7 +2,9 @@ use std::collections::{HashMap, HashSet};
 
 use vulkan_registry::*;
 
-use crate::code::*;
+use crate::{
+    c_decl::*, library::*, module::*, registry_index::*, rust_definitions::*, rust_from_c::*,
+};
 
 pub(crate) struct Generator {
     library: Library,

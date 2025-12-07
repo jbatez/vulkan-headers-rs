@@ -1,27 +1,11 @@
+mod c_decl;
+mod generator;
+mod library;
+mod module;
+mod registry_index;
+mod rust_definitions;
+mod rust_from_c;
+
 fn main() {
-    Generator::generate();
-}
-
-use code::*;
-mod code {
-    pub(crate) use c_decl::*;
-    mod c_decl;
-
-    pub(crate) use generator::*;
-    mod generator;
-
-    pub(crate) use library::*;
-    mod library;
-
-    pub(crate) use module::*;
-    mod module;
-
-    pub(crate) use registry_index::*;
-    mod registry_index;
-
-    pub(crate) use rust_definitions::*;
-    mod rust_definitions;
-
-    pub(crate) use rust_from_c::*;
-    mod rust_from_c;
+    generator::Generator::generate();
 }

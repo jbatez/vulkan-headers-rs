@@ -1,4 +1,4 @@
-use crate::code::*;
+use crate::c_decl::*;
 
 pub(crate) fn rust_type_from_c_type(c_typ: &CType, is_param: bool) -> String {
     match c_typ {
