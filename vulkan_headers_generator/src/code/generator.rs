@@ -455,24 +455,48 @@ pub enum {name} {{
         let category = typ.category.as_ref().unwrap();
         let mut s = format!("#[derive(Clone, Copy)]\n#[repr(C)]\npub {category} {name} {{\n");
 
+        let mut bitfields_width = 0;
         for content in &typ.contents {
             if let TypeContent::Member(member) = content
                 && index.api_matches(&member.api)
             {
-                let text = Self::collect_member_text(member);
-                let c_decl = CDecl::parse_member_decl(&text);
-                if c_decl.bit_field_width.is_some() {
-                    // TODO
-                }
-
-                s += "    pub ";
-                rust_decl_from_c_decl(&mut s, &c_decl, false);
-                s += ",\n";
+                Self::generate_member_text(&mut s, member, &mut bitfields_width);
             }
         }
 
+        Self::generate_bitfields_text(&mut s, bitfields_width);
         s += "}";
         s
+    }
+
+    fn generate_member_text(s: &mut String, member: &Member, bitfields_width: &mut u32) {
+        let text = Self::collect_member_text(member);
+        let c_decl = CDecl::parse_member_decl(&text);
+
+        if let Some(bitfield_width) = c_decl.bitfield_width {
+            let old_width = *bitfields_width;
+            *bitfields_width += bitfield_width;
+            if old_width < 32 && bitfield_width > 32 {
+                panic!("bitfield crosses 32-bit boundary");
+            }
+        } else {
+            Self::generate_bitfields_text(s, *bitfields_width);
+            *bitfields_width = 0;
+            *s += "    pub ";
+            rust_decl_from_c_decl(s, &c_decl, false);
+            *s += ",\n";
+        }
+    }
+
+    fn generate_bitfields_text(s: &mut String, width: u32) {
+        if width > 64 {
+            panic!("bitfields larger than 64 bits");
+        } else if width > 32 {
+            *s += "    pub bitfields1: u32,\n";
+            *s += "    pub bitfields2: u32,\n";
+        } else if width > 0 {
+            *s += "    pub bitfields: u32,\n"
+        }
     }
 
     fn require_enum(&mut self, enu: &RequireEnum, index: &RegistryIndex, module: &mut Module) {

@@ -28,11 +28,7 @@ pub struct StdVideoAV1ColorConfig {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1ColorConfigFlags {
-    pub mono_chrome: u32,
-    pub color_range: u32,
-    pub separate_uv_delta_q: u32,
-    pub color_description_present_flag: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -68,11 +64,7 @@ pub struct StdVideoAV1FilmGrain {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1FilmGrainFlags {
-    pub chroma_scaling_from_luma: u32,
-    pub overlap_flag: u32,
-    pub clip_to_restricted_range: u32,
-    pub update_grain: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -97,9 +89,7 @@ pub struct StdVideoAV1LoopFilter {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1LoopFilterFlags {
-    pub loop_filter_delta_enabled: u32,
-    pub loop_filter_delta_update: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -127,9 +117,7 @@ pub struct StdVideoAV1Quantization {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1QuantizationFlags {
-    pub using_qmatrix: u32,
-    pub diff_uv_delta: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -161,26 +149,7 @@ pub struct StdVideoAV1SequenceHeader {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1SequenceHeaderFlags {
-    pub still_picture: u32,
-    pub reduced_still_picture_header: u32,
-    pub use_128x128_superblock: u32,
-    pub enable_filter_intra: u32,
-    pub enable_intra_edge_filter: u32,
-    pub enable_interintra_compound: u32,
-    pub enable_masked_compound: u32,
-    pub enable_warped_motion: u32,
-    pub enable_dual_filter: u32,
-    pub enable_order_hint: u32,
-    pub enable_jnt_comp: u32,
-    pub enable_ref_frame_mvs: u32,
-    pub frame_id_numbers_present_flag: u32,
-    pub enable_superres: u32,
-    pub enable_cdef: u32,
-    pub enable_restoration: u32,
-    pub film_grain_params_present: u32,
-    pub timing_info_present_flag: u32,
-    pub initial_display_delay_present_flag: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -201,8 +170,7 @@ pub struct StdVideoAV1TileInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1TileInfoFlags {
-    pub uniform_tile_spacing_flag: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -217,8 +185,7 @@ pub struct StdVideoAV1TimingInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoAV1TimingInfoFlags {
-    pub equal_picture_interval: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_AV1_CHROMA_SAMPLE_POSITION_COLOCATED: StdVideoAV1ChromaSamplePosition = 2;

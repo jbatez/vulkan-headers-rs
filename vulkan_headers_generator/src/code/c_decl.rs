@@ -1,7 +1,7 @@
 pub(crate) struct CDecl {
     pub(crate) ident: Option<String>,
     pub(crate) typ: CType,
-    pub(crate) bit_field_width: Option<u32>,
+    pub(crate) bitfield_width: Option<u32>,
 }
 
 pub(crate) enum CType {
@@ -32,7 +32,7 @@ impl CDecl {
         let mut parser = CDeclParser { s };
         parser.consume("typedef");
         let decl = parser.parse_decl();
-        assert_eq!(decl.bit_field_width, None);
+        assert_eq!(decl.bitfield_width, None);
         parser.consume(";");
         assert_eq!(parser.peek_next_token(), None);
         decl
@@ -48,7 +48,7 @@ impl CDecl {
     pub(crate) fn parse_cmd_decl(s: &str) -> CDecl {
         let mut parser = CDeclParser { s };
         let decl = parser.parse_decl();
-        assert_eq!(decl.bit_field_width, None);
+        assert_eq!(decl.bitfield_width, None);
         assert_eq!(parser.peek_next_token(), None);
         decl
     }
@@ -186,11 +186,11 @@ impl<'a> CDeclParser<'a> {
         } else {
             let ident = self.opt_consume_ident();
             let typ = self.parse_array_extents(typ);
-            let bit_field_width = self.parse_bit_field_width();
+            let bitfield_width = self.parse_bitfield_width();
             CDecl {
                 ident,
                 typ,
-                bit_field_width,
+                bitfield_width,
             }
         }
     }
@@ -211,7 +211,7 @@ impl<'a> CDeclParser<'a> {
                 return_type,
                 params,
             },
-            bit_field_width: None,
+            bitfield_width: None,
         }
     }
 
@@ -243,7 +243,7 @@ impl<'a> CDeclParser<'a> {
         typ
     }
 
-    fn parse_bit_field_width(&mut self) -> Option<u32> {
+    fn parse_bitfield_width(&mut self) -> Option<u32> {
         if self.peek_next_token() == Some(":") {
             self.consume(":");
             let width = self.consume_int_or_ident();

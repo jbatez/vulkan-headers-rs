@@ -221,10 +221,8 @@ pub struct VkAccelerationStructureInfoNV {
 #[repr(C)]
 pub struct VkAccelerationStructureInstanceKHR {
     pub transform: VkTransformMatrixKHR,
-    pub instanceCustomIndex: u32,
-    pub mask: u32,
-    pub instanceShaderBindingTableRecordOffset: u32,
-    pub flags: VkGeometryInstanceFlagsKHR,
+    pub bitfields1: u32,
+    pub bitfields2: u32,
     pub accelerationStructureReference: u64,
 }
 
@@ -233,10 +231,8 @@ pub struct VkAccelerationStructureInstanceKHR {
 pub struct VkAccelerationStructureMatrixMotionInstanceNV {
     pub transformT0: VkTransformMatrixKHR,
     pub transformT1: VkTransformMatrixKHR,
-    pub instanceCustomIndex: u32,
-    pub mask: u32,
-    pub instanceShaderBindingTableRecordOffset: u32,
-    pub flags: VkGeometryInstanceFlagsKHR,
+    pub bitfields1: u32,
+    pub bitfields2: u32,
     pub accelerationStructureReference: u64,
 }
 
@@ -271,10 +267,8 @@ pub struct VkAccelerationStructureMotionInstanceNV {
 pub struct VkAccelerationStructureSRTMotionInstanceNV {
     pub transformT0: VkSRTDataNV,
     pub transformT1: VkSRTDataNV,
-    pub instanceCustomIndex: u32,
-    pub mask: u32,
-    pub instanceShaderBindingTableRecordOffset: u32,
-    pub flags: VkGeometryInstanceFlagsKHR,
+    pub bitfields1: u32,
+    pub bitfields2: u32,
     pub accelerationStructureReference: u64,
 }
 
@@ -928,11 +922,7 @@ pub struct VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV {
 pub struct VkClusterAccelerationStructureBuildTriangleClusterInfoNV {
     pub clusterID: u32,
     pub clusterFlags: VkClusterAccelerationStructureClusterFlagsNV,
-    pub triangleCount: u32,
-    pub vertexCount: u32,
-    pub positionTruncateBitCount: u32,
-    pub indexType: u32,
-    pub opacityMicromapIndexType: u32,
+    pub bitfields: u32,
     pub baseGeometryIndexAndGeometryFlags: VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
     pub indexBufferStride: u16,
     pub vertexBufferStride: u16,
@@ -950,11 +940,7 @@ pub struct VkClusterAccelerationStructureBuildTriangleClusterInfoNV {
 pub struct VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
     pub clusterID: u32,
     pub clusterFlags: VkClusterAccelerationStructureClusterFlagsNV,
-    pub triangleCount: u32,
-    pub vertexCount: u32,
-    pub positionTruncateBitCount: u32,
-    pub indexType: u32,
-    pub opacityMicromapIndexType: u32,
+    pub bitfields: u32,
     pub baseGeometryIndexAndGeometryFlags: VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
     pub indexBufferStride: u16,
     pub vertexBufferStride: u16,
@@ -995,9 +981,7 @@ pub struct VkClusterAccelerationStructureCommandsInfoNV {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV {
-    pub geometryIndex: u32,
-    pub reserved: u32,
-    pub geometryFlags: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -1022,8 +1006,7 @@ pub struct VkClusterAccelerationStructureInputInfoNV {
 #[repr(C)]
 pub struct VkClusterAccelerationStructureInstantiateClusterInfoNV {
     pub clusterIdOffset: u32,
-    pub geometryIndexOffset: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
     pub clusterTemplateAddress: VkDeviceAddress,
     pub vertexBuffer: VkStridedDeviceAddressNV,
 }

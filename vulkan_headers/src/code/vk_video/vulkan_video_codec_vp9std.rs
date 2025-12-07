@@ -14,8 +14,7 @@ pub struct StdVideoVP9ColorConfig {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoVP9ColorConfigFlags {
-    pub color_range: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -33,9 +32,7 @@ pub struct StdVideoVP9LoopFilter {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoVP9LoopFilterFlags {
-    pub loop_filter_delta_enabled: u32,
-    pub loop_filter_delta_update: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -51,11 +48,7 @@ pub struct StdVideoVP9Segmentation {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoVP9SegmentationFlags {
-    pub segmentation_update_map: u32,
-    pub segmentation_temporal_update: u32,
-    pub segmentation_update_data: u32,
-    pub segmentation_abs_or_delta_update: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_VP9_COLOR_SPACE_BT_2020: StdVideoVP9ColorSpace = 5;

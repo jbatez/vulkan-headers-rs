@@ -26,15 +26,7 @@ pub struct StdVideoDecodeVP9PictureInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoDecodeVP9PictureInfoFlags {
-    pub error_resilient_mode: u32,
-    pub intra_only: u32,
-    pub allow_high_precision_mv: u32,
-    pub refresh_frame_context: u32,
-    pub frame_parallel_decoding_mode: u32,
-    pub segmentation_enabled: u32,
-    pub show_frame: u32,
-    pub UsePrevFrameMvs: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 pub const VK_STD_VULKAN_VIDEO_CODEC_VP9_DECODE_API_VERSION_1_0_0: u32 = VK_MAKE_VIDEO_STD_VERSION(1, 0, 0);

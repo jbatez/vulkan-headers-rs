@@ -18,12 +18,7 @@ pub struct StdVideoEncodeH264PictureInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoEncodeH264PictureInfoFlags {
-    pub IdrPicFlag: u32,
-    pub is_reference: u32,
-    pub no_output_of_prior_pics_flag: u32,
-    pub long_term_reference_flag: u32,
-    pub adaptive_ref_pic_marking_mode_flag: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -59,8 +54,7 @@ pub struct StdVideoEncodeH264ReferenceInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoEncodeH264ReferenceInfoFlags {
-    pub used_for_long_term_reference: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -83,9 +77,7 @@ pub struct StdVideoEncodeH264ReferenceListsInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoEncodeH264ReferenceListsInfoFlags {
-    pub ref_pic_list_modification_flag_l0: u32,
-    pub ref_pic_list_modification_flag_l1: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -106,9 +98,7 @@ pub struct StdVideoEncodeH264SliceHeader {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoEncodeH264SliceHeaderFlags {
-    pub direct_spatial_mv_pred_flag: u32,
-    pub num_ref_idx_active_override_flag: u32,
-    pub reserved: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]

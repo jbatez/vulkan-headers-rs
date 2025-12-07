@@ -16,12 +16,7 @@ pub struct StdVideoDecodeH264PictureInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoDecodeH264PictureInfoFlags {
-    pub field_pic_flag: u32,
-    pub is_intra: u32,
-    pub IdrPicFlag: u32,
-    pub bottom_field_flag: u32,
-    pub is_reference: u32,
-    pub complementary_field_pair: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -36,10 +31,7 @@ pub struct StdVideoDecodeH264ReferenceInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoDecodeH264ReferenceInfoFlags {
-    pub top_field_flag: u32,
-    pub bottom_field_flag: u32,
-    pub used_for_long_term_reference: u32,
-    pub is_non_existing: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_BOTTOM: StdVideoDecodeH264FieldOrderCount = 1;

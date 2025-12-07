@@ -11,13 +11,7 @@ pub struct StdVideoH265DecPicBufMgr {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265HrdFlags {
-    pub nal_hrd_parameters_present_flag: u32,
-    pub vcl_hrd_parameters_present_flag: u32,
-    pub sub_pic_hrd_params_present_flag: u32,
-    pub sub_pic_cpb_params_in_pic_timing_sei_flag: u32,
-    pub fixed_pic_rate_general_flag: u32,
-    pub fixed_pic_rate_within_cvs_flag: u32,
-    pub low_delay_hrd_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -91,37 +85,7 @@ pub struct StdVideoH265PictureParameterSet {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265PpsFlags {
-    pub dependent_slice_segments_enabled_flag: u32,
-    pub output_flag_present_flag: u32,
-    pub sign_data_hiding_enabled_flag: u32,
-    pub cabac_init_present_flag: u32,
-    pub constrained_intra_pred_flag: u32,
-    pub transform_skip_enabled_flag: u32,
-    pub cu_qp_delta_enabled_flag: u32,
-    pub pps_slice_chroma_qp_offsets_present_flag: u32,
-    pub weighted_pred_flag: u32,
-    pub weighted_bipred_flag: u32,
-    pub transquant_bypass_enabled_flag: u32,
-    pub tiles_enabled_flag: u32,
-    pub entropy_coding_sync_enabled_flag: u32,
-    pub uniform_spacing_flag: u32,
-    pub loop_filter_across_tiles_enabled_flag: u32,
-    pub pps_loop_filter_across_slices_enabled_flag: u32,
-    pub deblocking_filter_control_present_flag: u32,
-    pub deblocking_filter_override_enabled_flag: u32,
-    pub pps_deblocking_filter_disabled_flag: u32,
-    pub pps_scaling_list_data_present_flag: u32,
-    pub lists_modification_present_flag: u32,
-    pub slice_segment_header_extension_present_flag: u32,
-    pub pps_extension_present_flag: u32,
-    pub cross_component_prediction_enabled_flag: u32,
-    pub chroma_qp_offset_list_enabled_flag: u32,
-    pub pps_curr_pic_ref_enabled_flag: u32,
-    pub residual_adaptive_colour_transform_enabled_flag: u32,
-    pub pps_slice_act_qp_offsets_present_flag: u32,
-    pub pps_palette_predictor_initializers_present_flag: u32,
-    pub monochrome_palette_flag: u32,
-    pub pps_range_extension_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -141,11 +105,7 @@ pub struct StdVideoH265ProfileTierLevel {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265ProfileTierLevelFlags {
-    pub general_tier_flag: u32,
-    pub general_progressive_source_flag: u32,
-    pub general_interlaced_source_flag: u32,
-    pub general_non_packed_constraint_flag: u32,
-    pub general_frame_only_constraint_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -256,66 +216,19 @@ pub struct StdVideoH265ShortTermRefPicSet {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265ShortTermRefPicSetFlags {
-    pub inter_ref_pic_set_prediction_flag: u32,
-    pub delta_rps_sign: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265SpsFlags {
-    pub sps_temporal_id_nesting_flag: u32,
-    pub separate_colour_plane_flag: u32,
-    pub conformance_window_flag: u32,
-    pub sps_sub_layer_ordering_info_present_flag: u32,
-    pub scaling_list_enabled_flag: u32,
-    pub sps_scaling_list_data_present_flag: u32,
-    pub amp_enabled_flag: u32,
-    pub sample_adaptive_offset_enabled_flag: u32,
-    pub pcm_enabled_flag: u32,
-    pub pcm_loop_filter_disabled_flag: u32,
-    pub long_term_ref_pics_present_flag: u32,
-    pub sps_temporal_mvp_enabled_flag: u32,
-    pub strong_intra_smoothing_enabled_flag: u32,
-    pub vui_parameters_present_flag: u32,
-    pub sps_extension_present_flag: u32,
-    pub sps_range_extension_flag: u32,
-    pub transform_skip_rotation_enabled_flag: u32,
-    pub transform_skip_context_enabled_flag: u32,
-    pub implicit_rdpcm_enabled_flag: u32,
-    pub explicit_rdpcm_enabled_flag: u32,
-    pub extended_precision_processing_flag: u32,
-    pub intra_smoothing_disabled_flag: u32,
-    pub high_precision_offsets_enabled_flag: u32,
-    pub persistent_rice_adaptation_enabled_flag: u32,
-    pub cabac_bypass_alignment_enabled_flag: u32,
-    pub sps_scc_extension_flag: u32,
-    pub sps_curr_pic_ref_enabled_flag: u32,
-    pub palette_mode_enabled_flag: u32,
-    pub sps_palette_predictor_initializers_present_flag: u32,
-    pub intra_boundary_filtering_disabled_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265SpsVuiFlags {
-    pub aspect_ratio_info_present_flag: u32,
-    pub overscan_info_present_flag: u32,
-    pub overscan_appropriate_flag: u32,
-    pub video_signal_type_present_flag: u32,
-    pub video_full_range_flag: u32,
-    pub colour_description_present_flag: u32,
-    pub chroma_loc_info_present_flag: u32,
-    pub neutral_chroma_indication_flag: u32,
-    pub field_seq_flag: u32,
-    pub frame_field_info_present_flag: u32,
-    pub default_display_window_flag: u32,
-    pub vui_timing_info_present_flag: u32,
-    pub vui_poc_proportional_to_timing_flag: u32,
-    pub vui_hrd_parameters_present_flag: u32,
-    pub bitstream_restriction_flag: u32,
-    pub tiles_fixed_structure_flag: u32,
-    pub motion_vectors_over_pic_boundaries_flag: u32,
-    pub restricted_ref_pic_lists_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -348,10 +261,7 @@ pub struct StdVideoH265VideoParameterSet {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH265VpsFlags {
-    pub vps_temporal_id_nesting_flag: u32,
-    pub vps_sub_layer_ordering_info_present_flag: u32,
-    pub vps_timing_info_present_flag: u32,
-    pub vps_poc_proportional_to_timing_flag: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_H265_ASPECT_RATIO_IDC_10_11: StdVideoH265AspectRatioIdc = 3;

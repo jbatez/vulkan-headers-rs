@@ -35,14 +35,7 @@ pub struct StdVideoH264PictureParameterSet {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH264PpsFlags {
-    pub transform_8x8_mode_flag: u32,
-    pub redundant_pic_cnt_present_flag: u32,
-    pub constrained_intra_pred_flag: u32,
-    pub deblocking_filter_control_present_flag: u32,
-    pub weighted_pred_flag: u32,
-    pub bottom_field_pic_order_in_frame_present_flag: u32,
-    pub entropy_coding_mode_flag: u32,
-    pub pic_scaling_matrix_present_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -108,39 +101,13 @@ pub struct StdVideoH264SequenceParameterSetVui {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH264SpsFlags {
-    pub constraint_set0_flag: u32,
-    pub constraint_set1_flag: u32,
-    pub constraint_set2_flag: u32,
-    pub constraint_set3_flag: u32,
-    pub constraint_set4_flag: u32,
-    pub constraint_set5_flag: u32,
-    pub direct_8x8_inference_flag: u32,
-    pub mb_adaptive_frame_field_flag: u32,
-    pub frame_mbs_only_flag: u32,
-    pub delta_pic_order_always_zero_flag: u32,
-    pub separate_colour_plane_flag: u32,
-    pub gaps_in_frame_num_value_allowed_flag: u32,
-    pub qpprime_y_zero_transform_bypass_flag: u32,
-    pub frame_cropping_flag: u32,
-    pub seq_scaling_matrix_present_flag: u32,
-    pub vui_parameters_present_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoH264SpsVuiFlags {
-    pub aspect_ratio_info_present_flag: u32,
-    pub overscan_info_present_flag: u32,
-    pub overscan_appropriate_flag: u32,
-    pub video_signal_type_present_flag: u32,
-    pub video_full_range_flag: u32,
-    pub color_description_present_flag: u32,
-    pub chroma_loc_info_present_flag: u32,
-    pub timing_info_present_flag: u32,
-    pub fixed_frame_rate_flag: u32,
-    pub bitstream_restriction_flag: u32,
-    pub nal_hrd_parameters_present_flag: u32,
-    pub vcl_hrd_parameters_present_flag: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_H264_ASPECT_RATIO_IDC_10_11: StdVideoH264AspectRatioIdc = 3;

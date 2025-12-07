@@ -19,10 +19,7 @@ pub struct StdVideoDecodeH265PictureInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoDecodeH265PictureInfoFlags {
-    pub IrapPicFlag: u32,
-    pub IdrPicFlag: u32,
-    pub IsReference: u32,
-    pub short_term_ref_pic_set_sps_flag: u32,
+    pub bitfields: u32,
 }
 
 #[derive(Clone, Copy)]
@@ -35,8 +32,7 @@ pub struct StdVideoDecodeH265ReferenceInfo {
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct StdVideoDecodeH265ReferenceInfoFlags {
-    pub used_for_long_term_reference: u32,
-    pub unused_for_reference: u32,
+    pub bitfields: u32,
 }
 
 pub const STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE: u32 = 8;
