@@ -3,6 +3,7 @@ use std::{fs::File, io::Write};
 pub(crate) struct Module {
     parent: String,
     name: String,
+    pub(crate) re_exports: Vec<(String, String)>,
     pub(crate) structs: Vec<(String, String)>,
     pub(crate) enums: Vec<(String, String)>,
     pub(crate) constants: Vec<(String, String)>,
@@ -17,6 +18,7 @@ impl Module {
         Self {
             parent: parent.to_string(),
             name: name.to_string(),
+            re_exports: Vec::new(),
             structs: Vec::new(),
             enums: Vec::new(),
             constants: Vec::new(),
@@ -32,6 +34,7 @@ impl Module {
         let mut file = File::create(path).unwrap();
 
         writeln!(file, "use crate::code::*;").unwrap();
+        self.sort_and_write_re_exports(&mut file);
         self.sort_and_write_structs(&mut file);
         self.sort_and_write_enums(&mut file);
         self.sort_and_write_constants(&mut file);
@@ -39,6 +42,14 @@ impl Module {
         self.sort_and_write_extern_functions(&mut file);
         self.sort_and_write_type_aliases(&mut file);
         self.sort_and_write_unions(&mut file);
+    }
+
+    fn sort_and_write_re_exports(&mut self, file: &mut File) {
+        self.re_exports.sort();
+        for (_, text) in &self.re_exports {
+            writeln!(file).unwrap();
+            writeln!(file, "{text}").unwrap();
+        }
     }
 
     fn sort_and_write_structs(&mut self, file: &mut File) {

@@ -60,8 +60,16 @@ impl Generator {
 
     fn generate_vulkan_core(&mut self, registry: &Registry, index: &RegistryIndex) {
         let mut module = Module::new("vulkan", "vulkan_core");
+        self.add_vulkan_core_re_exports(&mut module);
         self.visit_core_registry(registry, index, &mut module);
         module.write_file();
+    }
+
+    fn add_vulkan_core_re_exports(&mut self, module: &mut Module) {
+        for name in &self.library.video_modules {
+            let text = format!("#[doc(no_inline)]\npub use crate::vk_video::{name}::*;");
+            module.re_exports.push((name.clone(), text));
+        }
     }
 
     fn visit_core_registry(

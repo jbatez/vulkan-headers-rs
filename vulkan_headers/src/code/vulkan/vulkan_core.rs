@@ -1,5 +1,41 @@
 use crate::code::*;
 
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_av1std::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_av1std_decode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_av1std_encode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h264std::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h264std_decode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h264std_encode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h265std::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h265std_decode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_h265std_encode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_vp9std::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codec_vp9std_decode::*;
+
+#[doc(no_inline)]
+pub use crate::vk_video::vulkan_video_codecs_common::*;
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkAabbPositionsKHR {
