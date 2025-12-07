@@ -4,7 +4,10 @@
 
 pub use code::*;
 mod code {
-    pub(crate) use core::{ffi::{CStr, c_char, c_int, c_void}, ptr::NonNull};
+    pub(crate) use core::{
+        ffi::{CStr, c_char, c_int, c_void},
+        ptr::NonNull,
+    };
 
     pub(crate) use platform::*;
     pub mod platform;

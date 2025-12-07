@@ -29,8 +29,8 @@ impl Library {
         writeln!(file, "[features]").unwrap();
         writeln!(file, "exported_prototypes = []").unwrap();
         writeln!(file, "prototypes = [\"exported_prototypes\"]").unwrap();
-        writeln!(file).unwrap();
 
+        writeln!(file).unwrap();
         for platform in &self.platforms {
             writeln!(file, "{platform}_extensions = []").unwrap();
         }
@@ -39,20 +39,26 @@ impl Library {
     fn write_lib_rs(&mut self) {
         let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
 
-        writeln!(file, "#![cfg(target_pointer_width = \"64\")]").unwrap();
-        writeln!(file, "#![allow(nonstandard_style, unused_imports)]").unwrap();
-        writeln!(file, "#![no_std]").unwrap();
-        writeln!(file).unwrap();
-        writeln!(file, "pub use code::*;").unwrap();
-        writeln!(file, "mod code {{").unwrap();
-        writeln!(
+        write!(
             file,
-            "    pub(crate) use core::{{ffi::{{CStr, c_char, c_int, c_void}}, ptr::NonNull}};"
+            "{}",
+            "\
+#![cfg(target_pointer_width = \"64\")]
+#![allow(nonstandard_style, unused_imports)]
+#![no_std]
+
+pub use code::*;
+mod code {
+    pub(crate) use core::{
+        ffi::{CStr, c_char, c_int, c_void},
+        ptr::NonNull,
+    };
+
+    pub(crate) use platform::*;
+    pub mod platform;
+"
         )
         .unwrap();
-        writeln!(file).unwrap();
-        writeln!(file, "    pub(crate) use platform::*;").unwrap();
-        writeln!(file, "    pub mod platform;").unwrap();
 
         writeln!(file).unwrap();
         self.sort_and_write_video_modules(&mut file);
