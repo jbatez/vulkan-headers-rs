@@ -1,5 +1,6 @@
 #[cfg(any(doc, feature = "android_extensions"))]
 pub(crate) use android::*;
+/// Available if built with `android_extensions`.
 #[cfg(any(doc, feature = "android_extensions"))]
 pub mod android {
     #[cfg_attr(not(doc), repr(u8))]
@@ -21,6 +22,7 @@ pub mod android {
 
 #[cfg(any(doc, feature = "directfb_extensions"))]
 pub(crate) use directfb::*;
+/// Available if built with `directfb_extensions`.
 #[cfg(any(doc, feature = "directfb_extensions"))]
 pub mod directfb {
     #[cfg_attr(not(doc), repr(u8))]
@@ -42,6 +44,7 @@ pub mod directfb {
 
 #[cfg(any(doc, feature = "fuchsia_extensions"))]
 pub(crate) use fuchsia::*;
+/// Available if built with `fuchsia_extensions`.
 #[cfg(any(doc, feature = "fuchsia_extensions"))]
 pub mod fuchsia {
     pub type zx_handle_t = u32;
@@ -49,6 +52,7 @@ pub mod fuchsia {
 
 #[cfg(any(doc, feature = "ggp_extensions"))]
 pub(crate) use ggp::*;
+/// Available if built with `ggp_extensions`.
 #[cfg(any(doc, feature = "ggp_extensions"))]
 pub mod ggp {
     pub type GgpFrameToken = u64;
@@ -57,6 +61,7 @@ pub mod ggp {
 
 #[cfg(any(doc, feature = "metal_extensions"))]
 pub(crate) use metal::*;
+/// Available if built with `metal_extensions`.
 #[cfg(any(doc, feature = "metal_extensions"))]
 pub mod metal {
     use core::ffi::c_void;
@@ -80,6 +85,7 @@ pub mod metal {
 
 #[cfg(any(doc, feature = "ohos_extensions"))]
 pub(crate) use ohos::*;
+/// Available if built with `ohos_extensions`.
 #[cfg(any(doc, feature = "ohos_extensions"))]
 pub mod ohos {
     #[cfg_attr(not(doc), repr(u8))]
@@ -111,6 +117,7 @@ pub mod ohos {
 
 #[cfg(any(doc, feature = "screen_extensions"))]
 pub(crate) use screen::*;
+/// Available if built with `screen_extensions`.
 #[cfg(any(doc, feature = "screen_extensions"))]
 pub mod screen {
     #[cfg_attr(not(doc), repr(u8))]
@@ -140,6 +147,7 @@ pub mod screen {
 
 #[cfg(any(doc, feature = "wayland_extensions"))]
 pub(crate) use wayland::*;
+/// Available if built with `wayland_extensions`.
 #[cfg(any(doc, feature = "wayland_extensions"))]
 pub mod wayland {
     #[cfg_attr(not(doc), repr(u8))]
@@ -161,6 +169,7 @@ pub mod wayland {
 
 #[cfg(any(doc, feature = "win32_extensions"))]
 pub(crate) use win32::*;
+/// Available if built with `win32_extensions`.
 #[cfg(any(doc, feature = "win32_extensions"))]
 pub mod win32 {
     use core::ffi::c_void;
@@ -208,6 +217,7 @@ pub mod win32 {
 
 #[cfg(any(doc, feature = "xcb_extensions"))]
 pub(crate) use xcb::*;
+/// Available if built with `xcb_extensions`.
 #[cfg(any(doc, feature = "xcb_extensions"))]
 pub mod xcb {
     #[cfg_attr(not(doc), repr(u8))]
@@ -224,6 +234,7 @@ pub mod xcb {
 
 #[cfg(any(doc, feature = "xlib_extensions"))]
 pub(crate) use xlib::*;
+/// Available if built with `xlib_extensions`.
 #[cfg(any(doc, feature = "xlib_extensions"))]
 pub mod xlib {
     use core::ffi::{c_uint, c_ulong};
@@ -242,6 +253,7 @@ pub mod xlib {
 
 #[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
 pub(crate) use xlib_xrandr::*;
+/// Available if built with `xlib_xrandr_extensions`.
 #[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
 pub mod xlib_xrandr {
     use core::ffi::c_ulong;

@@ -85,6 +85,7 @@ impl Library {
 
         for platform in &self.platforms {
             writeln!(file).unwrap();
+            writeln!(file, "        {}", cfg_platform_doc(platform)).unwrap();
             writeln!(file, "        {}", cfg_platform(platform)).unwrap();
             writeln!(file, "        pub mod vulkan_{platform};").unwrap();
         }
@@ -97,14 +98,18 @@ impl Library {
 
         for platform in &self.platforms {
             writeln!(file).unwrap();
-            writeln!(file, "            #[doc(no_inline)]").unwrap();
             writeln!(file, "            {}", cfg_platform(platform)).unwrap();
+            writeln!(file, "            #[doc(no_inline)]").unwrap();
             writeln!(file, "            pub use super::vulkan_{platform}::*;").unwrap();
         }
 
         writeln!(file, "        }}").unwrap();
         writeln!(file, "    }}").unwrap();
     }
+}
+
+fn cfg_platform_doc(platform: &str) -> String {
+    format!("/// Available if built with `{platform}_extensions`.")
 }
 
 fn cfg_platform(platform: &str) -> String {
