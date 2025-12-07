@@ -28,14 +28,6 @@ impl PartialEq<&str> for CType {
 }
 
 impl CDecl {
-    pub(crate) fn parse_struct_forward_decl(s: &str, name: &str) {
-        let mut parser = CDeclParser { s };
-        parser.consume("struct");
-        parser.consume(name);
-        parser.consume(";");
-        assert_eq!(parser.peek_next_token(), None);
-    }
-
     pub(crate) fn parse_typedef_decl(s: &str) -> CDecl {
         let mut parser = CDeclParser { s };
         parser.consume("typedef");

@@ -269,24 +269,15 @@ pub enum {name} {{
 
     fn add_base_type(name: &str, typ: &Type, module: &mut Module) {
         let text = Self::collect_type_text(typ);
-        if text.starts_with("struct ") {
-            CDecl::parse_struct_forward_decl(&text, name);
-            return Self::add_extern_type(name, module);
-        } else if text.starts_with("typedef ") {
+        if text.starts_with("typedef ") && !text.starts_with("typedef struct ") {
             return Self::add_typedef(name, &text, module);
         }
 
         match name {
-            "CAMetalLayer" => {
-                Self::add_type_alias(name, "c_void", module);
-            }
-            "MTLBuffer_id" | "MTLCommandQueue_id" | "MTLDevice_id" | "MTLSharedEvent_id"
-            | "MTLTexture_id" => {
-                Self::add_type_alias(name, "*mut c_void", module);
-            }
-            name => {
-                panic!("unexpected basetype: {name:?}");
-            }
+            "AHardwareBuffer" | "ANativeWindow" | "CAMetalLayer" | "IOSurfaceRef"
+            | "MTLBuffer_id" | "MTLCommandQueue_id" | "MTLDevice_id" | "MTLSharedEvent_id"
+            | "MTLTexture_id" | "OHBufferHandle" | "OHNativeWindow" | "OH_NativeBuffer" => (),
+            name => panic!("unexpected basetype: {name:?}"),
         }
     }
 

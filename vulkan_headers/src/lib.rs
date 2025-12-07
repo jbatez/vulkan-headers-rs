@@ -6,6 +6,9 @@ pub use code::*;
 mod code {
     pub(crate) use core::{ffi::{CStr, c_char, c_int, c_void}, ptr::NonNull};
 
+    pub(crate) use platform::*;
+    pub mod platform;
+
     pub(crate) use vk_video::*;
     pub mod vk_video {
         pub(crate) use vulkan_video_codec_av1std::*;
@@ -99,53 +102,70 @@ mod code {
 
         pub(crate) use vulkan::*;
         pub mod vulkan {
+            #[doc(no_inline)]
             pub use super::vulkan_core::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "android_extensions"))]
             pub use super::vulkan_android::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "beta_extensions"))]
             pub use super::vulkan_beta::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "directfb_extensions"))]
             pub use super::vulkan_directfb::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "fuchsia_extensions"))]
             pub use super::vulkan_fuchsia::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "ggp_extensions"))]
             pub use super::vulkan_ggp::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "ios_extensions"))]
             pub use super::vulkan_ios::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "macos_extensions"))]
             pub use super::vulkan_macos::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "metal_extensions"))]
             pub use super::vulkan_metal::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "ohos_extensions"))]
             pub use super::vulkan_ohos::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "screen_extensions"))]
             pub use super::vulkan_screen::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "vi_extensions"))]
             pub use super::vulkan_vi::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "wayland_extensions"))]
             pub use super::vulkan_wayland::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "win32_extensions"))]
             pub use super::vulkan_win32::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "xcb_extensions"))]
             pub use super::vulkan_xcb::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "xlib_extensions"))]
             pub use super::vulkan_xlib::*;
 
+            #[doc(no_inline)]
             #[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
             pub use super::vulkan_xlib_xrandr::*;
         }

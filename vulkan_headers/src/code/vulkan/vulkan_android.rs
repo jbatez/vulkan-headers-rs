@@ -106,22 +106,6 @@ pub struct VkPhysicalDeviceExternalFormatResolvePropertiesANDROID {
     pub externalFormatResolveChromaOffsetY: VkChromaLocation,
 }
 
-#[cfg_attr(not(doc), repr(u8))]
-pub enum AHardwareBuffer {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum ANativeWindow {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
 pub const VK_ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION_NAME: &CStr = c"VK_ANDROID_external_format_resolve";
 pub const VK_ANDROID_EXTERNAL_FORMAT_RESOLVE_SPEC_VERSION: u32 = 1;
 pub const VK_ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME: &CStr = c"VK_ANDROID_external_memory_android_hardware_buffer";

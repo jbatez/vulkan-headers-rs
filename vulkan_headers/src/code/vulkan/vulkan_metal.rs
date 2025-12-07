@@ -172,13 +172,6 @@ pub const VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT: VkStructureType = 
 pub const VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT: VkStructureType = 1000602001;
 pub const VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT: VkStructureType = 1000217000;
 
-pub type CAMetalLayer = c_void;
-pub type IOSurfaceRef = *mut __IOSurface;
-pub type MTLBuffer_id = *mut c_void;
-pub type MTLCommandQueue_id = *mut c_void;
-pub type MTLDevice_id = *mut c_void;
-pub type MTLSharedEvent_id = *mut c_void;
-pub type MTLTexture_id = *mut c_void;
 pub type VkExportMetalObjectTypeFlagBitsEXT = VkFlags;
 pub type VkExportMetalObjectTypeFlagsEXT = VkFlags;
 pub type VkMetalSurfaceCreateFlagsEXT = VkFlags;

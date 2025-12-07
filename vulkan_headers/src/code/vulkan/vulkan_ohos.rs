@@ -89,22 +89,6 @@ pub struct VkSwapchainImageCreateInfoOHOS {
     pub usage: VkSwapchainImageUsageFlagsOHOS,
 }
 
-#[cfg_attr(not(doc), repr(u8))]
-pub enum OHBufferHandle {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum OH_NativeBuffer {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
 pub const VK_EXTERNAL_MEMORY_HANDLE_TYPE_OH_NATIVE_BUFFER_BIT_OHOS: VkExternalMemoryHandleTypeFlagBits = 1 << 15;
 pub const VK_OHOS_EXTERNAL_MEMORY_EXTENSION_NAME: &CStr = c"VK_OHOS_external_memory";
 pub const VK_OHOS_EXTERNAL_MEMORY_SPEC_VERSION: u32 = 1;
@@ -124,7 +108,6 @@ pub const VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS: VkStructureType = 10006850
 pub const VK_STRUCTURE_TYPE_SWAPCHAIN_IMAGE_CREATE_INFO_OHOS: VkStructureType = 1000453002;
 pub const VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_OHOS: VkSwapchainImageUsageFlagBitsOHOS = 1 << 0;
 
-pub type OHNativeWindow = NativeWindow;
 pub type VkSurfaceCreateFlagsOHOS = VkFlags;
 pub type VkSwapchainImageUsageFlagBitsOHOS = VkFlags;
 pub type VkSwapchainImageUsageFlagsOHOS = VkFlags;

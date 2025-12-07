@@ -50,6 +50,9 @@ impl Library {
             "    pub(crate) use core::{{ffi::{{CStr, c_char, c_int, c_void}}, ptr::NonNull}};"
         )
         .unwrap();
+        writeln!(file).unwrap();
+        writeln!(file, "    pub(crate) use platform::*;").unwrap();
+        writeln!(file, "    pub mod platform;").unwrap();
 
         writeln!(file).unwrap();
         self.sort_and_write_video_modules(&mut file);
@@ -89,10 +92,12 @@ impl Library {
         writeln!(file).unwrap();
         writeln!(file, "        pub(crate) use vulkan::*;").unwrap();
         writeln!(file, "        pub mod vulkan {{").unwrap();
+        writeln!(file, "            #[doc(no_inline)]").unwrap();
         writeln!(file, "            pub use super::vulkan_core::*;").unwrap();
 
         for platform in &self.platforms {
             writeln!(file).unwrap();
+            writeln!(file, "            #[doc(no_inline)]").unwrap();
             writeln!(file, "            {}", cfg_platform(platform)).unwrap();
             writeln!(file, "            pub use super::vulkan_{platform}::*;").unwrap();
         }
