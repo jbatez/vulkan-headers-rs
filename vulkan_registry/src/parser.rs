@@ -4,7 +4,7 @@ use quick_xml::{
     events::{BytesStart, Event, attributes::Attribute},
 };
 
-use crate::code::*;
+use crate::registry::*;
 
 impl Registry {
     pub fn parse(xml: &str) -> Self {
@@ -15,11 +15,11 @@ impl Registry {
     }
 
     pub fn video() -> Self {
-        Self::parse(crate::data::VIDEO_XML)
+        Self::parse(include_str!("video.xml"))
     }
 
     pub fn vk() -> Self {
-        Self::parse(crate::data::VK_XML)
+        Self::parse(include_str!("vk.xml"))
     }
 }
 
