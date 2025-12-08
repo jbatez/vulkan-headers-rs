@@ -49,6 +49,10 @@ impl Generator {
         self.library.video_modules.push(name.to_owned());
 
         let mut module = Module::new("vk_video", name);
+        if name != "vulkan_video_codecs_common" {
+            Self::add_import("super::vulkan_video_codecs_common", &mut module);
+        }
+
         self.visit_extension(extension, index, &mut module);
         module.write_file();
     }
@@ -170,12 +174,35 @@ impl Generator {
 
         if !modules.contains_key(platform) {
             self.library.platforms.push(platform.to_owned());
-            let module = Module::new("vulkan", &format!("vulkan_{platform}"));
+            let mut module = Module::new("vulkan", &format!("vulkan_{platform}"));
+            Self::add_platform_imports(platform, &mut module);
             modules.insert(platform.to_owned(), module);
         }
 
         let module = modules.get_mut(platform).unwrap();
         self.visit_extension(extension, index, module);
+    }
+
+    fn add_platform_imports(platform: &str, module: &mut Module) {
+        Self::add_import("super::vulkan_core", module);
+        match platform {
+            "android" => Self::add_import("crate::platform::android", module),
+            "directfb" => Self::add_import("crate::platform::directfb", module),
+            "fuchsia" => Self::add_import("crate::platform::fuchsia", module),
+            "ggp" => Self::add_import("crate::platform::ggp", module),
+            "metal" => Self::add_import("crate::platform::metal", module),
+            "ohos" => Self::add_import("crate::platform::ohos", module),
+            "screen" => Self::add_import("crate::platform::screen", module),
+            "wayland" => Self::add_import("crate::platform::wayland", module),
+            "win32" => Self::add_import("crate::platform::win32", module),
+            "xcb" => Self::add_import("crate::platform::xcb", module),
+            "xlib" => Self::add_import("crate::platform::xlib", module),
+            "xlib_xrandr" => {
+                Self::add_import("crate::platform::xlib", module);
+                Self::add_import("crate::platform::xlib_xrandr", module);
+            }
+            _ => (),
+        }
     }
 
     fn visit_extension(
@@ -207,8 +234,11 @@ impl Generator {
 
     fn require_type(&mut self, typ: &GeneralRef, index: &RegistryIndex, module: &mut Module) {
         let name = typ.name.as_ref().unwrap().as_str();
-        if self.items.insert(name.to_owned()) {
-            let typ = &index.types[name];
+        let typ = &index.types[name];
+        let category = typ.category.as_ref().unwrap().as_str();
+        if category == "include" {
+            Self::visit_include_type(name, module);
+        } else if self.items.insert(name.to_owned()) {
             if let Some(alias) = typ.alias.as_ref() {
                 Self::add_type_alias(name, alias, module);
             } else {
@@ -219,13 +249,27 @@ impl Generator {
                     "enum" => Self::add_enum_type(name, index, module),
                     "funcpointer" => Self::add_funcpointer_type(name, typ, module),
                     "handle" => Self::add_handle_type(name, module),
-                    "include" => (),
                     "struct" => Self::add_struct_type(name, typ, index, module),
                     "union" => Self::add_union_type(name, typ, index, module),
                     category => panic!("unexpected type category: {category:?}"),
                 }
             }
         }
+    }
+
+    fn visit_include_type(name: &str, module: &mut Module) {
+        if name.starts_with("vk_video/")
+            && name != "vk_video/vulkan_video_codecs_common.h"
+            && module.parent == "vk_video"
+        {
+            assert!(name.ends_with(".h"));
+            let name = &name["vk_video/".len()..name.len() - ".h".len()];
+            Self::add_import(&format!("super::{name}"), module);
+        }
+    }
+
+    fn add_import(path: &str, module: &mut Module) {
+        module.imports.push(format!("use {path}::*;"));
     }
 
     fn add_type_alias(name: &str, alias: &str, module: &mut Module) {

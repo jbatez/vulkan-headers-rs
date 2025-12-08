@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use super::vulkan_video_codecs_common::*;
 
 #[derive(Clone, Copy)]
 #[repr(C)]

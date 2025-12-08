@@ -1,4 +1,6 @@
 use crate::prelude::*;
+use crate::platform::win32::*;
+use super::vulkan_core::*;
 
 #[derive(Clone, Copy)]
 #[repr(C)]

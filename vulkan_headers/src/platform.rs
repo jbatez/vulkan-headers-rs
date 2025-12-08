@@ -213,7 +213,7 @@ pub mod xcb {
 }
 
 /// Available if built with `xlib_extensions`.
-#[cfg(any(doc, feature = "xlib_extensions"))]
+#[cfg(any(doc, feature = "xlib_extensions", feature = "xlib_xrandr_extensions"))]
 pub mod xlib {
     use core::ffi::{c_uint, c_ulong};
 
