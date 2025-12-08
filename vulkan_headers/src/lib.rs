@@ -2,9 +2,9 @@
 #![allow(nonstandard_style, unused_imports)]
 #![no_std]
 
-mod prelude;
-
 pub mod platform;
+
+mod prelude;
 
 pub mod vk_video {
     pub mod vulkan_video_codec_av1std;

@@ -5,7 +5,6 @@ edition.workspace = true
 [features]
 exported_prototypes = []
 prototypes = ["exported_prototypes"]
-
 android_extensions = []
 beta_extensions = []
 directfb_extensions = []

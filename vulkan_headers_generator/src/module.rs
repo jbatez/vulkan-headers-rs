@@ -30,10 +30,10 @@ impl Module {
     }
 
     pub(crate) fn write_file(&mut self) {
-        let path = format!("vulkan_headers/src/code/{}/{}.rs", self.parent, self.name);
+        let path = format!("vulkan_headers/src/{}/{}.rs", self.parent, self.name);
         let mut file = File::create(path).unwrap();
 
-        writeln!(file, "use crate::code::*;").unwrap();
+        writeln!(file, "use crate::prelude::*;").unwrap();
         self.sort_and_write_re_exports(&mut file);
         self.sort_and_write_structs(&mut file);
         self.sort_and_write_enums(&mut file);
