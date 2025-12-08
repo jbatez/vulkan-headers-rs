@@ -17,6 +17,7 @@ impl Library {
         self.platforms.sort();
         self.write_cargo_toml();
         self.write_lib_rs();
+        self.write_vulkan_rs();
     }
 
     fn write_cargo_toml(&mut self) {
@@ -29,7 +30,7 @@ impl Library {
         writeln!(file, "[features]").unwrap();
         writeln!(file, "exported_prototypes = []").unwrap();
         writeln!(file, "prototypes = [\"exported_prototypes\"]").unwrap();
-    
+
         for platform in &self.platforms {
             writeln!(file, "{platform}_extensions = []").unwrap();
         }
@@ -69,20 +70,34 @@ impl Library {
         writeln!(file, "    pub mod vulkan_core;").unwrap();
 
         for platform in &self.platforms {
+            let doc_comment = format!("/// Available if built with `{platform}_extensions`.");
+            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}_extensions\"))]");
+            let mod_decl = format!("pub mod vulkan_{platform};");
+
             writeln!(file).unwrap();
-            writeln!(file, "    {}", cfg_platform_doc(platform)).unwrap();
-            writeln!(file, "    {}", cfg_platform(platform)).unwrap();
-            writeln!(file, "    pub mod vulkan_{platform};").unwrap();
+            writeln!(file, "    {doc_comment}").unwrap();
+            writeln!(file, "    {cfg_attr}").unwrap();
+            writeln!(file, "    {mod_decl}").unwrap();
         }
 
         writeln!(file, "}}").unwrap();
     }
-}
 
-fn cfg_platform_doc(platform: &str) -> String {
-    format!("/// Available if built with `{platform}_extensions`.")
-}
+    fn write_vulkan_rs(&mut self) {
+        let mut file = File::create("vulkan_headers/src/vulkan/vulkan.rs").unwrap();
 
-fn cfg_platform(platform: &str) -> String {
-    format!("#[cfg(any(doc, feature = \"{platform}_extensions\"))]")
+        writeln!(file, "#[doc(no_inline)]").unwrap();
+        writeln!(file, "pub use super::vulkan_core::*;").unwrap();
+
+        for platform in &self.platforms {
+            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}_extensions\"))]");
+            let doc_attr = format!("#[doc(no_inline)]");
+            let re_export = format!("pub use super::vulkan_{platform}::*;");
+
+            writeln!(file).unwrap();
+            writeln!(file, "{cfg_attr}").unwrap();
+            writeln!(file, "{doc_attr}").unwrap();
+            writeln!(file, "{re_export}").unwrap();
+        }
+    }
 }
