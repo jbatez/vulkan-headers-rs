@@ -28,9 +28,10 @@ impl Library {
 
         writeln!(file).unwrap();
         writeln!(file, "[features]").unwrap();
-        writeln!(file, "exported_prototypes = []").unwrap();
         writeln!(file, "prototypes = [\"exported_prototypes\"]").unwrap();
+        writeln!(file, "exported_prototypes = []").unwrap();
 
+        writeln!(file).unwrap();
         for platform in &self.platforms {
             writeln!(file, "{platform}_extensions = []").unwrap();
         }
