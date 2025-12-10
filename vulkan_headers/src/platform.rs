@@ -212,7 +212,7 @@ pub mod xcb {
     pub type xcb_window_t = u32;
 }
 
-/// Available if built with `xlib_extensions`.
+/// Available if built with `xlib_extensions` or `xlib_xrandr_extensions`.
 #[cfg(any(doc, feature = "xlib_extensions", feature = "xlib_xrandr_extensions"))]
 pub mod xlib {
     use core::ffi::{c_uint, c_ulong};
