@@ -17524,47 +17524,38 @@ pub const VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV: VkViewportCoordinateSwiz
 pub const VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV: VkViewportCoordinateSwizzleNV = 4;
 pub const VK_WHOLE_SIZE: u64 = !0;
 
-#[inline]
 pub const fn VK_API_VERSION_MAJOR(version: u32) -> u32 {
     (version >> 22) & 0x7F
 }
 
-#[inline]
 pub const fn VK_API_VERSION_MINOR(version: u32) -> u32 {
     (version >> 12) & 0x3FF
 }
 
-#[inline]
 pub const fn VK_API_VERSION_PATCH(version: u32) -> u32 {
     version & 0xFFF
 }
 
-#[inline]
 pub const fn VK_API_VERSION_VARIANT(version: u32) -> u32 {
     version >> 29
 }
 
-#[inline]
 pub const fn VK_MAKE_API_VERSION(variant: u32, major: u32, minor: u32, patch: u32) -> u32 {
     (variant << 29) | (major << 22) | (minor << 12) | patch
 }
 
-#[inline]
 pub const fn VK_MAKE_VERSION(major: u32, minor: u32, patch: u32) -> u32 {
     (major << 22) | (minor << 12) | patch
 }
 
-#[inline]
 pub const fn VK_VERSION_MAJOR(version: u32) -> u32 {
     version >> 22
 }
 
-#[inline]
 pub const fn VK_VERSION_MINOR(version: u32) -> u32 {
     (version >> 12) & 0x3FF
 }
 
-#[inline]
 pub const fn VK_VERSION_PATCH(version: u32) -> u32 {
     version & 0xFFF
 }
