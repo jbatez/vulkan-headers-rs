@@ -1,17 +1,17 @@
 # `video.xml` and `vk.xml`
 
+These files fall under Apache-2.0 and MIT licenses.
+
 Copyright 2015-2025 The Khronos Group Inc.
 
-These files fall under `Apache-2.0` and `MIT` licenses.
-
-Full text of these licenses is available at:
+The full texts of these licenses are available at:
 
   * Apache-2.0: https://opensource.org/licenses/Apache-2.0
   * MIT: https://opensource.org/licenses/MIT
 
 # Everything Else
 
-MIT No Attribution
+These files fall under the MIT No Attribution License.
 
 Copyright 2025 Jo Bates
 
