@@ -116,7 +116,9 @@ pub(crate) fn rust_value_from_c_value(mut c_value: &str) -> String {
         };
 
         if is_digit(c_value.as_bytes()[0]) {
-            if c_value.ends_with('F') && !c_value.starts_with("0X") && !c_value.starts_with("0x") {
+            if (c_value.ends_with('F') || c_value.ends_with('f'))
+                && !(c_value.starts_with("0X") || c_value.starts_with("0x"))
+            {
                 c_value = &c_value[..c_value.len() - 1];
             }
 

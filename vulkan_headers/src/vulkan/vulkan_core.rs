@@ -1179,6 +1179,15 @@ pub struct VkComponentMapping {
 
 #[derive(Clone, Copy)]
 #[repr(C)]
+pub struct VkComputeOccupancyPriorityParametersNV {
+    pub sType: VkStructureType,
+    pub pNext: *const c_void,
+    pub occupancyPriority: f32,
+    pub occupancyThrottling: f32,
+}
+
+#[derive(Clone, Copy)]
+#[repr(C)]
 pub struct VkComputePipelineCreateInfo {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
@@ -4743,6 +4752,14 @@ pub struct VkPhysicalDeviceCommandBufferInheritanceFeaturesNV {
     pub sType: VkStructureType,
     pub pNext: *mut c_void,
     pub commandBufferInheritance: VkBool32,
+}
+
+#[derive(Clone, Copy)]
+#[repr(C)]
+pub struct VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV {
+    pub sType: VkStructureType,
+    pub pNext: *mut c_void,
+    pub computeOccupancyPriority: VkBool32,
 }
 
 #[derive(Clone, Copy)]
@@ -13175,6 +13192,9 @@ pub const VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR: VkCompositeAlphaFlagBitsKHR = 1 <<
 pub const VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR: VkCompositeAlphaFlagBitsKHR = 1 << 0;
 pub const VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR: VkCompositeAlphaFlagBitsKHR = 1 << 2;
 pub const VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR: VkCompositeAlphaFlagBitsKHR = 1 << 1;
+pub const VK_COMPUTE_OCCUPANCY_PRIORITY_HIGH_NV: f32 = 0.75;
+pub const VK_COMPUTE_OCCUPANCY_PRIORITY_LOW_NV: f32 = 0.25;
+pub const VK_COMPUTE_OCCUPANCY_PRIORITY_NORMAL_NV: f32 = 0.50;
 pub const VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT: VkConditionalRenderingFlagBitsEXT = 1 << 0;
 pub const VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT: VkConservativeRasterizationModeEXT = 0;
 pub const VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT: VkConservativeRasterizationModeEXT = 1;
@@ -14403,7 +14423,7 @@ pub const VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT: VkGrap
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 2;
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 1;
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 0;
-pub const VK_HEADER_VERSION: u32 = 335;
+pub const VK_HEADER_VERSION: u32 = 336;
 pub const VK_HEADER_VERSION_COMPLETE: u32 = VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION);
 pub const VK_HOST_IMAGE_COPY_MEMCPY: VkHostImageCopyFlagBits = VK_HOST_IMAGE_COPY_MEMCPY_BIT;
 pub const VK_HOST_IMAGE_COPY_MEMCPY_BIT: VkHostImageCopyFlagBits = 1 << 0;
@@ -15017,6 +15037,8 @@ pub const VK_NV_CLUSTER_ACCELERATION_STRUCTURE_EXTENSION_NAME: &CStr = c"VK_NV_c
 pub const VK_NV_CLUSTER_ACCELERATION_STRUCTURE_SPEC_VERSION: u32 = 4;
 pub const VK_NV_COMMAND_BUFFER_INHERITANCE_EXTENSION_NAME: &CStr = c"VK_NV_command_buffer_inheritance";
 pub const VK_NV_COMMAND_BUFFER_INHERITANCE_SPEC_VERSION: u32 = 1;
+pub const VK_NV_COMPUTE_OCCUPANCY_PRIORITY_EXTENSION_NAME: &CStr = c"VK_NV_compute_occupancy_priority";
+pub const VK_NV_COMPUTE_OCCUPANCY_PRIORITY_SPEC_VERSION: u32 = 1;
 pub const VK_NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION_NAME: &CStr = c"VK_NV_compute_shader_derivatives";
 pub const VK_NV_COMPUTE_SHADER_DERIVATIVES_SPEC_VERSION: u32 = 1;
 pub const VK_NV_COOPERATIVE_MATRIX_2_EXTENSION_NAME: &CStr = c"VK_NV_cooperative_matrix2";
@@ -15991,6 +16013,7 @@ pub const VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV:
 pub const VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO: VkStructureType = 1000314006;
 pub const VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR: VkStructureType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO;
 pub const VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO: VkStructureType = 39;
+pub const VK_STRUCTURE_TYPE_COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: VkStructureType = 1000645000;
 pub const VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO: VkStructureType = 29;
 pub const VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV: VkStructureType = 1000428001;
 pub const VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT: VkStructureType = 1000081002;
@@ -16364,6 +16387,7 @@ pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: VkStructureType = 1000229000;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: VkStructureType = 1000381000;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV: VkStructureType = 1000559000;
+pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: VkStructureType = 1000645001;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR: VkStructureType = 1000201000;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV: VkStructureType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR;
 pub const VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR: VkStructureType = 1000511000;
@@ -18312,6 +18336,10 @@ unsafe extern "system" {
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetColorWriteMaskEXT(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorWriteMasks: *const VkColorComponentFlags);
+
+    /// Available if built with `prototypes`.
+    #[cfg(any(doc, feature = "prototypes"))]
+    pub fn vkCmdSetComputeOccupancyPriorityNV(commandBuffer: VkCommandBuffer, pParameters: *const VkComputeOccupancyPriorityParametersNV);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
@@ -20579,6 +20607,7 @@ pub type NonNullPFN_vkCmdSetColorBlendEnableEXT = unsafe extern "system" fn(comm
 pub type NonNullPFN_vkCmdSetColorBlendEquationEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorBlendEquations: *const VkColorBlendEquationEXT);
 pub type NonNullPFN_vkCmdSetColorWriteEnableEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, attachmentCount: u32, pColorWriteEnables: *const VkBool32);
 pub type NonNullPFN_vkCmdSetColorWriteMaskEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, firstAttachment: u32, attachmentCount: u32, pColorWriteMasks: *const VkColorComponentFlags);
+pub type NonNullPFN_vkCmdSetComputeOccupancyPriorityNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, pParameters: *const VkComputeOccupancyPriorityParametersNV);
 pub type NonNullPFN_vkCmdSetConservativeRasterizationModeEXT = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, conservativeRasterizationMode: VkConservativeRasterizationModeEXT);
 pub type NonNullPFN_vkCmdSetCoverageModulationModeNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageModulationMode: VkCoverageModulationModeNV);
 pub type NonNullPFN_vkCmdSetCoverageModulationTableEnableNV = unsafe extern "system" fn(commandBuffer: VkCommandBuffer, coverageModulationTableEnable: VkBool32);
@@ -21350,6 +21379,7 @@ pub type PFN_vkCmdSetColorBlendEnableEXT = Option<NonNullPFN_vkCmdSetColorBlendE
 pub type PFN_vkCmdSetColorBlendEquationEXT = Option<NonNullPFN_vkCmdSetColorBlendEquationEXT>;
 pub type PFN_vkCmdSetColorWriteEnableEXT = Option<NonNullPFN_vkCmdSetColorWriteEnableEXT>;
 pub type PFN_vkCmdSetColorWriteMaskEXT = Option<NonNullPFN_vkCmdSetColorWriteMaskEXT>;
+pub type PFN_vkCmdSetComputeOccupancyPriorityNV = Option<NonNullPFN_vkCmdSetComputeOccupancyPriorityNV>;
 pub type PFN_vkCmdSetConservativeRasterizationModeEXT = Option<NonNullPFN_vkCmdSetConservativeRasterizationModeEXT>;
 pub type PFN_vkCmdSetCoverageModulationModeNV = Option<NonNullPFN_vkCmdSetCoverageModulationModeNV>;
 pub type PFN_vkCmdSetCoverageModulationTableEnableNV = Option<NonNullPFN_vkCmdSetCoverageModulationTableEnableNV>;
