@@ -3,8 +3,8 @@ name = "vulkan_headers"
 edition.workspace = true
 
 [features]
-prototypes = ["exported_prototypes"]
 exported_prototypes = []
+prototypes = ["exported_prototypes"]
 
 android_extensions = []
 beta_extensions = []

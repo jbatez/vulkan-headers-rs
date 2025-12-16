@@ -1,6 +1,7 @@
-#![cfg(target_pointer_width = "64")]
 #![allow(nonstandard_style, unused_imports)]
 #![no_std]
+
+const _: () = assert!(cfg!(target_pointer_width = "64"));
 
 pub mod platform;
 

@@ -22,14 +22,21 @@ impl Library {
 
     fn write_cargo_toml(&mut self) {
         let mut file = File::create("vulkan_headers/Cargo.toml").unwrap();
-        writeln!(file, "[package]").unwrap();
-        writeln!(file, "name = \"vulkan_headers\"").unwrap();
-        writeln!(file, "edition.workspace = true").unwrap();
 
-        writeln!(file).unwrap();
-        writeln!(file, "[features]").unwrap();
-        writeln!(file, "prototypes = [\"exported_prototypes\"]").unwrap();
-        writeln!(file, "exported_prototypes = []").unwrap();
+        write!(
+            file,
+            "{}",
+            "\
+[package]
+name = \"vulkan_headers\"
+edition.workspace = true
+
+[features]
+exported_prototypes = []
+prototypes = [\"exported_prototypes\"]
+"
+        )
+        .unwrap();
 
         writeln!(file).unwrap();
         for platform in &self.platforms {
@@ -40,13 +47,21 @@ impl Library {
     fn write_lib_rs(&mut self) {
         let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
 
-        writeln!(file, "#![cfg(target_pointer_width = \"64\")]").unwrap();
-        writeln!(file, "#![allow(nonstandard_style, unused_imports)]").unwrap();
-        writeln!(file, "#![no_std]").unwrap();
-        writeln!(file).unwrap();
-        writeln!(file, "pub mod platform;").unwrap();
-        writeln!(file).unwrap();
-        writeln!(file, "mod prelude;").unwrap();
+        write!(
+            file,
+            "{}",
+            "\
+#![allow(nonstandard_style, unused_imports)]
+#![no_std]
+
+const _: () = assert!(cfg!(target_pointer_width = \"64\"));
+
+pub mod platform;
+
+mod prelude;
+"
+        )
+        .unwrap();
 
         self.sort_and_write_video_modules(&mut file);
         self.write_vulkan_module(&mut file);
