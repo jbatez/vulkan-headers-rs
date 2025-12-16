@@ -1,5 +1,5 @@
 [package]
-name = "vulkan_headers"
+name = "vulkan-headers"
 edition.workspace = true
 
 [features]

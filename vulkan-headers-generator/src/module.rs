@@ -32,7 +32,7 @@ impl Module {
     }
 
     pub(crate) fn write_file(&mut self) {
-        let path = format!("vulkan_headers/src/{}/{}.rs", self.parent, self.name);
+        let path = format!("vulkan-headers/src/{}/{}.rs", self.parent, self.name);
         let mut file = File::create(path).unwrap();
 
         self.sort_and_write_imports(&mut file);

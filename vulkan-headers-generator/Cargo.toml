@@ -1,0 +1,6 @@
+[package]
+name = "vulkan-headers-generator"
+edition.workspace = true
+
+[dependencies]
+vulkan-registry.workspace = true

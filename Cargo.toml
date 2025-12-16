@@ -1,9 +1,9 @@
 [workspace]
 resolver = "3"
 members = [
-    "vulkan_headers",
-    "vulkan_headers_generator",
-    "vulkan_registry",
+    "vulkan-headers",
+    "vulkan-headers-generator",
+    "vulkan-registry",
 ]
 
 [workspace.package]
@@ -11,4 +11,4 @@ edition = "2024"
 
 [workspace.dependencies]
 quick-xml = "0.38.4"
-vulkan_registry.path = "vulkan_registry"
+vulkan-registry.path = "vulkan-registry"

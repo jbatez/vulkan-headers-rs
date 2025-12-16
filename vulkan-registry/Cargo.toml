@@ -1,5 +1,5 @@
 [package]
-name = "vulkan_registry"
+name = "vulkan-registry"
 edition.workspace = true
 
 [dependencies]

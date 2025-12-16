@@ -21,14 +21,14 @@ impl Library {
     }
 
     fn write_cargo_toml(&mut self) {
-        let mut file = File::create("vulkan_headers/Cargo.toml").unwrap();
+        let mut file = File::create("vulkan-headers/Cargo.toml").unwrap();
 
         write!(
             file,
             "{}",
             "\
 [package]
-name = \"vulkan_headers\"
+name = \"vulkan-headers\"
 edition.workspace = true
 
 [features]
@@ -45,7 +45,7 @@ prototypes = [\"exported_prototypes\"]
     }
 
     fn write_lib_rs(&mut self) {
-        let mut file = File::create("vulkan_headers/src/lib.rs").unwrap();
+        let mut file = File::create("vulkan-headers/src/lib.rs").unwrap();
 
         write!(
             file,
@@ -100,7 +100,7 @@ mod prelude;
     }
 
     fn write_vulkan_rs(&mut self) {
-        let mut file = File::create("vulkan_headers/src/vulkan/vulkan.rs").unwrap();
+        let mut file = File::create("vulkan-headers/src/vulkan/vulkan.rs").unwrap();
 
         writeln!(file, "#[doc(no_inline)]").unwrap();
         writeln!(file, "pub use super::vulkan_core::*;").unwrap();
