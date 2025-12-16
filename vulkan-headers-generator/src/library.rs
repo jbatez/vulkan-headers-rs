@@ -29,6 +29,7 @@ impl Library {
             "\
 [package]
 name = \"vulkan-headers\"
+version.workspace = true
 edition.workspace = true
 
 [features]
