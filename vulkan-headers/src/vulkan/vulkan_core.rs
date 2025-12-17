@@ -225,6 +225,12 @@ pub struct VkAccelerationStructureInstanceKHR {
     pub accelerationStructureReference: u64,
 }
 
+#[repr(C)]
+pub struct VkAccelerationStructureKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkAccelerationStructureMatrixMotionInstanceNV {
@@ -258,6 +264,12 @@ pub struct VkAccelerationStructureMotionInstanceNV {
     pub typ: VkAccelerationStructureMotionInstanceTypeNV,
     pub flags: VkAccelerationStructureMotionInstanceFlagsNV,
     pub data: VkAccelerationStructureMotionInstanceDataNV,
+}
+
+#[repr(C)]
+pub struct VkAccelerationStructureNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -836,6 +848,18 @@ pub struct VkBufferViewCreateInfo {
     pub range: VkDeviceSize,
 }
 
+#[repr(C)]
+pub struct VkBufferView_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
+#[repr(C)]
+pub struct VkBuffer_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkBuildPartitionedAccelerationStructureIndirectCommandNV {
@@ -1159,6 +1183,12 @@ pub struct VkCommandBufferSubmitInfo {
     pub deviceMask: u32,
 }
 
+#[repr(C)]
+pub struct VkCommandBuffer_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkCommandPoolCreateInfo {
@@ -1166,6 +1196,12 @@ pub struct VkCommandPoolCreateInfo {
     pub pNext: *const c_void,
     pub flags: VkCommandPoolCreateFlags,
     pub queueFamilyIndex: u32,
+}
+
+#[repr(C)]
+pub struct VkCommandPool_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -1538,6 +1574,12 @@ pub struct VkCuFunctionCreateInfoNVX {
     pub pName: *const c_char,
 }
 
+#[repr(C)]
+pub struct VkCuFunctionNVX_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkCuLaunchInfoNVX {
@@ -1564,6 +1606,12 @@ pub struct VkCuModuleCreateInfoNVX {
     pub pNext: *const c_void,
     pub dataSize: usize,
     pub pData: *const c_void,
+}
+
+#[repr(C)]
+pub struct VkCuModuleNVX_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -1678,6 +1726,12 @@ pub struct VkDataGraphPipelineResourceInfoARM {
     pub arrayElement: u32,
 }
 
+#[repr(C)]
+pub struct VkDataGraphPipelineSessionARM_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDataGraphPipelineSessionBindPointRequirementARM {
@@ -1777,6 +1831,12 @@ pub struct VkDebugReportCallbackCreateInfoEXT {
     pub pUserData: *mut c_void,
 }
 
+#[repr(C)]
+pub struct VkDebugReportCallbackEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDebugUtilsLabelEXT {
@@ -1813,6 +1873,12 @@ pub struct VkDebugUtilsMessengerCreateInfoEXT {
     pub messageType: VkDebugUtilsMessageTypeFlagsEXT,
     pub pfnUserCallback: PFN_vkDebugUtilsMessengerCallbackEXT,
     pub pUserData: *mut c_void,
+}
+
+#[repr(C)]
+pub struct VkDebugUtilsMessengerEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -1889,6 +1955,12 @@ pub struct VkDedicatedAllocationMemoryAllocateInfoNV {
     pub pNext: *const c_void,
     pub image: VkImage,
     pub buffer: VkBuffer,
+}
+
+#[repr(C)]
+pub struct VkDeferredOperationKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -2017,6 +2089,12 @@ pub struct VkDescriptorPoolSize {
     pub descriptorCount: u32,
 }
 
+#[repr(C)]
+pub struct VkDescriptorPool_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDescriptorSetAllocateInfo {
@@ -2082,6 +2160,12 @@ pub struct VkDescriptorSetLayoutSupport {
     pub supported: VkBool32,
 }
 
+#[repr(C)]
+pub struct VkDescriptorSetLayout_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDescriptorSetVariableDescriptorCountAllocateInfo {
@@ -2097,6 +2181,12 @@ pub struct VkDescriptorSetVariableDescriptorCountLayoutSupport {
     pub sType: VkStructureType,
     pub pNext: *mut c_void,
     pub maxVariableDescriptorCount: u32,
+}
+
+#[repr(C)]
+pub struct VkDescriptorSet_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -2123,6 +2213,12 @@ pub struct VkDescriptorUpdateTemplateEntry {
     pub descriptorType: VkDescriptorType,
     pub offset: usize,
     pub stride: usize,
+}
+
+#[repr(C)]
+pub struct VkDescriptorUpdateTemplate_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -2362,6 +2458,12 @@ pub struct VkDeviceMemoryReportCallbackDataEXT {
     pub heapIndex: u32,
 }
 
+#[repr(C)]
+pub struct VkDeviceMemory_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDevicePipelineBinaryInternalCacheControlKHR {
@@ -2423,6 +2525,12 @@ pub struct VkDeviceTensorMemoryRequirementsARM {
     pub pCreateInfo: *const VkTensorCreateInfoARM,
 }
 
+#[repr(C)]
+pub struct VkDevice_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDirectDriverLoadingInfoLUNARG {
@@ -2465,6 +2573,12 @@ pub struct VkDisplayEventInfoEXT {
     pub displayEvent: VkDisplayEventTypeEXT,
 }
 
+#[repr(C)]
+pub struct VkDisplayKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkDisplayModeCreateInfoKHR {
@@ -2472,6 +2586,12 @@ pub struct VkDisplayModeCreateInfoKHR {
     pub pNext: *const c_void,
     pub flags: VkDisplayModeCreateFlagsKHR,
     pub parameters: VkDisplayModeParametersKHR,
+}
+
+#[repr(C)]
+pub struct VkDisplayModeKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -2703,6 +2823,12 @@ pub struct VkEventCreateInfo {
     pub flags: VkEventCreateFlags,
 }
 
+#[repr(C)]
+pub struct VkEvent_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkExportFenceCreateInfo {
@@ -2787,6 +2913,12 @@ pub struct VkExternalComputeQueueDeviceCreateInfoNV {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
     pub reservedExternalQueues: u32,
+}
+
+#[repr(C)]
+pub struct VkExternalComputeQueueNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -2897,6 +3029,12 @@ pub struct VkFenceGetFdInfoKHR {
     pub pNext: *const c_void,
     pub fence: VkFence,
     pub handleType: VkExternalFenceHandleTypeFlagBits,
+}
+
+#[repr(C)]
+pub struct VkFence_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -3014,6 +3152,12 @@ pub struct VkFramebufferMixedSamplesCombinationNV {
     pub rasterizationSamples: VkSampleCountFlagBits,
     pub depthStencilSamples: VkSampleCountFlags,
     pub colorSamples: VkSampleCountFlags,
+}
+
+#[repr(C)]
+pub struct VkFramebuffer_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -3629,6 +3773,18 @@ pub struct VkImageViewUsageCreateInfo {
     pub usage: VkImageUsageFlags,
 }
 
+#[repr(C)]
+pub struct VkImageView_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
+#[repr(C)]
+pub struct VkImage_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkImportFenceFdInfoKHR {
@@ -3708,6 +3864,18 @@ pub struct VkIndirectCommandsLayoutCreateInfoNV {
     pub pStreamStrides: *const u32,
 }
 
+#[repr(C)]
+pub struct VkIndirectCommandsLayoutEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
+#[repr(C)]
+pub struct VkIndirectCommandsLayoutNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkIndirectCommandsLayoutTokenEXT {
@@ -3764,6 +3932,12 @@ pub struct VkIndirectExecutionSetCreateInfoEXT {
     pub pNext: *const c_void,
     pub typ: VkIndirectExecutionSetInfoTypeEXT,
     pub info: VkIndirectExecutionSetInfoEXT,
+}
+
+#[repr(C)]
+pub struct VkIndirectExecutionSetEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -3824,6 +3998,12 @@ pub struct VkInstanceCreateInfo {
     pub ppEnabledLayerNames: *const *const c_char,
     pub enabledExtensionCount: u32,
     pub ppEnabledExtensionNames: *const *const c_char,
+}
+
+#[repr(C)]
+pub struct VkInstance_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -4156,6 +4336,12 @@ pub struct VkMicromapCreateInfoEXT {
     pub deviceAddress: VkDeviceAddress,
 }
 
+#[repr(C)]
+pub struct VkMicromapEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkMicromapTriangleEXT {
@@ -4321,6 +4507,12 @@ pub struct VkOpticalFlowSessionCreatePrivateDataInfoNV {
     pub pPrivateData: *const c_void,
 }
 
+#[repr(C)]
+pub struct VkOpticalFlowSessionNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkOutOfBandQueueTypeInfoNV {
@@ -4442,6 +4634,12 @@ pub struct VkPerformanceConfigurationAcquireInfoINTEL {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
     pub typ: VkPerformanceConfigurationTypeINTEL,
+}
+
+#[repr(C)]
+pub struct VkPerformanceConfigurationINTEL_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -8487,6 +8685,12 @@ pub struct VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
     pub shaderZeroInitializeWorkgroupMemory: VkBool32,
 }
 
+#[repr(C)]
+pub struct VkPhysicalDevice_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkPipelineBinaryCreateInfoKHR {
@@ -8528,6 +8732,12 @@ pub struct VkPipelineBinaryInfoKHR {
     pub pNext: *const c_void,
     pub binaryCount: u32,
     pub pPipelineBinaries: *const VkPipelineBinaryKHR,
+}
+
+#[repr(C)]
+pub struct VkPipelineBinaryKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -8575,6 +8785,12 @@ pub struct VkPipelineCacheHeaderVersionOne {
     pub vendorID: u32,
     pub deviceID: u32,
     pub pipelineCacheUUID: [u8; VK_UUID_SIZE as usize],
+}
+
+#[repr(C)]
+pub struct VkPipelineCache_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -8838,6 +9054,12 @@ pub struct VkPipelineLayoutCreateInfo {
     pub pSetLayouts: *const VkDescriptorSetLayout,
     pub pushConstantRangeCount: u32,
     pub pPushConstantRanges: *const VkPushConstantRange,
+}
+
+#[repr(C)]
+pub struct VkPipelineLayout_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -9129,6 +9351,12 @@ pub struct VkPipelineViewportWScalingStateCreateInfoNV {
     pub pViewportWScalings: *const VkViewportWScalingNV,
 }
 
+#[repr(C)]
+pub struct VkPipeline_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkPresentId2KHR {
@@ -9248,6 +9476,12 @@ pub struct VkPrivateDataSlotCreateInfo {
     pub flags: VkPrivateDataSlotCreateFlags,
 }
 
+#[repr(C)]
+pub struct VkPrivateDataSlot_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkProtectedSubmitInfo {
@@ -9344,6 +9578,12 @@ pub struct VkQueryPoolVideoEncodeFeedbackCreateInfoKHR {
     pub encodeFeedbackFlags: VkVideoEncodeFeedbackFlagsKHR,
 }
 
+#[repr(C)]
+pub struct VkQueryPool_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkQueueFamilyCheckpointProperties2NV {
@@ -9426,6 +9666,12 @@ pub struct VkQueueFamilyVideoPropertiesKHR {
     pub sType: VkStructureType,
     pub pNext: *mut c_void,
     pub videoCodecOperations: VkVideoCodecOperationFlagsKHR,
+}
+
+#[repr(C)]
+pub struct VkQueue_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -9738,6 +9984,12 @@ pub struct VkRenderPassTransformBeginInfoQCOM {
     pub transform: VkSurfaceTransformFlagBitsKHR,
 }
 
+#[repr(C)]
+pub struct VkRenderPass_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkRenderingAreaInfo {
@@ -10010,6 +10262,18 @@ pub struct VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
     pub enableCbCrDegamma: VkBool32,
 }
 
+#[repr(C)]
+pub struct VkSamplerYcbcrConversion_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
+#[repr(C)]
+pub struct VkSampler_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkSemaphoreCreateInfo {
@@ -10067,6 +10331,12 @@ pub struct VkSemaphoreWaitInfo {
     pub pValues: *const u64,
 }
 
+#[repr(C)]
+pub struct VkSemaphore_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkSetDescriptorBufferOffsetsInfoEXT {
@@ -10114,6 +10384,12 @@ pub struct VkShaderCreateInfoEXT {
     pub pSpecializationInfo: *const VkSpecializationInfo,
 }
 
+#[repr(C)]
+pub struct VkShaderEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkShaderModuleCreateInfo {
@@ -10139,6 +10415,12 @@ pub struct VkShaderModuleValidationCacheCreateInfoEXT {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
     pub validationCache: VkValidationCacheEXT,
+}
+
+#[repr(C)]
+pub struct VkShaderModule_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -10552,6 +10834,12 @@ pub struct VkSurfaceFormatKHR {
     pub colorSpace: VkColorSpaceKHR,
 }
 
+#[repr(C)]
+pub struct VkSurfaceKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkSurfacePresentModeCompatibilityKHR {
@@ -10638,6 +10926,12 @@ pub struct VkSwapchainDisplayNativeHdrCreateInfoAMD {
     pub localDimmingEnable: VkBool32,
 }
 
+#[repr(C)]
+pub struct VkSwapchainKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkSwapchainLatencyCreateInfoNV {
@@ -10708,6 +11002,12 @@ pub struct VkSwapchainTimingPropertiesEXT {
     pub pNext: *mut c_void,
     pub refreshDuration: u64,
     pub refreshInterval: u64,
+}
+
+#[repr(C)]
+pub struct VkTensorARM_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -10792,6 +11092,12 @@ pub struct VkTensorMemoryRequirementsInfoARM {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
     pub tensor: VkTensorARM,
+}
+
+#[repr(C)]
+pub struct VkTensorViewARM_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -10907,6 +11213,12 @@ pub struct VkValidationCacheCreateInfoEXT {
     pub flags: VkValidationCacheCreateFlagsEXT,
     pub initialDataSize: usize,
     pub pInitialData: *const c_void,
+}
+
+#[repr(C)]
+pub struct VkValidationCacheEXT_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -12095,6 +12407,12 @@ pub struct VkVideoSessionCreateInfoKHR {
     pub pStdHeaderVersion: *const VkExtensionProperties,
 }
 
+#[repr(C)]
+pub struct VkVideoSessionKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkVideoSessionMemoryRequirementsKHR {
@@ -12112,6 +12430,12 @@ pub struct VkVideoSessionParametersCreateInfoKHR {
     pub flags: VkVideoSessionParametersCreateFlagsKHR,
     pub videoSessionParametersTemplate: VkVideoSessionParametersKHR,
     pub videoSession: VkVideoSessionKHR,
+}
+
+#[repr(C)]
+pub struct VkVideoSessionParametersKHR_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -12232,438 +12556,6 @@ pub struct VkWriteIndirectExecutionSetShaderEXT {
 pub struct VkXYColorEXT {
     pub x: f32,
     pub y: f32,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkAccelerationStructureKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkAccelerationStructureNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkBufferView_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkBuffer_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCommandBuffer_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCommandPool_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCuFunctionNVX_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCuModuleNVX_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDataGraphPipelineSessionARM_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDebugReportCallbackEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDebugUtilsMessengerEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDeferredOperationKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDescriptorPool_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDescriptorSetLayout_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDescriptorSet_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDescriptorUpdateTemplate_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDeviceMemory_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDevice_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDisplayKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkDisplayModeKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkEvent_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkExternalComputeQueueNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkFence_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkFramebuffer_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkImageView_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkImage_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkIndirectCommandsLayoutEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkIndirectCommandsLayoutNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkIndirectExecutionSetEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkInstance_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkMicromapEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkOpticalFlowSessionNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPerformanceConfigurationINTEL_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPhysicalDevice_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPipelineBinaryKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPipelineCache_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPipelineLayout_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPipeline_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkPrivateDataSlot_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkQueryPool_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkQueue_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkRenderPass_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkSamplerYcbcrConversion_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkSampler_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkSemaphore_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkShaderEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkShaderModule_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkSurfaceKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkSwapchainKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkTensorARM_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkTensorViewARM_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkValidationCacheEXT_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkVideoSessionKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkVideoSessionParametersKHR_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
 }
 
 pub const VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR: VkAccelerationStructureBuildTypeKHR = 1;

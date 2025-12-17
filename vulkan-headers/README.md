@@ -59,4 +59,5 @@ be enabled using the `beta_extensions` and/or `<platform>_extensions` (e.g.
 
 ## Requirements
 
-This library only supports targets with 64-bit pointers.
+This library only supports targets with 64-bit pointers. This allows pointer and
+`NonNull` types to be used portably for all Vulkan handle types.

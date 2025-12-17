@@ -47,6 +47,12 @@ pub struct VkCudaFunctionCreateInfoNV {
     pub pName: *const c_char,
 }
 
+#[repr(C)]
+pub struct VkCudaFunctionNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkCudaLaunchInfoNV {
@@ -73,6 +79,12 @@ pub struct VkCudaModuleCreateInfoNV {
     pub pNext: *const c_void,
     pub dataSize: usize,
     pub pData: *const c_void,
+}
+
+#[repr(C)]
+pub struct VkCudaModuleNV_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }
 
 #[derive(Clone, Copy)]
@@ -234,22 +246,6 @@ pub struct VkSetPresentConfigNV {
     pub pNext: *const c_void,
     pub numFramesPerBatch: u32,
     pub presentConfigFeedback: u32,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCudaFunctionNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkCudaModuleNV_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
 }
 
 pub const VK_AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION_NAME: &CStr = c"VK_AMDX_dense_geometry_format";

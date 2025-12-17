@@ -454,15 +454,13 @@ impl Generator {
     fn add_extern_type(name: &str, module: &mut Module) {
         let text = format!(
             "\
-#[cfg_attr(not(doc), repr(u8))]
-pub enum {name} {{
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
+#[repr(C)]
+pub struct {name} {{
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
 }}"
         );
-        module.enums.push((name.to_owned(), text));
+        module.structs.push((name.to_owned(), text));
     }
 
     fn add_struct_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {

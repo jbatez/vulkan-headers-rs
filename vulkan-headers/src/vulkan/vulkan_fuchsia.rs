@@ -31,6 +31,12 @@ pub struct VkBufferCollectionCreateInfoFUCHSIA {
     pub collectionToken: zx_handle_t,
 }
 
+#[repr(C)]
+pub struct VkBufferCollectionFUCHSIA_T {
+    _data: (),
+    _marker: PhantomData<(*mut u8, PhantomPinned)>,
+}
+
 #[derive(Clone, Copy)]
 #[repr(C)]
 pub struct VkBufferCollectionImageCreateInfoFUCHSIA {
@@ -162,14 +168,6 @@ pub struct VkSysmemColorSpaceFUCHSIA {
     pub sType: VkStructureType,
     pub pNext: *const c_void,
     pub colorSpace: u32,
-}
-
-#[cfg_attr(not(doc), repr(u8))]
-pub enum VkBufferCollectionFUCHSIA_T {
-    #[doc(hidden)]
-    __variant1,
-    #[doc(hidden)]
-    __variant2,
 }
 
 pub const VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT: VkDebugReportObjectTypeEXT = 1000366000;

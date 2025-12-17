@@ -1,52 +1,52 @@
 /// Available if built with `android_extensions`.
 #[cfg(any(doc, feature = "android_extensions"))]
 pub mod android {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum AHardwareBuffer {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct AHardwareBuffer {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum ANativeWindow {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct ANativeWindow {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 }
 
 /// Available if built with `directfb_extensions`.
 #[cfg(any(doc, feature = "directfb_extensions"))]
 pub mod directfb {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum IDirectFB {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct IDirectFB {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum IDirectFBSurface {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct IDirectFBSurface {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 }
 
 /// Available if built with `fuchsia_extensions`.
 #[cfg(any(doc, feature = "fuchsia_extensions"))]
 pub mod fuchsia {
+    use crate::prelude::*;
+
     pub type zx_handle_t = u32;
 }
 
 /// Available if built with `ggp_extensions`.
 #[cfg(any(doc, feature = "ggp_extensions"))]
 pub mod ggp {
+    use crate::prelude::*;
+
     pub type GgpFrameToken = u64;
     pub type GgpStreamDescriptor = u32;
 }
@@ -54,14 +54,12 @@ pub mod ggp {
 /// Available if built with `metal_extensions`.
 #[cfg(any(doc, feature = "metal_extensions"))]
 pub mod metal {
-    use core::ffi::c_void;
+    use crate::prelude::*;
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum __IOSurface {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct __IOSurface {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     pub type CAMetalLayer = c_void;
@@ -76,28 +74,24 @@ pub mod metal {
 /// Available if built with `ohos_extensions`.
 #[cfg(any(doc, feature = "ohos_extensions"))]
 pub mod ohos {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum NativeWindow {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct NativeWindow {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum OHBufferHandle {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct OHBufferHandle {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum OH_NativeBuffer {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct OH_NativeBuffer {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     pub type OHNativeWindow = NativeWindow;
@@ -106,86 +100,72 @@ pub mod ohos {
 /// Available if built with `screen_extensions`.
 #[cfg(any(doc, feature = "screen_extensions"))]
 pub mod screen {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum _screen_buffer {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct _screen_buffer {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum _screen_context {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct _screen_context {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum _screen_window {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct _screen_window {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 }
 
 /// Available if built with `wayland_extensions`.
 #[cfg(any(doc, feature = "wayland_extensions"))]
 pub mod wayland {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum wl_display {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct wl_display {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum wl_surface {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct wl_surface {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 }
 
 /// Available if built with `win32_extensions`.
 #[cfg(any(doc, feature = "win32_extensions"))]
 pub mod win32 {
-    use core::ffi::c_void;
+    use crate::prelude::*;
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum HINSTANCE__ {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct HINSTANCE__ {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum HMONITOR__ {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct HMONITOR__ {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum HWND__ {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct HWND__ {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum _SECURITY_ATTRIBUTES {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct _SECURITY_ATTRIBUTES {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     pub type DWORD = u32;
@@ -200,12 +180,12 @@ pub mod win32 {
 /// Available if built with `xcb_extensions`.
 #[cfg(any(doc, feature = "xcb_extensions"))]
 pub mod xcb {
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum xcb_connection_t {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    use crate::prelude::*;
+
+    #[repr(C)]
+    pub struct xcb_connection_t {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     pub type xcb_visualid_t = u32;
@@ -215,14 +195,12 @@ pub mod xcb {
 /// Available if built with `xlib_extensions` or `xlib_xrandr_extensions`.
 #[cfg(any(doc, feature = "xlib_extensions", feature = "xlib_xrandr_extensions"))]
 pub mod xlib {
-    use core::ffi::{c_uint, c_ulong};
+    use crate::prelude::*;
 
-    #[cfg_attr(not(doc), repr(u8))]
-    pub enum Display {
-        #[doc(hidden)]
-        __variant1,
-        #[doc(hidden)]
-        __variant2,
+    #[repr(C)]
+    pub struct Display {
+        _data: (),
+        _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     pub type VisualID = c_uint;
@@ -232,7 +210,7 @@ pub mod xlib {
 /// Available if built with `xlib_xrandr_extensions`.
 #[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
 pub mod xlib_xrandr {
-    use core::ffi::c_ulong;
+    use crate::prelude::*;
 
     pub type RROutput = c_ulong;
 }

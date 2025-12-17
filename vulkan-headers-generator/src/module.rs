@@ -6,7 +6,6 @@ pub(crate) struct Module {
     pub(crate) imports: Vec<String>,
     pub(crate) re_exports: Vec<(String, String)>,
     pub(crate) structs: Vec<(String, String)>,
-    pub(crate) enums: Vec<(String, String)>,
     pub(crate) constants: Vec<(String, String)>,
     pub(crate) functions: Vec<(String, String)>,
     pub(crate) extern_functions: Vec<(String, String)>,
@@ -22,7 +21,6 @@ impl Module {
             imports: Vec::new(),
             re_exports: Vec::new(),
             structs: Vec::new(),
-            enums: Vec::new(),
             constants: Vec::new(),
             functions: Vec::new(),
             extern_functions: Vec::new(),
@@ -38,7 +36,6 @@ impl Module {
         self.sort_and_write_imports(&mut file);
         self.sort_and_write_re_exports(&mut file);
         self.sort_and_write_structs(&mut file);
-        self.sort_and_write_enums(&mut file);
         self.sort_and_write_constants(&mut file);
         self.sort_and_write_functions(&mut file);
         self.sort_and_write_extern_functions(&mut file);
@@ -66,14 +63,6 @@ impl Module {
     fn sort_and_write_structs(&mut self, file: &mut File) {
         self.structs.sort();
         for (_, text) in &self.structs {
-            writeln!(file).unwrap();
-            writeln!(file, "{text}").unwrap();
-        }
-    }
-
-    fn sort_and_write_enums(&mut self, file: &mut File) {
-        self.enums.sort();
-        for (_, text) in &self.enums {
             writeln!(file).unwrap();
             writeln!(file, "{text}").unwrap();
         }
