@@ -1,4 +1,5 @@
 #![allow(nonstandard_style, unused_imports)]
+#![doc = include_str!("../README.md")]
 #![no_std]
 
 const _: () = assert!(cfg!(target_pointer_width = "64"));
