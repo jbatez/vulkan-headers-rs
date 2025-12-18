@@ -26,4 +26,4 @@ categories = [
 
 [workspace.dependencies]
 quick-xml = "0.38.4"
-vulkan-registry.path = "vulkan-registry"
+vulkan-registry = { path = "vulkan-registry", version = "0.1.0" }
