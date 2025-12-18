@@ -7,6 +7,8 @@ use quick_xml::{
 use crate::registry::*;
 
 impl Registry {
+    /// Parses the given XML text. This library is only tested with the bundled
+    /// XML file versions, but may work with others.
     pub fn parse(xml: &str) -> Self {
         let mut parser = Parser {
             reader: Reader::from_str(xml),
@@ -14,10 +16,14 @@ impl Registry {
         parser.parse_file()
     }
 
+    /// Parses the bundled copy of
+    /// [video.xml](https://github.com/KhronosGroup/Vulkan-Headers/blob/main/registry/video.xml).
     pub fn video() -> Self {
         Self::parse(include_str!("video.xml"))
     }
 
+    /// Parses the bundled copy of
+    /// [vk.xml](https://github.com/KhronosGroup/Vulkan-Headers/blob/main/registry/vk.xml).
     pub fn vk() -> Self {
         Self::parse(include_str!("vk.xml"))
     }
