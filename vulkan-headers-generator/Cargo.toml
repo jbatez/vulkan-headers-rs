@@ -2,6 +2,11 @@
 name = "vulkan-headers-generator"
 version.workspace = true
 edition.workspace = true
+description = "Generate the vulkan-headers crate"
+repository.workspace = true
+license = "MIT-0"
+keywords.workspace = true
+categories.workspace = true
 
 [dependencies]
 vulkan-registry.workspace = true

@@ -2,6 +2,11 @@
 name = "vulkan-registry"
 version.workspace = true
 edition.workspace = true
+description = "Parses the Vulkan API Registry XML files"
+repository.workspace = true
+license-file = "../LICENSE.md"
+keywords.workspace = true
+categories.workspace = true
 
 [dependencies]
 quick-xml.workspace = true

@@ -31,6 +31,11 @@ impl Library {
 name = \"vulkan-headers\"
 version.workspace = true
 edition.workspace = true
+description = \"Minimalist Rust FFI bindings for Vulkan\"
+repository.workspace = true
+license = \"MIT-0\"
+keywords.workspace = true
+categories.workspace = true
 
 [features]
 exported_prototypes = []

@@ -9,6 +9,20 @@ members = [
 [workspace.package]
 version = "0.1.0+1.4.336"
 edition = "2024"
+repository = "https://github.com/jbatez/vulkan-headers-rs"
+keywords = [
+    "gamedev",
+    "graphics", 
+    "vulkan",
+    "bindings",
+]
+categories = [
+    "api-bindings",
+    "external-ffi-bindings",
+    "game-development",
+    "graphics",
+    "rendering::graphics-api",
+]
 
 [workspace.dependencies]
 quick-xml = "0.38.4"
