@@ -77,13 +77,13 @@ pub mod ohos {
     use crate::prelude::*;
 
     #[repr(C)]
-    pub struct NativeWindow {
+    pub struct OHBufferHandle {
         _data: (),
         _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
     #[repr(C)]
-    pub struct OHBufferHandle {
+    pub struct OHNativeWindow {
         _data: (),
         _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
@@ -93,8 +93,6 @@ pub mod ohos {
         _data: (),
         _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
-
-    pub type OHNativeWindow = NativeWindow;
 }
 
 /// Available if built with `screen_extensions`.
@@ -203,7 +201,7 @@ pub mod xlib {
         _marker: PhantomData<(*mut u8, PhantomPinned)>,
     }
 
-    pub type VisualID = c_uint;
+    pub type VisualID = c_ulong;
     pub type Window = c_ulong;
 }
 
