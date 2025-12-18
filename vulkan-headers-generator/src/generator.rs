@@ -240,9 +240,12 @@ impl Generator {
             Self::visit_include_type(name, module);
         } else if self.items.insert(name.to_owned()) {
             if let Some(alias) = typ.alias.as_ref() {
-                Self::add_type_alias(name, alias, module);
+                match category {
+                    "handle" => Self::add_handle_type_alias(name, alias, module),
+                    _ => Self::add_type_alias(name, alias, module),
+                }
             } else {
-                match typ.category.as_ref().unwrap().as_str() {
+                match category {
                     "basetype" => Self::add_base_type(name, typ, module),
                     "bitmask" => Self::add_bitmask_type(name, typ, module),
                     "define" => Self::add_define_type(name, typ, module),
@@ -444,6 +447,15 @@ impl Generator {
 
     fn add_handle_type(name: &str, module: &mut Module) {
         Self::add_extern_type(&format!("{name}_T"), module);
+        Self::add_handle_type_aliases(name, module);
+    }
+
+    fn add_handle_type_alias(name: &str, alias: &str, module: &mut Module) {
+        Self::add_type_alias(&format!("{name}_T"), &format!("{alias}_T"), module);
+        Self::add_handle_type_aliases(name, module);
+    }
+
+    fn add_handle_type_aliases(name: &str, module: &mut Module) {
         Self::add_type_alias(name, &format!("*mut {name}_T"), module);
 
         let non_null_name = format!("NonNull{name}");
