@@ -7,7 +7,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0+1.4.336"
+version = "0.1.1+1.4.336"
 edition = "2024"
 repository = "https://github.com/jbatez/vulkan-headers-rs"
 keywords = [
@@ -26,4 +26,4 @@ categories = [
 
 [workspace.dependencies]
 quick-xml = "0.38.4"
-vulkan-registry = { path = "vulkan-registry", version = "0.1.0" }
+vulkan-registry = { path = "vulkan-registry", version = "0.1.1" }
