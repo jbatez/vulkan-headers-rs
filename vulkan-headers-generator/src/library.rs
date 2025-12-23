@@ -30,7 +30,8 @@ impl Library {
 [package]
 name = \"vulkan-headers\"
 version.workspace = true
-edition.workspace = true
+edition = \"2024\"
+rust-version = \"1.85.0\"
 description = \"Minimalist Rust FFI bindings for Vulkan\"
 repository.workspace = true
 license = \"MIT-0\"

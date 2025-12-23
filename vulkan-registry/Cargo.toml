@@ -1,7 +1,8 @@
 [package]
 name = "vulkan-registry"
 version.workspace = true
-edition.workspace = true
+edition = "2024"
+rust-version = "1.85.0"
 description = "Parses the Vulkan API Registry XML files"
 repository.workspace = true
 license-file = "../LICENSE.md"
@@ -9,4 +10,4 @@ keywords.workspace = true
 categories.workspace = true
 
 [dependencies]
-quick-xml.workspace = true
+quick-xml = "0.38.4"

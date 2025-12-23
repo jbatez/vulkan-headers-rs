@@ -1,7 +1,8 @@
 [package]
 name = "vulkan-headers-generator"
 version.workspace = true
-edition.workspace = true
+edition = "2024"
+rust-version = "1.88.0"
 description = "Generate the vulkan-headers crate"
 repository.workspace = true
 license = "MIT-0"
