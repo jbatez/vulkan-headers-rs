@@ -11,8 +11,9 @@ version = "0.1.2+1.4.337"
 repository = "https://github.com/jbatez/vulkan-headers-rs"
 keywords = [
     "gamedev",
-    "graphics", 
+    "graphics",
     "vulkan",
+    "headers",
     "bindings",
 ]
 categories = [
