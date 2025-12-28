@@ -1,4 +1,4 @@
-# Vulkan-Headers for Rust Generator
+# Generate Vulkan Headers for Rust
 
 This program uses [vulkan-registry](../vulkan-registry) to generate the
 [vulkan-headers](../vulkan-headers) Rust library.

@@ -1,4 +1,4 @@
-# Vulkan-Headers for Rust
+# Vulkan Headers for Rust
 
 This library contains minimalist Rust FFI bindings for Vulkan in a way that's
 roughly equivalent to the Khronos Group's official
