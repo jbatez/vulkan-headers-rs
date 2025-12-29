@@ -1,5 +1,5 @@
-/// Available if built with `android_extensions`.
-#[cfg(any(doc, feature = "android_extensions"))]
+/// Available if built with `android-extensions`.
+#[cfg(any(doc, feature = "android-extensions"))]
 pub mod android {
     use crate::prelude::*;
 
@@ -16,8 +16,8 @@ pub mod android {
     }
 }
 
-/// Available if built with `directfb_extensions`.
-#[cfg(any(doc, feature = "directfb_extensions"))]
+/// Available if built with `directfb-extensions`.
+#[cfg(any(doc, feature = "directfb-extensions"))]
 pub mod directfb {
     use crate::prelude::*;
 
@@ -34,16 +34,16 @@ pub mod directfb {
     }
 }
 
-/// Available if built with `fuchsia_extensions`.
-#[cfg(any(doc, feature = "fuchsia_extensions"))]
+/// Available if built with `fuchsia-extensions`.
+#[cfg(any(doc, feature = "fuchsia-extensions"))]
 pub mod fuchsia {
     use crate::prelude::*;
 
     pub type zx_handle_t = u32;
 }
 
-/// Available if built with `ggp_extensions`.
-#[cfg(any(doc, feature = "ggp_extensions"))]
+/// Available if built with `ggp-extensions`.
+#[cfg(any(doc, feature = "ggp-extensions"))]
 pub mod ggp {
     use crate::prelude::*;
 
@@ -51,8 +51,8 @@ pub mod ggp {
     pub type GgpStreamDescriptor = u32;
 }
 
-/// Available if built with `metal_extensions`.
-#[cfg(any(doc, feature = "metal_extensions"))]
+/// Available if built with `metal-extensions`.
+#[cfg(any(doc, feature = "metal-extensions"))]
 pub mod metal {
     use crate::prelude::*;
 
@@ -71,8 +71,8 @@ pub mod metal {
     pub type MTLTexture_id = *mut c_void;
 }
 
-/// Available if built with `ohos_extensions`.
-#[cfg(any(doc, feature = "ohos_extensions"))]
+/// Available if built with `ohos-extensions`.
+#[cfg(any(doc, feature = "ohos-extensions"))]
 pub mod ohos {
     use crate::prelude::*;
 
@@ -95,8 +95,8 @@ pub mod ohos {
     }
 }
 
-/// Available if built with `screen_extensions`.
-#[cfg(any(doc, feature = "screen_extensions"))]
+/// Available if built with `screen-extensions`.
+#[cfg(any(doc, feature = "screen-extensions"))]
 pub mod screen {
     use crate::prelude::*;
 
@@ -119,8 +119,8 @@ pub mod screen {
     }
 }
 
-/// Available if built with `wayland_extensions`.
-#[cfg(any(doc, feature = "wayland_extensions"))]
+/// Available if built with `wayland-extensions`.
+#[cfg(any(doc, feature = "wayland-extensions"))]
 pub mod wayland {
     use crate::prelude::*;
 
@@ -137,8 +137,8 @@ pub mod wayland {
     }
 }
 
-/// Available if built with `win32_extensions`.
-#[cfg(any(doc, feature = "win32_extensions"))]
+/// Available if built with `win32-extensions`.
+#[cfg(any(doc, feature = "win32-extensions"))]
 pub mod win32 {
     use crate::prelude::*;
 
@@ -175,8 +175,8 @@ pub mod win32 {
     pub type SECURITY_ATTRIBUTES = *mut _SECURITY_ATTRIBUTES;
 }
 
-/// Available if built with `xcb_extensions`.
-#[cfg(any(doc, feature = "xcb_extensions"))]
+/// Available if built with `xcb-extensions`.
+#[cfg(any(doc, feature = "xcb-extensions"))]
 pub mod xcb {
     use crate::prelude::*;
 
@@ -190,8 +190,8 @@ pub mod xcb {
     pub type xcb_window_t = u32;
 }
 
-/// Available if built with `xlib_extensions` or `xlib_xrandr_extensions`.
-#[cfg(any(doc, feature = "xlib_extensions", feature = "xlib_xrandr_extensions"))]
+/// Available if built with `xlib-extensions` or `xlib_xrandr-extensions`.
+#[cfg(any(doc, feature = "xlib-extensions", feature = "xlib_xrandr-extensions"))]
 pub mod xlib {
     use crate::prelude::*;
 
@@ -205,8 +205,8 @@ pub mod xlib {
     pub type Window = c_ulong;
 }
 
-/// Available if built with `xlib_xrandr_extensions`.
-#[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
+/// Available if built with `xlib_xrandr-extensions`.
+#[cfg(any(doc, feature = "xlib_xrandr-extensions"))]
 pub mod xlib_xrandr {
     use crate::prelude::*;
 

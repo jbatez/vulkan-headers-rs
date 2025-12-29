@@ -692,7 +692,7 @@ pub struct {name} {{
         module: &mut Module,
     ) {
         let feature = if cmd.export.is_some() && index.api_matches(&cmd.export) {
-            "exported_prototypes"
+            "exported-prototypes"
         } else {
             "prototypes"
         };

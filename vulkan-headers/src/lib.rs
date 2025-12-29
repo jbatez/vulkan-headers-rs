@@ -27,67 +27,67 @@ pub mod vulkan {
     pub mod vulkan;
     pub mod vulkan_core;
 
-    /// Available if built with `android_extensions`.
-    #[cfg(any(doc, feature = "android_extensions"))]
+    /// Available if built with `android-extensions`.
+    #[cfg(any(doc, feature = "android-extensions"))]
     pub mod vulkan_android;
 
-    /// Available if built with `beta_extensions`.
-    #[cfg(any(doc, feature = "beta_extensions"))]
+    /// Available if built with `beta-extensions`.
+    #[cfg(any(doc, feature = "beta-extensions"))]
     pub mod vulkan_beta;
 
-    /// Available if built with `directfb_extensions`.
-    #[cfg(any(doc, feature = "directfb_extensions"))]
+    /// Available if built with `directfb-extensions`.
+    #[cfg(any(doc, feature = "directfb-extensions"))]
     pub mod vulkan_directfb;
 
-    /// Available if built with `fuchsia_extensions`.
-    #[cfg(any(doc, feature = "fuchsia_extensions"))]
+    /// Available if built with `fuchsia-extensions`.
+    #[cfg(any(doc, feature = "fuchsia-extensions"))]
     pub mod vulkan_fuchsia;
 
-    /// Available if built with `ggp_extensions`.
-    #[cfg(any(doc, feature = "ggp_extensions"))]
+    /// Available if built with `ggp-extensions`.
+    #[cfg(any(doc, feature = "ggp-extensions"))]
     pub mod vulkan_ggp;
 
-    /// Available if built with `ios_extensions`.
-    #[cfg(any(doc, feature = "ios_extensions"))]
+    /// Available if built with `ios-extensions`.
+    #[cfg(any(doc, feature = "ios-extensions"))]
     pub mod vulkan_ios;
 
-    /// Available if built with `macos_extensions`.
-    #[cfg(any(doc, feature = "macos_extensions"))]
+    /// Available if built with `macos-extensions`.
+    #[cfg(any(doc, feature = "macos-extensions"))]
     pub mod vulkan_macos;
 
-    /// Available if built with `metal_extensions`.
-    #[cfg(any(doc, feature = "metal_extensions"))]
+    /// Available if built with `metal-extensions`.
+    #[cfg(any(doc, feature = "metal-extensions"))]
     pub mod vulkan_metal;
 
-    /// Available if built with `ohos_extensions`.
-    #[cfg(any(doc, feature = "ohos_extensions"))]
+    /// Available if built with `ohos-extensions`.
+    #[cfg(any(doc, feature = "ohos-extensions"))]
     pub mod vulkan_ohos;
 
-    /// Available if built with `screen_extensions`.
-    #[cfg(any(doc, feature = "screen_extensions"))]
+    /// Available if built with `screen-extensions`.
+    #[cfg(any(doc, feature = "screen-extensions"))]
     pub mod vulkan_screen;
 
-    /// Available if built with `vi_extensions`.
-    #[cfg(any(doc, feature = "vi_extensions"))]
+    /// Available if built with `vi-extensions`.
+    #[cfg(any(doc, feature = "vi-extensions"))]
     pub mod vulkan_vi;
 
-    /// Available if built with `wayland_extensions`.
-    #[cfg(any(doc, feature = "wayland_extensions"))]
+    /// Available if built with `wayland-extensions`.
+    #[cfg(any(doc, feature = "wayland-extensions"))]
     pub mod vulkan_wayland;
 
-    /// Available if built with `win32_extensions`.
-    #[cfg(any(doc, feature = "win32_extensions"))]
+    /// Available if built with `win32-extensions`.
+    #[cfg(any(doc, feature = "win32-extensions"))]
     pub mod vulkan_win32;
 
-    /// Available if built with `xcb_extensions`.
-    #[cfg(any(doc, feature = "xcb_extensions"))]
+    /// Available if built with `xcb-extensions`.
+    #[cfg(any(doc, feature = "xcb-extensions"))]
     pub mod vulkan_xcb;
 
-    /// Available if built with `xlib_extensions`.
-    #[cfg(any(doc, feature = "xlib_extensions"))]
+    /// Available if built with `xlib-extensions`.
+    #[cfg(any(doc, feature = "xlib-extensions"))]
     pub mod vulkan_xlib;
 
-    /// Available if built with `xlib_xrandr_extensions`.
-    #[cfg(any(doc, feature = "xlib_xrandr_extensions"))]
+    /// Available if built with `xlib_xrandr-extensions`.
+    #[cfg(any(doc, feature = "xlib_xrandr-extensions"))]
     pub mod vulkan_xlib_xrandr;
 }

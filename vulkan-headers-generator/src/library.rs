@@ -39,15 +39,15 @@ keywords.workspace = true
 categories.workspace = true
 
 [features]
-exported_prototypes = []
-prototypes = [\"exported_prototypes\"]
+exported-prototypes = []
+prototypes = [\"exported-prototypes\"]
 "
         )
         .unwrap();
 
         writeln!(file).unwrap();
         for platform in &self.platforms {
-            writeln!(file, "{platform}_extensions = []").unwrap();
+            writeln!(file, "{platform}-extensions = []").unwrap();
         }
     }
 
@@ -94,8 +94,8 @@ mod prelude;
         writeln!(file, "    pub mod vulkan_core;").unwrap();
 
         for platform in &self.platforms {
-            let doc_comment = format!("/// Available if built with `{platform}_extensions`.");
-            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}_extensions\"))]");
+            let doc_comment = format!("/// Available if built with `{platform}-extensions`.");
+            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}-extensions\"))]");
             let mod_decl = format!("pub mod vulkan_{platform};");
 
             writeln!(file).unwrap();
@@ -114,7 +114,7 @@ mod prelude;
         writeln!(file, "pub use super::vulkan_core::*;").unwrap();
 
         for platform in &self.platforms {
-            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}_extensions\"))]");
+            let cfg_attr = format!("#[cfg(any(doc, feature = \"{platform}-extensions\"))]");
             let doc_attr = format!("#[doc(no_inline)]");
             let re_export = format!("pub use super::vulkan_{platform}::*;");
 

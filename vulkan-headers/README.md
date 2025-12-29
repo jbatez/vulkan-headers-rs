@@ -47,14 +47,14 @@ provided but `PFN_vkCreateInstance` is). This is similar to defining
 `VK_NO_PROTOTYPES` before including `vulkan.h`. Use the `prototypes` feature to
 enable these function declarations.
 
-The `exported_prototypes` feature can be used instead to limit these
+The `exported-prototypes` feature can be used instead to limit these
 declarations to exported functions only. This is similar to defining
 `VK_ONLY_EXPORTED_PROTOTYPES` before including `vulkan.h`. Using the
-`prototypes` feature implicitly enables the `exported_prototypes` feature.
+`prototypes` feature implicitly enables the `exported-prototypes` feature.
 
 Beta (a.k.a. "provisional") extensions and/or platform-specific extensions can
-be enabled using the `beta_extensions` and/or `<platform>_extensions` (e.g.
-`win32_extensions`) features. This is similar to defining
+be enabled using the `beta-extensions` and/or `<platform>-extensions` (e.g.
+`win32-extensions`) features. This is similar to defining
 `VK_ENABLE_BETA_EXTENSIONS` and/or `VK_USE_PLATFORM_<PLATFORM>` (e.g.
 `VK_USE_PLATFORM_WIN32_KHR`) before including `vulkan.h`.
 

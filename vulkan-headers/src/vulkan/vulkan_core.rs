@@ -17558,36 +17558,36 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkAcquireProfilingLockKHR(device: VkDevice, pInfo: *const VkAcquireProfilingLockInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkAllocateCommandBuffers(device: VkDevice, pAllocateInfo: *const VkCommandBufferAllocateInfo, pCommandBuffers: *mut VkCommandBuffer) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkAllocateDescriptorSets(device: VkDevice, pAllocateInfo: *const VkDescriptorSetAllocateInfo, pDescriptorSets: *mut VkDescriptorSet) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkAllocateMemory(device: VkDevice, pAllocateInfo: *const VkMemoryAllocateInfo, pAllocator: *const VkAllocationCallbacks, pMemory: *mut VkDeviceMemory) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkAntiLagUpdateAMD(device: VkDevice, pData: *const VkAntiLagDataAMD);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkBeginCommandBuffer(commandBuffer: VkCommandBuffer, pBeginInfo: *const VkCommandBufferBeginInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkBindAccelerationStructureMemoryNV(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindAccelerationStructureMemoryInfoNV) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkBindBufferMemory(device: VkDevice, buffer: VkBuffer, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkBindBufferMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindBufferMemoryInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -17598,12 +17598,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkBindDataGraphPipelineSessionMemoryARM(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindDataGraphPipelineSessionMemoryInfoARM) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkBindImageMemory(device: VkDevice, image: VkImage, memory: VkDeviceMemory, memoryOffset: VkDeviceSize) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkBindImageMemory2(device: VkDevice, bindInfoCount: u32, pBindInfos: *const VkBindImageMemoryInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -17646,28 +17646,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBeginPerTileExecutionQCOM(commandBuffer: VkCommandBuffer, pPerTileBeginInfo: *const VkPerTileBeginInfoQCOM);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBeginQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBeginQueryIndexedEXT(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, flags: VkQueryControlFlags, index: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBeginRenderPass(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, contents: VkSubpassContents);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBeginRenderPass2(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBeginRenderPass2KHR(commandBuffer: VkCommandBuffer, pRenderPassBegin: *const VkRenderPassBeginInfo, pSubpassBeginInfo: *const VkSubpassBeginInfo);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBeginRendering(commandBuffer: VkCommandBuffer, pRenderingInfo: *const VkRenderingInfo);
 
     /// Available if built with `prototypes`.
@@ -17694,24 +17694,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBindDescriptorBuffersEXT(commandBuffer: VkCommandBuffer, bufferCount: u32, pBindingInfos: *const VkDescriptorBufferBindingInfoEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindDescriptorSets(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet, dynamicOffsetCount: u32, pDynamicOffsets: *const u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindDescriptorSets2(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBindDescriptorSets2KHR(commandBuffer: VkCommandBuffer, pBindDescriptorSetsInfo: *const VkBindDescriptorSetsInfo);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindIndexBuffer(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, indexType: VkIndexType);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindIndexBuffer2(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, size: VkDeviceSize, indexType: VkIndexType);
 
     /// Available if built with `prototypes`.
@@ -17722,8 +17722,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBindInvocationMaskHUAWEI(commandBuffer: VkCommandBuffer, imageView: VkImageView, imageLayout: VkImageLayout);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindPipeline(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
 
     /// Available if built with `prototypes`.
@@ -17746,24 +17746,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBindTransformFeedbackBuffersEXT(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindVertexBuffers(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBindVertexBuffers2(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBindVertexBuffers2EXT(commandBuffer: VkCommandBuffer, firstBinding: u32, bindingCount: u32, pBuffers: *const VkBuffer, pOffsets: *const VkDeviceSize, pSizes: *const VkDeviceSize, pStrides: *const VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBlitImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageBlit, filter: VkFilter);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdBlitImage2(commandBuffer: VkCommandBuffer, pBlitImageInfo: *const VkBlitImageInfo2);
 
     /// Available if built with `prototypes`.
@@ -17794,16 +17794,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdBuildPartitionedAccelerationStructuresNV(commandBuffer: VkCommandBuffer, pBuildInfo: *const VkBuildPartitionedAccelerationStructureInfoNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdClearAttachments(commandBuffer: VkCommandBuffer, attachmentCount: u32, pAttachments: *const VkClearAttachment, rectCount: u32, pRects: *const VkClearRect);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdClearColorImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pColor: *const VkClearColorValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdClearDepthStencilImage(commandBuffer: VkCommandBuffer, image: VkImage, imageLayout: VkImageLayout, pDepthStencil: *const VkClearDepthStencilValue, rangeCount: u32, pRanges: *const VkImageSubresourceRange);
 
     /// Available if built with `prototypes`.
@@ -17826,48 +17826,48 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdCopyAccelerationStructureToMemoryKHR(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyBuffer(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferCopy);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyBuffer2(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdCopyBuffer2KHR(commandBuffer: VkCommandBuffer, pCopyBufferInfo: *const VkCopyBufferInfo2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyBufferToImage(commandBuffer: VkCommandBuffer, srcBuffer: VkBuffer, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkBufferImageCopy);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyBufferToImage2(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdCopyBufferToImage2KHR(commandBuffer: VkCommandBuffer, pCopyBufferToImageInfo: *const VkCopyBufferToImageInfo2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageCopy);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyImage2(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdCopyImage2KHR(commandBuffer: VkCommandBuffer, pCopyImageInfo: *const VkCopyImageInfo2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyImageToBuffer(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstBuffer: VkBuffer, regionCount: u32, pRegions: *const VkBufferImageCopy);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyImageToBuffer2(commandBuffer: VkCommandBuffer, pCopyImageToBufferInfo: *const VkCopyImageToBufferInfo2);
 
     /// Available if built with `prototypes`.
@@ -17906,8 +17906,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdCopyMicromapToMemoryEXT(commandBuffer: VkCommandBuffer, pInfo: *const VkCopyMicromapToMemoryInfoEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdCopyQueryPoolResults(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, stride: VkDeviceSize, flags: VkQueryResultFlags);
 
     /// Available if built with `prototypes`.
@@ -17950,12 +17950,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDecompressMemoryNV(commandBuffer: VkCommandBuffer, decompressRegionCount: u32, pDecompressMemoryRegions: *const VkDecompressMemoryRegionNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDispatch(commandBuffer: VkCommandBuffer, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDispatchBase(commandBuffer: VkCommandBuffer, baseGroupX: u32, baseGroupY: u32, baseGroupZ: u32, groupCountX: u32, groupCountY: u32, groupCountZ: u32);
 
     /// Available if built with `prototypes`.
@@ -17966,16 +17966,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDispatchDataGraphARM(commandBuffer: VkCommandBuffer, session: VkDataGraphPipelineSessionARM, pInfo: *const VkDataGraphPipelineDispatchInfoARM);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDispatchIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDispatchTileQCOM(commandBuffer: VkCommandBuffer, pDispatchTileInfo: *const VkDispatchTileInfoQCOM);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDraw(commandBuffer: VkCommandBuffer, vertexCount: u32, instanceCount: u32, firstVertex: u32, firstInstance: u32);
 
     /// Available if built with `prototypes`.
@@ -17986,16 +17986,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDrawClusterIndirectHUAWEI(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDrawIndexed(commandBuffer: VkCommandBuffer, indexCount: u32, instanceCount: u32, firstIndex: u32, vertexOffset: i32, firstInstance: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDrawIndexedIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDrawIndexedIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
 
     /// Available if built with `prototypes`.
@@ -18006,16 +18006,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDrawIndexedIndirectCountKHR(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDrawIndirect(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, drawCount: u32, stride: u32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdDrawIndirectByteCountEXT(commandBuffer: VkCommandBuffer, instanceCount: u32, firstInstance: u32, counterBuffer: VkBuffer, counterBufferOffset: VkDeviceSize, counterOffset: u32, vertexStride: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdDrawIndirectCount(commandBuffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize, countBuffer: VkBuffer, countBufferOffset: VkDeviceSize, maxDrawCount: u32, stride: u32);
 
     /// Available if built with `prototypes`.
@@ -18074,28 +18074,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdEndPerTileExecutionQCOM(commandBuffer: VkCommandBuffer, pPerTileEndInfo: *const VkPerTileEndInfoQCOM);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdEndQuery(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdEndQueryIndexedEXT(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, query: u32, index: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdEndRenderPass(commandBuffer: VkCommandBuffer);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdEndRenderPass2(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdEndRenderPass2KHR(commandBuffer: VkCommandBuffer, pSubpassEndInfo: *const VkSubpassEndInfo);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdEndRendering(commandBuffer: VkCommandBuffer);
 
     /// Available if built with `prototypes`.
@@ -18118,8 +18118,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdEndVideoCodingKHR(commandBuffer: VkCommandBuffer, pEndCodingInfo: *const VkVideoEndCodingInfoKHR);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdExecuteCommands(commandBuffer: VkCommandBuffer, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
 
     /// Available if built with `prototypes`.
@@ -18130,20 +18130,20 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdExecuteGeneratedCommandsNV(commandBuffer: VkCommandBuffer, isPreprocessed: VkBool32, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdFillBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, size: VkDeviceSize, data: u32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdInsertDebugUtilsLabelEXT(commandBuffer: VkCommandBuffer, pLabelInfo: *const VkDebugUtilsLabelEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdNextSubpass(commandBuffer: VkCommandBuffer, contents: VkSubpassContents);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdNextSubpass2(commandBuffer: VkCommandBuffer, pSubpassBeginInfo: *const VkSubpassBeginInfo, pSubpassEndInfo: *const VkSubpassEndInfo);
 
     /// Available if built with `prototypes`.
@@ -18154,12 +18154,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdOpticalFlowExecuteNV(commandBuffer: VkCommandBuffer, session: VkOpticalFlowSessionNV, pExecuteInfo: *const VkOpticalFlowExecuteInfoNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPipelineBarrier(commandBuffer: VkCommandBuffer, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, dependencyFlags: VkDependencyFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPipelineBarrier2(commandBuffer: VkCommandBuffer, pDependencyInfo: *const VkDependencyInfo);
 
     /// Available if built with `prototypes`.
@@ -18174,24 +18174,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdPreprocessGeneratedCommandsNV(commandBuffer: VkCommandBuffer, pGeneratedCommandsInfo: *const VkGeneratedCommandsInfoNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushConstants(commandBuffer: VkCommandBuffer, layout: VkPipelineLayout, stageFlags: VkShaderStageFlags, offset: u32, size: u32, pValues: *const c_void);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushConstants2(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdPushConstants2KHR(commandBuffer: VkCommandBuffer, pPushConstantsInfo: *const VkPushConstantsInfo);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushDescriptorSet(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushDescriptorSet2(commandBuffer: VkCommandBuffer, pPushDescriptorSetInfo: *const VkPushDescriptorSetInfo);
 
     /// Available if built with `prototypes`.
@@ -18202,12 +18202,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdPushDescriptorSetKHR(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, set: u32, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushDescriptorSetWithTemplate(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdPushDescriptorSetWithTemplate2(commandBuffer: VkCommandBuffer, pPushDescriptorSetWithTemplateInfo: *const VkPushDescriptorSetWithTemplateInfo);
 
     /// Available if built with `prototypes`.
@@ -18218,28 +18218,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdPushDescriptorSetWithTemplateKHR(commandBuffer: VkCommandBuffer, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, layout: VkPipelineLayout, set: u32, pData: *const c_void);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdResetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdResetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdResetEvent2KHR(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdResetQueryPool(commandBuffer: VkCommandBuffer, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdResolveImage(commandBuffer: VkCommandBuffer, srcImage: VkImage, srcImageLayout: VkImageLayout, dstImage: VkImage, dstImageLayout: VkImageLayout, regionCount: u32, pRegions: *const VkImageResolve);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdResolveImage2(commandBuffer: VkCommandBuffer, pResolveImageInfo: *const VkResolveImageInfo2);
 
     /// Available if built with `prototypes`.
@@ -18258,8 +18258,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetAttachmentFeedbackLoopEnableEXT(commandBuffer: VkCommandBuffer, aspectMask: VkImageAspectFlags);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetBlendConstants(commandBuffer: VkCommandBuffer, blendConstants: *const f32);
 
     /// Available if built with `prototypes`.
@@ -18322,36 +18322,36 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetCoverageToColorLocationNV(commandBuffer: VkCommandBuffer, coverageToColorLocation: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetCullMode(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetCullModeEXT(commandBuffer: VkCommandBuffer, cullMode: VkCullModeFlags);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthBias(commandBuffer: VkCommandBuffer, depthBiasConstantFactor: f32, depthBiasClamp: f32, depthBiasSlopeFactor: f32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDepthBias2EXT(commandBuffer: VkCommandBuffer, pDepthBiasInfo: *const VkDepthBiasInfoEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthBiasEnable(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDepthBiasEnableEXT(commandBuffer: VkCommandBuffer, depthBiasEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthBounds(commandBuffer: VkCommandBuffer, minDepthBounds: f32, maxDepthBounds: f32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthBoundsTestEnable(commandBuffer: VkCommandBuffer, depthBoundsTestEnable: VkBool32);
 
     /// Available if built with `prototypes`.
@@ -18374,24 +18374,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDepthClipNegativeOneToOneEXT(commandBuffer: VkCommandBuffer, negativeOneToOne: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthCompareOp(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDepthCompareOpEXT(commandBuffer: VkCommandBuffer, depthCompareOp: VkCompareOp);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthTestEnable(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDepthTestEnableEXT(commandBuffer: VkCommandBuffer, depthTestEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDepthWriteEnable(commandBuffer: VkCommandBuffer, depthWriteEnable: VkBool32);
 
     /// Available if built with `prototypes`.
@@ -18406,8 +18406,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, layout: VkPipelineLayout, firstSet: u32, setCount: u32, pBufferIndices: *const u32, pOffsets: *const VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetDeviceMask(commandBuffer: VkCommandBuffer, deviceMask: u32);
 
     /// Available if built with `prototypes`.
@@ -18426,12 +18426,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetDiscardRectangleModeEXT(commandBuffer: VkCommandBuffer, discardRectangleMode: VkDiscardRectangleModeEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetEvent(commandBuffer: VkCommandBuffer, event: VkEvent, stageMask: VkPipelineStageFlags);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetEvent2(commandBuffer: VkCommandBuffer, event: VkEvent, pDependencyInfo: *const VkDependencyInfo);
 
     /// Available if built with `prototypes`.
@@ -18458,8 +18458,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetFragmentShadingRateKHR(commandBuffer: VkCommandBuffer, pFragmentSize: *const VkExtent2D, combinerOps: *const VkFragmentShadingRateCombinerOpKHR);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetFrontFace(commandBuffer: VkCommandBuffer, frontFace: VkFrontFace);
 
     /// Available if built with `prototypes`.
@@ -18470,8 +18470,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetLineRasterizationModeEXT(commandBuffer: VkCommandBuffer, lineRasterizationMode: VkLineRasterizationModeEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetLineStipple(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
 
     /// Available if built with `prototypes`.
@@ -18486,8 +18486,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetLineStippleKHR(commandBuffer: VkCommandBuffer, lineStippleFactor: u32, lineStipplePattern: u16);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetLineWidth(commandBuffer: VkCommandBuffer, lineWidth: f32);
 
     /// Available if built with `prototypes`.
@@ -18518,16 +18518,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetPolygonModeEXT(commandBuffer: VkCommandBuffer, polygonMode: VkPolygonMode);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetPrimitiveRestartEnable(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetPrimitiveRestartEnableEXT(commandBuffer: VkCommandBuffer, primitiveRestartEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetPrimitiveTopology(commandBuffer: VkCommandBuffer, primitiveTopology: VkPrimitiveTopology);
 
     /// Available if built with `prototypes`.
@@ -18546,8 +18546,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetRasterizationStreamEXT(commandBuffer: VkCommandBuffer, rasterizationStream: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetRasterizerDiscardEnable(commandBuffer: VkCommandBuffer, rasterizerDiscardEnable: VkBool32);
 
     /// Available if built with `prototypes`.
@@ -18558,16 +18558,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetRayTracingPipelineStackSizeKHR(commandBuffer: VkCommandBuffer, pipelineStackSize: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetRenderingAttachmentLocations(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetRenderingAttachmentLocationsKHR(commandBuffer: VkCommandBuffer, pLocationInfo: *const VkRenderingAttachmentLocationInfo);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetRenderingInputAttachmentIndices(commandBuffer: VkCommandBuffer, pInputAttachmentIndexInfo: *const VkRenderingInputAttachmentIndexInfo);
 
     /// Available if built with `prototypes`.
@@ -18590,12 +18590,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetSampleMaskEXT(commandBuffer: VkCommandBuffer, samples: VkSampleCountFlagBits, pSampleMask: *const VkSampleMask);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetScissor(commandBuffer: VkCommandBuffer, firstScissor: u32, scissorCount: u32, pScissors: *const VkRect2D);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetScissorWithCount(commandBuffer: VkCommandBuffer, scissorCount: u32, pScissors: *const VkRect2D);
 
     /// Available if built with `prototypes`.
@@ -18606,32 +18606,32 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetShadingRateImageEnableNV(commandBuffer: VkCommandBuffer, shadingRateImageEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetStencilCompareMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, compareMask: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetStencilOp(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetStencilOpEXT(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, failOp: VkStencilOp, passOp: VkStencilOp, depthFailOp: VkStencilOp, compareOp: VkCompareOp);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetStencilReference(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, reference: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetStencilTestEnable(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetStencilTestEnableEXT(commandBuffer: VkCommandBuffer, stencilTestEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetStencilWriteMask(commandBuffer: VkCommandBuffer, faceMask: VkStencilFaceFlags, writeMask: u32);
 
     /// Available if built with `prototypes`.
@@ -18642,8 +18642,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetVertexInputEXT(commandBuffer: VkCommandBuffer, vertexBindingDescriptionCount: u32, pVertexBindingDescriptions: *const VkVertexInputBindingDescription2EXT, vertexAttributeDescriptionCount: u32, pVertexAttributeDescriptions: *const VkVertexInputAttributeDescription2EXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetViewport(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewports: *const VkViewport);
 
     /// Available if built with `prototypes`.
@@ -18662,8 +18662,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdSetViewportWScalingNV(commandBuffer: VkCommandBuffer, firstViewport: u32, viewportCount: u32, pViewportWScalings: *const VkViewportWScalingNV);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdSetViewportWithCount(commandBuffer: VkCommandBuffer, viewportCount: u32, pViewports: *const VkViewport);
 
     /// Available if built with `prototypes`.
@@ -18690,20 +18690,20 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdTraceRaysNV(commandBuffer: VkCommandBuffer, raygenShaderBindingTableBuffer: VkBuffer, raygenShaderBindingOffset: VkDeviceSize, missShaderBindingTableBuffer: VkBuffer, missShaderBindingOffset: VkDeviceSize, missShaderBindingStride: VkDeviceSize, hitShaderBindingTableBuffer: VkBuffer, hitShaderBindingOffset: VkDeviceSize, hitShaderBindingStride: VkDeviceSize, callableShaderBindingTableBuffer: VkBuffer, callableShaderBindingOffset: VkDeviceSize, callableShaderBindingStride: VkDeviceSize, width: u32, height: u32, depth: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdUpdateBuffer(commandBuffer: VkCommandBuffer, dstBuffer: VkBuffer, dstOffset: VkDeviceSize, dataSize: VkDeviceSize, pData: *const c_void);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdUpdatePipelineIndirectBufferNV(commandBuffer: VkCommandBuffer, pipelineBindPoint: VkPipelineBindPoint, pipeline: VkPipeline);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdWaitEvents(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, srcStageMask: VkPipelineStageFlags, dstStageMask: VkPipelineStageFlags, memoryBarrierCount: u32, pMemoryBarriers: *const VkMemoryBarrier, bufferMemoryBarrierCount: u32, pBufferMemoryBarriers: *const VkBufferMemoryBarrier, imageMemoryBarrierCount: u32, pImageMemoryBarriers: *const VkImageMemoryBarrier);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdWaitEvents2(commandBuffer: VkCommandBuffer, eventCount: u32, pEvents: *const VkEvent, pDependencyInfos: *const VkDependencyInfo);
 
     /// Available if built with `prototypes`.
@@ -18730,12 +18730,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCmdWriteMicromapsPropertiesEXT(commandBuffer: VkCommandBuffer, micromapCount: u32, pMicromaps: *const VkMicromapEXT, queryType: VkQueryType, queryPool: VkQueryPool, firstQuery: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdWriteTimestamp(commandBuffer: VkCommandBuffer, pipelineStage: VkPipelineStageFlagBits, queryPool: VkQueryPool, query: u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCmdWriteTimestamp2(commandBuffer: VkCommandBuffer, stage: VkPipelineStageFlags2, queryPool: VkQueryPool, query: u32);
 
     /// Available if built with `prototypes`.
@@ -18758,16 +18758,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCopyAccelerationStructureToMemoryKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyAccelerationStructureToMemoryInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCopyImageToImage(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCopyImageToImageEXT(device: VkDevice, pCopyImageToImageInfo: *const VkCopyImageToImageInfo) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCopyImageToMemory(device: VkDevice, pCopyImageToMemoryInfo: *const VkCopyImageToMemoryInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18778,8 +18778,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCopyMemoryToAccelerationStructureKHR(device: VkDevice, deferredOperation: VkDeferredOperationKHR, pInfo: *const VkCopyMemoryToAccelerationStructureInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCopyMemoryToImage(device: VkDevice, pCopyMemoryToImageInfo: *const VkCopyMemoryToImageInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18806,20 +18806,20 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateAccelerationStructureNV(device: VkDevice, pCreateInfo: *const VkAccelerationStructureCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pAccelerationStructure: *mut VkAccelerationStructureNV) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateBuffer(device: VkDevice, pCreateInfo: *const VkBufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pBuffer: *mut VkBuffer) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateBufferView(device: VkDevice, pCreateInfo: *const VkBufferViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkBufferView) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateCommandPool(device: VkDevice, pCreateInfo: *const VkCommandPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pCommandPool: *mut VkCommandPool) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateComputePipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkComputePipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18850,24 +18850,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateDeferredOperationKHR(device: VkDevice, pAllocator: *const VkAllocationCallbacks, pDeferredOperation: *mut VkDeferredOperationKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateDescriptorPool(device: VkDevice, pCreateInfo: *const VkDescriptorPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorPool: *mut VkDescriptorPool) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateDescriptorSetLayout(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pSetLayout: *mut VkDescriptorSetLayout) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateDescriptorUpdateTemplate(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateDescriptorUpdateTemplateKHR(device: VkDevice, pCreateInfo: *const VkDescriptorUpdateTemplateCreateInfo, pAllocator: *const VkAllocationCallbacks, pDescriptorUpdateTemplate: *mut VkDescriptorUpdateTemplate) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateDevice(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18878,36 +18878,36 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateDisplayPlaneSurfaceKHR(instance: VkInstance, pCreateInfo: *const VkDisplaySurfaceCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateEvent(device: VkDevice, pCreateInfo: *const VkEventCreateInfo, pAllocator: *const VkAllocationCallbacks, pEvent: *mut VkEvent) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateExternalComputeQueueNV(device: VkDevice, pCreateInfo: *const VkExternalComputeQueueCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pExternalQueue: *mut VkExternalComputeQueueNV) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateFence(device: VkDevice, pCreateInfo: *const VkFenceCreateInfo, pAllocator: *const VkAllocationCallbacks, pFence: *mut VkFence) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateFramebuffer(device: VkDevice, pCreateInfo: *const VkFramebufferCreateInfo, pAllocator: *const VkAllocationCallbacks, pFramebuffer: *mut VkFramebuffer) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateGraphicsPipelines(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkGraphicsPipelineCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateHeadlessSurfaceEXT(instance: VkInstance, pCreateInfo: *const VkHeadlessSurfaceCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pSurface: *mut VkSurfaceKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateImage(device: VkDevice, pCreateInfo: *const VkImageCreateInfo, pAllocator: *const VkAllocationCallbacks, pImage: *mut VkImage) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateImageView(device: VkDevice, pCreateInfo: *const VkImageViewCreateInfo, pAllocator: *const VkAllocationCallbacks, pView: *mut VkImageView) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18922,8 +18922,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateIndirectExecutionSetEXT(device: VkDevice, pCreateInfo: *const VkIndirectExecutionSetCreateInfoEXT, pAllocator: *const VkAllocationCallbacks, pIndirectExecutionSet: *mut VkIndirectExecutionSetEXT) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateInstance(pCreateInfo: *const VkInstanceCreateInfo, pAllocator: *const VkAllocationCallbacks, pInstance: *mut VkInstance) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18938,24 +18938,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreatePipelineBinariesKHR(device: VkDevice, pCreateInfo: *const VkPipelineBinaryCreateInfoKHR, pAllocator: *const VkAllocationCallbacks, pBinaries: *mut VkPipelineBinaryHandlesInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreatePipelineCache(device: VkDevice, pCreateInfo: *const VkPipelineCacheCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineCache: *mut VkPipelineCache) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreatePipelineLayout(device: VkDevice, pCreateInfo: *const VkPipelineLayoutCreateInfo, pAllocator: *const VkAllocationCallbacks, pPipelineLayout: *mut VkPipelineLayout) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreatePrivateDataSlot(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreatePrivateDataSlotEXT(device: VkDevice, pCreateInfo: *const VkPrivateDataSlotCreateInfo, pAllocator: *const VkAllocationCallbacks, pPrivateDataSlot: *mut VkPrivateDataSlot) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateQueryPool(device: VkDevice, pCreateInfo: *const VkQueryPoolCreateInfo, pAllocator: *const VkAllocationCallbacks, pQueryPool: *mut VkQueryPool) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -18966,36 +18966,36 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateRayTracingPipelinesNV(device: VkDevice, pipelineCache: VkPipelineCache, createInfoCount: u32, pCreateInfos: *const VkRayTracingPipelineCreateInfoNV, pAllocator: *const VkAllocationCallbacks, pPipelines: *mut VkPipeline) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateRenderPass(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateRenderPass2(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateRenderPass2KHR(device: VkDevice, pCreateInfo: *const VkRenderPassCreateInfo2, pAllocator: *const VkAllocationCallbacks, pRenderPass: *mut VkRenderPass) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateSampler(device: VkDevice, pCreateInfo: *const VkSamplerCreateInfo, pAllocator: *const VkAllocationCallbacks, pSampler: *mut VkSampler) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateSamplerYcbcrConversion(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkCreateSamplerYcbcrConversionKHR(device: VkDevice, pCreateInfo: *const VkSamplerYcbcrConversionCreateInfo, pAllocator: *const VkAllocationCallbacks, pYcbcrConversion: *mut VkSamplerYcbcrConversion) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateSemaphore(device: VkDevice, pCreateInfo: *const VkSemaphoreCreateInfo, pAllocator: *const VkAllocationCallbacks, pSemaphore: *mut VkSemaphore) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkCreateShaderModule(device: VkDevice, pCreateInfo: *const VkShaderModuleCreateInfo, pAllocator: *const VkAllocationCallbacks, pShaderModule: *mut VkShaderModule) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19054,16 +19054,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyAccelerationStructureNV(device: VkDevice, accelerationStructure: VkAccelerationStructureNV, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyBuffer(device: VkDevice, buffer: VkBuffer, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyBufferView(device: VkDevice, bufferView: VkBufferView, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyCommandPool(device: VkDevice, commandPool: VkCommandPool, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
@@ -19090,48 +19090,48 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyDeferredOperationKHR(device: VkDevice, operation: VkDeferredOperationKHR, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyDescriptorSetLayout(device: VkDevice, descriptorSetLayout: VkDescriptorSetLayout, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyDescriptorUpdateTemplate(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyDescriptorUpdateTemplateKHR(device: VkDevice, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyDevice(device: VkDevice, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyEvent(device: VkDevice, event: VkEvent, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyExternalComputeQueueNV(device: VkDevice, externalQueue: VkExternalComputeQueueNV, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyFence(device: VkDevice, fence: VkFence, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyFramebuffer(device: VkDevice, framebuffer: VkFramebuffer, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyImage(device: VkDevice, image: VkImage, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyImageView(device: VkDevice, imageView: VkImageView, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
@@ -19146,8 +19146,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyIndirectExecutionSetEXT(device: VkDevice, indirectExecutionSet: VkIndirectExecutionSetEXT, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyInstance(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
@@ -19158,60 +19158,60 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyOpticalFlowSessionNV(device: VkDevice, session: VkOpticalFlowSessionNV, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyPipeline(device: VkDevice, pipeline: VkPipeline, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyPipelineBinaryKHR(device: VkDevice, pipelineBinary: VkPipelineBinaryKHR, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyPipelineCache(device: VkDevice, pipelineCache: VkPipelineCache, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyPipelineLayout(device: VkDevice, pipelineLayout: VkPipelineLayout, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyPrivateDataSlot(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyPrivateDataSlotEXT(device: VkDevice, privateDataSlot: VkPrivateDataSlot, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyQueryPool(device: VkDevice, queryPool: VkQueryPool, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyRenderPass(device: VkDevice, renderPass: VkRenderPass, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroySampler(device: VkDevice, sampler: VkSampler, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroySamplerYcbcrConversion(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroySamplerYcbcrConversionKHR(device: VkDevice, ycbcrConversion: VkSamplerYcbcrConversion, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroySemaphore(device: VkDevice, semaphore: VkSemaphore, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyShaderEXT(device: VkDevice, shader: VkShaderEXT, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDestroyShaderModule(device: VkDevice, shaderModule: VkShaderModule, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
@@ -19242,40 +19242,40 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDestroyVideoSessionParametersKHR(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pAllocator: *const VkAllocationCallbacks);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkDeviceWaitIdle(device: VkDevice) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkDisplayPowerControlEXT(device: VkDevice, display: VkDisplayKHR, pDisplayPowerInfo: *const VkDisplayPowerInfoEXT) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEndCommandBuffer(commandBuffer: VkCommandBuffer) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumerateDeviceLayerProperties(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumerateInstanceExtensionProperties(pLayerName: *const c_char, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumerateInstanceLayerProperties(pPropertyCount: *mut u32, pProperties: *mut VkLayerProperties) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumerateInstanceVersion(pApiVersion: *mut u32) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumeratePhysicalDeviceGroups(instance: VkInstance, pPhysicalDeviceGroupCount: *mut u32, pPhysicalDeviceGroupProperties: *mut VkPhysicalDeviceGroupProperties) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19290,24 +19290,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, pCounterCount: *mut u32, pCounters: *mut VkPerformanceCounterKHR, pCounterDescriptions: *mut VkPerformanceCounterDescriptionKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkEnumeratePhysicalDevices(instance: VkInstance, pPhysicalDeviceCount: *mut u32, pPhysicalDevices: *mut VkPhysicalDevice) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkFlushMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkFreeCommandBuffers(device: VkDevice, commandPool: VkCommandPool, commandBufferCount: u32, pCommandBuffers: *const VkCommandBuffer);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkFreeDescriptorSets(device: VkDevice, descriptorPool: VkDescriptorPool, descriptorSetCount: u32, pDescriptorSets: *const VkDescriptorSet) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkFreeMemory(device: VkDevice, memory: VkDeviceMemory, pAllocator: *const VkAllocationCallbacks);
 
     /// Available if built with `prototypes`.
@@ -19330,8 +19330,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkAccelerationStructureCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetBufferDeviceAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
 
     /// Available if built with `prototypes`.
@@ -19342,20 +19342,20 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetBufferDeviceAddressKHR(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> VkDeviceAddress;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetBufferMemoryRequirements(device: VkDevice, buffer: VkBuffer, pMemoryRequirements: *mut VkMemoryRequirements);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetBufferMemoryRequirements2(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetBufferMemoryRequirements2KHR(device: VkDevice, pInfo: *const VkBufferMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetBufferOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkBufferDeviceAddressInfo) -> u64;
 
     /// Available if built with `prototypes`.
@@ -19422,8 +19422,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDescriptorSetLayoutSizeEXT(device: VkDevice, layout: VkDescriptorSetLayout, pLayoutSizeInBytes: *mut VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDescriptorSetLayoutSupport(device: VkDevice, pCreateInfo: *const VkDescriptorSetLayoutCreateInfo, pSupport: *mut VkDescriptorSetLayoutSupport);
 
     /// Available if built with `prototypes`.
@@ -19434,8 +19434,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceAccelerationStructureCompatibilityKHR(device: VkDevice, pVersionInfo: *const VkAccelerationStructureVersionInfoKHR, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceBufferMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceBufferMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
 
     /// Available if built with `prototypes`.
@@ -19446,8 +19446,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceFaultInfoEXT(device: VkDevice, pFaultCounts: *mut VkDeviceFaultCountsEXT, pFaultInfo: *mut VkDeviceFaultInfoEXT) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceGroupPeerMemoryFeatures(device: VkDevice, heapIndex: u32, localDeviceIndex: u32, remoteDeviceIndex: u32, pPeerMemoryFeatures: *mut VkPeerMemoryFeatureFlags);
 
     /// Available if built with `prototypes`.
@@ -19462,36 +19462,36 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceGroupSurfacePresentModesKHR(device: VkDevice, surface: VkSurfaceKHR, pModes: *mut VkDeviceGroupPresentModeFlagsKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceImageMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceImageMemoryRequirementsKHR(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pMemoryRequirements: *mut VkMemoryRequirements2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceImageSparseMemoryRequirements(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceImageSparseMemoryRequirementsKHR(device: VkDevice, pInfo: *const VkDeviceImageMemoryRequirements, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceImageSubresourceLayout(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceImageSubresourceLayoutKHR(device: VkDevice, pInfo: *const VkDeviceImageSubresourceInfo, pLayout: *mut VkSubresourceLayout2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceMemoryCommitment(device: VkDevice, memory: VkDeviceMemory, pCommittedMemoryInBytes: *mut VkDeviceSize);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceMemoryOpaqueCaptureAddress(device: VkDevice, pInfo: *const VkDeviceMemoryOpaqueCaptureAddressInfo) -> u64;
 
     /// Available if built with `prototypes`.
@@ -19502,16 +19502,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetDeviceMicromapCompatibilityEXT(device: VkDevice, pVersionInfo: *const VkMicromapVersionInfoEXT, pCompatibility: *mut VkAccelerationStructureCompatibilityKHR);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceProcAddr(device: VkDevice, pName: *const c_char) -> PFN_vkVoidFunction;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceQueue(device: VkDevice, queueFamilyIndex: u32, queueIndex: u32, pQueue: *mut VkQueue);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetDeviceQueue2(device: VkDevice, pQueueInfo: *const VkDeviceQueueInfo2, pQueue: *mut VkQueue);
 
     /// Available if built with `prototypes`.
@@ -19554,8 +19554,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetEncodedVideoSessionParametersKHR(device: VkDevice, pVideoSessionParametersInfo: *const VkVideoEncodeSessionParametersGetInfoKHR, pFeedbackInfo: *mut VkVideoEncodeSessionParametersFeedbackInfoKHR, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetEventStatus(device: VkDevice, event: VkEvent) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19566,8 +19566,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetFenceFdKHR(device: VkDevice, pGetFdInfo: *const VkFenceGetFdInfoKHR, pFd: *mut c_int) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetFenceStatus(device: VkDevice, fence: VkFence) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19586,12 +19586,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetImageDrmFormatModifierPropertiesEXT(device: VkDevice, image: VkImage, pProperties: *mut VkImageDrmFormatModifierPropertiesEXT) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageMemoryRequirements(device: VkDevice, image: VkImage, pMemoryRequirements: *mut VkMemoryRequirements);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageMemoryRequirements2(device: VkDevice, pInfo: *const VkImageMemoryRequirementsInfo2, pMemoryRequirements: *mut VkMemoryRequirements2);
 
     /// Available if built with `prototypes`.
@@ -19602,24 +19602,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetImageOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkImageCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageSparseMemoryRequirements(device: VkDevice, image: VkImage, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageSparseMemoryRequirements2(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetImageSparseMemoryRequirements2KHR(device: VkDevice, pInfo: *const VkImageSparseMemoryRequirementsInfo2, pSparseMemoryRequirementCount: *mut u32, pSparseMemoryRequirements: *mut VkSparseImageMemoryRequirements2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageSubresourceLayout(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource, pLayout: *mut VkSubresourceLayout);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetImageSubresourceLayout2(device: VkDevice, image: VkImage, pSubresource: *const VkImageSubresource2, pLayout: *mut VkSubresourceLayout2);
 
     /// Available if built with `prototypes`.
@@ -19646,8 +19646,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetImageViewOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkImageViewCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetInstanceProcAddr(instance: VkInstance, pName: *const c_char) -> PFN_vkVoidFunction;
 
     /// Available if built with `prototypes`.
@@ -19730,16 +19730,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceDisplayPropertiesKHR(physicalDevice: VkPhysicalDevice, pPropertyCount: *mut u32, pProperties: *mut VkDisplayPropertiesKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceExternalBufferProperties(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceExternalBufferPropertiesKHR(physicalDevice: VkPhysicalDevice, pExternalBufferInfo: *const VkPhysicalDeviceExternalBufferInfo, pExternalBufferProperties: *mut VkExternalBufferProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceExternalFenceProperties(physicalDevice: VkPhysicalDevice, pExternalFenceInfo: *const VkPhysicalDeviceExternalFenceInfo, pExternalFenceProperties: *mut VkExternalFenceProperties);
 
     /// Available if built with `prototypes`.
@@ -19750,8 +19750,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceExternalImageFormatPropertiesNV(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, externalHandleType: VkExternalMemoryHandleTypeFlagsNV, pExternalImageFormatProperties: *mut VkExternalImageFormatPropertiesNV) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice: VkPhysicalDevice, pExternalSemaphoreInfo: *const VkPhysicalDeviceExternalSemaphoreInfo, pExternalSemaphoreProperties: *mut VkExternalSemaphoreProperties);
 
     /// Available if built with `prototypes`.
@@ -19762,24 +19762,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice: VkPhysicalDevice, pExternalTensorInfo: *const VkPhysicalDeviceExternalTensorInfoARM, pExternalTensorProperties: *mut VkExternalTensorPropertiesARM);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceFeatures(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceFeatures2(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceFeatures2KHR(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceFormatProperties2(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties2);
 
     /// Available if built with `prototypes`.
@@ -19790,24 +19790,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceFragmentShadingRatesKHR(physicalDevice: VkPhysicalDevice, pFragmentShadingRateCount: *mut u32, pFragmentShadingRates: *mut VkPhysicalDeviceFragmentShadingRateKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceImageFormatProperties2(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceImageFormatProperties2KHR(physicalDevice: VkPhysicalDevice, pImageFormatInfo: *const VkPhysicalDeviceImageFormatInfo2, pImageFormatProperties: *mut VkImageFormatProperties2) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceMemoryProperties(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceMemoryProperties2(physicalDevice: VkPhysicalDevice, pMemoryProperties: *mut VkPhysicalDeviceMemoryProperties2);
 
     /// Available if built with `prototypes`.
@@ -19826,12 +19826,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDevicePresentRectanglesKHR(physicalDevice: VkPhysicalDevice, surface: VkSurfaceKHR, pRectCount: *mut u32, pRects: *mut VkRect2D) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceProperties(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceProperties2(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties2);
 
     /// Available if built with `prototypes`.
@@ -19850,24 +19850,24 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(physicalDevice: VkPhysicalDevice, pPerformanceQueryCreateInfo: *const VkQueryPoolPerformanceCreateInfoKHR, pNumPasses: *mut u32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceQueueFamilyProperties2(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceQueueFamilyProperties2KHR(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties2);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, typ: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceSparseImageFormatProperties2(physicalDevice: VkPhysicalDevice, pFormatInfo: *const VkPhysicalDeviceSparseImageFormatInfo2, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties2);
 
     /// Available if built with `prototypes`.
@@ -19906,8 +19906,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPhysicalDeviceSurfaceSupportKHR(physicalDevice: VkPhysicalDevice, queueFamilyIndex: u32, surface: VkSurfaceKHR, pSupported: *mut VkBool32) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPhysicalDeviceToolProperties(physicalDevice: VkPhysicalDevice, pToolCount: *mut u32, pToolProperties: *mut VkPhysicalDeviceToolProperties) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19930,8 +19930,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPipelineBinaryDataKHR(device: VkDevice, pInfo: *const VkPipelineBinaryDataInfoKHR, pPipelineBinaryKey: *mut VkPipelineBinaryKeyKHR, pPipelineBinaryDataSize: *mut usize, pPipelineBinaryData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPipelineCacheData(device: VkDevice, pipelineCache: VkPipelineCache, pDataSize: *mut usize, pData: *mut c_void) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -19962,16 +19962,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPipelinePropertiesEXT(device: VkDevice, pPipelineInfo: *const VkPipelineInfoEXT, pPipelineProperties: *mut VkBaseOutStructure) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetPrivateDataEXT(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, pData: *mut u64);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetQueryPoolResults(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32, dataSize: usize, pData: *mut c_void, stride: VkDeviceSize, flags: VkQueryResultFlags) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20002,12 +20002,12 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetRefreshCycleDurationGOOGLE(device: VkDevice, swapchain: VkSwapchainKHR, pDisplayTimingProperties: *mut VkRefreshCycleDurationGOOGLE) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetRenderAreaGranularity(device: VkDevice, renderPass: VkRenderPass, pGranularity: *mut VkExtent2D);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetRenderingAreaGranularity(device: VkDevice, pRenderingAreaInfo: *const VkRenderingAreaInfo, pGranularity: *mut VkExtent2D);
 
     /// Available if built with `prototypes`.
@@ -20018,8 +20018,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkGetSamplerOpaqueCaptureDescriptorDataEXT(device: VkDevice, pInfo: *const VkSamplerCaptureDescriptorDataInfoEXT, pData: *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkGetSemaphoreCounterValue(device: VkDevice, semaphore: VkSemaphore, pValue: *mut u64) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20098,28 +20098,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkInitializePerformanceApiINTEL(device: VkDevice, pInitializeInfo: *const VkInitializePerformanceApiInfoINTEL) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkInvalidateMappedMemoryRanges(device: VkDevice, memoryRangeCount: u32, pMemoryRanges: *const VkMappedMemoryRange) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkLatencySleepNV(device: VkDevice, swapchain: VkSwapchainKHR, pSleepInfo: *const VkLatencySleepInfoNV) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkMapMemory(device: VkDevice, memory: VkDeviceMemory, offset: VkDeviceSize, size: VkDeviceSize, flags: VkMemoryMapFlags, ppData: *mut *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkMapMemory2(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkMapMemory2KHR(device: VkDevice, pMemoryMapInfo: *const VkMemoryMapInfo, ppData: *mut *mut c_void) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkMergePipelineCaches(device: VkDevice, dstCache: VkPipelineCache, srcCacheCount: u32, pSrcCaches: *const VkPipelineCache) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20130,8 +20130,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkQueueBeginDebugUtilsLabelEXT(queue: VkQueue, pLabelInfo: *const VkDebugUtilsLabelEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkQueueBindSparse(queue: VkQueue, bindInfoCount: u32, pBindInfo: *const VkBindSparseInfo, fence: VkFence) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20154,20 +20154,20 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkQueueSetPerformanceConfigurationINTEL(queue: VkQueue, configuration: VkPerformanceConfigurationINTEL) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkQueueSubmit(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo, fence: VkFence) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkQueueSubmit2(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkQueueSubmit2KHR(queue: VkQueue, submitCount: u32, pSubmits: *const VkSubmitInfo2, fence: VkFence) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkQueueWaitIdle(queue: VkQueue) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20202,28 +20202,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkReleaseSwapchainImagesKHR(device: VkDevice, pReleaseInfo: *const VkReleaseSwapchainImagesInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetCommandBuffer(commandBuffer: VkCommandBuffer, flags: VkCommandBufferResetFlags) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolResetFlags) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetDescriptorPool(device: VkDevice, descriptorPool: VkDescriptorPool, flags: VkDescriptorPoolResetFlags) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetEvent(device: VkDevice, event: VkEvent) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkResetQueryPool(device: VkDevice, queryPool: VkQueryPool, firstQuery: u32, queryCount: u32);
 
     /// Available if built with `prototypes`.
@@ -20242,8 +20242,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkSetDeviceMemoryPriorityEXT(device: VkDevice, memory: VkDeviceMemory, priority: f32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkSetEvent(device: VkDevice, event: VkEvent) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20262,8 +20262,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkSetLocalDimmingAMD(device: VkDevice, swapChain: VkSwapchainKHR, localDimmingEnable: VkBool32);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkSetPrivateData(device: VkDevice, objectType: VkObjectType, objectHandle: u64, privateDataSlot: VkPrivateDataSlot, data: u64) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20274,8 +20274,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkSetSwapchainPresentTimingQueueSizeEXT(device: VkDevice, swapchain: VkSwapchainKHR, size: u32) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkSignalSemaphore(device: VkDevice, pSignalInfo: *const VkSemaphoreSignalInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20286,16 +20286,16 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkSubmitDebugUtilsMessageEXT(instance: VkInstance, messageSeverity: VkDebugUtilsMessageSeverityFlagBitsEXT, messageTypes: VkDebugUtilsMessageTypeFlagsEXT, pCallbackData: *const VkDebugUtilsMessengerCallbackDataEXT);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkTransitionImageLayout(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkTransitionImageLayoutEXT(device: VkDevice, transitionCount: u32, pTransitions: *const VkHostImageLayoutTransitionInfo) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkTrimCommandPool(device: VkDevice, commandPool: VkCommandPool, flags: VkCommandPoolTrimFlags);
 
     /// Available if built with `prototypes`.
@@ -20306,28 +20306,28 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkUninitializePerformanceApiINTEL(device: VkDevice);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkUnmapMemory(device: VkDevice, memory: VkDeviceMemory);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkUnmapMemory2(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkUnmapMemory2KHR(device: VkDevice, pMemoryUnmapInfo: *const VkMemoryUnmapInfo) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkUpdateDescriptorSetWithTemplate(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
 
     /// Available if built with `prototypes`.
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkUpdateDescriptorSetWithTemplateKHR(device: VkDevice, descriptorSet: VkDescriptorSet, descriptorUpdateTemplate: VkDescriptorUpdateTemplate, pData: *const c_void);
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkUpdateDescriptorSets(device: VkDevice, descriptorWriteCount: u32, pDescriptorWrites: *const VkWriteDescriptorSet, descriptorCopyCount: u32, pDescriptorCopies: *const VkCopyDescriptorSet);
 
     /// Available if built with `prototypes`.
@@ -20342,8 +20342,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkUpdateVideoSessionParametersKHR(device: VkDevice, videoSessionParameters: VkVideoSessionParametersKHR, pUpdateInfo: *const VkVideoSessionParametersUpdateInfoKHR) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkWaitForFences(device: VkDevice, fenceCount: u32, pFences: *const VkFence, waitAll: VkBool32, timeout: u64) -> VkResult;
 
     /// Available if built with `prototypes`.
@@ -20354,8 +20354,8 @@ unsafe extern "system" {
     #[cfg(any(doc, feature = "prototypes"))]
     pub fn vkWaitForPresentKHR(device: VkDevice, swapchain: VkSwapchainKHR, presentId: u64, timeout: u64) -> VkResult;
 
-    /// Available if built with `exported_prototypes`.
-    #[cfg(any(doc, feature = "exported_prototypes"))]
+    /// Available if built with `exported-prototypes`.
+    #[cfg(any(doc, feature = "exported-prototypes"))]
     pub fn vkWaitSemaphores(device: VkDevice, pWaitInfo: *const VkSemaphoreWaitInfo, timeout: u64) -> VkResult;
 
     /// Available if built with `prototypes`.
