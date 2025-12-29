@@ -7,7 +7,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.2+1.4.337"
+version = "0.1.2+vulkan-1.4.337"
 repository = "https://github.com/jbatez/vulkan-headers-rs"
 keywords = [
     "gamedev",
