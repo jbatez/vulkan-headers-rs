@@ -7,7 +7,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.2.0+vulkan-1.4.337"
+version = "0.2.1+vulkan-1.4.338"
 repository = "https://github.com/jbatez/vulkan-headers-rs"
 keywords = [
     "gamedev",
@@ -25,4 +25,4 @@ categories = [
 ]
 
 [workspace.dependencies]
-vulkan-registry = { path = "vulkan-registry", version = "0.2.0" }
+vulkan-registry = { path = "vulkan-registry", version = "0.2.1" }

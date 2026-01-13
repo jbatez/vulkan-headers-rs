@@ -1709,7 +1709,7 @@ pub struct VkDataGraphPipelineInfoARM {
 #[repr(C)]
 pub struct VkDataGraphPipelinePropertyQueryResultARM {
     pub sType: VkStructureType,
-    pub pNext: *const c_void,
+    pub pNext: *mut c_void,
     pub property: VkDataGraphPipelinePropertyARM,
     pub isText: VkBool32,
     pub dataSize: usize,
@@ -1736,7 +1736,7 @@ pub struct VkDataGraphPipelineSessionARM_T {
 #[repr(C)]
 pub struct VkDataGraphPipelineSessionBindPointRequirementARM {
     pub sType: VkStructureType,
-    pub pNext: *const c_void,
+    pub pNext: *mut c_void,
     pub bindPoint: VkDataGraphPipelineSessionBindPointARM,
     pub bindPointType: VkDataGraphPipelineSessionBindPointTypeARM,
     pub numObjects: u32,
@@ -9628,7 +9628,7 @@ pub struct VkQueueFamilyCheckpointPropertiesNV {
 #[repr(C)]
 pub struct VkQueueFamilyDataGraphProcessingEnginePropertiesARM {
     pub sType: VkStructureType,
-    pub pNext: *const c_void,
+    pub pNext: *mut c_void,
     pub foreignSemaphoreHandleTypes: VkExternalSemaphoreHandleTypeFlags,
     pub foreignMemoryHandleTypes: VkExternalMemoryHandleTypeFlags,
 }
@@ -9637,7 +9637,7 @@ pub struct VkQueueFamilyDataGraphProcessingEnginePropertiesARM {
 #[repr(C)]
 pub struct VkQueueFamilyDataGraphPropertiesARM {
     pub sType: VkStructureType,
-    pub pNext: *const c_void,
+    pub pNext: *mut c_void,
     pub engine: VkPhysicalDeviceDataGraphProcessingEngineARM,
     pub operation: VkPhysicalDeviceDataGraphOperationSupportARM,
 }
@@ -14373,7 +14373,7 @@ pub const VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT: VkGrap
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 2;
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 1;
 pub const VK_GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT: VkGraphicsPipelineLibraryFlagBitsEXT = 1 << 0;
-pub const VK_HEADER_VERSION: u32 = 337;
+pub const VK_HEADER_VERSION: u32 = 338;
 pub const VK_HEADER_VERSION_COMPLETE: u32 = VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION);
 pub const VK_HOST_IMAGE_COPY_MEMCPY: VkHostImageCopyFlagBits = VK_HOST_IMAGE_COPY_MEMCPY_BIT;
 pub const VK_HOST_IMAGE_COPY_MEMCPY_BIT: VkHostImageCopyFlagBits = 1 << 0;

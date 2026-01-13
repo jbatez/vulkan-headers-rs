@@ -2,7 +2,7 @@
 
 These files fall under the Apache-2.0 License or the MIT License.
 
-Copyright 2015-2025 The Khronos Group Inc.
+Copyright 2015-2026 The Khronos Group Inc.
 
 The full texts of these licenses are available at:
 
@@ -13,7 +13,7 @@ The full texts of these licenses are available at:
 
 These files fall under the MIT No Attribution License.
 
-Copyright 2025 Jo Bates
+Copyright 2025-2026 Jo Bates
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
