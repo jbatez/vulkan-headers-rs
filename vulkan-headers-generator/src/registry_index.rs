@@ -69,8 +69,16 @@ impl<'a> RegistryIndex<'a> {
         }
 
         for content in &typ.contents {
-            if let TypeContent::Name(name) = content {
-                return name;
+            match content {
+                TypeContent::Name(name) => return name,
+                TypeContent::Proto(proto) => {
+                    for content in &proto.contents {
+                        if let ProtoContent::Name(name) = content {
+                            return name;
+                        }
+                    }
+                }
+                _ => (),
             }
         }
 

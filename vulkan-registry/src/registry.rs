@@ -93,6 +93,8 @@ pub enum TypeContent {
     Type(String),
     Name(String),
     Member(Member),
+    Proto(Proto),
+    Param(Param),
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]

@@ -8,14 +8,7 @@ pub(crate) enum CType {
     Name(String),
     Const(Box<CType>),
     Ptr(Box<CType>),
-    Pfn {
-        return_type: Box<CType>,
-        params: Vec<CDecl>,
-    },
-    Array {
-        elem_type: Box<CType>,
-        len: String,
-    },
+    Array { elem_type: Box<CType>, len: String },
 }
 
 impl PartialEq<&str> for CType {
@@ -181,49 +174,13 @@ impl<'a> CDeclParser<'a> {
     fn parse_decl(&mut self) -> CDecl {
         let typ = self.parse_maybe_const_type_name();
         let typ = self.parse_maybe_const_ptrs(typ);
-        if self.peek_next_token() == Some("(") {
-            self.parse_pfn_decl(Box::new(typ))
-        } else {
-            let ident = self.opt_consume_ident();
-            let typ = self.parse_array_extents(typ);
-            let bitfield_width = self.parse_bitfield_width();
-            CDecl {
-                typ,
-                ident,
-                bitfield_width,
-            }
-        }
-    }
-
-    fn parse_pfn_decl(&mut self, return_type: Box<CType>) -> CDecl {
-        self.consume("(");
-        self.consume("VKAPI_PTR");
-        self.consume("*");
         let ident = self.opt_consume_ident();
-        self.consume(")");
-        self.consume("(");
-        let params = self.parse_params();
-        self.consume(")");
-
+        let typ = self.parse_array_extents(typ);
+        let bitfield_width = self.parse_bitfield_width();
         CDecl {
-            typ: CType::Pfn {
-                return_type,
-                params,
-            },
+            typ,
             ident,
-            bitfield_width: None,
-        }
-    }
-
-    fn parse_params(&mut self) -> Vec<CDecl> {
-        let mut params = Vec::new();
-        loop {
-            params.push(self.parse_decl());
-            match self.peek_next_token().unwrap() {
-                "," => self.consume(","),
-                ")" => return params,
-                token => panic!("unexpected token: {token:?}"),
-            }
+            bitfield_width,
         }
     }
 

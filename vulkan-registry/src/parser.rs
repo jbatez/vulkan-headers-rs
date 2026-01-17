@@ -421,6 +421,14 @@ impl<'a> Parser<'a> {
                     let member = this.parse_member(elem);
                     contents.push(TypeContent::Member(member));
                 }
+                b"proto" => {
+                    let proto = this.parse_proto(elem);
+                    contents.push(TypeContent::Proto(proto));
+                }
+                b"param" => {
+                    let param = this.parse_param(elem);
+                    contents.push(TypeContent::Param(param));
+                }
                 _ => {
                     panic!("unexpected elem: {elem:?}");
                 }

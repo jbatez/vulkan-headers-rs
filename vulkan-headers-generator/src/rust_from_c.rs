@@ -11,9 +11,6 @@ pub(crate) fn rust_type_from_c_type(c_typ: &CType, is_param: bool) -> String {
         CType::Ptr(pointee_type) => {
             return rust_ptr_type_from_c_pointee_type(&pointee_type);
         }
-        CType::Pfn { .. } => {
-            panic!("unexpected C function pointer type");
-        }
         CType::Array { elem_type, len } => {
             if is_param {
                 return rust_ptr_type_from_c_pointee_type(&elem_type);

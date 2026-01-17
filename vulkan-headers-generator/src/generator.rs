@@ -250,7 +250,7 @@ impl Generator {
                     "bitmask" => Self::add_bitmask_type(name, typ, module),
                     "define" => Self::add_define_type(name, typ, module),
                     "enum" => Self::add_enum_type(name, index, module),
-                    "funcpointer" => Self::add_funcpointer_type(name, typ, module),
+                    "funcpointer" => Self::add_funcpointer_type(name, typ, index, module),
                     "handle" => Self::add_handle_type(name, module),
                     "struct" => Self::add_struct_type(name, typ, index, module),
                     "union" => Self::add_union_type(name, typ, index, module),
@@ -288,7 +288,7 @@ impl Generator {
                 TypeContent::Text(text) => out += text,
                 TypeContent::Type(text) => out += text,
                 TypeContent::Name(text) => out += text,
-                TypeContent::Member(_) => panic!("unexpected type member"),
+                _ => panic!("unexpected type content"),
             }
         }
         out
@@ -421,19 +421,34 @@ impl Generator {
         }
     }
 
-    fn add_funcpointer_type(name: &str, typ: &Type, module: &mut Module) {
-        let c_text = Self::collect_type_text(typ);
-        let c_decl = CDecl::parse_typedef_decl(&c_text);
-        assert_eq!(c_decl.ident.unwrap(), name);
+    fn add_funcpointer_type(name: &str, typ: &Type, index: &RegistryIndex, module: &mut Module) {
+        let mut return_type = None;
+        let mut params = Vec::new();
 
-        let signature = match &c_decl.typ {
-            CType::Pfn {
-                return_type,
-                params,
-            } => rust_fn_signature_from_c(return_type, params),
-            _ => panic!("expected a C function pointer type"),
-        };
+        for content in &typ.contents {
+            match content {
+                TypeContent::Text(text) => {
+                    for b in text.bytes() {
+                        assert!(matches!(b, b'\n' | b' '));
+                    }
+                }
+                TypeContent::Proto(proto) => {
+                    let c_text = Self::collect_proto_text(proto);
+                    let c_decl = CDecl::parse_cmd_decl(&c_text);
+                    assert!(return_type.is_none());
+                    return_type = Some(c_decl.typ);
+                }
+                TypeContent::Param(param) => {
+                    if index.api_matches(&param.api) {
+                        let c_text = Self::collect_param_text(param);
+                        params.push(CDecl::parse_cmd_decl(&c_text));
+                    }
+                }
+                _ => panic!("unexpected funcpointer type content"),
+            }
+        }
 
+        let signature = rust_fn_signature_from_c(&return_type.unwrap(), &params);
         Self::add_pfn_type_aliases(name, &signature, module);
     }
 

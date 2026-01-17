@@ -19,18 +19,18 @@ dependencies = [
 
 [[package]]
 name = "vulkan-headers"
-version = "0.2.1+vulkan-1.4.338"
+version = "0.2.2+vulkan-1.4.339"
 
 [[package]]
 name = "vulkan-headers-generator"
-version = "0.2.1+vulkan-1.4.338"
+version = "0.2.2+vulkan-1.4.339"
 dependencies = [
  "vulkan-registry",
 ]
 
 [[package]]
 name = "vulkan-registry"
-version = "0.2.1+vulkan-1.4.338"
+version = "0.2.2+vulkan-1.4.339"
 dependencies = [
  "quick-xml",
 ]
